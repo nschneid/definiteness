@@ -1,0 +1,525 @@
+\PassOptionsToPackage{usenames}{color}
+\documentclass[11pt,letterpaper]{article}
+\usepackage{comment}
+\usepackage{relsize} % relative font sizes (e.g. \smaller). must precede ACL style
+\usepackage{acl2014}
+
+\usepackage[linkcolor=blue]{hyperref}
+
+\usepackage[round]{natbib}
+\newcommand{\citeposs}[1]{\citeauthor{#1}'s (\citeyear{#1})}
+
+%\usepackage{times}
+%\usepackage{latexsym}
+
+
+\usepackage[boxed]{algorithm2e}
+\renewcommand\AlCapFnt{\small}
+\usepackage[small,bf,skip=5pt]{caption}
+\usepackage{sidecap} % side captions
+\usepackage{rotating}	% sideways
+
+% Italicize subparagraph headings
+\usepackage{titlesec}
+\titleformat*{\subparagraph}{\itshape}
+\titlespacing{\subparagraph}{%
+  1em}{%              left margin
+  0pt}{% space before (vertical)
+  1em}%               space after (horizontal)
+
+% Numbered Examples and lists
+\usepackage{lingmacros}
+
+\usepackage{enumitem} % customizable lists
+\setitemize{noitemsep,topsep=0em,leftmargin=*}
+\setenumerate{noitemsep,leftmargin=0em,itemindent=13pt,topsep=0em}
+
+
+\usepackage{textcomp}
+% \usepackage{arabtex} % must go after xparse, if xparse is used!
+%\usepackage{utf8}
+% \setcode{utf8} % use UTF-8 Arabic
+% \newcommand{\Ar}[1]{\RL{\novocalize #1}} % Arabic text
+
+\usepackage[procnames]{listings}
+
+\usepackage{amssymb}	%amsfonts,eucal,amsbsy,amsthm,amsopn
+\usepackage{amsmath}
+
+\usepackage{mathptmx}	% txfonts
+\usepackage[scaled]{beramono}
+\usepackage[T1]{fontenc}
+\usepackage[utf8x]{inputenc}
+
+\usepackage{MnSymbol}	% must be after mathptmx
+
+\usepackage{latexsym}
+
+
+
+
+
+% Tables
+\usepackage{array}
+\usepackage{multirow}
+\usepackage{booktabs} % pretty tables
+\usepackage{multicol}
+\usepackage{footnote}
+
+
+\usepackage{url}
+\usepackage[usenames]{color}
+\usepackage{xcolor}
+
+% colored frame box
+\newcommand{\cfbox}[2]{%
+    \colorlet{currentcolor}{.}%
+    {\color{#1}%
+    \fbox{\color{currentcolor}#2}}%
+}
+
+\usepackage[normalem]{ulem} % \uline
+\usepackage{colortbl}
+\usepackage{graphicx}
+\usepackage{subcaption}
+%\usepackage{tikz-dependency}
+\usepackage{tikz}
+%\usepackage{tree-dvips}
+\usetikzlibrary{arrows,positioning,calc} 
+
+\DeclareMathOperator*{\argmax}{arg\,max}
+\DeclareMathOperator*{\argmin}{arg\,min}
+
+
+
+% Author comments
+\usepackage{color}
+\newcommand\bmmax{0} % magic to avoid 'too many math alphabets' error
+\usepackage{bm}
+\definecolor{orange}{rgb}{1,0.5,0}
+\definecolor{mdgreen}{rgb}{0,0.6,0}
+\definecolor{mdblue}{rgb}{0,0,0.7}
+\definecolor{dkblue}{rgb}{0,0,0.5}
+\definecolor{dkgray}{rgb}{0.3,0.3,0.3}
+\definecolor{slate}{rgb}{0.25,0.25,0.4}
+\definecolor{gray}{rgb}{0.5,0.5,0.5}
+\definecolor{ltgray}{rgb}{0.7,0.7,0.7}
+\definecolor{purple}{rgb}{0.7,0,1.0}
+\definecolor{lavender}{rgb}{0.65,0.55,1.0}
+
+% Settings for algorithm listings
+\makeatletter
+\lst@AddToHook{EveryPar}{%
+  \label{lst:\thelstnumber}% make a label for each line number except the first (assumes only one listing in the document)
+}
+\makeatother
+\lstset{
+% basicstyle=\rmshape,
+  numbers=left,
+  numberstyle=\tt\color{gray},
+  firstnumber=2,
+  stepnumber=5,
+  xleftmargin=3em,
+  language=Python,
+  upquote=true,
+  showstringspaces=false,
+  formfeed=\newpage,
+  tabsize=1,
+  stringstyle=\color{mdgreen},
+  commentstyle=\itshape\color{lavender},
+  basicstyle=\small\smaller\ttfamily,
+  morekeywords={lambda,with,as,assert},
+  keywordstyle=\bfseries\color{magenta},
+  procnamekeys={def},
+  procnamestyle=\bfseries\color{orange},
+  aboveskip=0.5cm,
+  belowskip=0.5cm
+}
+\renewcommand{\lstlistingname}{Algorithm}
+
+
+\newcommand{\ensuretext}[1]{#1}
+\newcommand{\cjdmarker}{\ensuretext{\textcolor{green}{\ensuremath{^{\textsc{CJ}}_{\textsc{D}}}}}}
+\newcommand{\nssmarker}{\ensuretext{\textcolor{magenta}{\ensuremath{^{\textsc{NS}}_{\textsc{S}}}}}}
+\newcommand{\abmarker}{\ensuretext{\textcolor{red}{\ensuremath{^{\textsc{A}}_{\textsc{B}}}}}}
+\newcommand{\ytmarker}{\ensuretext{\textcolor{blue}{\ensuremath{^{\textsc{Y}}_{\textsc{T}}}}}}
+\newcommand{\jbmarker}{\ensuretext{\textcolor{orange}{\ensuremath{^{\textsc{J}}_{\textsc{B}}}}}}
+\newcommand{\lslmarker}{\ensuretext{\textcolor{purple}{\ensuremath{^{\textsc{LS}}_{\textsc{L}}}}}}
+\newcommand{\arkcomment}[3]{\ensuretext{\textcolor{#3}{[#1 #2]}}}
+%\newcommand{\arkcomment}[3]{}
+\newcommand{\cjd}[1]{\arkcomment{\cjdmarker}{#1}{green}}
+\newcommand{\nss}[1]{\arkcomment{\nssmarker}{#1}{magenta}}
+\newcommand{\ab}[1]{\arkcomment{\abmarker}{#1}{red}}
+\newcommand{\yt}[1]{\arkcomment{\ytmarker}{#1}{blue}}
+\newcommand{\jb}[1]{\arkcomment{\jbmarker}{#1}{orange}}
+\newcommand{\lsl}[1]{\arkcomment{\lslmarker}{#1}{purple}}
+\newcommand{\params}{\mathbf{\theta}}
+\newcommand{\wts}{\mathbf{w}}
+\newcommand{\g}{\mathbf{g}}
+\newcommand{\f}{\mathbf{f}}
+\newcommand{\x}{\mathbf{x}}
+\newcommand{\y}{\mathbf{y}}
+\newcommand{\overbar}[1]{\mkern 1.5mu\overline{\mkern-1.5mu#1\mkern-1.5mu}\mkern 1.5mu} % \bar is too narrow in math
+\newcommand{\cost}{c}
+
+\usepackage{nameref}
+\usepackage{cleveref}
+
+% use \S for all references to all kinds of sections, and \P to paragraphs
+% (sadly, we cannot use the simpler \crefname{} macro because it would insert a space after the symbol)
+\crefformat{part}{\S#2#1#3}
+\crefformat{chapter}{\S#2#1#3}
+\crefformat{section}{\S#2#1#3}
+\crefformat{subsection}{\S#2#1#3}
+\crefformat{subsubsection}{\S#2#1#3}
+\crefformat{paragraph}{\P#2#1#3}
+\crefformat{subparagraph}{\P#2#1#3}
+\crefmultiformat{part}{\S\S#2#1#3}{ and~#2#1#3}{, #2#1#3}{, and~#2#1#3}
+\crefmultiformat{chapter}{\S\S#2#1#3}{ and~#2#1#3}{, #2#1#3}{, and~#2#1#3}
+\crefmultiformat{section}{\S\S#2#1#3}{ and~#2#1#3}{, #2#1#3}{, and~#2#1#3}
+\crefmultiformat{subsection}{\S\S#2#1#3}{ and~#2#1#3}{, #2#1#3}{, and~#2#1#3}
+\crefmultiformat{subsubsection}{\S\S#2#1#3}{ and~#2#1#3}{, #2#1#3}{, and~#2#1#3}
+\crefmultiformat{paragraph}{\P\P#2#1#3}{ and~#2#1#3}{, #2#1#3}{, and~#2#1#3}
+\crefmultiformat{subparagraph}{\P\P#2#1#3}{ and~#2#1#3}{, #2#1#3}{, and~#2#1#3}
+% for \label[appsec]{...}
+\crefname{appsec}{appendix}{appendices}
+\Crefname{appsec}{Appendix}{Appendices}
+
+\renewcommand{\creflastconjunction}{, and\nobreakspace} % Oxford comma for lists
+
+\newcommand*{\Fullref}[1]{\hyperref[{#1}]{\Cref*{#1}: \nameref*{#1}}}
+\newcommand*{\fullref}[1]{\hyperref[{#1}]{\cref*{#1}: \nameref{#1}}}
+\newcommand{\fnref}[1]{\autoref{#1}} % don't use \cref{} due to bug in (now out-of-date) cleveref package w.r.t. footnotes
+
+
+% Space savers
+% From http://www.eng.cam.ac.uk/help/tpl/textprocessing/squeeze.html
+%\addtolength{\dbltextfloatsep}{-.5cm} % space between last top float or first bottom float and the text.
+%\addtolength{\intextsep}{-.5cm} % space left on top and bottom of an in-text float.
+%\addtolength{\abovedisplayskip}{-.5cm} % space before maths
+%\addtolength{\belowdisplayskip}{-.5cm} % space after maths
+%\addtolength{\topsep}{-.5cm} %space between first item and preceding paragraph
+%\setlength{\belowcaptionskip}{-.25cm}
+
+
+% customize \paragraph spacing
+\makeatletter
+\renewcommand{\paragraph}{%
+  \@startsection{paragraph}{4}%
+  {\z@}{.2ex \@plus 1ex \@minus .2ex}{-1em}%
+  {\normalfont\normalsize\bfseries}%
+}
+\makeatother
+
+
+
+% Special macros
+\newcommand{\tg}[1]{\texttt{#1}}	% supersense tag name
+\newcommand{\lex}[1]{\textsmaller{\textsf{\textcolor{slate}{\textbf{#1}}}}}	% example lexical item 
+\newcommand{\glosst}[2]{\ensuremath{\underset{\textrm{#2}}{\textrm{#1}}}} % gloss text (a word or phrase) (second arg is the gloss)
+\newcommand{\sys}[1]{\mbox{\textbf{#1}}}   % name of a system (one of our experimental conditions)
+\newcommand{\dataset}[1]{\mbox{\textsc{#1}}}	% one of the datasets in our experiments
+\newcommand{\datasplit}[1]{\mbox{\textbf{#1}}}	% portion one of the datasets in our experiments
+\newcommand{\ilbl}[1]{\mbox{\textbf{\textsc{#1}}}} % internal label
+\newcommand{\llbl}[1]{\mbox{\textsc{#1}}} % leaf label
+
+\newcommand{\w}[1]{\textit{#1}}	% word
+\newcommand{\tat}[0]{\textasciitilde}
+
+\newcommand{\shortlong}[2]{#1} % short vs. long version of the paper
+\newcommand{\confversion}[1]{#1}
+\newcommand{\srsversion}[1]{}
+%\newcommand{\finalversion}[1]{#1}
+\newcommand{\finalversion}[1]{}
+\newcommand{\shortversion}[1]{#1}
+\newcommand{\considercutting}[1]{#1}
+\newcommand{\longversion}[1]{} % ...if only there were more space...
+\newcommand{\subversion}[1]{#1} % for the submission version only
+\newcommand{\draftnotice}[1]{{\it\small #1}\\} % for the draft version only
+%\newcommand{\subversion}[1]{}
+
+\hyphenation{WordNet}
+\hyphenation{WordNets}
+\hyphenation{VerbNet}
+\hyphenation{FrameNet}
+\hyphenation{SemCor}
+\hyphenation{PennConverter}
+\hyphenation{an-aly-sis}
+\hyphenation{an-aly-ses}
+\hyphenation{news-text}
+\hyphenation{base-line}
+\hyphenation{de-ve-lop-ed}
+\hyphenation{comb-over}
+\hyphenation{per-cept}
+\hyphenation{per-cepts}
+\title{\draftnotice{Title, author list not final. Page limit: 5 + 2 bib} Learning Definiteness across Languages using Classifiers \nss{maybe: A Classification and Classifier for Cross-linguistic Functions of Definiteness}}
+
+\finalversion{\author{Archna Bhatia \ \ \  Chu-Cheng Lin \ \ \  Lori Levin \ \ \ \  Mandy Simons \\
+\bf Fatima Talib Al-Raisi \ \ \  Laleh Roostapour \ \ \  Abhimanu Kumar  \\
+\bf  Nathan Schneider \ \ \  Yulia Tsvetkov \ \ \  Jordan Bender \ \ \  Chris Dyer\\
+Carnegie Mellon University\\
+Pittsburgh, PA 15213}}
+
+\date{}
+
+\begin{document}
+\maketitle
+\begin{abstract}
+  Definiteness seems to be a nonhomogenoeus category across languages denoting various semantic/ pragmatic aspects. The semantic - pragmatic information may be grouped differently in different languages to result in grammaticalizations corresponding to definiteness in these languages. In this paper, we attempt to find out these clusterings of semantic- pragmatic features relevant to two languages English and Hindi in an attempt to find out how definiteness is grammaticalizd in these languages. This work has twofold benefits: for the linguistic studies, it provides us a concrete set of groupings for each language which tells us how definiteness is conceptualized and repesented in these languages; in addition, these findings serve as a guide in improving machine translations across these languages.  
+\end{abstract}
+
+\section{Introduction}
+
+\ab{Here we discuss about why we should study definiteness- linguistically a hard problem, also it has applications in machine translation. Discuss about grammaticalization as a general problem (differences across languages), then grammaticalization of definiteness across languages, some examples to show differences across languages.}
+\nss{we review the annotation scheme in \cref{sec:scheme}; etc.}
+
+\section{Annotation scheme}\label{sec:scheme}
+
+
+\ab{A brief discussion of the Annotation scheme}
+\nss{we should probably have a name for the scheme---something like ``Functions of Definiteness Across Languages (FDAL)''? 
+and a name for the categories (I have been calling them semantic functions).}
+\nss{suggestion: lead with a discourse excerpt, ideally illustrating a few of the categories, a nested NP, and 
+an anaphoric link across sentence boundaries. I can help format it.}
+
+\nss{cite papers like this: \citet{bhatia-14} (but probably anonymize this for review) or \citep{reiter-10}}
+
+\begin{figure*}\small
+\begin{tabular}{p{.45\textwidth}p{.45\textwidth}}
+\begin{itemize}
+\item    \ilbl{Nonanaphora} $[-A,-B]$ \textbf{(00)}
+  \begin{itemize}
+  \item      \ilbl{Unique} $[+U]$ \textbf{(00)}
+    \begin{itemize}
+    \item        \ilbl{uniq\_Hearer\_old} $[-G,+O,+S]$ \textbf{(00)}
+      \begin{itemize}
+      \item          \llbl{uniq\_Physical\_copresence} $[+R]$ (00)
+      \item          \llbl{uniq\_Larger\_situation} $[+R]$ (00)
+      \item          \llbl{uniq\_predicative\_identity} $[+P]$ (00)
+      \end{itemize}
+    \item        \llbl{uniq\_Hearer\_new} $[-O]$
+    \end{itemize}
+   \item     \ilbl{Nonunique} $[-U]$
+     \begin{itemize}
+     \item       \ilbl{nonuniq\_Hearer\_old} $[+O]$
+       \begin{itemize}
+       \item         \llbl{nonuniq\_Physical\_copresence} $[-G,+R,+S]$
+       \item         \llbl{nonuniq\_Larger\_situation} $[-G,+R,+S]$
+       \item         \llbl{nonuniq\_predicative\_identity} $[+P]$
+       \end{itemize}
+     \item       \llbl{nonuniq\_Hearer\_new\_spec} $[-G,-O,+R,+S]$
+     \item       \llbl{nonuniq\_nonspec} $[-G,-S]$
+     \end{itemize}
+   \item \ilbl{Generic} $[+G,-R]$
+     \begin{itemize}
+	   \item      \llbl{Generic\_kindLevel}
+	   \item      \llbl{Generic\_individualLevel}
+     \end{itemize}
+  \end{itemize}
+\end{itemize} &
+\begin{itemize}
+\item    \ilbl{Anaphora} $[+A]$
+  \begin{itemize}
+  \item      \ilbl{Basic} $[+O,-B]$
+    \begin{itemize}
+    \item        \llbl{Same\_head}
+    \item        \llbl{Different\_head}
+    \end{itemize}
+  \item  \ilbl{Extended} $[+B]$
+    \begin{itemize}
+    \item        \llbl{Bridging\_nominal} $[-G,+R,+S]$
+    \item        \llbl{Bridging\_event} $[+R,+S]$
+    \item        \llbl{Bridging\_restrictiveModifier} $[-G,+S]$
+    \item        \llbl{Bridging\_subtype\_instance} $[-G]$
+    \item        \llbl{Bridging\_OtherContext} $[+O]$
+    \end{itemize}
+  \end{itemize}
+\item \ilbl{Miscellaneous} $[-R]$
+  \begin{itemize}
+	\item \llbl{Pleonastic} $[-B,-P]$
+	\item \llbl{Quantified}
+	\item \llbl{Predicative\_equative\_role} $[-B,+P]$
+	\item \llbl{Part\_of\_noncompositional\_mwe}
+	\item \llbl{Measure\_Nonreferential}
+	\item \llbl{Other\_Nonreferential}
+  \end{itemize}
+\end{itemize}
+\end{tabular}
+\caption{Taxonomy of definiteness functions, with number of occurrences in the training data \nss{TODO}. 
+Internal (non-leaf) labels are in bold.\nss{added two: Generic and Miscellaneous, and also reversed Nonreferential to Referential. is that OK?}\nss{TODO: normalize capitalization}
+$+$/$-$ values are shown for ternary attributes \uline{A}naphoric, \uline{B}ridging, \uline{G}eneric, Hearer-\uline{O}ld, \uline{P}redicative, \uline{R}eferential, \uline{S}pecific, and \uline{U}nique; 
+these are inherited from supercategories, but otherwise default to $0$.\nss{nonuniq\_nonspec is $-$generic, right?} 
+Thus, for example, the full attribute specification for \llbl{uniq\_Physical\_copresence} is $[-A,-B,-G,+O,0P,+R,+S,+U]$.}
+\label{fig:hierarchy}
+\end{figure*}
+
+\section{Data}\label{sec:data}
+
+\ab{description of data, IAA, other statistics- n(annotations), n(annotations/ category)
+classifiers for English, and Hindi- baseline, accuracy etc, confusion matrix- classifier predictions and gold standard
+may be a brief discussion of feature ablation study-  which features are most helpful at least in these languages corresponding to individual categories (a clue to grammaticalization)
+Principle component analysis, clustering of features}
+
+\section{Classification framework}\label{sec:modeling}
+
+To model the relationship between the grammar of definiteness and its semantic functions in a data-driven fashion,
+we work within the supervised framework of feature-rich discriminative classification, 
+treating the functional categories from \cref{sec:scheme} as output labels $y$
+and various lexical, morphological, and syntactic characteristics of the language as features of the input $x$.
+Specifically, we learn a probabilistic log-linear model similar to multiclass logistic regression, 
+but deviating in the following ways:
+\begin{itemize}
+  \item Logistic regression treats each output label (response) as atomic; 
+  we decompose each into \emph{attributes} based on their linguistic definitions, 
+  enabling commonalities between related labels to be recognized.
+  Each weight in the model corresponds to a feature that mediates between 
+  \emph{percepts} (characteristics of the input noun phrase) and attributes (characteristics of the label).
+  \item Logistic regression assumes a prediction is either correct or incorrect.
+  We incorporate a \emph{cost function} that gives partial credit during learning when a related label 
+  is predicted, so the learned model will better match our evaluation measure.
+  \item Logistic regression assumes the space of possible predictions matches 
+  the space of labels observed in the training data; we allow more abstract labels to be predicted, 
+  which can receive partial credit. The scoring scheme encourages the predictor to ``back off'' 
+  to a coarser label if it is not sufficiently confident about a fine-grained label.
+\end{itemize}
+These decisions are aimed at attaining better predictive accuracy 
+as well as feature weights that better describe the form--function interactions we are interested in recovering.
+
+Our setup is formalized below, where we discuss the mathematical model and linguistically motivated features.
+
+\subsection{Model}
+
+At test time, we model the probability of semantic label $y$ 
+conditional on a \nss{gold?} noun phrase $x$ as follows:
+\begin{equation}
+p_{\boldsymbol{\theta}}(y | x) = \log{\frac{\exp{\boldsymbol{\theta}^{\top}\mathbf{f}(x,y)}}{\sum_{y' \in \mathcal{Y}}\exp{\boldsymbol{\theta}^{\top}\mathbf{f}(x,y')}}}
+\end{equation}
+where $\boldsymbol{\theta} \in \mathbb{R}^d$ is a vector of parameters (feature weights), and 
+$\mathbf{f}: \mathcal{X} \times \mathcal{Y} \rightarrow \mathbb{R}^d$ is the feature function over input--label pairs.
+The feature function is defined as follows:
+\begin{equation}
+\mathbf{f}(x,y) = \boldsymbol{\phi}(x) \times \tilde{\boldsymbol{\omega}}(y)
+\end{equation}
+where the percept function $\boldsymbol{\phi}: \mathcal{X} \rightarrow \mathbb{R}^c$ 
+produces a vector of real-valued characteristics of the input, and  
+the attribute function $\tilde{\boldsymbol{\omega}}: \mathcal{Y} \rightarrow \{0,1\}^a$
+encodes characteristics of each label.
+There is a feature for every percept--attribute pairing: so
+$d = c \cdot a$ and $f_{(i-1)a+j}(x,y) = \phi_i(x)\tilde{\omega}_j(y), 1 \leq i \leq c, 1 \leq j \leq a$.
+The contents of the percept and attribute functions are detailed in \cref{sec:attrs,sec:feats}.
+
+For prediction, having learned weights $\hat{\boldsymbol{\theta}}$ we choose the $y$ that maximizes this probability:
+\begin{equation}
+\hat{y} \leftarrow \arg\max_{y' \in \mathcal{Y}} p_{\hat{\boldsymbol{\theta}}}(y | x)
+\end{equation}
+
+Training optimizes $\hat{\boldsymbol{\theta}}$ so as to maximize the $L_1$-regularized
+\emph{softmax-margin} learning objective \citep{gimpel} over the training data $\mathcal{D}$:
+\begin{align*}
+\hat{\boldsymbol{\theta}} &= \argmax_{\boldsymbol{\theta}} L(\boldsymbol{\theta}, \mathcal{D}) \\
+\begin{split}
+L(\boldsymbol{\theta}, \mathcal{D}) &= -\lambda ||\boldsymbol{\theta}||_1 \\ 
++ \sum_{\langle x,y \rangle\in\mathcal{D}} &\log{\frac{\exp{\boldsymbol{\theta}^{\top}\mathbf{f}(x,y)}}{\sum_{y' \in \mathcal{Y}}\exp{\left(\boldsymbol{\theta}^{\top}\mathbf{f}(x,y') + \textit{cost}(y,y')\right)}}}
+\end{split}
+\end{align*}
+The \emph{cost function} allows us to penalize some errors more than others during training, 
+taking into account the linguistic functions of the labels.
+It is zero for the gold label and nonnegative for the others.\nss{intuition}
+
+This framework gives us several ways to design a classifier appropriate to the task: 
+the attributes, the space of labels $\mathcal{Y}$ to consider, 
+and the cost function, and of course, the features themselves.
+With $\textit{cost}(y,y') = 0$, $\mathcal{Y} = \{\textit{gold labels in training}\}$, 
+and $\tilde{\boldsymbol{\omega}}(y) = \textit{the identity of the label}$, 
+this reduces to standard logistic regression.
+
+\subsection{Features}\label{sec:feats}
+
+\nss{TODO}
+
+\subsection{Attributes}\label{sec:attrs}
+
+As noted above, though labels are organized into a tree hierarchy, 
+there are actually several dimensions of commonality that suggest different groupings.
+These attributes are encoded as ternary characteristics; 
+for each label (including internal labels), every one of the 8 attributes  
+is assigned a value of $+$, $-$, or $0$ (refer to \cref{fig:hierarchy}).
+In order to capture these similarities in the model's features and cost function, 
+we define the attribute vector function $\boldsymbol{\omega}(y) = $
+\begin{equation*}
+[y, A(y), B(y), G(y), O(y), P(y), R(y), S(y), U(y)]^{\top}
+\end{equation*}
+where $A: \mathcal{L} \cup \mathcal{I} \rightarrow \{+, -, 0\}$ returns the value for Anaphoric, 
+$B(y)$ for Bridging, etc. The identity of the label is also included in the vector so that 
+different labels are always recognized as different by the attribute function.
+The categorical components of this vector are then binarized to form $\tilde{\boldsymbol{\omega}}(y)$; 
+however, instead of a binary component that fires for the $0$ value of each ternary attribute, 
+there is a component that fires for \emph{any} value of the attribute---a sort of bias term.
+The weights assigned to features incorporating $+$ or $-$ attribute values, then, 
+are easily interpreted as deviations relative to the bias.
+
+\subsection{Cost and label space}\label{sec:cost}
+
+The definiteness function hierarchy presented in \cref{fig:hierarchy} 
+consists of 24~\emph{leaf labels}, which will be denoted $\mathcal{L}$, and 
+10~more abstract \emph{intermediate labels}, denoted $\mathcal{I}$.
+All of the gold labels in the training data are from $\mathcal{L}$, 
+but we give our model the option to predict more abstract labels 
+to receive partial credit.
+We will therefore use $\mathcal{Y} = \mathcal{L} \cup \mathcal{I}$.
+
+The relatedness of leaf label pairs is determined by the dot product of the two original attribute vectors: 
+let $\Delta(\ell,\ell') = |\boldsymbol{\omega}(\ell) \cap \boldsymbol{\omega}(\ell')|^{-1}$.\footnote{By the intersection of two attribute vectors, we mean the subset of components that have a matching (categorical) value.} 
+For a gold leaf label $\ell$ and an internal label $\iota$, 
+$\Delta(\ell,\iota) =$ the distance in the hierarchy 
+between $\ell$ and $\iota$.\nss{TODO: ensure if $\iota$ is an ancestor of $\ell$, this is less than choosing another leaf dominated by $\iota$}.
+(There is no need to define $\Delta(\iota, \cdot)$, as the training set does not contain intermediate labels.)
+
+\section{Evaluation}\label{sec:eval}
+
+The following measures will be used to evaluate our predictor against the gold standard 
+for the held-out evaluation (dev or test) set $\mathcal{E}$:
+\begin{itemize}
+  \item \textbf{Exact match:} This gives credit only where the predicted and gold labels 
+  are identical. When the model is allowed to predict internal labels, we will report 
+  overall precision and recall of leaf labels. Otherwise, we report accuracy.
+  \item \textbf{By leaf label:} We also compute precision and recall of each leaf label 
+  to determine which categories are reliably predicted.
+  \item \textbf{Soft match:} This accuracy measure gives partial credit where the predicted and gold labels 
+  are related. It is computed as the $\Delta$ function in \cref{sec:cost} \nss{normalized to be between 0 and 1?}.
+  \item \textbf{Perplexity:} This determines how ``surprised'' our model is by the gold labels 
+  in the test set; the greater the probability mass assigned to the true labels, 
+  the higher the score. 
+  It is computed as $2^{\left(\sum_{\langle x, y \rangle \in \mathcal{E}} \log_2 p_{\hat{\boldsymbol{\theta}}}(y | x)\right) / |\mathcal{E}|}$.
+\end{itemize}
+
+\section{Experiments}\label{sec:exp}
+
+\nss{English: ±cost function, ±non-identity attributes, ±predicting intermediate labels}
+
+\nss{maybe: which attribute groupings produce the best classifier, if we want to force a hierarchy}
+
+\nss{feature/attribute ablations}
+
+\nss{Hindi?}
+
+\section{Discussion: Error analysis, comparison across languages}\label{sec:discussion}
+
+\ab{confusion matrix - Hindi vs Eng (for common annotations)- semantic annotations
+differences in annotations- why- different grammatical constructions, e.g. NP in 1 language but predicate in another etc.
+what do similarities tell us about grammaticalization, what do differences tell.
+discuss- how this analysis can help in MT}
+
+\section{Conclusion}
+
+
+
+
+\bibliographystyle{aclnat}
+% you bib file should really go here
+\setlength{\bibsep}{10pt}
+{\fontsize{10}{12.25}\selectfont
+\bibliography{definiteness}}
+
+
+\end{document}
