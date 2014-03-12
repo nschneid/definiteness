@@ -273,13 +273,35 @@ Pittsburgh, PA 15213}}
 \begin{document}
 \maketitle
 \begin{abstract}
-Definiteness is a nonhomogeneous category across languages expressing various {\em communicative functions} (types of semantic, pragmatic and discourse- related information).   Languages differ in the grainsize and inventory of communicative functions  that are expressed as well as the syntactic means for expressing them.  In a previous publication we presented an annotation scheme for the communicative functions of definiteness and released an annotated corpus in English and Hindi.   This paper reports on a classifier for English that uses lexical, morphological, and syntactic features to predict communicative functions.   This work has twofold benefits: linguistically, the classifier's features and weights model the {\em grammaticalization} of definiteness in English, some of which is obvious (e.g., {\em the} and {\em a}) and some of which is not obvious (include an example from our findings). 
-Computationally,  it presents a framework to predict \textit{semantic and pragmatic} communicative functions of definiteness which, unlike lexical and morphosyntactic features, are preserved in translation.  This work may also be useful in tracking noun phrase reference for information extraction, entity tracking, and other semantic processing tasks. 
+Definiteness is a nonhomogeneous category across languages expressing various {\em communicative functions} 
+(types of semantic, pragmatic, and discourse--related information).   
+Languages differ in the grainsize and inventory of communicative functions  that are expressed 
+as well as the syntactic means for expressing them.  
+\citet{bhatia14} presented an annotation scheme for the communicative functions of definiteness 
+and released an annotated corpus in English and Hindi.   
+This paper reports on a classifier for English that uses lexical, morphological, and syntactic features 
+to predict communicative functions.   
+The benefits of this work are twofold: linguistically, the classifier's features and weights 
+model the {\em grammaticalization} of definiteness in English, 
+some of which is obvious (e.g., {\em the} and {\em a}) and some of which is not obvious \ab{(include an example from our findings)}. 
+Computationally, it presents a framework to predict \textit{semantic and pragmatic} communicative functions of definiteness 
+which, unlike lexical and morphosyntactic features, are preserved in translation.  
+This work may also be useful in tracking noun phrase reference for information extraction, entity tracking, 
+and other semantic processing tasks. 
 \end{abstract}
 
 \section{Introduction}
 
-Languages display a vast range of variation with respect to definiteness. For example, while languages like English make use of definite and indefinite articles to distinguish between the discourse status of various entities ({\it the car} vs. {\it a car}), many other languages, such as Czech, Hindi, Indonesian, and Russian do not have articles (although they do have demonstrative determiners). Even the languages that do have articles vary in terms of how these articles are used. For example, English uses only one definite article ‘the’ for entities irrespective of whether they have been mentioned previously in the discourse or are familiar to the hearer by some other means, but there are languages such as Hausa which have a specialized article for anaphoric definite entities, see example in \cref{ex:hausaanaphdef} (borrowed from \cite{lyons99}). 
+Languages display a vast range of variation with respect to definiteness. 
+For example, while languages like English make use of definite and indefinite articles 
+to distinguish between the discourse status of various entities ({\it the car} vs. {\it a car}), 
+many other languages, such as Czech, Hindi, Indonesian, and Russian, do not have articles 
+(although they do have demonstrative determiners). 
+Even the languages that do have articles vary in terms of how these articles are used. 
+For example, English uses only one definite article `the' for entities irrespective of whether 
+they have been mentioned previously in the discourse or are familiar to the hearer by some other means, 
+but there are languages such as Hausa which have a specialized article for anaphoric definite entities, 
+see example in \cref{ex:hausaanaphdef} (borrowed from \cite{lyons99}). 
 
 \enumsentence{\label{ex:hausaanaphdef}\small\shortex{4}
 		{Na & kawo & keke & din-ka}
@@ -287,41 +309,113 @@ Languages display a vast range of variation with respect to definiteness. For ex
 		{`I brought your bicycle (previously mentioned).'}
 		}
 
-There are other means to express (in)definiteness, such as the use of affixes.   Arabic, for example, uses a definite prefix {\it al-} and indefinite suffix {\it -n}. \cite{chen04} shows that Chinese expresses (in)definiteness through the use of various constructions, such as the existential construction for indefinite subjects and the {\it ba}- construction for definite direct objects. Demonstratives, personal pronouns and possessives (which are found in all languages) are other kinds of definite NPs. Aside from this variation in the form of (in)definite NPs within and across languages, there is also variability in what semantic, pragmatic, discourse- related functions (in)definites express.   We will refer to these as {\em communicative functions}. 
+There are other means to express (in)definiteness, such as the use of affixes.   
+Arabic, for example, uses a definite prefix {\it al-} and indefinite suffix {\it -n}. 
+\citet{chen04} shows that Chinese expresses (in)definiteness through the use of various constructions, 
+such as the existential construction for indefinite subjects and the {\it ba}- construction for definite direct objects. 
+Demonstratives, personal pronouns and possessives (which are found in all languages) are other kinds of definite NPs. 
+Aside from this variation in the form of (in)definite NPs within and across languages, there is also variability 
+in what semantic, pragmatic, and discourse--related functions (in)definites express.   
+We will refer to these as {\em communicative functions}. 
 
-The literature on definiteness suggests that it may express communicative functions corresponding to notions such as uniqueness, familiarity, identifiability, anaphoricity, specificity, and referentiality \citep[\textit{inter alia}]{birner94,condoravdi92,evans77,evans80,gundel88,gundel93,heim90,kadmon87,kadmon90,lyons99,prince92,roberts03,russell05}.  Reductionist approaches to definiteness try to define a single communicative function of definteness.   For example, \citet{kadmon87,evans80} propose that semantic uniqueness is the main communicative function of definite NPs but pronouns do not display uniqueness effects. \citet{roberts03} proposes that the combination of uniqueness and a presupposition of familiarity can explain definiteness, but possessive definite descriptions ({\it John's daughter}) and the weak definites ({\it the son of Queen Juliana of the Netherlands}) are neither unique nor necessarily familiar to the listener before they are spoken.  
+The literature on definiteness suggests that it may express communicative functions corresponding to 
+notions such as uniqueness, familiarity, identifiability, anaphoricity, specificity, 
+and referentiality \citep[\textit{inter alia}]{birner94,condoravdi92,evans77,evans80,gundel88,gundel93,heim90,kadmon87,kadmon90,lyons99,prince92,roberts03,russell05}.  
+Reductionist approaches to definiteness try to define a single communicative function of definiteness.   
+For example, \citet{kadmon87,evans80} propose that semantic uniqueness is the main communicative function of definite NPs 
+but pronouns do not display uniqueness effects. 
+\citet{roberts03} proposes that the combination of uniqueness and a presupposition of familiarity can explain definiteness, 
+but possessive definite descriptions ({\it John's daughter}) and the weak definites 
+({\it the son of Queen Juliana of the Netherlands}) are neither unique nor necessarily familiar to the listener 
+before they are spoken.  
 
-We take such linguistic observations to suggest that definiteness is not as homogeneous a category as many accounts have assumed.  In contrast to the reductionists, we are following an approach to grammaticalization~\citep{?} in which grammar develops over time in such a way that each grammatical construction has some prototypical communicative functions, but also has many non-prototypical communicative functions.  
-Grammaticalization varies quite a lot across languages in both which communicative functions are grammaticalized and in which syntactic constructions are used to grammaticalize them~\citep{semantic maps and other stuff}.     
+We take such linguistic observations to suggest that definiteness is not as homogeneous a category 
+as many accounts have assumed.  In contrast to the reductionists, 
+we are following an approach to grammaticalization~\citep{?} in which grammar develops over time in such a way 
+that each grammatical construction has some prototypical communicative functions, 
+but also has many non-prototypical communicative functions.  
+Grammaticalization varies quite a lot across languages in both which communicative functions are grammaticalized 
+and in which syntactic constructions are used to grammaticalize them~\citep{semantic maps and other stuff}.     
 
-This paper describes a classifier that predicts communicative function labels for English noun phrases.   The features used by the classifier are lexical, morphological, and syntactic.   The contribution of our work is in both the output of the classifier and the model that it uses (features and weights).  The classifier outputs communicative function labels (see next section, e.g., whether the entities are old or new to the discourse and to the hearer).   Communicative function is important because it is usually preserved in translation even when the grammatical mechanisms for expressing it are different. The communicative function labels also represent the discourse status of entities, making them relevant for entity tracking, knowledge base construction, and information extraction. 
+This paper describes a classifier that predicts communicative function labels for English noun phrases.  
+The features used by the classifier are lexical, morphological, and syntactic.   
+The contribution of our work is in both the output of the classifier and the model that it uses (features and weights).  
+The classifier outputs communicative function labels (see next section, e.g., whether the entities are 
+old or new to the discourse and to the hearer).   
+Communicative function is important because it is usually preserved in translation 
+even when the grammatical mechanisms for expressing it are different. 
+The communicative function labels also represent the discourse status of entities, 
+making them relevant for entity tracking, knowledge base construction, and information extraction. 
 
-The model is a form-meaning mapping, consisting of the syntactic, lexical, and morphological features and weights that correlate with---are predictive of---communicative functions.   This in itself is linguistically significant in that it shows the grammatical mechanisms beyond the articles {\em the} and {\em a} that are used for expressing definiteness in English.   In future work we will build such models for languages that do not have articles such as Hindi, Russian, and Chinese.        The form-meaning mapping for these languages can be used for machine translation applications. It has been noted previously that machine translation systems face problems while translating from one language to another when the languages use different grammatical strategies. \citet{tsvetkov13,stymne09} mention how translating from an article-language to an article-less language is problematic. If the mapping between different forms and the information they encode is known in both the source language and the target language, this information can be leveraged in improving machine translation across these languages.  
+The model is a form-meaning mapping, consisting of the syntactic, lexical, and morphological features 
+and weights that correlate with---are predictive of---communicative functions.   
+This in itself is linguistically significant in that it shows the grammatical mechanisms 
+beyond the articles {\em the} and {\em a} that are used for expressing definiteness in English.   
+In future work we will build such models for languages that do not have articles such as Hindi, Russian, and Chinese.
+The form-meaning mapping for these languages can be used for machine translation applications. 
+It has been noted previously that machine translation systems face problems 
+while translating from one language to another when the languages use different grammatical strategies. 
+\citet{tsvetkov13,stymne09} mention how translating from an article-language to an article-less language is problematic. 
+If the mapping between different forms and the information they encode is known
+in both the source language and the target language, this information can be leveraged in 
+improving machine translation across these languages.  
 
-In \cref{sec:scheme}, we review the annotation scheme we have used to determine the mapping between the form and meaning it encodes with respect to (in)definiteness. In \cref{sec:data}, we provide information about the English data we have annotated using this scheme. \cref{sec:modeling} is an overview of the classification framework we have used. In \cref{sec:eval}, we describe the measures we have used to evaluate the predictions against the gold standard for the held-out data. In \cref{sec:exp}, we describe our experiments and discuss the results. In \cref{sec:conclusion}, we summarize our findings and briefly discuss the future tasks we are undertaking or envision.    \yt{I think that detailed description of definiteness in linguistics in the beginning of this section deserves a section by itself; I'd split the Introduction section into Introduction (shorter, only what we do, motivation, contribution) and then Definiteness.} 
+In \cref{sec:scheme}, we review the annotation scheme we have used to determine the mapping 
+between the form and meaning it encodes with respect to (in)definiteness. 
+In \cref{sec:data}, we provide information about the English data we have annotated using this scheme. 
+\cref{sec:modeling} is an overview of the classification framework we have used. 
+In \cref{sec:eval}, we describe the measures we have used to evaluate the predictions 
+against the gold standard for the held-out data. 
+In \cref{sec:exp}, we describe our experiments and discuss the results. 
+In \cref{sec:conclusion}, we summarize our findings and briefly discuss the future tasks we are undertaking or envision.    
+\yt{I think that detailed description of definiteness in linguistics in the beginning of this section deserves a section 
+by itself; I'd split the Introduction section into Introduction (shorter, only what we do, motivation, contribution) 
+and then Definiteness.} 
 
 %\ab{Here we discuss about why we should study definiteness- linguistically a hard problem, also it has applications in machine translation. Discuss about grammaticalization as a general problem (differences across languages), then grammaticalization of definiteness across languages, some examples to show differences across languages.}
 %\nss{we review the annotation scheme in \cref{sec:scheme}; etc.}
 
 \section{Annotation scheme}\label{sec:scheme}
-Based on the literature on definiteness, we compiled a list of semantic, pragmatic, and discourse- related features which are relevant for the form of (in)definite NPs in English (and many other languages). \yt{ref to the LREC paper?} These features were put together in a hierarchical structure to ease the annotation effort for the annotators. At each step, the annotators make a decision and thus reduce the number of labels they have to consider before annotating an NP. This approach also increases the consistency in annotations due to the reduced effort on considering the options among which to select the correct label for the NP. The annotation scheme was revised through many iterations after attempts at annotating natural language data from different genres using the scheme. The current scheme is presented in Figure~\ref{fig:hierarchy}. 
+Based on the literature on definiteness, we compiled a list of semantic, pragmatic, and discourse--related 
+features which are relevant for the form of (in)definite NPs in English (and many other languages).\yt{ref to the LREC paper?} These features were put together in a hierarchical structure to ease the annotation effort for the annotators. At each step, the annotators make a decision and thus reduce the number of labels they have to consider before annotating an NP. This approach also increases the consistency in annotations due to the reduced effort on considering the options among which to select the correct label for the NP. The annotation scheme was revised through many iterations after attempts at annotating natural language data from different genres using the scheme. The current scheme is presented in Figure~\ref{fig:hierarchy}. 
 
-The first distinction annotators make is whether the NP at hand is anaphoric (discourse old) or non anaphoric (discourse new). We do not annotate for uniqueness, hearer old/new distinction, specificity or genericity for the anaphoric NPs as those distinctions were deemed inconsequential for English anaphoric NPs\footnote{However, in future, we may include these features for anaphoric NPs as well if contrary evidence were found.}. \yt{For someone who is not familiar with the scheme, this would be very hard to understand without looking at the definiteness scheme. I think the scheme should be on this page, and description should always point to the place in the scheme. May be we can write all scheme-related terms using the same font as they appear in the scheme? } The anaphoric NPs’ category is further subdivided into basic anaphora and extended anaphora. The basic anaphora is used for entities which have been mentioned previously in the discourse. The extended anaphora is inspired by the bridging references \citet{clark77} had mentioned. These are used for entities which are not discourse old or even hearer old, but at the same time, they are not entirely new either.  See example in Figure~\ref{fig:bridging} (borrowed from \citet{poesio98}). 
+The first distinction annotators make is whether the NP at hand is anaphoric (discourse old) or non anaphoric (discourse new). 
+We do not annotate for uniqueness, hearer old/new distinction, specificity or genericity for the anaphoric NPs 
+as those distinctions were deemed inconsequential for English anaphoric NPs\footnote{However, in future, we may include these features for anaphoric NPs as well if contrary evidence were found.}.
+\yt{For someone who is not familiar with the scheme, this would be very hard to understand without looking at the definiteness scheme. I think the scheme should be on this page, and description should always point to the place in the scheme. May be we can write all scheme-related terms using the same font as they appear in the scheme? }
+The category of anaphoric NPs is further subdivided into basic anaphora and extended anaphora. 
+The basic anaphora is used for entities which have been mentioned previously in the discourse. 
+The extended anaphora is inspired by the bridging references \citet{clark77} had mentioned. 
+These are used for entities which are not discourse old or even hearer old, but at the same time, 
+they are not entirely new either.  See an example in \cref{fig:bridging} (borrowed from \citet{poesio98}). 
 
-\begin{figure}
-\vspace*{0.1cm}
-\begin{footnotesize}
+\begin{figure}\small
 (2) I went to {\it a wedding} last weekend. {\it The bride} was a friend of mine. She baked {\it the cake} herself. 
-\end{footnotesize}
 \label{fig:bridging}
+\caption{\nss{need a caption here}}
 \end{figure}
 
-Within the non anaphoric category, the annotators decide whether the NP denotes a unique NP, a non unique NP or a generic NP. For the nongeneric cases, further decisions are made based on whether the entity is hearer old or new, and if it is old, what kind of situation makes it old. For generics also, there are two categories depending on whether they appear with kind-level or individual- level predicates resulting in different properties of these NPs. Besides these, there are a few non-referential categories as well.
+Within the non anaphoric category, the annotators decide whether the NP denotes a unique NP, 
+a nonunique NP, or a generic NP. For the nongeneric cases, further decisions are made based on 
+whether the entity is hearer-old or -new, and if it is old, what kind of situation makes it old. 
+For generics also, there are two categories depending on whether they appear 
+with kind-level or individual-level predicates resulting in different properties of these NPs. 
+Besides these, there are a few non-referential categories as well.
 
-Besides the annotation categories, a few other decisions were also taken regarding annotations. For example, corresponding to the basic anaphora cases, the anaphoric links can be established with antecedent NPs in previous sentences as well as with NPs within the same sentence. Also to determine whether an NP gets a Same\_head or a Different\_head label, we refer to the closest antecedent even if it appears within the same sentence. Regarding annotations of nested NPs, we assume that these NPs are interpreted inside out. This helps determine the cases of Bridging\_RestrictiveModifier category. If an NP consists of a modifier that restricts its reference enough to make the referent identifiable to the addressees, the embedding NP is annotated with the Bridging\_RestrictiveModifier label. 
+Besides the annotation categories, a few other decisions were also taken regarding annotations. 
+For example, corresponding to the basic anaphora cases, the anaphoric links can be established with antecedent NPs 
+in previous sentences as well as with NPs within the same sentence. 
+Also to determine whether an NP gets a \llbl{Same\_head} or a \llbl{Different\_head} label, 
+we refer to the closest antecedent even if it appears within the same sentence. 
+Regarding annotations of nested NPs, we assume that these NPs are interpreted inside out. 
+This helps determine the cases of \llbl{Bridging\_RestrictiveModifier} category. 
+If an NP consists of a modifier that restricts its reference enough 
+to make the referent identifiable to the addressees, the embedding NP is annotated with 
+the \llbl{Bridging\_RestrictiveModifier} label. 
 
 
-\Cref{fig:excerpt} is an excerpt from Little Red Riding Hood demonstrating the above-mentioned decisions regarding annotations and illustrating some of the categories from our annotation scheme.
+\Cref{fig:excerpt} is an excerpt from the ``Little Red Riding Hood'' document demonstrating 
+the above-mentioned decisions regarding annotations and illustrating some of the categories from our annotation scheme.
 
 
 \begin{figure*}[t]\small
