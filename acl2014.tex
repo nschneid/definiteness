@@ -90,7 +90,7 @@
 \DeclareMathOperator*{\argmax}{arg\,max}
 \DeclareMathOperator*{\argmin}{arg\,min}
 
-
+\usepackage{verbatim}
 
 % Author comments
 \usepackage{color}
@@ -185,7 +185,7 @@
 \crefname{appsec}{appendix}{appendices}
 \Crefname{appsec}{Appendix}{Appendices}
 
-\renewcommand{\creflastconjunction}{, and\nobreakspace} % Oxford comma for lists
+\newcommand{\creflastconjunction}{, and\nobreakspace} % Oxford comma for lists
 
 \newcommand*{\Fullref}[1]{\hyperref[{#1}]{\Cref*{#1}: \nameref*{#1}}}
 \newcommand*{\fullref}[1]{\hyperref[{#1}]{\cref*{#1}: \nameref{#1}}}
@@ -252,7 +252,7 @@
 \hyphenation{comb-over}
 \hyphenation{per-cept}
 \hyphenation{per-cepts}
-\title{\draftnotice{Title, author list not final. Page limit: 5 + 2 bib} Learning Definiteness across Languages using Classifiers \nss{maybe: A Classification and Classifier for Cross-linguistic Functions of Definiteness}}
+\title{\draftnotice{Title, author list not final. Page limit: 5 + 2 bib} \ab{Learning Definiteness across Languages using Classifiers} \nss{maybe: A Classification and Classifier for Cross-linguistic Functions of Definiteness}}
 
 \finalversion{\author{Archna Bhatia \ \ \  Chu-Cheng Lin \ \ \  Lori Levin \ \ \ \  Mandy Simons \\
 \bf Fatima Talib Al-Raisi \ \ \  Laleh Roostapour \ \ \  Abhimanu Kumar  \\
@@ -265,24 +265,81 @@ Pittsburgh, PA 15213}}
 \begin{document}
 \maketitle
 \begin{abstract}
-  Definiteness seems to be a nonhomogenoeus category across languages denoting various semantic/ pragmatic aspects. The semantic - pragmatic information may be grouped differently in different languages to result in grammaticalizations corresponding to definiteness in these languages. In this paper, we attempt to find out these clusterings of semantic- pragmatic features relevant to two languages English and Hindi in an attempt to find out how definiteness is grammaticalizd in these languages. This work has twofold benefits: for the linguistic studies, it provides us a concrete set of groupings for each language which tells us how definiteness is conceptualized and repesented in these languages; in addition, these findings serve as a guide in improving machine translations across these languages.  
+Definiteness is a nonhomogeneous category across languages expressing various communicative functions (types of semantic, pragmatic and discourse- related information).   Languages differ in the grainsize and inventory of communicative functions  that are expressed as well as the syntactic means for expressing them.  There is a major difference between languages that express definiteness primarily through articles like English "the" and "a" and languages that express definiteness with word order and other syntactic constructions.   This paper presents an \yt{ a thorough linguistic analysis of } annotation scheme for the communicative functions of definiteness. \yt{Agree with Nathan -- the scheme was presented in the LREC paper. This paper presents the linguistic analysis and the classifier}  We applied the annotation scheme to a corpus of written and spoken English and built a classifier that uses lexical, morphological, and syntactic features to predict communicative functions.   This work has twofold benefits: linguistically, it discovers the grammaticalization of definiteness, some of which is obvious (e.g., articles) and some of which is not obvious (include an example from our findings) 
+In addition, this work has the potential to improve language technologies such as machine translation, information extraction, entity tracking, and other semantic processing tasks. \yt{We work only on English, and I don't think we discover grammaticalization. I'd say that benefits are: (1) linguistically, it provides analysis and interpretation of the scheme, (2) computationally,  it presents a framework to predict \textit{semantic and pragmatic} properties of the communicative functions of definiteness which, unlike lexical and morphosyntactic features, are preserved in translation.  This framework can be used to discover definiteness grammaticalization across languages.}.  
 \end{abstract}
 
 \section{Introduction}
 
-\ab{Here we discuss about why we should study definiteness- linguistically a hard problem, also it has applications in machine translation. Discuss about grammaticalization as a general problem (differences across languages), then grammaticalization of definiteness across languages, some examples to show differences across languages.}
-\nss{we review the annotation scheme in \cref{sec:scheme}; etc.}
+Languages display a vast range of variation with respect to definiteness. For example, while languages like English make use of definite and indefinite articles to distinguish between the discourse status of various entities ({\it the car} vs {\it a car}), many other languages, such as Czech, Hindi, Indonesian, Russian do not have definite articles or any articles at all. Even the languages that do have articles vary in terms of how these articles are used. For example, English uses only one definite article ‘the’ for entities irrespective of whether they have been mentioned previously in the discourse or are familiar to the hearer by some other means, but there are languages such as Hausa which have a specialized article for anaphoric definite entities, see example in Figure~\ref{fig:hausaanaphdef} (borrowed from \cite{lyons99}). 
+
+\begin{figure}[htbp]
+\vspace*{0.1cm}
+\begin{footnotesize}
+\begin{verbatim}
+(1) Na  kawo  keke    din-ka 
+    AUX bring bicycle the-2SGM 	
+    'I brought your bicycle (previously mentioned).' 
+\end{verbatim}
+\end{footnotesize}
+\label{fig:hausaanaphdef}
+\end{figure}
+
+There are other means to express (in-)definiteness, such as the use of affixes.   Arabic, for example, uses a definite prefix {\it al-} and indefinite suffix {\it -n}. \cite{chen04} shows that Chinese expresses (in-)definiteness through the use of various constructions, such as the existential construction for indefinite subjects and the {\it ba}- construction for definite direct objects. Demonstratives, personal pronouns and possessives (which are found in all languages) are other kinds of definite NPs. Besides this variation in the form of (in-)definite NPs within and across languages, there is also variability in what semantic, pragmatic, discourse- related functions (in-)definites express.   We will refer to these as communicative functions. 
+
+The literature on definiteness suggests that it may express communicative functions corresponding to notions such as uniqueness, familiarity, identifiability, anaphoricity, specificity, and referentiality(\cite{birner94}, \cite{condoravdi92}, \cite{evans77}, \cite{evans80}, \cite{gundel88}, \cite{gundel93}, \cite{heim90}, \cite{kadmon87}, \cite{kadmon90}, \cite{lyons99}, \cite{prince92}, \cite{roberts03}, \cite{russell05} among many others).  Reductionist approaches to definiteness try to define a single communicative function of definteness.   For example, \cite{kadmon87}, \cite{evans80} have used the notion of semantic uniqueness to account for definite NPs, but pronouns do not display uniqueness effects. \cite{roberts03} proposes that the combination of uniqueness and a presupposition of familiarity can explain definiteness, but possessive definite descriptions ({\it John's daughter}) and the weak definites ({\it the son of Queen Juliana of the Netherlands}) cannot be explained using this combination.
+
+%% The red phrases only have meaning to linguists.   We have to %% rephrase for computer scientists. 
+
+In contrast to the reductionists, we …(I’ll finish editing this paragraph tomorrow.   It will say that we have a range of prototypical and radial communicative functions and we want to correlate them with lexical, syntactic, and morphological constructions.)
+
+We take such linguistic observations to suggest that definiteness is not as homogeneous a category as many accounts have assumed. Instead, it should be seen as grammaticalization of many such semantic, pragmatic, discourse- related notions. Therefore, it seems relevant to identify what information different forms of (in-)definites express within a language as a goal in itself. Additionally, it is advantageous to identify the mapping between the form and meaning of (in-)definites for various NLP applications. For example, this mapping can be used to encode correct information during the automatic construction of knowledge bases or other information extraction or semantic processing tasks. Also, this mapping can be used for machine translation applications. Here the assumption is that even though the forms may change across languages, the meaning is maintained while translating from one language to another. It has been noted previously that machine translation systems face problems while translating from a language to another when the languages use different grammatical strategies. \cite{tsvetkov13} and \cite{stymne09} mention how translating from an article-language to an article-less language is problematic. If the mapping between different forms and the information they encode is known in both the source language and the target language, this information can be leveraged in improving machine translation across these languages.  
+
+In \cref{sec:scheme}, we review the annotation scheme we have used to determine the mapping between the form and meaning it encodes with respect to (in-)definiteness. In \cref{sec:data}, we provide information about the English data we have annotated using this scheme. \cref{sec:modeling} is an overview of the classification framework we have used. In \cref{sec:eval}, we describe the measures we have used to evaluate the predictions against the gold standard for the held-out data. In \cref{sec:exp}, we describe our experiments and discuss the results. In \cref{sec:conclusion}, we summarize our findings and briefly discuss the future tasks we are undertaking or envision.    \yt{I think that detailed description of definiteness in linguistics in the beginning of this section deserves a section by itself; I'd split the Introduction section into Introduction (shorter, only what we do, motivation, contribution) and then Definiteness.} 
+
+%\ab{Here we discuss about why we should study definiteness- linguistically a hard problem, also it has applications in machine translation. Discuss about grammaticalization as a general problem (differences across languages), then grammaticalization of definiteness across languages, some examples to show differences across languages.}
+%\nss{we review the annotation scheme in \cref{sec:scheme}; etc.}
 
 \section{Annotation scheme}\label{sec:scheme}
+Based on the literature on definiteness, we compiled a list of semantic, pragmatic, and discourse- related features which are relevant for the form of (in-)definite NPs in English (and many other languages). \yt{ref to the LREC paper?} These features were put together in a hierarchical structure to ease the annotation effort for the annotators. At each step, the annotators make a decision and thus reduce the number of labels they have to consider before annotating an NP. This approach also increases the consistency in annotations due to the reduced effort on considering the options among which to select the correct label for the NP. The annotation scheme was revised through many iterations after attempts at annotating natural language data from different genres using the scheme. The current scheme is presented in Figure~\ref{fig:hierarchy}. 
+
+The first distinction annotators make is whether the NP at hand is anaphoric (discourse old) or non anaphoric (discourse new). We do not annotate for uniqueness, hearer old/new distinction, specificity or genericity for the anaphoric NPs as those distinctions were deemed inconsequential for English anaphoric NPs\footnote{However, in future, we may include these features for anaphoric NPs as well if contrary evidence were found.}. \yt{For someone who is not familiar with the scheme, this would be very hard to understand without looking at the definiteness scheme. I think the scheme should be on this page, and description should always point to the place in the scheme. May be we can write all scheme-related terms using the same font as they appear in the scheme? } The anaphoric NPs’ category is further subdivided into basic anaphora and extended anaphora. The basic anaphora is used for entities which have been mentioned previously in the discourse. The extended anaphora is inspired by the bridging references \cite{clark77} had mentioned. These are used for entities which are not discourse old or even hearer old, but at the same time, they are not entirely new either.  See example in Figure~\ref{fig:bridging} (borrowed from \cite{poesio98}). 
+
+\begin{figure}[htbp]
+\vspace*{0.1cm}
+\begin{footnotesize}
+(2) I went to {\it a wedding} last weekend. {\it The bride} was a friend of mine. She baked {\it the cake} herself. 
+\end{footnotesize}
+\label{fig:bridging}
+\end{figure}
+
+Within the non anaphoric category, the annotators decide whether the NP denotes a unique NP, a non unique NP or a generic NP. For the nongeneric cases, further decisions are made based on whether the entity is hearer old or new, and if it is old, what kind of situation makes it old. For generics also, there are two categories depending on whether they appear with kind-level or individual- level predicates resulting in different properties of these NPs. Besides these, there are a few non-referential categories as well.
+
+Besides the annotation categories, a few other decisions were also taken regarding annotations. For example, corresponding to the basic anaphora cases, the anaphoric links can be established with antecedent NPs in previous sentences as well as with NPs within the same sentence. Also to determine whether an NP gets a Same\_head or a Different\_head label, we refer to the closest antecedent even if it appears within the same sentence. Regarding annotations of nested NPs, we assume that these NPs are interpreted inside out. This helps determine the cases of Bridging\_RestrictiveModifier category. If an NP consists of a modifier that restricts its reference enough to make the referent identifiable to the addressees, the embedding NP is annotated with the Bridging\_RestrictiveModifier label. 
 
 
-\ab{A brief discussion of the Annotation scheme}
-\nss{we should probably have a name for the scheme---something like ``Functions of Definiteness Across Languages (FDAL)''? 
-and a name for the categories (I have been calling them semantic functions).}
+Figure~\ref{fig:excerpt} is an excerpt from Little Red Riding Hood demonstrating the above-mentioned decisions regarding annotations and illustrating some of the categories from our annotation scheme.
+
+
+\begin{figure}[htbp]
+…
+…
+…
+\label{fig:excerpt}
+\end{figure}
+
+
+
+
+
+
+ 
+%\ab{A brief discussion of the Annotation scheme}
+\nss{we should probably have a name for the scheme---something like ``Functions of Definiteness Across Languages (FDAL)''? and a name for the categories (I have been calling them semantic functions).}\ab{I actually like the name ``Functions of Definiteness Across Languages'' but am not sure how to incorporate it here.}
 \nss{suggestion: lead with a discourse excerpt, ideally illustrating a few of the categories, a nested NP, and 
 an anaphoric link across sentence boundaries. I can help format it.}
 
-\nss{cite papers like this: \citet{bhatia-14} (but probably anonymize this for review) or \citep{reiter-10}}
+\nss{cite papers like this: \citet{bhatia14} (but probably anonymize this for review) or \citep{reiter10}}
 
 \begin{figure*}\small
 \begin{tabular}{p{.45\textwidth}p{.45\textwidth}}
@@ -346,17 +403,21 @@ an anaphoric link across sentence boundaries. I can help format it.}
 \end{itemize}
 \end{tabular}
 \caption{Taxonomy of definiteness functions, with number of occurrences in the training data \nss{TODO}. 
-Internal (non-leaf) labels are in bold.\nss{added two: Generic and Miscellaneous, and also reversed Nonreferential to Referential. is that OK?}\nss{TODO: normalize capitalization}
+Internal (non-leaf) labels are in bold.\nss{added two: Generic and Miscellaneous, and also reversed Nonreferential to Referential. is that OK?}\ab{yes, that is fine}\nss{TODO: normalize capitalization}
 $+$/$-$ values are shown for ternary attributes \uline{A}naphoric, \uline{B}ridging, \uline{G}eneric, Hearer-\uline{O}ld, \uline{P}redicative, \uline{R}eferential, \uline{S}pecific, and \uline{U}nique; 
-these are inherited from supercategories, but otherwise default to $0$.\nss{nonuniq\_nonspec is $-$generic, right?} 
+these are inherited from supercategories, but otherwise default to $0$.\nss{nonuniq\_nonspec is $-$generic, right?} \ab{right}
 Thus, for example, the full attribute specification for \llbl{uniq\_Physical\_copresence} is $[-A,-B,-G,+O,0P,+R,+S,+U]$.}
 \label{fig:hierarchy}
 \end{figure*}
 
 \section{Data}\label{sec:data}
 
+We annotated data from a few genres, namely TED talks, news articles, speech (Presidential inauguration speech) and stories in English. However, currently the majority of our annotated data is from the TED talks corpus. For future work, we will be annotating other genres more as well. We annotated a total of 1783 sentences \ab{that is all our data, some is not yet annotated, am working on it today, hopefully we will be able to use most of it, otherwise we will change the numbers here} (a total of 28574 words), which consist of 10476 NPs (i.e. the annotatable units). 
+
+A total of 6 annotators contributed to the annotations. Two of the annotators are linguists while others are computer scientists working on languages and an undergraduate student of Linguistics. Two annotators annotated most of the data, the inter annotator agreement between them was very high with Cohen's Kappa score of 0.94 within the TED corpus and 0.91 for combined genres.  However the other 4 annotators also annotated some of the data, but one of the two annotators with most experience took these data as inputs and revised annotations according to their annotations. This two-step process of annotation was taken to increase the amount of data within a short period of time and also to achieve consistency within annotations. All annotators were trained using the annotation guidelines and example annotated texts. Then the annotators were asked to annotate some data, these annotations were discussed to reach at consensus. The annotations used for discussions to reach at consensus were not included while calculating the inter annotator agreement.    
+
 \ab{description of data, IAA, other statistics- n(annotations), n(annotations/ category)
-classifiers for English, and Hindi- baseline, accuracy etc, confusion matrix- classifier predictions and gold standard
+classifiers for English- baseline, accuracy etc, confusion matrix- classifier predictions and gold standard
 may be a brief discussion of feature ablation study-  which features are most helpful at least in these languages corresponding to individual categories (a clue to grammaticalization)
 Principle component analysis, clustering of features}
 
@@ -434,8 +495,20 @@ and $\tilde{\boldsymbol{\omega}}(y) = \textit{the identity of the label}$,
 this reduces to standard logistic regression.
 
 \subsection{Features}\label{sec:feats}
+\begin{description}
+	\item[Features of words of interest] The text is parsed with a dependency parser. In an NP parse there are certain words that we are mostly interested in. They include its \emph{head},
+    \emph{dependents}, and \emph{outer heads} (which are words that the heads depend on). We are also interested in the \emph{attached verb}, which is the first verb one encounters when going upward the dependency path from the head. We extract their part-of-speech,
+    lemmas, and grammatical information (of which we only collect plurality right now). Since there may be multiple dependents,
+    we have special features for the first and the last one. Moreover, to better capture tense, aspect and modality, we collect the attached verb's \emph{aux} words. We also make note of \emph{neg} if it is attached to the verb.
+    Of these words we collect their lemmas, POS's and dependency relation. Since there may be many dependents, we also specifically mark the first and the last word.
+    
+    \item[Parse structure related features] These features include length of the upward path from the head to the root, and to the attached verb. We also have features for the number of dependents, and the number of dependency relations that link non-neighbors.
+    \item[Position related features] Including the length of the NP, NP position in the sentence (upper half or lower half), relative position of the verb to the head (left or right). We also collect information of the words of interest' left and right neighbors.
+    \item[Other NPs] These include features in annotated NPs such as \emph{immediate parent}, which is the smallest NP that fully covers this NP, and similarly \emph{immediate child}. We also have \emph{immediate precedent} and \emph{immediate successor}. Using a coreference resolution program, we identify mentions, and extract their features as well.
+    
+\end{description}
 
-\nss{TODO}
+%\nss{TODO}
 
 \subsection{Attributes}\label{sec:attrs}
 
@@ -503,14 +576,8 @@ for the held-out evaluation (dev or test) set $\mathcal{E}$:
 
 \nss{Hindi?}
 
-\section{Discussion: Error analysis, comparison across languages}\label{sec:discussion}
+\section{Conclusion}\label{sec:conclusion}
 
-\ab{confusion matrix - Hindi vs Eng (for common annotations)- semantic annotations
-differences in annotations- why- different grammatical constructions, e.g. NP in 1 language but predicate in another etc.
-what do similarities tell us about grammaticalization, what do differences tell.
-discuss- how this analysis can help in MT}
-
-\section{Conclusion}
 
 
 
@@ -523,3 +590,12 @@ discuss- how this analysis can help in MT}
 
 
 \end{document}
+
+
+\section{Discussion: Error analysis, comparison across languages}\label{sec:discussion}
+
+\ab{confusion matrix - Hindi vs Eng (for common annotations)- semantic annotations
+differences in annotations- why- different grammatical constructions, e.g. NP in 1 language but predicate in another etc.
+what do similarities tell us about grammaticalization, what do differences tell.
+discuss- how this analysis can help in MT}
+
