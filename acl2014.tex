@@ -235,6 +235,7 @@
 \newcommand{\srsversion}[1]{}
 %\newcommand{\finalversion}[1]{#1}
 \newcommand{\finalversion}[1]{}
+\newcommand{\costversion}[1]{}
 \newcommand{\shortversion}[1]{#1}
 \newcommand{\considercutting}[1]{#1}
 \newcommand{\longversion}[1]{} % ...if only there were more space...
@@ -412,9 +413,9 @@ an anaphoric link across sentence boundaries. I can help format it.}
 \end{itemize}
 \end{tabular}
 \caption{Taxonomy of definiteness functions, with number of occurrences in the training data \nss{TODO}. 
-Internal (non-leaf) labels are in bold.\nss{added two: Generic and Miscellaneous, and also reversed Nonreferential to Referential. is that OK?}\ab{yes, that is fine}\nss{TODO: normalize capitalization}
+Internal (non-leaf) labels are in bold;\costversion{\nss{}} these are not annotated or predicted.\nss{TODO: normalize capitalization}
 $+$/$-$ values are shown for ternary attributes \uline{A}naphoric, \uline{B}ridging, \uline{G}eneric, Hearer-\uline{O}ld, \uline{P}redicative, \uline{R}eferential, \uline{S}pecific, and \uline{U}nique; 
-these are inherited from supercategories, but otherwise default to $0$.\nss{nonuniq\_nonspec is $-$generic, right?} \ab{right}
+these are inherited from supercategories, but otherwise default to $0$.
 Thus, for example, the full attribute specification for \llbl{uniq\_Physical\_copresence} is $[-A,-B,-G,+O,0P,+R,+S,+U]$.}
 \label{fig:hierarchy}
 \end{figure*}
@@ -437,7 +438,13 @@ we work within the supervised framework of feature-rich discriminative classific
 treating the functional categories from \cref{sec:scheme} as output labels $y$
 and various lexical, morphological, and syntactic characteristics of the language as features of the input $x$.
 Specifically, we learn a probabilistic log-linear model similar to multiclass logistic regression, 
-but deviating in the following ways:
+but deviating in that
+logistic regression treats each output label (response) as atomic, whereas 
+we decompose each into \emph{attributes} based on their linguistic definitions, 
+enabling commonalities between related labels to be recognized.
+Each weight in the model corresponds to a feature that mediates between 
+\emph{percepts} (characteristics of the input noun phrase) and attributes (characteristics of the label).
+\costversion{\nss{}the following ways:
 \begin{itemize}
   \item Logistic regression treats each output label (response) as atomic; 
   we decompose each into \emph{attributes} based on their linguistic definitions, 
@@ -452,7 +459,8 @@ but deviating in the following ways:
   which can receive partial credit. The scoring scheme encourages the predictor to ``back off'' 
   to a coarser label if it is not sufficiently confident about a fine-grained label.
 \end{itemize}
-These decisions are aimed at attaining better predictive accuracy 
+These decisions are\nss{}}
+This is aimed at attaining better predictive accuracy 
 as well as feature weights that better describe the form--function interactions we are interested in recovering.
 
 Our setup is formalized below, where we discuss the mathematical model and linguistically motivated features.
@@ -483,24 +491,24 @@ For prediction, having learned weights $\hat{\boldsymbol{\theta}}$ we choose the
 \hat{y} \leftarrow \arg\max_{y' \in \mathcal{Y}} p_{\hat{\boldsymbol{\theta}}}(y | x)
 \end{equation}
 
-Training optimizes $\hat{\boldsymbol{\theta}}$ so as to maximize the $L_1$-regularized
-\emph{softmax-margin} learning objective \citep{gimpel} over the training data $\mathcal{D}$:
-\begin{align*}
+Training optimizes $\hat{\boldsymbol{\theta}}$ so as to maximize a convex $L_1$-regularized
+\costversion{\emph{softmax-margin} }learning objective\costversion{ \citep{gimpel}} over the training data $\mathcal{D}$:
+\begin{align}
 \hat{\boldsymbol{\theta}} &= \argmax_{\boldsymbol{\theta}} L(\boldsymbol{\theta}, \mathcal{D}) \\
 \begin{split}
 L(\boldsymbol{\theta}, \mathcal{D}) &= -\lambda ||\boldsymbol{\theta}||_1 \\ 
-+ \sum_{\langle x,y \rangle\in\mathcal{D}} &\log{\frac{\exp{\boldsymbol{\theta}^{\top}\mathbf{f}(x,y)}}{\sum_{y' \in \mathcal{Y}}\exp{\left(\boldsymbol{\theta}^{\top}\mathbf{f}(x,y') + \textit{cost}(y,y')\right)}}}
++ \sum_{\langle x,y \rangle\in\mathcal{D}} &\log{\frac{\exp{\boldsymbol{\theta}^{\top}\mathbf{f}(x,y)}}{\sum_{y' \in \mathcal{Y}}\exp{\left(\boldsymbol{\theta}^{\top}\mathbf{f}(x,y')\costversion{ + \kappa\textit{cost}(y,y')}\right)}}}
 \end{split}
-\end{align*}
-The \emph{cost function} allows us to penalize some errors more than others during training, 
+\end{align}
+\costversion{The \emph{cost function} allows us to penalize some errors more than others during training, 
 taking into account the linguistic functions of the labels.
 It is zero for the gold label and nonnegative for the others.\nss{intuition}
 
 This framework gives us several ways to design a classifier appropriate to the task: 
 the attributes, the space of labels $\mathcal{Y}$ to consider, 
-and the cost function, and of course, the features themselves.
-With $\textit{cost}(y,y') = 0$, $\mathcal{Y} = \{\textit{gold labels in training}\}$, 
-and $\tilde{\boldsymbol{\omega}}(y) = \textit{the identity of the label}$, 
+and the cost function, and of course, the features themselves.}
+With \costversion{$\kappa = 0$, $\mathcal{Y} = \{\textit{gold labels in training}\}$, 
+and }$\tilde{\boldsymbol{\omega}}(y) = \textit{the identity of the label}$, 
 this reduces to standard logistic regression.
 
 \subsection{Features}\label{sec:feats}
@@ -526,12 +534,12 @@ there are actually several dimensions of commonality that suggest different grou
 These attributes are encoded as ternary characteristics; 
 for each label (including internal labels), every one of the 8 attributes  
 is assigned a value of $+$, $-$, or $0$ (refer to \cref{fig:hierarchy}).
-In order to capture these similarities in the model's features and cost function, 
+In order to capture these similarities in the model's features\costversion{ and cost function}, 
 we define the attribute vector function $\boldsymbol{\omega}(y) = $
 \begin{equation*}
 [y, A(y), B(y), G(y), O(y), P(y), R(y), S(y), U(y)]^{\top}
 \end{equation*}
-where $A: \mathcal{L} \cup \mathcal{I} \rightarrow \{+, -, 0\}$ returns the value for Anaphoric, 
+where $A: \costversion{\mathcal{L} \cup \mathcal{I}\nss{}}\mathcal{Y} \rightarrow \{+, -, 0\}$ returns the value for Anaphoric, 
 $B(y)$ for Bridging, etc. The identity of the label is also included in the vector so that 
 different labels are always recognized as different by the attribute function.
 The categorical components of this vector are then binarized to form $\tilde{\boldsymbol{\omega}}(y)$; 
@@ -540,7 +548,7 @@ there is a component that fires for \emph{any} value of the attribute---a sort o
 The weights assigned to features incorporating $+$ or $-$ attribute values, then, 
 are easily interpreted as deviations relative to the bias.
 
-\subsection{Cost and label space}\label{sec:cost}
+\costversion{\subsection{Cost and label space}\label{sec:cost}
 
 The definiteness function hierarchy presented in \cref{fig:hierarchy} 
 consists of 24~\emph{leaf labels}, which will be denoted $\mathcal{L}$, and 
@@ -550,25 +558,26 @@ but we give our model the option to predict more abstract labels
 to receive partial credit.
 We will therefore use $\mathcal{Y} = \mathcal{L} \cup \mathcal{I}$.
 
-The relatedness of leaf label pairs is determined by the dot product of the two original attribute vectors: 
-let $\Delta(\ell,\ell') = |\boldsymbol{\omega}(\ell) \cap \boldsymbol{\omega}(\ell')|^{-1}$.\footnote{By the intersection of two attribute vectors, we mean the subset of components that have a matching (categorical) value.} 
-For a gold leaf label $\ell$ and an internal label $\iota$, 
-$\Delta(\ell,\iota) =$ the distance in the hierarchy 
-between $\ell$ and $\iota$.\nss{TODO: ensure if $\iota$ is an ancestor of $\ell$, this is less than choosing another leaf dominated by $\iota$}.
-(There is no need to define $\Delta(\iota, \cdot)$, as the training set does not contain intermediate labels.)
+The relatedness of label pairs depends on the number of values that differ between the two original attribute vectors: 
+let $\Delta(y,y') = |\boldsymbol{\omega}(y) \ominus \boldsymbol{\omega}(y')|$.\footnote{By the symmetric difference of two attribute vectors, we mean the subset of components that lack a matching (categorical) value.} 
+For a gold leaf label $\ell$ and an internal label $\iota$ that subsumes it in the hierarchy 
+(i.e., $\iota$ is an ancestor of $\ell$), let $\delta(\ell,\iota) =$ the distance in the hierarchy 
+between $\ell$ and $\iota$.\footnote{There is no need to define $\delta(\iota, \cdot)$, as the training set does not contain intermediate labels.}
+Now define $\textit{cost}(y,y') = \Delta(y,y') - 0.5^{\delta(y,y')}$: 
+this assigns lower (better) cost to an internal label than to an incorrect leaf label with an equivalent attribute distance.}
 
 \section{Evaluation}\label{sec:eval}
 
 The following measures will be used to evaluate our predictor against the gold standard 
 for the held-out evaluation (dev or test) set $\mathcal{E}$:
 \begin{itemize}
-  \item \textbf{Exact match:} This gives credit only where the predicted and gold labels 
-  are identical. When the model is allowed to predict internal labels, we will report 
-  overall precision and recall of leaf labels. Otherwise, we report accuracy.
+  \item \textbf{Exact match:} This accuracy measure gives credit only where the predicted and gold labels 
+  are identical.\costversion{\nss{} When the model is allowed to predict internal labels, we will report 
+  overall precision and recall of leaf labels. Otherwise, we report accuracy.}
   \item \textbf{By leaf label:} We also compute precision and recall of each leaf label 
   to determine which categories are reliably predicted.
   \item \textbf{Soft match:} This accuracy measure gives partial credit where the predicted and gold labels 
-  are related. It is computed as the $\Delta$ function in \cref{sec:cost} \nss{normalized to be between 0 and 1?}.
+  are related. It is computed as in \cref{sec:eval}.
   \item \textbf{Perplexity:} This determines how ``surprised'' our model is by the gold labels 
   in the test set; the greater the probability mass assigned to the true labels, 
   the higher the score. 
