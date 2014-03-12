@@ -321,7 +321,7 @@ Within the non anaphoric category, the annotators decide whether the NP denotes 
 Besides the annotation categories, a few other decisions were also taken regarding annotations. For example, corresponding to the basic anaphora cases, the anaphoric links can be established with antecedent NPs in previous sentences as well as with NPs within the same sentence. Also to determine whether an NP gets a Same\_head or a Different\_head label, we refer to the closest antecedent even if it appears within the same sentence. Regarding annotations of nested NPs, we assume that these NPs are interpreted inside out. This helps determine the cases of Bridging\_RestrictiveModifier category. If an NP consists of a modifier that restricts its reference enough to make the referent identifiable to the addressees, the embedding NP is annotated with the Bridging\_RestrictiveModifier label. 
 
 
-Figure~\ref{fig:excerpt} is an excerpt from Little Red Riding Hood demonstrating the above-mentioned decisions regarding annotations and illustrating some of the categories from our annotation scheme.
+\Cref{fig:excerpt} is an excerpt from Little Red Riding Hood demonstrating the above-mentioned decisions regarding annotations and illustrating some of the categories from our annotation scheme.
 
 
 \begin{figure*}[t]\small
@@ -348,6 +348,21 @@ would never wear \glosst{anything else}{\llbl{Quantified}}; so \glosst{she}{\llb
 an anaphoric link across sentence boundaries. I can help format it.}
 
 \nss{make sure to cite related computational stuff such as \citep{reiter10}}
+
+Examples from \citet[pp. 6--7]{croft-03}:
+
+\eenumsentence{\small
+\item He went to \textbf{the bank}. (def.)\\
+	  Il est all\'{e} \`{a} \textbf{la banque}. (def.)
+\item He showed \textbf{extreme care}. (unmarked)\\
+	  Il montra \textbf{un soin extr\^{e}me}. (indef.)
+\item I love \textbf{artichokes} and asparagus. (unmarked)
+	  J'aime \textbf{les artichauts} et les asperges. (def.)
+\item His brother became \textbf{a soldier}. (indef.)\\
+	  Son fr\`{e}re est devenu \textbf{soldat}. (unmarked)
+}
+In the scheme used here, these should receive labels \llbl{nonuniq\_Hearer\_new\_spec}, \llbl{Other\_Nonreferential}, 
+\llbl{Generic\_individualLevel}, and \llbl{Predicative\_equative\_role}, respectively.
 
 \begin{figure*}\small
 \begin{tabular}{p{.45\textwidth}p{.45\textwidth}}
@@ -509,21 +524,49 @@ With \costversion{$\kappa = 0$, $\mathcal{Y} = \{\textit{gold labels in training
 and }$\tilde{\boldsymbol{\omega}}(y) = \textit{the identity of the label}$, 
 this reduces to standard logistic regression.
 
-\subsection{Features}\label{sec:feats}
-\begin{description}
-	\item[Features of words of interest] The text is parsed with a dependency parser. In an NP parse there are certain words that we are mostly interested in. They include its \emph{head},
-    \emph{dependents}, and \emph{outer heads} (which are words that the heads depend on). We are also interested in the \emph{attached verb}, which is the first verb one encounters when going upward the dependency path from the head. We extract their part-of-speech,
-    lemmas, and grammatical information (of which we only collect plurality right now). Since there may be multiple dependents,
-    we have special features for the first and the last one. Moreover, to better capture tense, aspect and modality, we collect the attached verb's \emph{aux} words. We also make note of \emph{neg} if it is attached to the verb.
-    Of these words we collect their lemmas, POS's and dependency relation. Since there may be many dependents, we also specifically mark the first and the last word.
-    
-    \item[Parse structure related features] These features include length of the upward path from the head to the root, and to the attached verb. We also have features for the number of dependents, and the number of dependency relations that link non-neighbors.
-    \item[Position related features] Including the length of the NP, NP position in the sentence (upper half or lower half), relative position of the verb to the head (left or right). We also collect information of the words of interest' left and right neighbors.
-    \item[Other NPs] These include features in annotated NPs such as \emph{immediate parent}, which is the smallest NP that fully covers this NP, and similarly \emph{immediate child}. We also have \emph{immediate precedent} and \emph{immediate successor}. Using a coreference resolution program, we identify mentions, and extract their features as well.
-    
-\end{description}
+\subsection{Percepts}\label{sec:feats}
 
-%\nss{TODO}
+The characteristics of the input that are incorporated in the model, which we call \emph{percepts} 
+to distinguish them from model features linking inputs to outputs,\footnote{See above.} 
+are intended to capture the aspects of English morphosyntax that may be relevant 
+to the semantic and pragmatic functions of definiteness.
+
+After preprocessing the text with a dependency parser and coreference resolver, 
+we extract the several kinds of percepts for each noun phrase (NP).
+
+\subsubsection{Basic}
+
+\paragraph{Words of interest.} 
+These are the \emph{head} within the NP, all of its \emph{dependents}, and its \emph{governor} (external to the NP). 
+We are also interested in the \emph{attached verb}, which is the first verb one encounters when traversing the dependency path upward from the head. 
+For each of these words, we have separate percepts capturing: the token, the part-of-speech (POS) tag, the lemma, 
+the dependency relation,
+and (for the head only) a binary indicator of plurality (determined from the POS tag).
+As there may be multiple dependents, we have additional features specific to the first and the last one. 
+Moreover, to better capture tense, aspect and modality, we collect the attached verb's \emph{auxiliaries}. 
+We also make note of \emph{neg} if it is attached to the verb.
+    
+\paragraph{Structural.} 
+These are: the \emph{path length} from the head up to the root, and to the attached verb. 
+We also have percepts for the number of dependents, and the number of dependency relations that link non-neighbors.
+Integer values were binarized with thresholding.
+
+\paragraph{Positional.} 
+The \emph{token length} of the NP; the NP's \emph{location} in the sentence (first or second half); 
+the \emph{attached verb's position} relative to the head (left or right). 
+12~additional percept templates record the POS and lemma of the left and right neighbors of the head, governor, and attached verb.
+
+\subsubsection{Contextual NPs}
+
+When extracting features for a given NP (call it the ``target''), 
+we also consider NPs in the following relationship with the target NP:
+its \emph{immediate parent}, which is the smallest NP whose span fully subsumes that of the target; 
+the \emph{immediate child}, which is the largest NP subsumed within the target;
+the \emph{immediate precedent} and \emph{immediate successor} within the sentence; 
+and the \emph{nearest preceding coreferent mention}.
+
+For each of these related NPs, we include all of their basic percepts 
+conjoined with the nature of the relation to the target.
 
 \subsection{Attributes}\label{sec:attrs}
 
