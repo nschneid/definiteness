@@ -185,7 +185,11 @@
 \crefname{appsec}{appendix}{appendices}
 \Crefname{appsec}{Appendix}{Appendices}
 
+\ifx\creflastconjunction\undefined%
 \newcommand{\creflastconjunction}{, and\nobreakspace} % Oxford comma for lists
+\else%
+\renewcommand{\creflastconjunction}{, and\nobreakspace} % Oxford comma for lists
+\fi%
 
 \newcommand*{\Fullref}[1]{\hyperref[{#1}]{\Cref*{#1}: \nameref*{#1}}}
 \newcommand*{\fullref}[1]{\hyperref[{#1}]{\cref*{#1}: \nameref{#1}}}
@@ -216,7 +220,7 @@
 % Special macros
 \newcommand{\tg}[1]{\texttt{#1}}	% supersense tag name
 \newcommand{\lex}[1]{\textsmaller{\textsf{\textcolor{slate}{\textbf{#1}}}}}	% example lexical item 
-\newcommand{\glosst}[2]{\ensuremath{\underset{\textrm{#2}}{\textrm{#1}}}} % gloss text (a word or phrase) (second arg is the gloss)
+\newcommand{\glosst}[2]{\ensuremath{\underset{\textrm{#2}}{\uline{\textrm{#1}}}}} % gloss text (a word or phrase) (second arg is the gloss)
 \newcommand{\sys}[1]{\mbox{\textbf{#1}}}   % name of a system (one of our experimental conditions)
 \newcommand{\dataset}[1]{\mbox{\textsc{#1}}}	% one of the datasets in our experiments
 \newcommand{\datasplit}[1]{\mbox{\textbf{#1}}}	% portion one of the datasets in our experiments
@@ -305,7 +309,7 @@ Based on the literature on definiteness, we compiled a list of semantic, pragmat
 
 The first distinction annotators make is whether the NP at hand is anaphoric (discourse old) or non anaphoric (discourse new). We do not annotate for uniqueness, hearer old/new distinction, specificity or genericity for the anaphoric NPs as those distinctions were deemed inconsequential for English anaphoric NPs\footnote{However, in future, we may include these features for anaphoric NPs as well if contrary evidence were found.}. \yt{For someone who is not familiar with the scheme, this would be very hard to understand without looking at the definiteness scheme. I think the scheme should be on this page, and description should always point to the place in the scheme. May be we can write all scheme-related terms using the same font as they appear in the scheme? } The anaphoric NPs’ category is further subdivided into basic anaphora and extended anaphora. The basic anaphora is used for entities which have been mentioned previously in the discourse. The extended anaphora is inspired by the bridging references \cite{clark77} had mentioned. These are used for entities which are not discourse old or even hearer old, but at the same time, they are not entirely new either.  See example in Figure~\ref{fig:bridging} (borrowed from \cite{poesio98}). 
 
-\begin{figure}[htbp]
+\begin{figure}
 \vspace*{0.1cm}
 \begin{footnotesize}
 (2) I went to {\it a wedding} last weekend. {\it The bride} was a friend of mine. She baked {\it the cake} herself. 
@@ -321,12 +325,17 @@ Besides the annotation categories, a few other decisions were also taken regardi
 Figure~\ref{fig:excerpt} is an excerpt from Little Red Riding Hood demonstrating the above-mentioned decisions regarding annotations and illustrating some of the categories from our annotation scheme.
 
 
-\begin{figure}[htbp]
-…
-…
-…
+\begin{figure*}[t]\small
+\textit{Once upon a time there was a dear little girl who was loved by everyone who looked at her, but most of all by her grandmother, and there was nothing that she would not have given to the child.}
+\\[5pt]
+Once \glosst{she}{\llbl{Same\_head}} gave \glosst{her}{\llbl{Different\_head}} 
+\glosst{a little riding hood of \glosst{red velvet}{\llbl{Other\_nonreferential}}}{$\underset{~}{\llbl{nonuniq\_Hearer\_new\_spec}}$}, 
+which suited \glosst{her}{\llbl{Same\_head}} so well that \glosst{she}{\llbl{Same\_head}} 
+would never wear \glosst{anything else}{\llbl{Quantified}}; so \glosst{she}{\llbl{Same\_head}} was always called 
+`\glosst{Little Red Riding Hood}{\llbl{uniq\_Hearer\_new}}.'
+\caption{An annotated sentence from ``Little Red Riding Hood.'' The previous sentence is shown for context.}
 \label{fig:excerpt}
-\end{figure}
+\end{figure*}
 
 
 
@@ -339,7 +348,7 @@ Figure~\ref{fig:excerpt} is an excerpt from Little Red Riding Hood demonstrating
 \nss{suggestion: lead with a discourse excerpt, ideally illustrating a few of the categories, a nested NP, and 
 an anaphoric link across sentence boundaries. I can help format it.}
 
-\nss{cite papers like this: \citet{bhatia14} (but probably anonymize this for review) or \citep{reiter10}}
+\nss{cite papers like this: \citet{bhatia-14} or \citep{reiter-10}}
 
 \begin{figure*}\small
 \begin{tabular}{p{.45\textwidth}p{.45\textwidth}}
