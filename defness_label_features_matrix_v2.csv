@@ -1,0 +1,29 @@
+"semantic, discourse related, some syntactic properties --->",Anaphoric,Unique,hearer old,specific,Generic,bridging,unique,"Predicative (not whether they would be annotated as predicative or not, but whether they appear in predicative nominal position or not)",nonreferential
+Same_head,+,0,+,0,0,-,0,0,0
+Different_head,+,0,+,0,0,-,0,0,0
+Bridging_nominal,+,0,0,+,-,+,0,0,-
+Bridging_event,+,0,0,+,0,+,0,0,-
+Bridging_restrictiveModifier,+,-,0,+,-,+,0,0,0
+Bridging_Generic,+,-,0,0,-,+,0,0,0
+Bridging_OtherContext,+,0,+,0,0,+,0,0,0
+uniq_Physical_copresence,-,+,+,+,-,-,+,0,-
+uniq_Larger_situation,-,+,+,+,-,-,+,0,-
+uniq_predicative_identity,-,+,+,+,-,-,+,+,0
+uniq_Hearer_New,-,+,-,0,0,-,+,0,0
+nonuniq_Physical_copresence,-,-,+,+,-,-,-,0,-
+nonuniq_Larger_situation,-,-,+,+,-,-,-,0,-
+nonuniq_predicative_identity,-,-,+,0,0,-,-,+,0
+nonuniq_Hearer_new_spec,-,-,-,+,-,-,-,0,-
+nonuniq_generic_nonspec,-,-,0,-,-,-,-,0,0
+Generic_kindLevel,-,0,0,0,+,-,0,0,+
+Generic_individualLevel,-,0,0,0,+,-,0,0,+
+Pleonastic,0,0,0,0,0,-,0,-,+
+Quantified,0,0,0,0,0,0,0,0,+
+Predicative_Nonidentity,0,0,0,0,0,-,0,+,+
+Part_of_noncompositionalMWE,0,0,0,0,0,0,0,0,+
+Measure_Nonreferential,0,0,0,0,0,0,0,0,+
+Other_Nonreferential,0,0,0,0,0,0,0,0,+
+,,,,,,,,,
++ : yes,,,,,,,,,
+- : no,,,,,,,,,
+0 : not relevant,,,,,,,,,
