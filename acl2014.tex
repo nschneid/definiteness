@@ -308,11 +308,12 @@ that have been previously mentioned in contrast to those that are definite by vi
 Definiteness can also be expressed by affixes as in Arabic.  
 \citet{chen04} shows that Chinese, a language without articles, expresses (in)definiteness through constructions, 
 such as the existential construction for indefinite subjects and the {\it ba}- construction for definite direct objects. 
-Demonstratives, personal pronouns and possessives (which are found in all languages) are other kinds of definite NPs. 
+Demonstratives, personal pronouns and possessives (which are found in all languages) \fta{Demonstrative, personal pronouns, and ... (which are found in all languages)
+I suggest removing (which are found in all languages) since the statement may give the impression that these are syntactic phenomena in all languages which is not always the case (Arabic for example expresses possessives in a number of different ways none of which is identified explicitly as a grammaticalization of possessive)} are other kinds of definite NPs. 
 
 Aside from this variation in the form of (in)definite NPs within and across languages, there is also variability 
 in the semantic, pragmatic, and discourse--related functions (in)definites expresses.   
-We will refer to these as {\em communicative functions}.  
+We will refer to these as {\em communicative functions} \fta{of (in)definiteness}.  
 The literature on definiteness suggests that it may express communicative functions such as 
 uniqueness, familiarity, identifiability, anaphoricity, specificity, and 
 referentiality \citep[\textit{inter alia}]{birner94,condoravdi92,evans77,evans80,gundel88,gundel93,heim90,kadmon87,kadmon90,lyons99,prince92,roberts03,russell05}.  
@@ -328,7 +329,7 @@ We take such linguistic observations to suggest that definiteness is not as homo
 as many accounts have assumed.  In contrast to the reductionists, we are following an 
 approach to grammaticalization~\citep{?} in which grammar develops over time in such a way that 
 each grammatical construction has some prototypical communicative functions, 
-but also has many non-prototypical communicative functions.  
+but also has many non-prototypical communicative functions\fta{not totally clear how this relates to learning the communicative functions of definiteness, either elaborate or remove the part that start with In contrast to the reductionist...until prototypical functions. The part that follows in the previous version is relevant: Grammaticalization varies a lot across ...}.  
 
 This paper describes a classifier that predicts communicative function labels for English noun phrases.  
 The features used by the classifier are lexical, morphological, and syntactic.   
@@ -340,7 +341,7 @@ for expressing it are different. The communicative function labels also represen
 making them relevant for entity tracking, knowledge base construction, and information extraction. 
 
 The model is a form-meaning mapping, consisting of the syntactic, lexical, and morphological features 
-and weights that correlate with---are predictive of---communicative functions.   
+and weights that correlate with\fta{suggestion: remove correlate with}---are predictive of---communicative functions.   
 This in itself is linguistically significant in that it shows the grammatical mechanisms 
 beyond the articles {\em the} and {\em a} that are used for expressing definiteness in English.   
 In future work we will build such models for languages that do not have articles such as Hindi, Russian, and Chinese.
@@ -518,15 +519,7 @@ Thus, for example, the full attribute specification for \llbl{uniq\_Physical\_co
 
 \section{Data}\label{sec:data}
 
-We use the English definiteness corpus of \citet{bhatia14}, 
-which consists of texts from multiple genres annotated with the scheme described in \cref{sec:scheme}. 
-The 16~documents are from prepared speeches (TED talks and a presidential address), 
-published news articles, and fictional narratives. 
-The TED data predominates (about 72\% of the corpus);\finalversion{\footnote{\nss{note that The TED talks are from a large parallel corpus?}}} 
-the presidential speech represents 18\%, news articles 5\%, and fictional narratives 5\%. 
-All told, the corpus contains 20,655~words (812~sentences), with 2,950~NPs (the annotatable units). 
-\citet{bhatia14} report high inter-annotator agreement, estimating Cohen's $\kappa = 0.94$ within the TED genre 
-and $0.91$ for combined genres\finalversion{\nss{update---this was on a previous version of the annotation scheme.}}.  
+We used the definiteness corpus \cite{bhatia14} which consisted of texts from a few genres, namely TED talks, published news articles, speech (Presidential inauguration speech) and fictional narratives in English. However, currently majority of the corpus consists of the TED talks’ annotations (about 72\% of the data) with 18\% of speech and 10\% of news and fiction narratives data. We used a total of 812 sentences (a total of 20655 words), with 2950 NPs (the annotatable units). \cite{bhatia14} reports an inter annotator agreement of Cohen's Kappa = 0.94 within the TED genre and 0.91 for combined genres on a previous version of the annotation scheme.  
 
 
 \section{Classification framework}\label{sec:modeling}
@@ -578,7 +571,7 @@ The feature function is defined as follows:
 \end{equation}
 where the percept function $\boldsymbol{\phi}: \mathcal{X} \rightarrow \mathbb{R}^c$ 
 produces a vector of real-valued characteristics of the input, and  
-the attribute function $\tilde{\boldsymbol{\omega}}: \mathcal{Y} \rightarrow \{0,1\}^a$
+the attribute function \fta{define a and c to make it clear} $\tilde{\boldsymbol{\omega}}: \mathcal{Y} \rightarrow \{0,1\}^a$
 encodes characteristics of each label.
 There is a feature for every percept--attribute pairing: so
 $d = c \cdot a$ and $f_{(i-1)a+j}(x,y) = \phi_i(x)\tilde{\omega}_j(y), 1 \leq i \leq c, 1 \leq j \leq a$.
@@ -612,7 +605,7 @@ this reduces to standard logistic regression.
 \subsection{Percepts}\label{sec:feats}
 
 The characteristics of the input that are incorporated in the model, which we call \emph{percepts} 
-to distinguish them from model features linking inputs to outputs,\footnote{See above.} 
+to distinguish them from model features linking inputs to outputs,\footnote{See above.\fta{see section or subsection number?} 
 are intended to capture the aspects of English morphosyntax that may be relevant 
 to the semantic and pragmatic functions of definiteness.
 
@@ -666,7 +659,7 @@ we define the attribute vector function $\boldsymbol{\omega}(y) = $
 [y, A(y), B(y), G(y), O(y), P(y), R(y), S(y), U(y)]^{\top}
 \end{equation*}
 where $A: \costversion{\mathcal{L} \cup \mathcal{I}\nss{}}\mathcal{Y} \rightarrow \{+, -, 0\}$ returns the value for Anaphoric, 
-$B(y)$ for Bridging, etc. The identity of the label is also included in the vector so that 
+$B(y)$ for Bridging, etc. \fta{explain the three possible values: positive negative or 0}The identity of the label is also included in the vector so that 
 different labels are always recognized as different by the attribute function.
 The categorical components of this vector are then binarized to form $\tilde{\boldsymbol{\omega}}(y)$; 
 however, instead of a binary component that fires for the $0$ value of each ternary attribute, 
@@ -759,15 +752,6 @@ Full log-linear classifier & & \\
 \nss{computational approaches to things related to definiteness, e.g. in MT. also would be good to mention Bresnan's work 
 on predicting syntactic alternations with logistic regression (here we want to predict the hidden information 
 so that the classifier is useful for applications!).}
-
-
-Automated prediction of (in)definite articles has been found beneficial in a variety of applications, 
-including postediting of MT output \citep{knight1994automated}, text generation \citep{DBLP:conf/aaai/Elhadad93,minnen2000memory}, 
-and identification and correction of ESL errors  \citep{aehan2006detecting,de2008classifier,gamon2008,rozovskaya2010training}. 
-More recently, \citet{tsvetkov13} trained a classifier to predict where English articles might plausibly be added or removed in a phrase, 
-and used this classifier to improve the quality of statistical machine translation. 
-To the best of our knowledge, no studies have been conducted on automatic prediction of semantic and pragmatic properties of definiteness.  
-
 
 \section{Conclusion}\label{sec:conclusion}
 
