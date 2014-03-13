@@ -184,9 +184,12 @@
 % for \label[appsec]{...}
 \crefname{appsec}{appendix}{appendices}
 \Crefname{appsec}{Appendix}{Appendices}
-\crefname{enums}{example}{examples}
-\Crefname{enums}{Example}{Examples}
+\crefname{enums,enumsi}{example}{examples}
+\Crefname{enums,enumsi}{Example}{Examples}
 \crefformat{enums}{(#2#1#3)}
+\crefformat{enumsi}{(#2#1#3)}
+\crefrangeformat{enums}{\mbox{(#3#1#4--#5#2#6)}}
+\crefrangeformat{enumsi}{\mbox{(#3#1#4--#5#2#6)}}
 
 \ifx\creflastconjunction\undefined%
 \newcommand{\creflastconjunction}{, and\nobreakspace} % Oxford comma for lists
@@ -299,20 +302,39 @@ semantic processing tasks.
 
 Languages display a vast range of variation with respect to the form and meaning of definiteness. 
 For example, while languages like English make use of definite and indefinite articles 
-to distinguish between the discourse status of various entities ({\it the car} vs.~{\it a car}), 
-many other languages, such as Czech, Hindi, Indonesian, and Russian, do not have articles 
-(although they do have demonstrative determiners).  
-Some languages such as Hausa~\citep{lyons99} have different definite articles for noun phrases 
-that have been previously mentioned in contrast to those that are definite by virtue of the situation 
-(e.g., ``the podium'' at a conference).  
-Definiteness can also be expressed by affixes as in Arabic.  
+to distinguish between the discourse status of various entities ({\it \textbf{the} car} vs.~{\it \textbf{a} car} vs.~{\it cars}), 
+many other languages---including Czech, Hindi, Indonesian, and Russian---do not have articles 
+(although they do have demonstrative determiners).\footnote{Demonstratives, personal pronouns, and possessives (which are found in all languages) are other kinds of definite NPs. }  
+% Some languages such as Hausa~\citep{lyons99} have different definite articles for noun phrases 
+% that have been previously mentioned in contrast to those that are definite by virtue of the situation 
+% (e.g., ``the podium'' at a conference).
+Sometimes definiteness is marked with affixes or clitics (as in Arabic);  
 \citet{chen04} shows that Chinese, a language without articles, expresses (in)definiteness through constructions, 
 such as the existential construction for indefinite subjects and the {\it ba}- construction for definite direct objects. 
-Demonstratives, personal pronouns and possessives (which are found in all languages) are other kinds of definite NPs. 
 
 Aside from this variation in the form of (in)definite NPs within and across languages, there is also variability 
 in the semantic, pragmatic, and discourse--related functions expressed by (in)definites.   
 We will refer to these as {\em communicative functions}.  
+\Citet[pp. 6--7]{croft-03}, for instance, shows that the conditions under which a noun phrase 
+is marked as definite or indefinite (or not at all) 
+are language-specific by contrasting English and French translations such as:
+%In the CFD scheme, these should receive labels \llbl{nonuniq\_Hearer\_new\_spec}, \llbl{Other\_Nonreferential}, \llbl{Generic\_individualLevel}, and \llbl{Predicative\_equative\_role}, respectively.  The first is expressed the same (with a definite article) in English and French, whereas the other two are expressed differently in the two languages.     
+%\eenumsentence{\small\label{ex:enfr}
+% \item He went to \textbf{the bank}. (def.)\\
+% 	  Il est all\'{e} \`{a} \textbf{la banque}. (def.)
+
+\begin{small}
+\enumsentence{\label{ex:care}He showed \textbf{extreme care}. (unmarked)\\
+	  Il montra \textbf{un soin extr\^{e}me}. (indef.)}
+\enumsentence{\label{ex:artichokes}I love \textbf{artichokes} and asparagus. (unmarked)\\
+	  J'aime \textbf{les artichauts} et les asperges. (def.)}
+\enumsentence{\label{ex:soldier}His brother became \textbf{a soldier}. (indef.)\\
+	  Son fr\`{e}re est devenu \textbf{soldat}. (unmarked)}
+\end{small}
+A cross-linguistic classification of communicative functions  
+should be able to characterize the aspects of meaning that account for the different patterns of definiteness marking 
+exhibited in \cref{ex:care,ex:artichokes,ex:soldier}: e.g., that \cref{ex:artichokes} concerns a generic class of entities while 
+\cref{ex:soldier} concerns a role filled by an individual.
 The literature on definiteness describes functions including 
 uniqueness, familiarity, identifiability, anaphoricity, specificity, and 
 referentiality \citep[\textit{inter alia}]{birner94,condoravdi92,evans77,evans80,gundel88,gundel93,heim90,kadmon87,kadmon90,lyons99,prince92,roberts03,russell05}.  
@@ -375,15 +397,15 @@ The scheme was developed by annotating texts in two languages (English and Hindi
 \begin{figure*}\small
 \begin{tabular}{p{.45\textwidth}p{.45\textwidth}}
 \begin{itemize}
-\item    \ilbl{Nonanaphora} $[-A,-B]$ \textbf{(00)}
+\item    \ilbl{Nonanaphora} $[-A,-B]$
   \begin{itemize}
-  \item      \ilbl{Unique} $[+U]$ \textbf{(00)}
+  \item      \ilbl{Unique} $[+U]$
     \begin{itemize}
-    \item        \ilbl{uniq\_Hearer\_old} $[-G,+O,+S]$ \textbf{(00)}
+    \item        \ilbl{uniq\_Hearer\_old} $[-G,+O,+S]$
       \begin{itemize}
-      \item          \llbl{uniq\_Physical\_copresence} $[+R]$ (00)
-      \item          \llbl{uniq\_Larger\_situation} $[+R]$ (00)
-      \item          \llbl{uniq\_predicative\_identity} $[+P]$ (00)
+      \item          \llbl{uniq\_Physical\_copresence} $[+R]$
+      \item          \llbl{uniq\_Larger\_situation} $[+R]$
+      \item          \llbl{uniq\_predicative\_identity} $[+P]$
       \end{itemize}
     \item        \llbl{uniq\_Hearer\_new} $[-O]$
     \end{itemize}
@@ -433,7 +455,7 @@ The scheme was developed by annotating texts in two languages (English and Hindi
   \end{itemize}
 \end{itemize}
 \end{tabular}
-\caption{CFD (Communicative Functions of Definiteness) annotation scheme, with number of occurrences in the training data \nss{TODO}. Internal (non-leaf) labels are in bold;\costversion{\nss{}} these are not annotated or predicted.\nss{TODO: normalize capitalization}
+\caption{CFD (Communicative Functions of Definiteness) annotation scheme\finalversion{, with number of occurrences in the training data \nss{TODO}}. Internal (non-leaf) labels are in bold;\costversion{\nss{}} these are not annotated or predicted.\finalversion{\nss{TODO: normalize capitalization}}
 $+$/$-$ values are shown for ternary attributes \uline{A}naphoric, \uline{B}ridging, \uline{G}eneric, Hearer-\uline{O}ld, \uline{P}redicative, \uline{R}eferential, \uline{S}pecific, and \uline{U}nique; 
 these are inherited from supercategories, but otherwise default to $0$.
 Thus, for example, the full attribute specification for \llbl{uniq\_Physical\_copresence} is $[-A,-B,-G,+O,0P,+R,+S,+U]$.}
@@ -470,18 +492,7 @@ would never wear \glosst{anything else}{\llbl{Quantified}}; so \glosst{she}{\llb
 \label{fig:excerpt}
 \end{figure*}
 
-The following examples from \citet[pp. 6--7]{croft-03} illustrate the grammatical expression of three communicative functions in English and French. In the CFD scheme, these should receive labels \llbl{nonuniq\_Hearer\_new\_spec}, \llbl{Other\_Nonreferential}, \llbl{Generic\_individualLevel}, and \llbl{Predicative\_equative\_role}, respectively.  The first is expressed the same (with a definite article) in English and French, whereas the other two are expressed differently in the two languages.     
 
-\eenumsentence{\small
-\item He went to \textbf{the bank}. (def.)\\
-	  Il est all\'{e} \`{a} \textbf{la banque}. (def.)
-\item He showed \textbf{extreme care}. (unmarked)\\
-	  Il montra \textbf{un soin extr\^{e}me}. (indef.)
-\item I love \textbf{artichokes} and asparagus. (unmarked)
-	  J'aime \textbf{les artichauts} et les asperges. (def.)
-\item His brother became \textbf{a soldier}. (indef.)\\
-	  Son fr\`{e}re est devenu \textbf{soldat}. (unmarked)
-}
 
 \section{Data}\label{sec:data}
 
@@ -709,8 +720,8 @@ Majority baseline & --- & \\
 Log-linear classifier, no grouping by attributes & & \\
 Full log-linear classifier & & \\
 \end{tabular}
-\label{tbl:results}
 \caption{Classifier versus baselines.}
+\label{tbl:results}
 \end{table*}
 
 \nss{English: ±cost function, ±non-identity attributes, ±predicting intermediate labels}
