@@ -303,7 +303,8 @@ semantic processing tasks.
 Languages display a vast range of variation with respect to the form and meaning of definiteness. 
 For example, while languages like English make use of definite and indefinite articles 
 to distinguish between the discourse status of various entities ({\it \textbf{the} car} vs.~{\it \textbf{a} car} vs.~{\it cars}), 
-many other languages---including Czech, Hindi, Indonesian, and Russian---do not have articles 
+many other languages---including Czech, Indonesian, and Russian---do not have articles
+% Archna: Hindi sort of has an indefinite article 
 (although they do have demonstrative determiners).\footnote{Demonstratives, personal pronouns, and possessives (which are found in all languages) are other kinds of definite NPs. }  
 % Some languages such as Hausa~\citep{lyons99} have different definite articles for noun phrases 
 % that have been previously mentioned in contrast to those that are definite by virtue of the situation 
@@ -339,7 +340,7 @@ The literature on definiteness describes functions including
 uniqueness, familiarity, identifiability, anaphoricity, specificity, and 
 referentiality \citep[\textit{inter alia}]{birner94,condoravdi92,evans77,evans80,gundel88,gundel93,heim90,kadmon87,kadmon90,lyons99,prince92,roberts03,russell05}.  
 
-Reductionist approaches to definiteness try to define one or two communicative functions of definiteness.   
+Reductionist approaches to definiteness try to define definiteness in terms of one or two communicative functions.   
 For example, \citet{kadmon87,evans80} propose that semantic uniqueness is the main communicative function of definite NPs.  
 \citet{roberts03} proposes that the combination of uniqueness and a presupposition of familiarity 
 underlie all definite descriptions.  However, possessive definite descriptions ({\it John's daughter}) 
@@ -348,7 +349,7 @@ familiar to the listener before they are spoken.
 
 We take such linguistic observations to suggest that definiteness is not as homogeneous a category 
 as many accounts have assumed.  In contrast to the reductionists, we are following an 
-approach to grammaticalization~\citep{?} in which grammar develops over time in such a way that 
+approach to grammaticalization~\citep{hopper-03} in which grammar develops over time in such a way that 
 each grammatical construction has some prototypical communicative functions, 
 but also has many non-prototypical communicative functions.  
 
@@ -685,8 +686,8 @@ for the held-out evaluation (dev or test) set $\mathcal{E}$:
   $|\boldsymbol{\omega}(y) \cap \boldsymbol{\omega}(y')|/9$.
   \item \textbf{Perplexity:} This determines how ``surprised'' our model is by the gold labels 
   in the test set; the greater the probability mass assigned to the true labels, 
-  the higher the score. 
-  It is computed as $2^{\left(\sum_{\langle x, y \rangle \in \mathcal{E}} \log_2 p_{\hat{\boldsymbol{\theta}}}(y | x)\right) / |\mathcal{E}|}$.
+  the lower the score. 
+  It is computed as $2^{-\left(\sum_{\langle x, y \rangle \in \mathcal{E}} \log_2 p_{\hat{\boldsymbol{\theta}}}(y | x)\right) / |\mathcal{E}|}$.
 \end{itemize}
 
 \section{Experiments}\label{sec:exp}
@@ -712,11 +713,12 @@ for use in features (\cref{sec:feats}).
 \subsection{Results}
 
 \begin{table*}\small\centering
-\begin{tabular}{lrrrr}
-\multicolumn{1}{c}{\bf Condition} & \multicolumn{1}{c}{$|\boldsymbol{\theta}|$} & \multicolumn{1}{c}{\bf Exact Match Accuracy} & 
-\multicolumn{1}{c}{\bf Soft Match Accuracy} & \multicolumn{1}{c}{\bf Perplexity} \\
+\begin{tabular}{lrrrrr}
+\multicolumn{1}{c}{\bf Condition} & \multicolumn{1}{c}{$|\boldsymbol{\theta}|$} & \multicolumn{1}{c}{$\lambda$} 
+& \multicolumn{1}{c}{\bf Exact Match Accuracy} & \multicolumn{1}{c}{\bf Soft Match Accuracy} 
+& \multicolumn{1}{c}{\bf Perplexity} \\
 \midrule
-Majority baseline & --- & \\
+Majority baseline & --- & --- & \\
 Log-linear classifier, no grouping by attributes & & \\
 Full log-linear classifier & & \\
 \end{tabular}
