@@ -174,13 +174,20 @@
 \crefformat{subsubsection}{\S#2#1#3}
 \crefformat{paragraph}{\P#2#1#3}
 \crefformat{subparagraph}{\P#2#1#3}
-\crefmultiformat{part}{\S\S#2#1#3}{ and~#2#1#3}{, #2#1#3}{, and~#2#1#3}
+\crefmultiformat{part}{\S#2#1#3}{ and~\S#2#1#3}{, \S#2#1#3}{, and~\S#2#1#3}
 \crefmultiformat{chapter}{\S\S#2#1#3}{ and~#2#1#3}{, #2#1#3}{, and~#2#1#3}
-\crefmultiformat{section}{\S\S#2#1#3}{ and~#2#1#3}{, #2#1#3}{, and~#2#1#3}
-\crefmultiformat{subsection}{\S\S#2#1#3}{ and~#2#1#3}{, #2#1#3}{, and~#2#1#3}
+\crefmultiformat{section}{\S#2#1#3}{ and~\S#2#1#3}{, \S#2#1#3}{, and~\S#2#1#3}
+\crefmultiformat{subsection}{\S#2#1#3}{ and~\S#2#1#3}{, \S#2#1#3}{, and~\S#2#1#3}
 \crefmultiformat{subsubsection}{\S\S#2#1#3}{ and~#2#1#3}{, #2#1#3}{, and~#2#1#3}
 \crefmultiformat{paragraph}{\P\P#2#1#3}{ and~#2#1#3}{, #2#1#3}{, and~#2#1#3}
 \crefmultiformat{subparagraph}{\P\P#2#1#3}{ and~#2#1#3}{, #2#1#3}{, and~#2#1#3}
+\crefrangeformat{part}{\mbox{\S\S#3#1#4--#5#2#6}}
+\crefrangeformat{chapter}{\mbox{\S\S#3#1#4--#5#2#6}}
+\crefrangeformat{section}{\mbox{\S\S#3#1#4--#5#2#6}}
+\crefrangeformat{subsection}{\mbox{\S\S#3#1#4--#5#2#6}}
+\crefrangeformat{subsubsection}{\mbox{\S\S#3#1#4--#5#2#6}}
+\crefrangeformat{paragraph}{\mbox{\P\P#3#1#4--#5#2#6}}
+\crefrangeformat{subparagraph}{\mbox{\P\P#3#1#4--#5#2#6}}
 % for \label[appsec]{...}
 \crefname{appsec}{appendix}{appendices}
 \Crefname{appsec}{Appendix}{Appendices}
@@ -402,7 +409,7 @@ referentiality \citep[\textit{inter alia}]{birner94,condoravdi92,evans77,evans80
   \end{itemize}
 \end{itemize}
 \end{tabular}
-\caption{CFD (Communicative Functions of Definiteness) annotation scheme\finalversion{, with number of occurrences in the training data \nss{TODO}}. Internal (non-leaf) labels are in bold;\costversion{\nss{}} these are not annotated or predicted.\finalversion{\nss{TODO: normalize capitalization}}
+\caption{CFD (Communicative Functions of Definiteness) annotation scheme, with relative frequency in the corpus \nss{TODO; maybe also show these for each attribute value}. Internal (non-leaf) labels are in bold;\costversion{\nss{}} these are not annotated or predicted.\nss{TODO: normalize capitalization}
 $+$/$-$ values are shown for ternary attributes \uline{A}naphoric, \uline{B}ridging, \uline{G}eneric, Hearer-\uline{O}ld, \uline{P}redicative, \uline{R}eferential, \uline{S}pecific, and \uline{U}nique; 
 these are inherited from supercategories, but otherwise default to $0$.
 Thus, for example, the full attribute specification for \llbl{uniq\_Physical\_copresence} is $[-A,-B,-G,+O,0P,+R,+S,+U]$.}
@@ -464,7 +471,7 @@ with features that combine lexical and morphosyntactic information
 with prespecified groupings of the communicative function labels; 
 the evaluation measures (\cref{sec:eval}) include one that exploits these label groupings 
 to award partial credit according to relatedness.
-\nss{TODO: \cref{sec:exp} obtain good performance? discover interesting features?}
+\nss{TODO: \cref{sec:exp} obtain good performance? discover interesting features? \cref{sec:eval,sec:exp,sec:related}}
 
 %\ab{Here we discuss about why we should study definiteness- linguistically a hard problem, also it has applications in machine translation. Discuss about grammaticalization as a general problem (differences across languages), then grammaticalization of definiteness across languages, some examples to show differences across languages.}
 %\nss{we review the annotation scheme in \cref{sec:scheme}; etc.}
@@ -565,7 +572,7 @@ the attribute function $\tilde{\boldsymbol{\omega}}: \mathcal{Y} \rightarrow \{0
 encodes characteristics of each label.
 There is a feature for every percept--attribute pairing: so
 $d = c \cdot a$ and $f_{(i-1)a+j}(x,y) = \phi_i(x)\tilde{\omega}_j(y), 1 \leq i \leq c, 1 \leq j \leq a$.
-The contents of the percept and attribute functions are detailed in \cref{sec:attrs,sec:feats}.
+The contents of the percept and attribute functions are detailed in \cref{sec:feats,sec:attrs}.
 
 For prediction, having learned weights $\hat{\boldsymbol{\theta}}$ we choose the $y$ that maximizes this probability:
 \begin{equation}
@@ -742,12 +749,12 @@ and the tuned regularization hyperparameter, respectively.}
 
 \section{Related Work}\label{sec:related}
 
-\finalversion{\nss{mention Bresnan's work on predicting syntactic alternations with logistic regression 
+\nss{mention Bresnan's work on predicting syntactic alternations with logistic regression 
 (here we want to predict the hidden information 
-so that the classifier is useful for applications!).}}
+so that the classifier is useful for applications!).}
 Automated prediction of (in)definite articles has been found beneficial in a variety of applications, 
 including postediting of MT output \citep{knight1994automated}, text generation \citep{DBLP:conf/aaai/Elhadad93,minnen2000memory}, 
-and identification and correction of ESL errors  \citep{aehan2006detecting,de2008classifier,gamon2008,rozovskaya2010training}. 
+and identification and correction of ESL errors  \citep{aehan2006detecting,de2008classifier,gamon2008,rozovskaya2010training}.\nss{what about coref? discourse models?} 
 More recently, \citet{tsvetkov13} trained a classifier to predict where English articles might plausibly be added or removed in a phrase, 
 and used this classifier to improve the quality of statistical machine translation. 
 
