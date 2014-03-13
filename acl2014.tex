@@ -340,61 +340,6 @@ The literature on definiteness describes functions including
 uniqueness, familiarity, identifiability, anaphoricity, specificity, and 
 referentiality \citep[\textit{inter alia}]{birner94,condoravdi92,evans77,evans80,gundel88,gundel93,heim90,kadmon87,kadmon90,lyons99,prince92,roberts03,russell05}.  
 
-Reductionist approaches to definiteness try to define definiteness in terms of one or two communicative functions.   
-For example, \citet{kadmon87,evans80} propose that semantic uniqueness is the main communicative function of definite NPs.  
-\citet{roberts03} proposes that the combination of uniqueness and a presupposition of familiarity 
-underlie all definite descriptions.  However, possessive definite descriptions ({\it John's daughter}) 
-and the weak definites ({\it the son of Queen Juliana of the Netherlands}) are neither unique nor necessarily 
-familiar to the listener before they are spoken.  
-
-We take such linguistic observations to suggest that definiteness is not as homogeneous a category 
-as many accounts have assumed.  In contrast to the reductionists, we are following an 
-approach to grammaticalization~\citep{hopper-03} in which grammar develops over time in such a way that 
-each grammatical construction has some prototypical communicative functions, 
-but also has many non-prototypical communicative functions.  
-
-This paper describes a classifier that predicts communicative function labels for English noun phrases.  
-The features used by the classifier are lexical, morphological, and syntactic.   
-The contribution of our work is in both the output of the classifier and the model that it uses (features and weights).  
-The classifier outputs communicative function labels (see next section, e.g., whether the entities are 
-old or new to the discourse and to the hearer).   
-Communicative function is important because it is usually preserved in translation even when the grammatical mechanisms 
-for expressing it are different. The communicative function labels also represent the discourse status of entities, 
-making them relevant for entity tracking, knowledge base construction, and information extraction. 
-
-The model is a form-meaning mapping, consisting of the syntactic, lexical, and morphological features 
-and weights that correlate with---are predictive of---communicative functions.   
-This in itself is linguistically significant in that it shows the grammatical mechanisms 
-beyond the articles {\em the} and {\em a} that are used for expressing definiteness in English.   
-In future work we will build such models for languages that do not have articles such as Hindi, Russian, and Chinese.
-The form-meaning mapping for these languages can be used for machine translation applications. 
-It has been noted previously that machine translation systems face problems 
-while translating from one language to another when the languages use different grammatical strategies. 
-\citet{tsvetkov13,stymne09} mention how translating from an article-language to an article-less language is problematic. 
-If the mapping between different forms and the information they encode is known
-in both the source language and the target language, this information can be leveraged in 
-improving machine translation across these languages.  
-
-To build our model, we leverage a cross-lingual definiteness annotation scheme (\cref{sec:scheme}) 
-and annotated English corpus (\cref{sec:data}) from prior work \citep{bhatia14}.
-Our classifier, \cref{sec:modeling}, is a supervised log-linear model akin to logistic regression,
-with features that combine lexical and morphosyntactic information 
-with prespecified groupings of the communicative function labels; 
-the evaluation measures (\cref{sec:eval}) include one that exploits these label groupings 
-to award partial credit according to relatedness.
-\nss{TODO: \cref{sec:exp} obtain good performance? discover interesting features?}
-
-%\ab{Here we discuss about why we should study definiteness- linguistically a hard problem, also it has applications in machine translation. Discuss about grammaticalization as a general problem (differences across languages), then grammaticalization of definiteness across languages, some examples to show differences across languages.}
-%\nss{we review the annotation scheme in \cref{sec:scheme}; etc.}
-
-\section{Annotation scheme}\label{sec:scheme}
-
-We give an overview of the annotation scheme for Communicative Functions of Definiteness (CFD), as described in \citet{bhatia14}.
-It is summarized in \cref{fig:hierarchy}. 
-The hierarchical organization serves to reduce the number of decisions that an annotator needs to make
-for speed and consistency.  
-The scheme was developed by annotating texts in two languages (English and Hindi) and various genres.  
-
 \begin{figure*}\small
 \begin{tabular}{p{.45\textwidth}p{.45\textwidth}}
 \begin{itemize}
@@ -463,6 +408,74 @@ Thus, for example, the full attribute specification for \llbl{uniq\_Physical\_co
 \label{fig:hierarchy}
 \end{figure*}
 
+
+Reductionist approaches to definiteness try to define definiteness in terms of one or two communicative functions.   
+For example, \citet{kadmon87,evans80} propose that semantic uniqueness is the main communicative function of definite NPs.  
+\citet{roberts03} proposes that the combination of uniqueness and a presupposition of familiarity 
+underlie all definite descriptions.  However, possessive definite descriptions ({\it John's daughter}) 
+and the weak definites ({\it the son of Queen Juliana of the Netherlands}) are neither unique nor necessarily 
+familiar to the listener before they are spoken.  
+
+We take such linguistic observations to suggest that definiteness is not as homogeneous a category 
+as many accounts have assumed.  In contrast to the reductionists, we are following an 
+approach to grammaticalization~\citep{hopper-03} in which grammar develops over time in such a way that 
+each grammatical construction has some prototypical communicative functions, 
+but also has many non-prototypical communicative functions.  
+
+This paper describes a classifier that predicts communicative function labels for English noun phrases.  
+The features used by the classifier are lexical, morphological, and syntactic.   
+The contribution of our work is in both the output of the classifier and the model that it uses (features and weights).  
+The classifier outputs communicative function labels (see next section, e.g., whether the entities are 
+old or new to the discourse and to the hearer).   
+Communicative function is important because it is usually preserved in translation even when the grammatical mechanisms 
+for expressing it are different. The communicative function labels also represent the discourse status of entities, 
+making them relevant for entity tracking, knowledge base construction, and information extraction. 
+
+The model is a form-meaning mapping, consisting of the syntactic, lexical, and morphological features 
+and weights that correlate with---are predictive of---communicative functions.   
+This in itself is linguistically significant in that it shows the grammatical mechanisms 
+beyond the articles {\em the} and {\em a} that are used for expressing definiteness in English.   
+In future work we will build such models for languages that do not have articles such as Hindi, Russian, and Chinese.
+The form-meaning mapping for these languages can be used for machine translation applications. 
+It has been noted previously that machine translation systems face problems 
+while translating from one language to another when the languages use different grammatical strategies. 
+\citet{tsvetkov13,stymne09} mention how translating from an article-language to an article-less language is problematic. 
+If the mapping between different forms and the information they encode is known
+in both the source language and the target language, this information can be leveraged in 
+improving machine translation across these languages.  
+
+\begin{figure*}[t]\small
+\textit{Once upon a time there was a dear little girl who was loved by everyone who looked at her, but most of all by her grandmother, and there was nothing that she would not have given to the child.}
+\\[5pt]
+Once \glosst{she}{\llbl{Same\_head}} gave \glosst{her}{\llbl{Different\_head}} 
+\glosst{a little riding hood of \glosst{red velvet}{\llbl{Other\_nonreferential}}}{$\underset{~}{\llbl{nonuniq\_Hearer\_new\_spec}}$}, 
+which suited \glosst{her}{\llbl{Same\_head}} so well that \glosst{she}{\llbl{Same\_head}} 
+would never wear \glosst{anything else}{\llbl{Quantified}}; so \glosst{she}{\llbl{Same\_head}} was always called 
+`\glosst{Little Red Riding Hood}{\llbl{uniq\_Hearer\_new}}.'
+\caption{An annotated sentence from ``Little Red Riding Hood.'' The previous sentence is shown for context.}
+\label{fig:excerpt}
+\end{figure*}
+
+To build our model, we leverage a cross-lingual definiteness annotation scheme (\cref{sec:scheme}) 
+and annotated English corpus (\cref{sec:data}) from prior work \citep{bhatia14}.
+Our classifier, \cref{sec:modeling}, is a supervised log-linear model akin to logistic regression,
+with features that combine lexical and morphosyntactic information 
+with prespecified groupings of the communicative function labels; 
+the evaluation measures (\cref{sec:eval}) include one that exploits these label groupings 
+to award partial credit according to relatedness.
+\nss{TODO: \cref{sec:exp} obtain good performance? discover interesting features?}
+
+%\ab{Here we discuss about why we should study definiteness- linguistically a hard problem, also it has applications in machine translation. Discuss about grammaticalization as a general problem (differences across languages), then grammaticalization of definiteness across languages, some examples to show differences across languages.}
+%\nss{we review the annotation scheme in \cref{sec:scheme}; etc.}
+
+\section{Annotation scheme}\label{sec:scheme}
+
+We give an overview of the annotation scheme for Communicative Functions of Definiteness (CFD), as described in \citet{bhatia14}.
+It is summarized in \cref{fig:hierarchy}. 
+The hierarchical organization serves to reduce the number of decisions that an annotator needs to make
+for speed and consistency.  
+The scheme was developed by annotating texts in two languages (English and Hindi) and various genres.
+
 CFD assigns a communicative function label to every noun phrase except for first- and second-person pronouns.
 The three main communicative functions in the annotation scheme are {\bf Anaphora} vs.~{\bf Nonanaphora} 
 (whether the entity is new to to the discourse or not), {\bf Hearer-old} vs.~{\bf Hearer-new}, 
@@ -481,17 +494,7 @@ generic, pleonastic, quantified, predicative, and non-referential noun phrases.
 
 \Cref{fig:excerpt} is an excerpt from the ``Little Red Riding Hood'' annotated with the CFD scheme.
 
-\begin{figure*}[t]\small
-\textit{Once upon a time there was a dear little girl who was loved by everyone who looked at her, but most of all by her grandmother, and there was nothing that she would not have given to the child.}
-\\[5pt]
-Once \glosst{she}{\llbl{Same\_head}} gave \glosst{her}{\llbl{Different\_head}} 
-\glosst{a little riding hood of \glosst{red velvet}{\llbl{Other\_nonreferential}}}{$\underset{~}{\llbl{nonuniq\_Hearer\_new\_spec}}$}, 
-which suited \glosst{her}{\llbl{Same\_head}} so well that \glosst{she}{\llbl{Same\_head}} 
-would never wear \glosst{anything else}{\llbl{Quantified}}; so \glosst{she}{\llbl{Same\_head}} was always called 
-`\glosst{Little Red Riding Hood}{\llbl{uniq\_Hearer\_new}}.'
-\caption{An annotated sentence from ``Little Red Riding Hood.'' The previous sentence is shown for context.}
-\label{fig:excerpt}
-\end{figure*}
+
 
 
 
@@ -639,8 +642,8 @@ there are actually several dimensions of commonality that suggest different grou
 These attributes are encoded as ternary characteristics; 
 for each label (including internal labels), every one of the 8 attributes  
 is assigned a value of $+$, $-$, or $0$ (refer to \cref{fig:hierarchy}).
-In order to capture these similarities in the model's features\costversion{ and cost function}, 
-we define the attribute vector function $\boldsymbol{\omega}(y) = $
+In light of sparse data, we design features\costversion{ and cost function} to exploit these similarities 
+via the attribute vector function $\boldsymbol{\omega}(y) = $
 \begin{equation*}
 [y, A(y), B(y), G(y), O(y), P(y), R(y), S(y), U(y)]^{\top}
 \end{equation*}
@@ -736,11 +739,9 @@ Full log-linear classifier & & \\
 
 \section{Related Work}
 
-\nss{mention Bresnan's work on predicting syntactic alternations with logistic regression 
+\finalversion{\nss{mention Bresnan's work on predicting syntactic alternations with logistic regression 
 (here we want to predict the hidden information 
-so that the classifier is useful for applications!).}
-
-
+so that the classifier is useful for applications!).}}
 Automated prediction of (in)definite articles has been found beneficial in a variety of applications, 
 including postediting of MT output \citep{knight1994automated}, text generation \citep{DBLP:conf/aaai/Elhadad93,minnen2000memory}, 
 and identification and correction of ESL errors  \citep{aehan2006detecting,de2008classifier,gamon2008,rozovskaya2010training}. 
