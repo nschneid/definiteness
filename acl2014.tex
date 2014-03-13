@@ -273,28 +273,33 @@ Pittsburgh, PA 15213}}
 \begin{document}
 \maketitle
 \begin{abstract}
-Definiteness is a nonhomogeneous category across languages expressing various {\em communicative functions} 
-(types of semantic, pragmatic, and discourse--related information).   
-Languages differ in the grainsize and inventory of communicative functions  that are expressed 
-as well as the syntactic means for expressing them.  
-\citet{bhatia14} presented an annotation scheme for the communicative functions of definiteness 
-and released an annotated corpus in English and Hindi.   
-This paper reports on a classifier for English that uses lexical, morphological, and syntactic features 
-to predict communicative functions.   
+% Definiteness is a nonhomogeneous category across languages expressing various {\em communicative functions} 
+% (types of semantic, pragmatic, and discourse--related information).   
+% Languages differ in the grainsize and inventory of communicative functions  that are expressed 
+% as well as the syntactic means for expressing them.  
+% \citet{bhatia14} presented an annotation scheme for the communicative functions of definiteness 
+% and released an annotated corpus in English and Hindi.   
+Whether a noun phrase is realized grammatically as definite or not 
+depends on a variety of semantic, pragmatic, and discourse criteria, or {\em communicative functions}, 
+the interaction of which varies from language to language.
+This paper reports on a supervised classifier for English that uses lexical, morphological, and syntactic features 
+to predict communicative functions of definiteness.   
 The benefits of this work are twofold: linguistically, the classifier's features and weights 
 model the {\em grammaticalization} of definiteness in English, 
-some of which is obvious (e.g., {\em the} and {\em a}) and some of which is not obvious \ab{(include an example from our findings)}. 
+not all of which are obvious.
+% some of which is obvious (e.g., {\em the} and {\em a}) and some of which is not obvious \ab{(include an example from our findings)}. 
 Computationally, it presents a framework to predict \textit{semantic and pragmatic} communicative functions of definiteness 
 which, unlike lexical and morphosyntactic features, are preserved in translation.  
-This work may also be useful in tracking noun phrase reference for information extraction, entity tracking, 
-and other semantic processing tasks. 
+The classifier may also be useful in tracking noun phrase reference for 
+%information extraction, entity tracking, and other 
+semantic processing tasks. 
 \end{abstract}
 
 \section{Introduction}
 
 Languages display a vast range of variation with respect to the form and meaning of definiteness. 
 For example, while languages like English make use of definite and indefinite articles 
-to distinguish between the discourse status of various entities ({\it the car} vs. {\it a car}), 
+to distinguish between the discourse status of various entities ({\it the car} vs.~{\it a car}), 
 many other languages, such as Czech, Hindi, Indonesian, and Russian, do not have articles 
 (although they do have demonstrative determiners).  
 Some languages such as Hausa~\cite{lyons} have different definite articles for noun phrases 
@@ -774,7 +779,7 @@ so that the classifier is useful for applications!).}
 
 \section{Discussion: Error analysis, comparison across languages}\label{sec:discussion}
 
-\ab{confusion matrix - Hindi vs. Eng (for common annotations)- semantic annotations
+\ab{confusion matrix - Hindi vs.~Eng (for common annotations)- semantic annotations
 differences in annotations- why- different grammatical constructions, e.g. NP in 1 language but predicate in another etc.
 what do similarities tell us about grammaticalization, what do differences tell.
 discuss- how this analysis can help in MT}
