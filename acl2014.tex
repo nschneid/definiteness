@@ -735,14 +735,25 @@ Gold NP boundaries are assumed throughout our experiments.
 
 We use an in-house implementation of supervised learning with $L_1$-regularized AdaGrad \citep{adagrad}. 
 Hyperparameters are tuned on a dev set formed by holding out every tenth instance from the training set 
-(test set experiments use the full training set).\nss{early stopping? what exactly is tuned?} 
+(test set experiments use the full training set).\nss{early stopping? what exactly is tuned? optimize soft match acc?} 
 Automatic dependency parses and coreference information were obtained with 
 the parser and coreference resolution system in Stanford CoreNLP v.~3.3.0 \citep{socher-13,recasens-13}
 for use in features (\cref{sec:feats}).
 
 \subsection{Results}
 
-
+\begin{table*}\small\centering
+\begin{tabular}{lrrrr}
+\multicolumn{1}{c}{\bf Condition} & \multicolumn{1}{c}{$|\boldsymbol{\theta}|$} & \multicolumn{1}{c}{\bf Exact Match Accuracy} & 
+\multicolumn{1}{c}{\bf Soft Match Accuracy} & \multicolumn{1}{c}{\bf Perplexity} \\
+\midrule
+Majority baseline & --- & \\
+Log-linear classifier, no grouping by attributes & & \\
+Full log-linear classifier & & \\
+\end{tabular}
+\label{tbl:results}
+\caption{Classifier versus baselines.}
+\end{table*}
 
 \nss{English: ±cost function, ±non-identity attributes, ±predicting intermediate labels}
 
@@ -751,6 +762,12 @@ for use in features (\cref{sec:feats}).
 \nss{feature/attribute ablations}
 
 \nss{Hindi?}
+
+\section{Related Work}
+
+\nss{computational approaches to things related to definiteness, e.g. in MT. also would be good to mention Bresnan's work 
+on predicting syntactic alternations with logistic regression (here we want to predict the hidden information 
+so that the classifier is useful for applications!).}
 
 \section{Conclusion}\label{sec:conclusion}
 
