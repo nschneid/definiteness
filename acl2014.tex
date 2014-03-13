@@ -260,7 +260,7 @@
 \hyphenation{comb-over}
 \hyphenation{per-cept}
 \hyphenation{per-cepts}
-\title{\draftnotice{Title, author list not final. Page limit: 5 + 2 bib} \ab{Learning Definiteness across Languages using Classifiers} \nss{maybe: A Classification and Classifier for Cross-linguistic Functions of Definiteness}}
+\title{\draftnotice{Title, author list not final. Page limit: 5 + 2 bib}A Classifier for Communicative Functions of Definiteness}
 
 \finalversion{\author{Archna Bhatia \ \ \  Chu-Cheng Lin \ \ \  Lori Levin \ \ \ \  Mandy Simons \\
 \bf Fatima Talib Al-Raisi \ \ \  Laleh Roostapour \ \ \  Abhimanu Kumar  \\
@@ -720,6 +720,28 @@ for the held-out evaluation (dev or test) set $\mathcal{E}$:
 \end{itemize}
 
 \section{Experiments}\label{sec:exp}
+
+\subsection{Experimental Setup}
+
+The annotated corpus of \citet{bhatia14} (\cref{sec:data}) contains 16~documents 
+in 3~genres: 12~prepared speeches (mostly TED talks), 2~newspaper articles, 
+and 2~fictional narratives. We arbitrarily choose some documents to hold out from each genre; 
+the resulting test set consists of 2~TED talks (``Alisa\_News'', ``RobertHammond\_park''), 
+1~newspaper article (``crime1\_iPad\_E''), and 1~narrative (``Little Red Riding Hood'').
+The test set then contains 3,558~tokens (110~sentences), in which there are 492~annotated NPs; 
+while the training set contains 2,458~NPs among 17,097~tokens (702~sentences).
+Gold NP boundaries are assumed throughout our experiments.
+
+We use an in-house implementation of supervised learning with $L_1$-regularized AdaGrad \citep{adagrad}. 
+Hyperparameters are tuned on a dev set formed by holding out every tenth instance from the training set 
+(test set experiments use the full training set).\nss{early stopping? what exactly is tuned?} 
+Automatic dependency parses and coreference information were obtained with 
+the parser and coreference resolution system in Stanford CoreNLP v.~3.3.0 \citep{socher-13,recasens-13}
+for use in features (\cref{sec:feats}).
+
+\subsection{Results}
+
+
 
 \nss{English: ±cost function, ±non-identity attributes, ±predicting intermediate labels}
 
