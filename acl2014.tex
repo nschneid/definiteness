@@ -712,7 +712,8 @@ for the held-out evaluation (dev or test) set $\mathcal{E}$:
   \item \textbf{By leaf label:} We also compute precision and recall of each leaf label 
   to determine which categories are reliably predicted.
   \item \textbf{Soft match:} This accuracy measure gives partial credit where the predicted and gold labels 
-  are related. It is computed as in \cref{sec:eval}.
+  are related. It is computed as the proportion of attributes whose (categorical) values match: 
+  $|\boldsymbol{\omega}(y) \cap \boldsymbol{\omega}(y')|/9$.
   \item \textbf{Perplexity:} This determines how ``surprised'' our model is by the gold labels 
   in the test set; the greater the probability mass assigned to the true labels, 
   the higher the score. 
