@@ -143,7 +143,7 @@
 \newcommand{\nssmarker}{\ensuretext{\textcolor{magenta}{\ensuremath{^{\textsc{NS}}_{\textsc{S}}}}}}
 \newcommand{\abmarker}{\ensuretext{\textcolor{red}{\ensuremath{^{\textsc{A}}_{\textsc{B}}}}}}
 \newcommand{\ytmarker}{\ensuretext{\textcolor{blue}{\ensuremath{^{\textsc{Y}}_{\textsc{T}}}}}}
-\newcommand{\jbmarker}{\ensuretext{\textcolor{orange}{\ensuremath{^{\textsc{J}}_{\textsc{B}}}}}}
+\newcommand{\ftamarker}{\ensuretext{\textcolor{orange}{\ensuremath{^{\textsc{FT}}_{\textsc{A}}}}}}
 \newcommand{\lslmarker}{\ensuretext{\textcolor{purple}{\ensuremath{^{\textsc{LS}}_{\textsc{L}}}}}}
 \newcommand{\arkcomment}[3]{\ensuretext{\textcolor{#3}{[#1 #2]}}}
 %\newcommand{\arkcomment}[3]{}
@@ -151,7 +151,7 @@
 \newcommand{\nss}[1]{\arkcomment{\nssmarker}{#1}{magenta}}
 \newcommand{\ab}[1]{\arkcomment{\abmarker}{#1}{red}}
 \newcommand{\yt}[1]{\arkcomment{\ytmarker}{#1}{blue}}
-\newcommand{\jb}[1]{\arkcomment{\jbmarker}{#1}{orange}}
+\newcommand{\fta}[1]{\arkcomment{\ftamarker}{#1}{orange}}
 \newcommand{\lsl}[1]{\arkcomment{\lslmarker}{#1}{purple}}
 \newcommand{\params}{\mathbf{\theta}}
 \newcommand{\wts}{\mathbf{w}}
@@ -292,59 +292,46 @@ and other semantic processing tasks.
 
 \section{Introduction}
 
-Languages display a vast range of variation with respect to definiteness. 
+Languages display a vast range of variation with respect to the form and meaning of definiteness. 
 For example, while languages like English make use of definite and indefinite articles 
 to distinguish between the discourse status of various entities ({\it the car} vs. {\it a car}), 
 many other languages, such as Czech, Hindi, Indonesian, and Russian, do not have articles 
-(although they do have demonstrative determiners). 
-Even the languages that do have articles vary in terms of how these articles are used. 
-For example, English uses only one definite article `the' for entities irrespective of whether 
-they have been mentioned previously in the discourse or are familiar to the hearer by some other means, 
-but there are languages such as Hausa which have a specialized article for anaphoric definite entities, 
-see example in \cref{ex:hausaanaphdef} (borrowed from \cite{lyons99}). 
-
-\enumsentence{\label{ex:hausaanaphdef}\small\shortex{4}
-		{Na & kawo & keke & din-ka}
-		{AUX & bring & bicycle & the-2SGM}
-		{`I brought your bicycle (previously mentioned).'}
-		}
-
-There are other means to express (in)definiteness, such as the use of affixes.   
-Arabic, for example, uses a definite prefix {\it al-} and indefinite suffix {\it -n}. 
-\citet{chen04} shows that Chinese expresses (in)definiteness through the use of various constructions, 
+(although they do have demonstrative determiners).  
+Some languages such as Hausa~\cite{lyons} have different definite articles for noun phrases 
+that have been previously mentioned in contrast to those that are definite by virtue of the situation 
+(e.g., ``the podium'' at a conference).  
+Definiteness can also be expressed by affixes as in Arabic.  
+\citet{chen04} shows that Chinese, a language without articles, expresses (in)definiteness through constructions, 
 such as the existential construction for indefinite subjects and the {\it ba}- construction for definite direct objects. 
 Demonstratives, personal pronouns and possessives (which are found in all languages) are other kinds of definite NPs. 
-Aside from this variation in the form of (in)definite NPs within and across languages, there is also variability 
-in what semantic, pragmatic, and discourse--related functions (in)definites express.   
-We will refer to these as {\em communicative functions}. 
 
-The literature on definiteness suggests that it may express communicative functions corresponding to 
-notions such as uniqueness, familiarity, identifiability, anaphoricity, specificity, 
-and referentiality \citep[\textit{inter alia}]{birner94,condoravdi92,evans77,evans80,gundel88,gundel93,heim90,kadmon87,kadmon90,lyons99,prince92,roberts03,russell05}.  
-Reductionist approaches to definiteness try to define a single communicative function of definiteness.   
-For example, \citet{kadmon87,evans80} propose that semantic uniqueness is the main communicative function of definite NPs 
-but pronouns do not display uniqueness effects. 
-\citet{roberts03} proposes that the combination of uniqueness and a presupposition of familiarity can explain definiteness, 
-but possessive definite descriptions ({\it John's daughter}) and the weak definites 
-({\it the son of Queen Juliana of the Netherlands}) are neither unique nor necessarily familiar to the listener 
-before they are spoken.  
+Aside from this variation in the form of (in)definite NPs within and across languages, there is also variability 
+in the semantic, pragmatic, and discourse--related functions (in)definites expresses.   
+We will refer to these as {\em communicative functions}.  
+The literature on definiteness suggests that it may express communicative functions such as 
+uniqueness, familiarity, identifiability, anaphoricity, specificity, and 
+referentiality \citep[\textit{inter alia}]{birner94,condoravdi92,evans77,evans80,gundel88,gundel93,heim90,kadmon87,kadmon90,lyons99,prince92,roberts03,russell05}.  
+
+Reductionist approaches to definiteness try to define one or two communicative functions of definiteness.   
+For example, \citet{kadmon87,evans80} propose that semantic uniqueness is the main communicative function of definite NPs.  
+\citet{roberts03} proposes that the combination of uniqueness and a presupposition of familiarity 
+underlie all definite descriptions.  However, possessive definite descriptions ({\it John's daughter}) 
+and the weak definites ({\it the son of Queen Juliana of the Netherlands}) are neither unique nor necessarily 
+familiar to the listener before they are spoken.  
 
 We take such linguistic observations to suggest that definiteness is not as homogeneous a category 
-as many accounts have assumed.  In contrast to the reductionists, 
-we are following an approach to grammaticalization~\citep{?} in which grammar develops over time in such a way 
-that each grammatical construction has some prototypical communicative functions, 
+as many accounts have assumed.  In contrast to the reductionists, we are following an 
+approach to grammaticalization~\citep{?} in which grammar develops over time in such a way that 
+each grammatical construction has some prototypical communicative functions, 
 but also has many non-prototypical communicative functions.  
-Grammaticalization varies quite a lot across languages in both which communicative functions are grammaticalized 
-and in which syntactic constructions are used to grammaticalize them~\citep{semantic maps and other stuff}.     
 
 This paper describes a classifier that predicts communicative function labels for English noun phrases.  
 The features used by the classifier are lexical, morphological, and syntactic.   
 The contribution of our work is in both the output of the classifier and the model that it uses (features and weights).  
 The classifier outputs communicative function labels (see next section, e.g., whether the entities are 
 old or new to the discourse and to the hearer).   
-Communicative function is important because it is usually preserved in translation 
-even when the grammatical mechanisms for expressing it are different. 
-The communicative function labels also represent the discourse status of entities, 
+Communicative function is important because it is usually preserved in translation even when the grammatical mechanisms 
+for expressing it are different. The communicative function labels also represent the discourse status of entities, 
 making them relevant for entity tracking, knowledge base construction, and information extraction. 
 
 The model is a form-meaning mapping, consisting of the syntactic, lexical, and morphological features 
