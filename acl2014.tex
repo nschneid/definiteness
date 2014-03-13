@@ -302,7 +302,7 @@ For example, while languages like English make use of definite and indefinite ar
 to distinguish between the discourse status of various entities ({\it the car} vs.~{\it a car}), 
 many other languages, such as Czech, Hindi, Indonesian, and Russian, do not have articles 
 (although they do have demonstrative determiners).  
-Some languages such as Hausa~\cite{lyons} have different definite articles for noun phrases 
+Some languages such as Hausa~\citep{lyons99} have different definite articles for noun phrases 
 that have been previously mentioned in contrast to those that are definite by virtue of the situation 
 (e.g., ``the podium'' at a conference).  
 Definiteness can also be expressed by affixes as in Arabic.  
@@ -311,9 +311,9 @@ such as the existential construction for indefinite subjects and the {\it ba}- c
 Demonstratives, personal pronouns and possessives (which are found in all languages) are other kinds of definite NPs. 
 
 Aside from this variation in the form of (in)definite NPs within and across languages, there is also variability 
-in the semantic, pragmatic, and discourse--related functions (in)definites expresses.   
+in the semantic, pragmatic, and discourse--related functions expressed by (in)definites.   
 We will refer to these as {\em communicative functions}.  
-The literature on definiteness suggests that it may express communicative functions such as 
+The literature on definiteness describes functions including 
 uniqueness, familiarity, identifiability, anaphoricity, specificity, and 
 referentiality \citep[\textit{inter alia}]{birner94,condoravdi92,evans77,evans80,gundel88,gundel93,heim90,kadmon87,kadmon90,lyons99,prince92,roberts03,russell05}.  
 
@@ -365,87 +365,12 @@ to award partial credit according to relatedness.
 %\nss{we review the annotation scheme in \cref{sec:scheme}; etc.}
 
 \section{Annotation scheme}\label{sec:scheme}
-Based on the literature on definiteness, we compiled a list of semantic, pragmatic, and discourse--related 
-features which are relevant for the form of (in)definite NPs in English (and many other languages).\yt{ref to the LREC paper?} These features were put together in a hierarchical structure to ease the annotation effort for the annotators. At each step, the annotators make a decision and thus reduce the number of labels they have to consider before annotating an NP. This approach also increases the consistency in annotations due to the reduced effort on considering the options among which to select the correct label for the NP. The annotation scheme was revised through many iterations after attempts at annotating natural language data from different genres using the scheme. The current scheme is presented in Figure~\ref{fig:hierarchy}. 
 
-The first distinction annotators make is whether the NP at hand is anaphoric (discourse old) or non anaphoric (discourse new). 
-We do not annotate for uniqueness, hearer old/new distinction, specificity or genericity for the anaphoric NPs 
-as those distinctions were deemed inconsequential for English anaphoric NPs\footnote{However, in future, we may include these features for anaphoric NPs as well if contrary evidence were found.}.
-\yt{For someone who is not familiar with the scheme, this would be very hard to understand without looking at the definiteness scheme. I think the scheme should be on this page, and description should always point to the place in the scheme. May be we can write all scheme-related terms using the same font as they appear in the scheme? }
-The category of anaphoric NPs is further subdivided into basic anaphora and extended anaphora. 
-The basic anaphora is used for entities which have been mentioned previously in the discourse. 
-The extended anaphora is inspired by the bridging references \citet{clark77} had mentioned. 
-These are used for entities which are not discourse old or even hearer old, but at the same time, 
-they are not entirely new either.  See an example in \cref{fig:bridging} (borrowed from \citet{poesio98}). 
-
-\begin{figure}\small
-(2) I went to {\it a wedding} last weekend. {\it The bride} was a friend of mine. She baked {\it the cake} herself. 
-\label{fig:bridging}
-\caption{\nss{need a caption here}}
-\end{figure}
-
-Within the non anaphoric category, the annotators decide whether the NP denotes a unique NP, 
-a nonunique NP, or a generic NP. For the nongeneric cases, further decisions are made based on 
-whether the entity is hearer-old or -new, and if it is old, what kind of situation makes it old. 
-For generics also, there are two categories depending on whether they appear 
-with kind-level or individual-level predicates resulting in different properties of these NPs. 
-Besides these, there are a few non-referential categories as well.
-
-Besides the annotation categories, a few other decisions were also taken regarding annotations. 
-For example, corresponding to the basic anaphora cases, the anaphoric links can be established with antecedent NPs 
-in previous sentences as well as with NPs within the same sentence. 
-Also to determine whether an NP gets a \llbl{Same\_head} or a \llbl{Different\_head} label, 
-we refer to the closest antecedent even if it appears within the same sentence. 
-Regarding annotations of nested NPs, we assume that these NPs are interpreted inside out. 
-This helps determine the cases of \llbl{Bridging\_RestrictiveModifier} category. 
-If an NP consists of a modifier that restricts its reference enough 
-to make the referent identifiable to the addressees, the embedding NP is annotated with 
-the \llbl{Bridging\_RestrictiveModifier} label. 
-
-
-\Cref{fig:excerpt} is an excerpt from the ``Little Red Riding Hood'' document demonstrating 
-the above-mentioned decisions regarding annotations and illustrating some of the categories from our annotation scheme.
-
-
-\begin{figure*}[t]\small
-\textit{Once upon a time there was a dear little girl who was loved by everyone who looked at her, but most of all by her grandmother, and there was nothing that she would not have given to the child.}
-\\[5pt]
-Once \glosst{she}{\llbl{Same\_head}} gave \glosst{her}{\llbl{Different\_head}} 
-\glosst{a little riding hood of \glosst{red velvet}{\llbl{Other\_nonreferential}}}{$\underset{~}{\llbl{nonuniq\_Hearer\_new\_spec}}$}, 
-which suited \glosst{her}{\llbl{Same\_head}} so well that \glosst{she}{\llbl{Same\_head}} 
-would never wear \glosst{anything else}{\llbl{Quantified}}; so \glosst{she}{\llbl{Same\_head}} was always called 
-`\glosst{Little Red Riding Hood}{\llbl{uniq\_Hearer\_new}}.'
-\caption{An annotated sentence from ``Little Red Riding Hood.'' The previous sentence is shown for context.}
-\label{fig:excerpt}
-\end{figure*}
-
-
-
-
-
-
- 
-%\ab{A brief discussion of the Annotation scheme}
-\nss{we should probably have a name for the scheme---something like ``Functions of Definiteness Across Languages (FDAL)''? and a name for the categories (I have been calling them semantic functions).}\ab{I actually like the name ``Functions of Definiteness Across Languages'' but am not sure how to incorporate it here.}
-\nss{suggestion: lead with a discourse excerpt, ideally illustrating a few of the categories, a nested NP, and 
-an anaphoric link across sentence boundaries. I can help format it.}
-
-\nss{make sure to cite related computational stuff such as \citep{reiter10}}
-
-Examples from \citet[pp. 6--7]{croft-03}:
-
-\eenumsentence{\small
-\item He went to \textbf{the bank}. (def.)\\
-	  Il est all\'{e} \`{a} \textbf{la banque}. (def.)
-\item He showed \textbf{extreme care}. (unmarked)\\
-	  Il montra \textbf{un soin extr\^{e}me}. (indef.)
-\item I love \textbf{artichokes} and asparagus. (unmarked)
-	  J'aime \textbf{les artichauts} et les asperges. (def.)
-\item His brother became \textbf{a soldier}. (indef.)\\
-	  Son fr\`{e}re est devenu \textbf{soldat}. (unmarked)
-}
-In the scheme used here, these should receive labels \llbl{nonuniq\_Hearer\_new\_spec}, \llbl{Other\_Nonreferential}, 
-\llbl{Generic\_individualLevel}, and \llbl{Predicative\_equative\_role}, respectively.
+We give an overview of the annotation scheme for Communicative Functions of Definiteness (CFD), as described in \citet{bhatia14}.
+It is summarized in \cref{fig:hierarchy}. 
+The hierarchical organization serves to reduce the number of decisions that an annotator needs to make
+for speed and consistency.  
+The scheme was developed by annotating texts in two languages (English and Hindi) and various genres.  
 
 \begin{figure*}\small
 \begin{tabular}{p{.45\textwidth}p{.45\textwidth}}
@@ -508,13 +433,55 @@ In the scheme used here, these should receive labels \llbl{nonuniq\_Hearer\_new\
   \end{itemize}
 \end{itemize}
 \end{tabular}
-\caption{Taxonomy of definiteness functions, with number of occurrences in the training data \nss{TODO}. 
-Internal (non-leaf) labels are in bold;\costversion{\nss{}} these are not annotated or predicted.\nss{TODO: normalize capitalization}
+\caption{CFD (Communicative Functions of Definiteness) annotation scheme, with number of occurrences in the training data \nss{TODO}. Internal (non-leaf) labels are in bold;\costversion{\nss{}} these are not annotated or predicted.\nss{TODO: normalize capitalization}
 $+$/$-$ values are shown for ternary attributes \uline{A}naphoric, \uline{B}ridging, \uline{G}eneric, Hearer-\uline{O}ld, \uline{P}redicative, \uline{R}eferential, \uline{S}pecific, and \uline{U}nique; 
 these are inherited from supercategories, but otherwise default to $0$.
 Thus, for example, the full attribute specification for \llbl{uniq\_Physical\_copresence} is $[-A,-B,-G,+O,0P,+R,+S,+U]$.}
 \label{fig:hierarchy}
 \end{figure*}
+
+CFD assigns a communicative function label to every noun phrase except for first- and second-person pronouns.
+The three main communicative functions in the annotation scheme are {\bf Anaphora} vs.~{\bf Nonanaphora} 
+(whether the entity is new to to the discourse or not), {\bf Hearer-old} vs.~{\bf Hearer-new}, 
+and {\bf Unique} vs.~{\bf Nonunique} (annotated for {\bf Nonanaphoric} only in the current scheme).  
+However there are a few twists.   
+Entities that have not been mentioned are considered {\bf Anaphoric} (discourse-old) 
+if they are evoked by a previously mentioned entity.   
+For example, after mentioning a wedding, {\em the bride}, {\em the groom}, and {\em the cake} 
+are considered to be {\bf Anaphoric}~\citep{clark77,poesio98}.  
+Entities that are {\bf Non-Anaphoric} can be {\bf Hearer-old} if they are physically present 
+in the speech situation ({\bf Physical-copresence}) or is not co-present but is part of the {\bf Larger-situation} 
+(e.g., spoken on the first day of a conference: ``I'm tired. The airplane was noisy.'').\footnote{\citet{komen-13} proposed a hierarchy with similar leaf nodes, but different internal structure.}  
+
+In addition to the three main communicative functions, we have annotations for 
+generic, pleonastic, quantified, predicative, and non-referential noun phrases.   
+
+\Cref{fig:excerpt} is an excerpt from the ``Little Red Riding Hood'' annotated with the CFD scheme.
+
+\begin{figure*}[t]\small
+\textit{Once upon a time there was a dear little girl who was loved by everyone who looked at her, but most of all by her grandmother, and there was nothing that she would not have given to the child.}
+\\[5pt]
+Once \glosst{she}{\llbl{Same\_head}} gave \glosst{her}{\llbl{Different\_head}} 
+\glosst{a little riding hood of \glosst{red velvet}{\llbl{Other\_nonreferential}}}{$\underset{~}{\llbl{nonuniq\_Hearer\_new\_spec}}$}, 
+which suited \glosst{her}{\llbl{Same\_head}} so well that \glosst{she}{\llbl{Same\_head}} 
+would never wear \glosst{anything else}{\llbl{Quantified}}; so \glosst{she}{\llbl{Same\_head}} was always called 
+`\glosst{Little Red Riding Hood}{\llbl{uniq\_Hearer\_new}}.'
+\caption{An annotated sentence from ``Little Red Riding Hood.'' The previous sentence is shown for context.}
+\label{fig:excerpt}
+\end{figure*}
+
+The following examples from \citet[pp. 6--7]{croft-03} illustrate the grammatical expression of three communicative functions in English and French. In the CFD scheme, these should receive labels \llbl{nonuniq\_Hearer\_new\_spec}, \llbl{Other\_Nonreferential}, \llbl{Generic\_individualLevel}, and \llbl{Predicative\_equative\_role}, respectively.  The first is expressed the same (with a definite article) in English and French, whereas the other two are expressed differently in the two languages.     
+
+\eenumsentence{\small
+\item He went to \textbf{the bank}. (def.)\\
+	  Il est all\'{e} \`{a} \textbf{la banque}. (def.)
+\item He showed \textbf{extreme care}. (unmarked)\\
+	  Il montra \textbf{un soin extr\^{e}me}. (indef.)
+\item I love \textbf{artichokes} and asparagus. (unmarked)
+	  J'aime \textbf{les artichauts} et les asperges. (def.)
+\item His brother became \textbf{a soldier}. (indef.)\\
+	  Son fr\`{e}re est devenu \textbf{soldat}. (unmarked)
+}
 
 \section{Data}\label{sec:data}
 
