@@ -717,16 +717,18 @@ for use in features (\cref{sec:feats}).
 \subsection{Results}
 
 \begin{table*}\small\centering
-\begin{tabular}{lrrrrr}
-\multicolumn{1}{c}{\bf Condition} & \multicolumn{1}{c}{$|\boldsymbol{\theta}|$} & \multicolumn{1}{c}{$\lambda$} 
-& \multicolumn{1}{c}{\bf Exact Match Accuracy} & \multicolumn{1}{c}{\bf Soft Match Accuracy} 
+\begin{tabular}{@{}lrrrrrr@{}}
+\multicolumn{1}{c}{\bf Condition} & \multicolumn{1}{c}{$|\boldsymbol{\theta}|$} & \multicolumn{1}{c}{$||\boldsymbol{\theta}||_0$} & \multicolumn{1}{c}{$\lambda$} 
+& \multicolumn{1}{c}{\bf Exact Match Acc.} & \multicolumn{1}{c}{\bf Soft Match Acc.} 
 & \multicolumn{1}{c}{\bf Perplexity} \\
 \midrule
-Majority baseline & --- & --- & \\
+Majority baseline & \multicolumn{1}{c}{---} & \multicolumn{1}{c}{---} & \multicolumn{1}{c}{---} & \\
 Log-linear classifier, no grouping by attributes & & \\
 Full log-linear classifier & & \\
 \end{tabular}
-\caption{Classifier versus baselines.}
+\caption{Classifier versus baselines, as measured on the test set. 
+The first three columns of numbers report the number of parameters (feature weights), the number of nonzero parameters, 
+and the tuned regularization hyperparameter, respectively.}
 \label{tbl:results}
 \end{table*}
 
