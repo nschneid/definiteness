@@ -323,7 +323,7 @@ such as the existential construction for indefinite subjects and the {\it ba}- c
 
 Aside from this variation in the form of (in)definite NPs within and across languages, there is also variability 
 in the semantic, pragmatic, and discourse--related functions expressed by (in)definites.   
-We will refer to these as {\em communicative functions}.  
+We will refer to these as {\em communicative functions}\fta{of (in)definiteness}.  
 \Citet[pp. 6--7]{croft-03}, for instance, shows that the conditions under which a noun phrase 
 is marked as definite or indefinite (or not at all) 
 are language-specific by contrasting English and French translations such as:
@@ -428,7 +428,9 @@ We take such linguistic observations to suggest that definiteness is not as homo
 as many accounts have assumed.  In contrast to the reductionists, we are following an 
 approach to grammaticalization~\citep{hopper-03} in which grammar develops over time in such a way that 
 each grammatical construction has some prototypical communicative functions, 
-but also has many non-prototypical communicative functions.  
+but also has many non-prototypical communicative functions\fta{not totally clear how this relates to learning the communicative functions of definiteness, 
+either elaborate or remove the part that start with In contrast to the reductionist...until prototypical functions. 
+The part that follows in the previous version is relevant: Grammaticalization varies a lot across ...}.  
 
 This paper describes a classifier that predicts communicative function labels for English noun phrases  
 using lexical, morphological, and syntactic features.   
@@ -568,7 +570,7 @@ The feature function is defined as follows:
 \end{equation}
 where the percept function $\boldsymbol{\phi}: \mathcal{X} \rightarrow \mathbb{R}^c$ 
 produces a vector of real-valued characteristics of the input, and  
-the attribute function $\tilde{\boldsymbol{\omega}}: \mathcal{Y} \rightarrow \{0,1\}^a$
+the attribute function\fta{define a and c to make it clear} $\tilde{\boldsymbol{\omega}}: \mathcal{Y} \rightarrow \{0,1\}^a$
 encodes characteristics of each label.
 There is a feature for every percept--attribute pairing: so
 $d = c \cdot a$ and $f_{(i-1)a+j}(x,y) = \phi_i(x)\tilde{\omega}_j(y), 1 \leq i \leq c, 1 \leq j \leq a$.
@@ -602,7 +604,7 @@ this reduces to standard logistic regression.
 \subsection{Percepts}\label{sec:feats}
 
 The characteristics of the input that are incorporated in the model, which we call \emph{percepts} 
-to distinguish them from model features linking inputs to outputs,\footnote{See above.} 
+to distinguish them from model features linking inputs to outputs,\footnote{See above.\fta{see section or subsection number?}} 
 are intended to capture the aspects of English morphosyntax that may be relevant 
 to the semantic and pragmatic functions of definiteness.
 
@@ -656,7 +658,7 @@ via the attribute vector function $\boldsymbol{\omega}(y) = $
 [y, A(y), B(y), G(y), O(y), P(y), R(y), S(y), U(y)]^{\top}
 \end{equation*}
 where $A: \costversion{\mathcal{L} \cup \mathcal{I}\nss{}}\mathcal{Y} \rightarrow \{+, -, 0\}$ returns the value for Anaphoric, 
-$B(y)$ for Bridging, etc. The identity of the label is also included in the vector so that 
+$B(y)$ for Bridging, etc.\fta{explain the three possible values: positive negative or 0} The identity of the label is also included in the vector so that 
 different labels are always recognized as different by the attribute function.
 The categorical components of this vector are then binarized to form $\tilde{\boldsymbol{\omega}}(y)$; 
 however, instead of a binary component that fires for the $0$ value of each ternary attribute, 
