@@ -562,6 +562,7 @@ conditional on a \nss{gold?} noun phrase $x$ as follows:
 \begin{equation}
 p_{\boldsymbol{\theta}}(y | x) = \log{\frac{\exp{\boldsymbol{\theta}^{\top}\mathbf{f}(x,y)}}{\sum_{y' \in \mathcal{Y}}\exp{\boldsymbol{\theta}^{\top}\mathbf{f}(x,y')}}}
 \end{equation}
+\cjd{Wouldn't it make more sense, given the story about percepts and label attributes, to use the form $\boldsymbol{\phi}(x)^{T} W \boldsymbol{\omega}(y)$? Then you could cast $W$ as a linear map from the percept vector space to the attribute vector space. This is a bit different than the usual linear regression story (of course), but it's closer to what you're actually doing. I think the links to the feature vector function of $x,y$ is a bit opaque and could be a footnote, but I'll leave it up to you.}
 where $\boldsymbol{\theta} \in \mathbb{R}^d$ is a vector of parameters (feature weights), and 
 $\mathbf{f}: \mathcal{X} \times \mathcal{Y} \rightarrow \mathbb{R}^d$ is the feature function over input--label pairs.
 The feature function is defined as follows:
@@ -576,7 +577,7 @@ There is a feature for every percept--attribute pairing: so
 $d = c \cdot a$ and $f_{(i-1)a+j}(x,y) = \phi_i(x)\tilde{\omega}_j(y), 1 \leq i \leq c, 1 \leq j \leq a$.
 The contents of the percept and attribute functions are detailed in \cref{sec:feats,sec:attrs}.
 
-For prediction, having learned weights $\hat{\boldsymbol{\theta}}$ we choose the $y$ that maximizes this probability:
+For prediction, having learned weights $\hat{\boldsymbol{\theta}}$ we choose the $y$ that maximizes this probability \cjd{maybe add: the Bayes-optimal decision rule for minimizing misclassification error}:
 \begin{equation}
 \hat{y} \leftarrow \arg\max_{y' \in \mathcal{Y}} p_{\hat{\boldsymbol{\theta}}}(y | x)
 \end{equation}
@@ -693,11 +694,11 @@ for the held-out evaluation (dev or test) set $\mathcal{E}$:
   to determine which categories are reliably predicted.
   \item \textbf{Soft match:} This accuracy measure gives partial credit where the predicted and gold labels 
   are related. It is computed as the proportion of attributes whose (categorical) values match: 
-  $|\boldsymbol{\omega}(y) \cap \boldsymbol{\omega}(y')|/9$.
-  \item \textbf{Perplexity:} This determines how ``surprised'' our model is by the gold labels 
+  $|\boldsymbol{\omega}(y) \cap \boldsymbol{\omega}(y')|/9$.\cjd{Should these be differentially weighted based on their height in the hierarchy?}
+  \item \textbf{Perplexity:} Perplexity is a value $\rho \in [1,\infty)$ that quantifies how ``surprised'', on average, our model is by the gold labels 
   in the test set; the greater the probability mass assigned to the true labels, 
   the lower the score. 
-  It is computed as $2^{-\left(\sum_{\langle x, y \rangle \in \mathcal{E}} \log_2 p_{\hat{\boldsymbol{\theta}}}(y | x)\right) / |\mathcal{E}|}$.
+  It is computed as $\rho = 2^{-\left(\sum_{\langle x, y \rangle \in \mathcal{E}} \log_2 p_{\hat{\boldsymbol{\theta}}}(y \mid x)\right) / |\mathcal{E}|}$. Intuitively a perplexity of $\rho$ means the amount of surprisal in a $\rho$-way uniform random draw.
 \end{itemize}
 
 \section{Experiments}\label{sec:exp}
