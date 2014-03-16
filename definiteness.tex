@@ -580,16 +580,13 @@ For prediction, having learned weights $\hat{\boldsymbol{\theta}}$ we choose the
 \begin{equation}
 \hat{y} \leftarrow \arg\max_{y' \in \mathcal{Y}} p_{\hat{\boldsymbol{\theta}}}(y | x)
 \end{equation}
-
 Training optimizes $\hat{\boldsymbol{\theta}}$ so as to maximize a convex $L_1$-regularized
 \costversion{\emph{softmax-margin} }learning objective\costversion{ \citep{gimpel}} over the training data $\mathcal{D}$:
-\begin{align}
-\hat{\boldsymbol{\theta}} &= \argmax_{\boldsymbol{\theta}} L(\boldsymbol{\theta}, \mathcal{D}) \\
-\begin{split}
-L(\boldsymbol{\theta}, \mathcal{D}) &= -\lambda ||\boldsymbol{\theta}||_1 \\ 
-+ \sum_{\langle x,y \rangle\in\mathcal{D}} &\log{\frac{\exp{\boldsymbol{\theta}^{\top}\mathbf{f}(x,y)}}{\sum_{y' \in \mathcal{Y}}\exp{\left(\boldsymbol{\theta}^{\top}\mathbf{f}(x,y')\costversion{ + \kappa\textit{cost}(y,y')}\right)}}}
-\end{split}
-\end{align}
+\begin{equation}
+\hat{\boldsymbol{\theta}} = \argmax_{\boldsymbol{\theta}} 
+-\lambda ||\boldsymbol{\theta}||_1 
++ \sum_{\langle x,y \rangle\in\mathcal{D}} \log{\frac{\exp{\boldsymbol{\theta}^{\top}\mathbf{f}(x,y)}}{\sum_{y' \in \mathcal{Y}}\exp{\left(\boldsymbol{\theta}^{\top}\mathbf{f}(x,y')\costversion{ + \kappa\textit{cost}(y,y')}\right)}}}
+\end{equation}
 \costversion{The \emph{cost function} allows us to penalize some errors more than others during training, 
 taking into account the linguistic functions of the labels.
 It is zero for the gold label and nonnegative for the others.\nss{intuition}
@@ -653,9 +650,9 @@ These attributes are encoded as ternary characteristics;
 for each label (including internal labels), every one of the 8 attributes  
 is assigned a value of $+$, $-$, or $0$ (refer to \cref{fig:hierarchy}).
 In light of sparse data, we design features\costversion{ and cost function} to exploit these similarities 
-via the attribute vector function $\boldsymbol{\omega}(y) = $
+via the attribute vector function
 \begin{equation*}
-[y, A(y), B(y), G(y), O(y), P(y), R(y), S(y), U(y)]^{\top}
+\boldsymbol{\omega}(y) = [y, A(y), B(y), G(y), O(y), P(y), R(y), S(y), U(y)]^{\top}
 \end{equation*}
 where $A: \costversion{\mathcal{L} \cup \mathcal{I}\nss{}}\mathcal{Y} \rightarrow \{+, -, 0\}$ returns the value for Anaphoric, 
 $B(y)$ for Bridging, etc.\fta{explain the three possible values: positive negative or 0} The identity of the label is also included in the vector so that 
