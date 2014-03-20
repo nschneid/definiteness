@@ -91,6 +91,8 @@
 \DeclareMathOperator*{\argmin}{arg\,min}
 
 \usepackage{verbatim}
+\usepackage{ulem}
+
 
 % Author comments
 \usepackage{color}
@@ -289,7 +291,7 @@ Pittsburgh, PA 15213}}
 % as well as the syntactic means for expressing them.  
 % \citet{bhatia14} presented an annotation scheme for the communicative functions of definiteness 
 % and released an annotated corpus in English and Hindi.   
-Whether a noun phrase is realized grammatically as definite or not 
+Whether a NP is realized grammatically as definite or not 
 depends on a variety of semantic, pragmatic, and discourse criteria, or {\em communicative functions}, 
 the interaction of which varies from language to language.
 We present a supervised classifier for English that uses lexical, morphological, and syntactic features 
@@ -301,7 +303,7 @@ not all of which are obvious.
 Computationally, it presents a framework to predict \textit{semantic and pragmatic} communicative functions of definiteness 
 which, unlike lexical and morphosyntactic features, are preserved in translation.  
 The classifier may therefore be useful for MT
-%tracking noun phrase reference for 
+%tracking NP reference for 
 %information extraction, entity tracking, and other 
 and other NLP tasks. 
 \end{abstract}
@@ -313,18 +315,17 @@ For example, while languages like English make use of definite and indefinite ar
 to distinguish between the discourse status of various entities ({\it \textbf{the} car} vs.~{\it \textbf{a} car} vs.~{\it cars}), 
 many other languages---including Czech, Indonesian, and Russian---do not have articles
 % Archna: Hindi sort of has an indefinite article 
-(although they do have demonstrative determiners).\footnote{Demonstratives, personal pronouns, and possessives (which are found in all languages) are other kinds of definite NPs. }  
+(although they do have demonstrative determiners).\footnote{Definite NPs, such as demonstratives, personal pronouns, and possessives are found in all languages.}  
 % Some languages such as Hausa~\citep{lyons99} have different definite articles for noun phrases 
 % that have been previously mentioned in contrast to those that are definite by virtue of the situation 
 % (e.g., ``the podium'' at a conference).
-Sometimes definiteness is marked with affixes or clitics (as in Arabic);  
-\citet{chen04} shows that Chinese, a language without articles, expresses (in)definiteness through constructions, 
-such as the existential construction for indefinite subjects and the {\it ba}- construction for definite direct objects. 
+Sometimes definiteness is marked with affixes or clitics, as in Arabic; sometimes it is expressed through other constructions, e.g.  
+\citet{chen04} shows that in Chinese (a language without articles), the existential construction is used to express indefinite subjects and the {\it ba}- construction for definite direct objects. 
 
-Aside from this variation in the form of (in)definite NPs within and across languages, there is also variability 
+Aside from this variation in the form of (in)definite noun phrases (NPs) within and across languages, there is also variability 
 in the semantic, pragmatic, and discourse--related functions expressed by (in)definites.   
 We will refer to these as {\em communicative functions}\fta{of (in)definiteness}.  
-\Citet[pp. 6--7]{croft-03}, for instance, shows that the conditions under which a noun phrase 
+\Citet[pp. 6--7]{croft-03}, for instance, shows that the conditions under which an NP 
 is marked as definite or indefinite (or not at all) 
 are language-specific by contrasting English and French translations such as:
 %In the CFD scheme, these should receive labels \llbl{nonuniq\_Hearer\_new\_spec}, \llbl{Other\_Nonreferential}, \llbl{Generic\_individualLevel}, and \llbl{Predicative\_equative\_role}, respectively.  The first is expressed the same (with a definite article) in English and French, whereas the other two are expressed differently in the two languages.     
@@ -343,12 +344,9 @@ are language-specific by contrasting English and French translations such as:
 A cross-linguistic classification of communicative functions  
 should be able to characterize the aspects of meaning that account for the different patterns of definiteness marking 
 exhibited in \cref{ex:care,ex:artichokes,ex:soldier}: e.g., that \cref{ex:artichokes} concerns a generic class of entities while 
-\cref{ex:soldier} concerns a role filled by an individual.
-The literature on definiteness describes functions including 
-uniqueness, familiarity, identifiability, anaphoricity, specificity, and 
-referentiality \citep[\textit{inter alia}]{birner94,condoravdi92,evans77,evans80,gundel88,gundel93,heim90,kadmon87,kadmon90,lyons99,prince92,roberts03,russell05}.  
+\cref{ex:soldier} concerns a role filled by an individual. For more on communicative functions, see \cref{sec:scheme}.
 
-\begin{figure*}\small
+\begin{figure*}[t]\small
 \begin{tabular}{p{.45\textwidth}p{.45\textwidth}}
 \begin{itemize}
 \item    \ilbl{Nonanaphora} $[-A,-B]$
@@ -357,27 +355,27 @@ referentiality \citep[\textit{inter alia}]{birner94,condoravdi92,evans77,evans80
     \begin{itemize}
     \item        \ilbl{uniq\_Hearer\_old} $[-G,+O,+S]$
       \begin{itemize}
-      \item          \llbl{uniq\_Physical\_copresence} $[+R]$
-      \item          \llbl{uniq\_Larger\_situation} $[+R]$
-      \item          \llbl{uniq\_predicative\_identity} $[+P]$
+      \item          \llbl{uniq\_Physical\_copresence} $[+R]$ {\tiny(13)}
+      \item          \llbl{uniq\_Larger\_situation} $[+R]$ {\tiny(237)}
+      \item          \llbl{uniq\_predicative\_identity} $[+P]$ {\tiny(1)}
       \end{itemize}
-    \item        \llbl{uniq\_Hearer\_new} $[-O]$
+    \item        \llbl{uniq\_Hearer\_new} $[-O]$ {\tiny(36)}
     \end{itemize}
    \item     \ilbl{Nonunique} $[-U]$
      \begin{itemize}
      \item       \ilbl{nonuniq\_Hearer\_old} $[+O]$
        \begin{itemize}
-       \item         \llbl{nonuniq\_Physical\_copresence} $[-G,+R,+S]$
-       \item         \llbl{nonuniq\_Larger\_situation} $[-G,+R,+S]$
-       \item         \llbl{nonuniq\_predicative\_identity} $[+P]$
+       \item         \llbl{nonuniq\_Physical\_copresence} $[-G,+R,+S]$ {\tiny(39)}
+       \item         \llbl{nonuniq\_Larger\_situation} $[-G,+R,+S]$ {\tiny(117)}
+       \item         \llbl{nonuniq\_predicative\_identity} $[+P]$ {\tiny(13)}
        \end{itemize}
-     \item       \llbl{nonuniq\_Hearer\_new\_spec} $[-G,-O,+R,+S]$
-     \item       \llbl{nonuniq\_nonspec} $[-G,-S]$
+     \item       \llbl{nonuniq\_Hearer\_new\_spec} $[-G,-O,+R,+S]$ {\tiny(231)}
+     \item       \llbl{nonuniq\_nonspec} $[-G,-S]$ {\tiny(181)}
      \end{itemize}
    \item \ilbl{Generic} $[+G,-R]$
      \begin{itemize}
-	   \item      \llbl{Generic\_kindLevel}
-	   \item      \llbl{Generic\_individualLevel}
+	   \item      \llbl{Generic\_kindLevel} {\tiny(0)}
+	   \item      \llbl{Generic\_individualLevel} {\tiny(131)}
      \end{itemize}
   \end{itemize}
 \end{itemize} &
@@ -386,26 +384,26 @@ referentiality \citep[\textit{inter alia}]{birner94,condoravdi92,evans77,evans80
   \begin{itemize}
   \item      \ilbl{Basic} $[+O,-B]$
     \begin{itemize}
-    \item        \llbl{Same\_head}
-    \item        \llbl{Different\_head}
+    \item        \llbl{Same\_head} {\tiny(556)}
+    \item        \llbl{Different\_head} {\tiny(329)}
     \end{itemize}
   \item  \ilbl{Extended} $[+B]$
     \begin{itemize}
-    \item        \llbl{Bridging\_nominal} $[-G,+R,+S]$
-    \item        \llbl{Bridging\_event} $[+R,+S]$
-    \item        \llbl{Bridging\_restrictiveModifier} $[-G,+S]$
+    \item        \llbl{Bridging\_nominal} $[-G,+R,+S]$ {\tiny(43)}
+    \item        \llbl{Bridging\_event} $[+R,+S]$ {\tiny(10)}
+    \item        \llbl{Bridging\_restrictiveModifier} $[-G,+S]$ {\tiny(614)}
     \item        \llbl{Bridging\_subtype\_instance} $[-G]$
-    \item        \llbl{Bridging\_OtherContext} $[+O]$
+    \item        \llbl{Bridging\_OtherContext} $[+O]$ {\tiny(112)}
     \end{itemize}
   \end{itemize}
 \item \ilbl{Miscellaneous} $[-R]$
   \begin{itemize}
-	\item \llbl{Pleonastic} $[-B,-P]$
-	\item \llbl{Quantified}
-	\item \llbl{Predicative\_equative\_role} $[-B,+P]$
-	\item \llbl{Part\_of\_noncompositional\_mwe}
-	\item \llbl{Measure\_Nonreferential}
-	\item \llbl{Other\_Nonreferential}
+	\item \llbl{Pleonastic} $[-B,-P]$ {\tiny(53)}
+	\item \llbl{Quantified} {\tiny(248)}
+	\item \llbl{Predicative\_equative\_role} $[-B,+P]$ {\tiny(58)}
+	\item \llbl{Part\_of\_noncompositional\_mwe} {\tiny(100)}
+	\item \llbl{Measure\_Nonreferential} {\tiny(125)}
+	\item \llbl{Other\_Nonreferential} {\tiny(148)}
   \end{itemize}
 \end{itemize}
 \end{tabular}
@@ -416,29 +414,13 @@ Thus, for example, the full attribute specification for \llbl{uniq\_Physical\_co
 \label{fig:hierarchy}
 \end{figure*}
 
-\nss{can the following two paragraphs go under \cref{sec:scheme}?}
-Reductionist approaches to definiteness try to define definiteness in terms of one or two communicative functions.   
-For example, \citet{kadmon87,evans80} propose that semantic uniqueness is the main communicative function of definite NPs.  
-\citet{roberts03} proposes that the combination of uniqueness and a presupposition of familiarity 
-underlie all definite descriptions.  However, possessive definite descriptions ({\it John's daughter}) 
-and the weak definites ({\it the son of Queen Juliana of the Netherlands}) are neither unique nor necessarily 
-familiar to the listener before they are spoken.  
-
-We take such linguistic observations to suggest that definiteness is not as homogeneous a category 
-as many accounts have assumed.  In contrast to the reductionists, we are following an 
-approach to grammaticalization~\citep{hopper-03} in which grammar develops over time in such a way that 
-each grammatical construction has some prototypical communicative functions, 
-but also has many non-prototypical communicative functions\fta{not totally clear how this relates to learning the communicative functions of definiteness, 
-either elaborate or remove the part that start with In contrast to the reductionist...until prototypical functions. 
-The part that follows in the previous version is relevant: Grammaticalization varies a lot across ...}.  
-
-This paper describes a classifier that predicts communicative function labels for English noun phrases  
+This paper describes a classifier that predicts communicative function labels for English NPs  
 using lexical, morphological, and syntactic features.   
-The contribution of our work is in both the output of the classifier and the model that it uses (features and weights).  
+The contribution of our work is in both the output of the classifier and the model that it uses (features and weights).  \ab{What about the Random forest classifier, we don’t mention that?}
 The classifier predicts communicative function labels that capture aspects of discourse-newness, uniqueness, specificity, and so forth. %(see next section, e.g., whether the entities are 
 %old or new to the discourse and to the hearer)
 Such functions are usually preserved in translation, even when the grammatical mechanisms 
-for expressing it are different. 
+for expressing them are different. 
 Indeed, previous work has noted that machine translation systems face problems 
 while translating from one language to another when the languages use different grammatical strategies (see \cref{sec:related}).
 % If the mapping between different forms and the information they encode is known
@@ -454,6 +436,53 @@ beyond the articles {\em the} and {\em a} that are used for expressing definiten
 %The form-meaning mapping for these languages can be used for machine translation applications. 
 %\citet{tsvetkov13,stymne09} mention how translating from an article-language to an article-less language is problematic. 
 
+To build our model, we leverage a cross-lingual definiteness annotation scheme (\cref{sec:scheme}) 
+and annotated English corpus (\cref{sec:data}) from prior work \citep{bhatia14}.
+Our classifier, \cref{sec:modeling}, is a supervised log-linear model akin to logistic regression,
+with features that combine lexical and morphosyntactic information 
+with prespecified groupings of the communicative function labels\ab{again what about random forest?};
+the evaluation measures (\cref{sec:eval}) include one that exploits these label groupings 
+to award partial credit according to relatedness.
+\nss{TODO: \cref{sec:exp} obtain good performance? discover interesting features? \cref{sec:eval,sec:exp,sec:related}}
+
+%\ab{Here we discuss about why we should study definiteness- linguistically a hard problem, also it has applications in machine translation. Discuss about grammaticalization as a general problem (differences across languages), then grammaticalization of definiteness across languages, some examples to show differences across languages.}
+%\nss{we review the annotation scheme in \cref{sec:scheme}; etc.}
+
+\section{Annotation scheme}\label{sec:scheme}
+
+The literature on definiteness describes functions such as 
+uniqueness, familiarity, identifiability, anaphoricity, specificity, and 
+referentiality \citep[\textit{inter alia}]{birner94,condoravdi92,evans77,evans80,gundel88,gundel93,heim90,kadmon87,kadmon90,lyons99,prince92,roberts03,russell05} as being related to definiteness.\footnote{The reductionist approaches to definiteness try to define it in terms of one or two of above mentioned communicative functions.   
+For example, \citet{roberts03} proposes that the combination of uniqueness and a presupposition of familiarity 
+underlie all definite descriptions.  However, possessive definite descriptions ({\it John's daughter}) 
+and the weak definites ({\it the son of Queen Juliana of the Netherlands}) are neither unique nor necessarily 
+familiar to the listener before they are spoken. In contrast to the reductionist approaches are approaches to grammaticalization~\citep{hopper-03} in which grammar develops over time in such a way that 
+each grammatical construction has some prototypical communicative functions, 
+but may also have many non-prototypical communicative functions. The scheme we are adopting assumes that there may be multiple functions to definiteness.} For this work, we have adopted a scheme that is based on a combination of these functions, the annotation scheme for Communicative Functions of Definiteness (CFD), as described in \citet{bhatia14}.
+It is summarized in \cref{fig:hierarchy}.
+  
+It was developed by annotating texts in two languages (English and Hindi) for various genres keeping in mind the communicative functions that have been associated with definiteness previously. The hierarchical organization of CFD serves to reduce the number of decisions that an annotator needs to make
+for speed and consistency.
+
+It assigns a communicative function label to every NP except for first-person pronouns, second-person pronouns and relative pronouns.
+The three main communicative functions in CFD are {\bf Anaphora} vs.~{\bf Nonanaphora} 
+(whether the entity is old in the discourse or not), {\bf Hearer-old} vs.~{\bf Hearer-new}, 
+and {\bf Unique} vs.~{\bf Nonunique} (annotated for {\bf Nonanaphoric} only in the current scheme).  
+However there are a few twists.   
+Entities that have not been mentioned are considered {\bf Anaphoric} (discourse-old) 
+if they are evoked by a previously mentioned entity.   
+For example, after mentioning a wedding, {\em the bride}, {\em the groom}, and {\em the cake} 
+are considered to be {\bf Anaphoric}~\citep{clark77,poesio98}.  
+Entities that are {\bf Non-Anaphoric} can be {\bf Hearer-old} if they are physically present 
+in the speech situation ({\bf Physical-copresence}) or are not Physically-copresent but are identifiable by members of a community due to it being a part of the common knowledge retained by the community ({\bf Larger-situation},
+e.g., spoken on the first day of a conference: ``I'm tired. The airplane was noisy.'').\footnote{\citet{komen-13} also proposed a hierarchy with similar leaf nodes, but different internal structure.}  
+
+In addition to the three main communicative functions, we have annotations for 
+generic, pleonastic, quantified, predicative, and non-referential NPs. For details on the scheme, see \citet{bhatia14}  
+
+\Cref{fig:excerpt} is an excerpt from the ``Little Red Riding Hood'' annotated with the CFD scheme.
+
+
 \begin{figure*}[t]\small
 \textit{Once upon a time there was a dear little girl who was loved by everyone who looked at her, but most of all by her grandmother, and there was nothing that she would not have given to the child.}
 \\[5pt]
@@ -466,45 +495,6 @@ would never wear \glosst{anything else}{\llbl{Quantified}}; so \glosst{she}{\llb
 \label{fig:excerpt}
 \end{figure*}
 
-To build our model, we leverage a cross-lingual definiteness annotation scheme (\cref{sec:scheme}) 
-and annotated English corpus (\cref{sec:data}) from prior work \citep{bhatia14}.
-Our classifier, \cref{sec:modeling}, is a supervised log-linear model akin to logistic regression,
-with features that combine lexical and morphosyntactic information 
-with prespecified groupings of the communicative function labels; 
-the evaluation measures (\cref{sec:eval}) include one that exploits these label groupings 
-to award partial credit according to relatedness.
-\nss{TODO: \cref{sec:exp} obtain good performance? discover interesting features? \cref{sec:eval,sec:exp,sec:related}}
-
-%\ab{Here we discuss about why we should study definiteness- linguistically a hard problem, also it has applications in machine translation. Discuss about grammaticalization as a general problem (differences across languages), then grammaticalization of definiteness across languages, some examples to show differences across languages.}
-%\nss{we review the annotation scheme in \cref{sec:scheme}; etc.}
-
-\section{Annotation scheme}\label{sec:scheme}
-
-We give an overview of the annotation scheme for Communicative Functions of Definiteness (CFD), as described in \citet{bhatia14}.
-It is summarized in \cref{fig:hierarchy}. 
-The hierarchical organization serves to reduce the number of decisions that an annotator needs to make
-for speed and consistency.  
-The scheme was developed by annotating texts in two languages (English and Hindi) and various genres.
-
-CFD assigns a communicative function label to every noun phrase except for first- and second-person pronouns.
-The three main communicative functions in the annotation scheme are {\bf Anaphora} vs.~{\bf Nonanaphora} 
-(whether the entity is new to to the discourse or not), {\bf Hearer-old} vs.~{\bf Hearer-new}, 
-and {\bf Unique} vs.~{\bf Nonunique} (annotated for {\bf Nonanaphoric} only in the current scheme).  
-However there are a few twists.   
-Entities that have not been mentioned are considered {\bf Anaphoric} (discourse-old) 
-if they are evoked by a previously mentioned entity.   
-For example, after mentioning a wedding, {\em the bride}, {\em the groom}, and {\em the cake} 
-are considered to be {\bf Anaphoric}~\citep{clark77,poesio98}.  
-Entities that are {\bf Non-Anaphoric} can be {\bf Hearer-old} if they are physically present 
-in the speech situation ({\bf Physical-copresence}) or is not co-present but is part of the {\bf Larger-situation} 
-(e.g., spoken on the first day of a conference: ``I'm tired. The airplane was noisy.'').\footnote{\citet{komen-13} proposed a hierarchy with similar leaf nodes, but different internal structure.}  
-
-In addition to the three main communicative functions, we have annotations for 
-generic, pleonastic, quantified, predicative, and non-referential noun phrases.   
-
-\Cref{fig:excerpt} is an excerpt from the ``Little Red Riding Hood'' annotated with the CFD scheme.
-
-
 
 
 
@@ -512,18 +502,18 @@ generic, pleonastic, quantified, predicative, and non-referential noun phrases.
 
 We use the English definiteness corpus of \citet{bhatia14}, 
 which consists of texts from multiple genres annotated with the scheme described in \cref{sec:scheme}. 
-The 16~documents are from prepared speeches (TED talks and a presidential address), 
+The 17~documents consist of prepared speeches (TED talks and a presidential address), 
 published news articles, and fictional narratives. 
-The TED data predominates (about 72\% of the corpus);\finalversion{\footnote{\nss{note that The TED talks are from a large parallel corpus?}}} 
-the presidential speech represents 18\%, news articles 5\%, and fictional narratives 5\%. 
-All told, the corpus contains 20,655~words (812~sentences), with 2,950~NPs (the annotatable units). 
+The TED data predominates (75\% of the corpus)\footnote{Note that the TED talks are from a large parallel corpus obtained from {\it http://www.ted.com/talks/}.}; 
+the presidential speech represents about 16\%, fictional narratives 5\%, and news articles 4\%. 
+All told, the corpus contains 13,860~words (868~sentences), with 3,422~NPs (the annotatable units). 
 \citet{bhatia14} report high inter-annotator agreement, estimating Cohen's $\kappa = 0.94$ within the TED genre 
-and $0.91$ for combined genres\finalversion{\nss{update---this was on a previous version of the annotation scheme.}}.  
+and $0.91$ for combined genres\ab{will enter the current IAA between Jordan \& me soon}\finalversion{\nss{update---this was on a previous version of the annotation scheme.}}.  
 
 
 \section{Classification framework}\label{sec:modeling}
 
-To model the relationship between the grammar of definiteness and its semantic functions in a data-driven fashion,
+To model the relationship between the grammar of definiteness and its communicative functions in a data-driven fashion,
 we work within the supervised framework of feature-rich discriminative classification, 
 treating the functional categories from \cref{sec:scheme} as output labels $y$
 and various lexical, morphological, and syntactic characteristics of the language as features of the input $x$.
@@ -533,14 +523,14 @@ logistic regression treats each output label (response) as atomic, whereas
 we decompose each into \emph{attributes} based on their linguistic definitions, 
 enabling commonalities between related labels to be recognized.
 Each weight in the model corresponds to a feature that mediates between 
-\emph{percepts} (characteristics of the input noun phrase) and attributes (characteristics of the label).
+\emph{percepts} (characteristics of the input NP) and attributes (characteristics of the label).
 \costversion{\nss{}the following ways:
 \begin{itemize}
   \item Logistic regression treats each output label (response) as atomic; 
   we decompose each into \emph{attributes} based on their linguistic definitions, 
   enabling commonalities between related labels to be recognized.
   Each weight in the model corresponds to a feature that mediates between 
-  \emph{percepts} (characteristics of the input noun phrase) and attributes (characteristics of the label).
+  \emph{percepts} (characteristics of the input NP) and attributes (characteristics of the label).
   \item Logistic regression assumes a prediction is either correct or incorrect.
   We incorporate a \emph{cost function} that gives partial credit during learning when a related label 
   is predicted, so the learned model will better match our evaluation measure.
@@ -558,7 +548,7 @@ Our setup is formalized below, where we discuss the mathematical model and lingu
 \subsection{Model}
 
 At test time, we model the probability of semantic label $y$ 
-conditional on a \nss{gold?} noun phrase $x$ as follows:
+conditional on an \nss{gold?} NP $x$ as follows:
 \begin{equation}
 p_{\boldsymbol{\theta}}(y | x) = \log{\frac{\exp{\boldsymbol{\theta}^{\top}\mathbf{f}(x,y)}}{\sum_{y' \in \mathcal{Y}}\exp{\boldsymbol{\theta}^{\top}\mathbf{f}(x,y')}}}
 \end{equation}
@@ -604,10 +594,10 @@ this reduces to standard logistic regression.
 The characteristics of the input that are incorporated in the model, which we call \emph{percepts} 
 to distinguish them from model features linking inputs to outputs,\footnote{See above.\fta{see section or subsection number?}} 
 are intended to capture the aspects of English morphosyntax that may be relevant 
-to the semantic and pragmatic functions of definiteness.
+to the communicative functions of definiteness.
 
 After preprocessing the text with a dependency parser and coreference resolver, 
-we extract the several kinds of percepts for each noun phrase (NP).
+we extract \sout{\bf the} several kinds of percepts for each NP.
 
 \subsubsection{Basic}
 
@@ -622,12 +612,12 @@ Moreover, to better capture tense, aspect and modality, we collect the attached 
 We also make note of \emph{neg} if it is attached to the verb.
     
 \paragraph{Structural.} 
-These are: the \emph{path length} from the head up to the root, and to the attached verb. 
+The structural percepts are: the \emph{path length} from the head up to the root, and to the attached verb. 
 We also have percepts for the number of dependents, and the number of dependency relations that link non-neighbors.
 Integer values were binarized with thresholding.
 
 \paragraph{Positional.} 
-The \emph{token length} of the NP; the NP's \emph{location} in the sentence (first or second half); 
+These percepts are the \emph{token length} of the NP, the NP's \emph{location} in the sentence (first or second half), and 
 the \emph{attached verb's position} relative to the head (left or right). 
 12~additional percept templates record the POS and lemma of the left and right neighbors of the head, governor, and attached verb.
 
@@ -705,16 +695,16 @@ for the held-out evaluation (dev or test) set $\mathcal{E}$:
 
 \subsection{Experimental Setup}
 
-The annotated corpus of \citet{bhatia14} (\cref{sec:data}) contains 16~documents 
-in 3~genres: 12~prepared speeches (mostly TED talks), 2~newspaper articles, 
+The annotated corpus of \citet{bhatia14} (\cref{sec:data}) contains 17~documents 
+in 3~genres: 13~prepared speeches (mostly TED talks), 2~newspaper articles, 
 and 2~fictional narratives. We arbitrarily choose some documents to hold out from each genre; 
 the resulting test set consists of 2~TED talks (``Alisa\_News'', ``RobertHammond\_park''), 
 1~newspaper article (``crime1\_iPad\_E''), and 1~narrative (``Little Red Riding Hood'').
-The test set then contains 3,558~tokens (110~sentences), in which there are 492~annotated NPs; 
-while the training set contains 2,458~NPs among 17,097~tokens (702~sentences).
+The test set then contains 19,28~tokens (111~sentences), in which there are 511~annotated NPs; 
+while the training set contains 2,911~NPs among 11,932~tokens (757~sentences).
 Gold NP boundaries are assumed throughout our experiments.
 
-We use an in-house implementation of supervised learning with $L_1$-regularized AdaGrad \citep{adagrad}. 
+We use an in-house implementation of supervised learning with $L_1$-regularized AdaGrad \citep{adagrad}. \ab{Now we mention $L_2$-regularization as well as or instead of $L_1$.}
 Hyperparameters are tuned on a dev set formed by holding out every tenth instance from the training set 
 (test set experiments use the full training set).\nss{early stopping? what exactly is tuned? optimize soft match acc?} 
 Automatic dependency parses and coreference information were obtained with 
@@ -745,10 +735,11 @@ and the tuned regularization hyperparameter, respectively.}
 
 \nss{feature/attribute ablations}
 
-\nss{Hindi?}
+\ab{a brief discussion of error analysis, feature weights-function mapping for possible grammaticalization??}
+
 
 \section{Related Work}\label{sec:related}
-
+\ab{am working on it currently, will update soon}
 \nss{mention Bresnan's work on predicting syntactic alternations with logistic regression 
 (here we want to predict the hidden information 
 so that the classifier is useful for applications!).}
@@ -797,4 +788,8 @@ classifiers for English- baseline, accuracy etc, confusion matrix- classifier pr
 may be a brief discussion of feature ablation study-  which features are most helpful at least in these languages corresponding to individual categories (a clue to grammaticalization)
 Principle component analysis, clustering of features}
 
+\fta{not totally clear how this relates to learning the communicative functions of definiteness, 
+either elaborate or remove the part that start with In contrast to the reductionist...until prototypical functions. 
+The part that follows in the previous version is relevant: Grammaticalization varies a lot across ...}
 
+\nss{Hindi?}
