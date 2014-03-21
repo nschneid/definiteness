@@ -417,7 +417,7 @@ Thus, for example, the full attribute specification for \llbl{uniq\_Physical\_co
 
 This paper describes a classifier that predicts communicative function labels for English NPs  
 using lexical, morphological, and syntactic features.   
-The contribution of our work is in both the output of the classifier and the model that it uses (features and weights).  \ab{What about the Random forest classifier, we don’t mention that?}
+The contribution of our work is in both the output of the classifier and the model that it uses (features and weights).  %\ab{What about the Random forest classifier, we don’t mention that?}
 The classifier predicts communicative function labels that capture aspects of discourse-newness, uniqueness, specificity, and so forth. %(see next section, e.g., whether the entities are 
 %old or new to the discourse and to the hearer)
 Such functions are usually preserved in translation, even when the grammatical mechanisms 
@@ -441,7 +441,7 @@ To build our model, we leverage a cross-lingual definiteness annotation scheme (
 and annotated English corpus (\cref{sec:data}) from prior work \citep{bhatia14}.
 Our classifier, \cref{sec:modeling}, is a supervised log-linear model akin to logistic regression,
 with features that combine lexical and morphosyntactic information 
-with prespecified groupings of the communicative function labels\ab{again what about random forest?};
+with prespecified groupings of the communicative function labels;
 the evaluation measures (\cref{sec:eval}) include one that exploits these label groupings 
 to award partial credit according to relatedness.
 \nss{TODO: \cref{sec:exp} obtain good performance? discover interesting features? \cref{sec:eval,sec:exp,sec:related}}
@@ -508,8 +508,8 @@ published news articles, and fictional narratives.
 The TED data predominates (75\% of the corpus)\footnote{Note that the TED talks are from a large parallel corpus obtained from {\it http://www.ted.com/talks/}.}; 
 the presidential speech represents about 16\%, fictional narratives 5\%, and news articles 4\%. 
 All told, the corpus contains 13,860~words (868~sentences), with 3,422~NPs (the annotatable units). 
-\citet{bhatia14} report high inter-annotator agreement, estimating Cohen's $\kappa = 0.94$ within the TED genre 
-and $0.91$ for combined genres\ab{will enter the current IAA between Jordan \& me soon}\finalversion{\nss{update---this was on a previous version of the annotation scheme.}}.  
+\citet{bhatia14} report high inter-annotator agreement, estimating Cohen's $\kappa = 0.89$ within the TED genre 
+and $0.9$ for all genres.  
 
 
 \section{Classification framework}\label{sec:modeling}
@@ -544,7 +544,7 @@ These decisions are\nss{}}
 This is aimed at attaining better predictive accuracy 
 as well as feature weights that better describe the form--function interactions we are interested in recovering.
 
-Our setup is formalized below, where we discuss the mathematical model \yt{s} and linguistically motivated features.
+Our setup is formalized below, where we discuss the mathematical models and linguistically motivated features.
 
 \subsection{Model}
 \yt{
@@ -595,7 +595,7 @@ and }$\tilde{\boldsymbol{\omega}}(y) = \textit{the identity of the label}$,
 this reduces to standard logistic regression.
 
 \yt{\subsubsection{Non-linear model}
-We employ a random forest classifier \citep{Breiman:2001}, an ensemble of tree-structured classifiers ${h(\mathbf{x}, \Theta_n)}$, where $\mathbf{x}$ is a input vector, and ${\Theta_n}$ is the set of random vectors. The random vector for the $k$th tree---$\Theta_k$---is generated independently from the past $\Theta_1, \dots, \Theta_{k-1}$ vectors, but from the same distribution. Each random vector governs the growth of its tree in the ensemble. After $n$ trees are generated, the most popular class is selected by voting; each tree casts a unit vote.}
+We employ a random forest classifier \citep{Breiman:2001}, an ensemble of tree-structured classifiers ${h(\mathbf{x}, \Theta_n)}$, where $\mathbf{x}$ is an input vector, and ${\Theta_n}$ is the set of random vectors. The random vector for the $k$th tree---$\Theta_k$---is generated independently from the past $\Theta_1, \dots, \Theta_{k-1}$ vectors, but from the same distribution. Each random vector governs the growth of its tree in the ensemble. After $n$ trees are generated, the most popular class is selected by voting; each tree casts a unit vote.}
  
 \yt{An important property of the random forests, in addition to being an effective tool in prediction, is their insusceptibility to overfitting. Rather than overfitting, as the number of trees increases, they produce a limiting value of the generalization error.\footnote{See Theorem 1.2 in \cite{Breiman:2001} for more details.} Thus, a held-out development set for hyperparameter tuning is not required; this alleviates the scarcity problem in setups with limited amount of data.}
 
@@ -769,7 +769,7 @@ on automatic prediction of semantic and pragmatic communicative functions of def
 
 \section{Conclusion}\label{sec:conclusion}
 
-In future work we will build such models for languages that do not have articles such as Hindi, Russian, and Chinese.
+In this paper we presented a model that captures the relationship between the grammar of definiteness and its communicative functions in English to a good accuracy\ab{??! English is an article language, where articles are a clear indicator of some of these functions. }. In future work we will build such models for languages that do not have articles such as Hindi, Russian, and Chinese to identify grammaticalizations of definiteness in these languages as well. This information can, in turn, be used for various MT and NLP tasks.
 
 
 
