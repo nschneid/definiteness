@@ -302,10 +302,10 @@ not all of which are obvious.
 % some of which is obvious (e.g., {\em the} and {\em a}) and some of which is not obvious \ab{(include an example from our findings)}. 
 Computationally, it presents a framework to predict \textit{semantic and pragmatic} communicative functions of definiteness 
 which, unlike lexical and morphosyntactic features, are preserved in translation.  
-The classifier may therefore be useful for MT
+The classifier may therefore be useful for \yt{co-reference resolution,} MT
 %tracking NP reference for 
 %information extraction, entity tracking, and other 
-and other NLP tasks. 
+and other \yt{mono- and cross-lingual} NLP tasks. 
 \end{abstract}
 
 \section{Introduction}
@@ -544,9 +544,13 @@ These decisions are\nss{}}
 This is aimed at attaining better predictive accuracy 
 as well as feature weights that better describe the form--function interactions we are interested in recovering.
 
-Our setup is formalized below, where we discuss the mathematical model and linguistically motivated features.
+Our setup is formalized below, where we discuss the mathematical model \yt{s} and linguistically motivated features.
 
 \subsection{Model}
+\yt{
+We experiment with two classification models: linear logistic regression and a non-linear tree-based model. 
+Due to their consistency and interpretability, linear models are a valuable tool for quantifying the effects of individual features; non-linear models, on the other hand, are powerful and often outperform logistic regression \citep{PerlichEtAl:2003}.
+\subsubsection{Linear model}}
 
 At test time, we model the probability of semantic label $y$ 
 conditional on an \nss{gold?} NP $x$ as follows:
@@ -589,6 +593,11 @@ and the cost function, and of course, the features themselves.}
 With \costversion{$\kappa = 0$, $\mathcal{Y} = \{\textit{gold labels in training}\}$, 
 and }$\tilde{\boldsymbol{\omega}}(y) = \textit{the identity of the label}$, 
 this reduces to standard logistic regression.
+
+\yt{\subsubsection{Non-linear model}
+We employ a random forest classifier \citep{Breiman:2001}, an ensemble of tree-structured classifiers ${h(\mathbf{x}, \Theta_n)}$, where $\mathbf{x}$ is a input vector, and ${\Theta_n}$ is the set of random vectors. The random vector for the $k$th tree---$\Theta_k$---is generated independently from the past $\Theta_1, \dots, \Theta_{k-1}$ vectors, but from the same distribution. Each random vector governs the growth of its tree in the ensemble. After $n$ trees are generated, the most popular class is selected by voting; each tree casts a unit vote.}
+ 
+\yt{An important property of the random forests, in addition to being an effective tool in prediction, is their insusceptibility to overfitting. Rather than overfitting, as the number of trees increases, they produce a limiting value of the generalization error.\footnote{See Theorem 1.2 in \cite{Breiman:2001} for more details.} Thus, a held-out development set for hyperparameter tuning is not required; this alleviates the scarcity problem in setups with limited amount of data.}
 
 \subsection{Percepts}\label{sec:feats}
 
