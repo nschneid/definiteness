@@ -749,22 +749,26 @@ and the tuned regularization hyperparameter, respectively.}
 
 
 \section{Related Work}\label{sec:related}
-\ab{am working on it currently, will update soon}
-\nss{mention Bresnan's work on predicting syntactic alternations with logistic regression 
-(here we want to predict the hidden information 
-so that the classifier is useful for applications!).}
-Automated prediction of (in)definite articles has been found beneficial in a variety of applications, 
-including postediting of MT output \citep{knight1994automated}, text generation \citep{DBLP:conf/aaai/Elhadad93,minnen2000memory}, 
-and identification and correction of ESL errors  \citep{aehan2006detecting,de2008classifier,gamon2008,rozovskaya2010training}.\nss{what about coref? discourse models?} 
-More recently, \citet{tsvetkov13} trained a classifier to predict where English articles might plausibly be added or removed in a phrase, 
+
+Understanding definiteness is beneficial in applications such as co-reference processing, information extraction, machine translation. For example, the anaphoric relations between a definite description and its antecedent could be realized differently depending on whether it is basic anaphora or extended anaphora and yet differently from non anaphoric uses of descriptions (NPs). A knowledge of these differences can aid co-reference resolution systems in determining which entities may be linked together or in recognizing descriptions which are discourse-new depending on the grammaticalization they appear with. 
+
+Similarly an understanding of definiteness in different languages can help machine translation systems. It has been noted that machine translation systems face problems when the source and the target language use different grammatical strategies to express the same information , see \cite{stymne09}, \cite{tsvetkov13}. Previous work on machine translation (PBSMT) has attempted to deal with this in terms of either preprocessing the source language to make it look more like the target language, e.g. \cite{collins05, habash07, niesen00, stymne09}; or post processing the machine translation output to match the target language, e.g. \cite{popovic06}. Attempts have also been made to use syntax on either the source or the target side or on both sides to get the syntactic differences between languages \cite{liu06, yamada02, zhang07}. Automated prediction of (in)definite articles has been found beneficial in a variety of applications, including postediting of MT output \citep{knight1994automated}, text generation \citep{DBLP:conf/aaai/Elhadad93,minnen2000memory}, and identification and correction of ESL errors \citep{aehan2006detecting,de2008classifier,gamon2008,rozovskaya2010training}. More recently, \citet{tsvetkov13} trained a classifier to predict where English articles might plausibly be added or removed in a phrase, 
 and used this classifier to improve the quality of statistical machine translation. 
 
-While definiteness morpheme prediction has been thoroughly studied in computational linguistics, 
-studies on additional, more complex aspects of definiteness are limited.  
+While definiteness morpheme prediction has been thoroughly studied in computational linguistics, studies on additional, more complex aspects of definiteness are limited.  
 \citet{reiter10}  exploit linguistically-motivated features in a supervised approach to 
 distinguish between generic and specific NPs.\finalversion{\yt{what else?}}
 To the best of our knowledge, no studies have been conducted 
-on automatic prediction of semantic and pragmatic communicative functions of definiteness.  
+on automatic prediction of semantic and pragmatic communicative functions of definiteness. An understanding of such communicative functions in a language can come handy, e.g., in cases of syncretism on the source and/or the target side language, where the observable parts of grammar alone cannot guide machine translation systems. 
+
+\citet{bresnan07} have used logistic regression to predict syntactic structures related to dative alternation based on the semantic mappings to the structures. In this work, we have used logistic regression models to explore the syntax-semantic mapping related to definiteness. 
+\nss{mention Bresnan's work on predicting syntactic alternations with logistic regression 
+(here we want to predict the hidden information 
+so that the classifier is useful for applications!).}
+
+
+
+\nss{what about coref? discourse models?} 
 
 
 \section{Conclusion}\label{sec:conclusion}
