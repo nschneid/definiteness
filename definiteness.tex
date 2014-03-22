@@ -345,10 +345,10 @@ should be able to characterize the aspects of meaning that account for the diffe
 exhibited in \cref{ex:care,ex:artichokes,ex:soldier}: e.g., that \cref{ex:artichokes} concerns a generic class of entities while 
 \cref{ex:soldier} concerns a role filled by an individual. For more on communicative functions, see \cref{sec:scheme}.
 
-\begin{figure*}[t]\small
+\begin{figure*}[t]\small\centering
 \begin{tabular}{@{}p{.51\textwidth}p{.46\textwidth}@{}}
 \begin{itemize}
-\item    \ilbl{Nonanaphora} $[-A,-B]$ \hfill {\bf\tiny 868}
+\item    \ilbl{Nonanaphora} $[-A,-B]$ \hfill {\bf\tiny 999}
   \begin{itemize}
   \item      \ilbl{Unique} $[+U]$ \hfill {\bf\tiny 287}
     \begin{itemize}
@@ -406,10 +406,20 @@ exhibited in \cref{ex:care,ex:artichokes,ex:soldier}: e.g., that \cref{ex:artich
   \end{itemize}
 \end{itemize}
 \end{tabular}
-\caption{CFD (Communicative Functions of Definiteness) annotation scheme, with frequencies in the corpus \nss{TODO: maybe also show these for each attribute value}. Internal (non-leaf) labels are in bold;\costversion{\nss{}} these are not annotated or predicted.\nss{TODO: normalize capitalization}
+\begin{tabular}{r@{~~}>{\smaller}r@{~~}>{\smaller}r@{~~}>{\smaller}r|r@{~~}>{\smaller}r@{~~}>{\smaller}r@{~~}>{\smaller}r|r@{~~}>{\smaller}r@{~~}>{\smaller}r@{~~}>{\smaller}r|r@{~~}>{\smaller}r@{~~}>{\smaller}r@{~~}>{\smaller}r}
+& \multicolumn{1}{@{}c}{$+$} & \multicolumn{1}{@{~~}c}{$-$} & \multicolumn{1}{@{~~}c}{$0$} && 
+  \multicolumn{1}{@{~}c@{~}}{$+$} & \multicolumn{1}{@{~}c@{~~}}{$-$} & \multicolumn{1}{@{~~}c}{$0$} && 
+  \multicolumn{1}{@{~}c@{~}}{$+$} & \multicolumn{1}{@{~}c@{~~}}{$-$} & \multicolumn{1}{@{~~}c}{$0$} && 
+  \multicolumn{1}{@{~}c@{~}}{$+$} & \multicolumn{1}{@{~}c@{~~}}{$-$} & \multicolumn{1}{@{~~}c}{$0$} \\
+\hline
+\uline{A}naphoric & 1574 &  999 & 732 &    \uline{G}eneric &  131 & 1476 & 1698 & \uline{P}redicative &  72 &  53 & 3180 & \uline{S}pecific & 1305 & 181 & 1819 \\
+\uline{B}ridging  &  779 & 1905 & 621 & Hearer-\uline{O}ld & 1327 &  267 & 1711 & \uline{R}eferential & 690 & 863 & 1752 & \uline{U}nique   &  287 & 581 & 2437 \\
+\end{tabular}\finalversion{\nss{TODO: column headings aren't quite centered}}
+\caption{CFD (Communicative Functions of Definiteness) annotation scheme, with frequencies in the corpus. Internal (non-leaf) labels are in bold;\costversion{\nss{}} these are not annotated or predicted.\nss{TODO: normalize capitalization}
 $+$/$-$ values are shown for ternary attributes \uline{A}naphoric, \uline{B}ridging, \uline{G}eneric, Hearer-\uline{O}ld, \uline{P}redicative, \uline{R}eferential, \uline{S}pecific, and \uline{U}nique; 
 these are inherited from supercategories, but otherwise default to $0$.
-Thus, for example, the full attribute specification for \llbl{uniq\_Physical\_copresence} is $[-A,-B,-G,+O,0P,+R,+S,+U]$.}
+Thus, for example, the full attribute specification for \llbl{uniq\_Physical\_copresence} is $[-A,-B,-G,+O,0P,+R,+S,+U]$.
+Counts for these attributes are shown in the table at bottom.}
 \label{fig:hierarchy}
 \end{figure*}
 
