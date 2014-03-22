@@ -272,7 +272,7 @@
 \hyphenation{comb-over}
 \hyphenation{per-cept}
 \hyphenation{per-cepts}
-\title{\draftnotice{Title, author list not final. Page limit: 8 + 2 bib (will be granted more space in CR)}A Classifier for Communicative Functions of Definiteness}
+\title{\draftnotice{Title, author list not final. Page limit: 8 + 2 bib (will be granted more space in CR)}Automatic Classification of Communicative Functions of Definiteness}
 
 \finalversion{\author{Archna Bhatia \ \ \  Chu-Cheng Lin \ \ \  Lori Levin \ \ \ \  Mandy Simons \\
 \bf Fatima Talib Al-Raisi \ \ \  Laleh Roostapour \ \ \  Abhimanu Kumar  \\
@@ -294,15 +294,15 @@ Pittsburgh, PA 15213}}
 Whether an NP is realized grammatically as definite or not 
 depends on a variety of semantic, pragmatic, and discourse criteria, or {\em communicative functions}, 
 the interaction of which varies from language to language.
-We present a supervised classifier for English that uses lexical, morphological, and syntactic features 
+We present supervised classifiers for English that use lexical, morphological, and syntactic features 
 to predict communicative functions of definiteness.   
-The benefits of this work are twofold: linguistically, the classifier's features and weights 
+The benefits of this work are twofold: linguistically, the classifiers' features and parameters 
 model the {\em grammaticalization} of definiteness in English, 
 not all of which are obvious.
 % some of which is obvious (e.g., {\em the} and {\em a}) and some of which is not obvious \ab{(include an example from our findings)}. 
 Computationally, it presents a framework to predict \textit{semantic and pragmatic} communicative functions of definiteness 
 which, unlike lexical and morphosyntactic features, are preserved in translation.  
-The classifier may therefore be useful for coreference resolution, MT
+The classifiers may therefore be useful for coreference resolution, MT,
 and other mono- and cross-lingual NLP tasks. 
 \end{abstract}
 
@@ -423,10 +423,10 @@ Counts for these attributes are shown in the table at bottom.}
 \label{fig:hierarchy}
 \end{figure*}
 
-This paper describes a classifier that predicts communicative function labels for English NPs  
+This paper describes classifiers that predict communicative function labels for English NPs  
 using lexical, morphological, and syntactic features.   
-The contribution of our work is in both the output of the classifier and the model that it uses (features and weights).  %\ab{What about the Random forest classifier, we don’t mention that?}
-The classifier predicts communicative function labels that capture aspects of discourse-newness, uniqueness, specificity, and so forth. %(see next section, e.g., whether the entities are 
+The contribution of our work is in both the output of the classifiers and the models themselves (features and weights).  %\ab{What about the Random forest classifier, we don’t mention that?}
+Each classifier predicts communicative function labels that capture aspects of discourse-newness, uniqueness, specificity, and so forth. %(see next section, e.g., whether the entities are 
 %old or new to the discourse and to the hearer)
 Such functions are usually preserved in translation, even when the grammatical mechanisms 
 for expressing them are different. 
@@ -438,21 +438,22 @@ while translating from one language to another when the languages use different 
 The communicative function labels also represent the discourse status of entities, 
 making them relevant for entity tracking, knowledge base construction, and information extraction. 
 
-The model is a form-meaning mapping, consisting of the syntactic, lexical, and morphological features 
+Our log-linear model is a form-meaning mapping, consisting of the syntactic, lexical, and morphological features 
 and weights that are predictive of communicative functions.   
 This in itself is linguistically significant in that it shows the grammatical mechanisms 
 beyond the articles {\em the} and {\em a} that are used for expressing definiteness in English.   
 %The form-meaning mapping for these languages can be used for machine translation applications. 
 %\citet{tsvetkov13,stymne09} mention how translating from an article-language to an article-less language is problematic. 
 
-To build our model, we leverage a cross-lingual definiteness annotation scheme (\cref{sec:scheme}) 
+To build our models, we leverage a cross-lingual definiteness annotation scheme (\cref{sec:scheme}) 
 and annotated English corpus (\cref{sec:data}) from prior work \citep{bhatia14}.
-Our classifier, \cref{sec:modeling}, is a supervised log-linear model akin to logistic regression,
+Our classifiers, \cref{sec:modeling}, are supervised models
 with features that combine lexical and morphosyntactic information 
 with prespecified groupings of the communicative function labels;
 the evaluation measures (\cref{sec:eval}) include one that exploits these label groupings 
 to award partial credit according to relatedness.
-\nss{TODO: \cref{sec:exp} obtain good performance? discover interesting features? \cref{sec:eval,sec:exp,sec:related}}
+\Cref{sec:exp} presents experiments comparing several models and discussing their strengths and weaknesses;
+computational work and applications related to definiteness are addressed in \cref{sec:related}.
 
 %\ab{Here we discuss about why we should study definiteness- linguistically a hard problem, also it has applications in machine translation. Discuss about grammaticalization as a general problem (differences across languages), then grammaticalization of definiteness across languages, some examples to show differences across languages.}
 %\nss{we review the annotation scheme in \cref{sec:scheme}; etc.}
@@ -469,7 +470,7 @@ familiar to the listener before they are spoken. In contrast to the reductionist
 each grammatical construction has some prototypical communicative functions, 
 but may also have many non-prototypical communicative functions. The scheme we are adopting assumes that there may be multiple functions to definiteness.} For this work, we have adopted a scheme that is based on a combination of these functions, the annotation scheme for Communicative Functions of Definiteness (CFD), as described in \citet{bhatia14}.
 It is summarized in \cref{fig:hierarchy}.
-  
+
 It was developed by annotating texts in two languages (English and Hindi) for various genres keeping in mind the communicative functions that have been associated with definiteness previously. The hierarchical organization of CFD serves to reduce the number of decisions that an annotator needs to make
 for speed and consistency.
 
@@ -526,7 +527,8 @@ To model the relationship between the grammar of definiteness and its communicat
 we work within the supervised framework of feature-rich discriminative classification, 
 treating the functional categories from \cref{sec:scheme} as output labels $y$
 and various lexical, morphological, and syntactic characteristics of the language as features of the input $x$.
-Specifically, we learn a probabilistic log-linear model similar to multiclass logistic regression, 
+Specifically, we learn two kinds of probabilistic models. 
+The first is a log-linear model similar to multiclass logistic regression, 
 but deviating in that
 logistic regression treats each output label (response) as atomic, whereas 
 we decompose each into \emph{attributes} based on their linguistic definitions, 
@@ -551,17 +553,21 @@ Each weight in the model corresponds to a feature that mediates between
 These decisions are\nss{}}
 This is aimed at attaining better predictive accuracy 
 as well as feature weights that better describe the form--function interactions we are interested in recovering.
+We also train a random forest model, which sacrifices interpretability of the learned parameters for predictive accuracy.
 
 Our setup is formalized below, where we discuss the mathematical models and linguistically motivated features.
 
 \subsection{Models}
 
-We experiment with two classification models: linear logistic regression and a non-linear tree-based model. 
-Due to their consistency and interpretability, linear models are a valuable tool for quantifying and analyzing the effects of individual features; non-linear models, on the other hand, are powerful and often outperform logistic regression \citep{PerlichEtAl:2003}.
+We experiment with two classification methods: a log-linear model and a nonlinear tree-based ensemble model. 
+Due to their consistency and interpretability, linear models are a valuable tool 
+for quantifying and analyzing the effects of individual features. 
+Non-linear models, while less interpretable, often outperform logistic regression \citep{PerlichEtAl:2003}, 
+and thus could be desirable when the predictions are needed for a downstream task.
 
-\subsubsection{Linear model}
+\subsubsection{Log-linear model}
 
-At test time, we model the probability of semantic label $y$ 
+At test time, we model the probability of communicative function label $y$ 
 conditional on an NP $x$ as follows:
 \begin{equation}
 p_{\boldsymbol{\theta}}(y | x) = \log{\frac{\exp{\boldsymbol{\theta}^{\top}\mathbf{f}(x,y)}}{\sum_{y' \in \mathcal{Y}}\exp{\boldsymbol{\theta}^{\top}\mathbf{f}(x,y')}}}
@@ -574,7 +580,7 @@ The feature function is defined as follows:
 \end{equation}
 where the percept function $\boldsymbol{\phi}: \mathcal{X} \rightarrow \mathbb{R}^c$ 
 produces a vector of real-valued characteristics of the input, and  
-the attribute function\fta{define a and c to make it clear} $\tilde{\boldsymbol{\omega}}: \mathcal{Y} \rightarrow \{0,1\}^a$
+the attribute function\finalversion{\fta{define a and c to make it clear}} $\tilde{\boldsymbol{\omega}}: \mathcal{Y} \rightarrow \{0,1\}^a$
 encodes characteristics of each label.
 There is a feature for every percept--attribute pairing: so
 $d = c \cdot a$ and $f_{(i-1)a+j}(x,y) = \phi_i(x)\tilde{\omega}_j(y), 1 \leq i \leq c, 1 \leq j \leq a$.
@@ -604,6 +610,7 @@ and }$\tilde{\boldsymbol{\omega}}(y) = \textit{the identity of the label}$,
 this reduces to standard logistic regression.
 
 \subsubsection{Non-linear model}
+
 We employ a random forest classifier \citep{Breiman:2001}, an ensemble of decision tree classifiers 
 %${h(\mathbf{x}, N, \boldsymbol{\Theta})}$, 
 %where $\mathbf{x}$ is an input vector, $N$ is the number of classification trees, and $\boldsymbol{\Theta}$ is a set of $N$ independently generated random vectors. 
@@ -677,7 +684,11 @@ via the attribute vector function
 \boldsymbol{\omega}(y) = [y, A(y), B(y), G(y), O(y), P(y), R(y), S(y), U(y)]^{\top}
 \end{equation*}
 where $A: \costversion{\mathcal{L} \cup \mathcal{I}\nss{}}\mathcal{Y} \rightarrow \{+, -, 0\}$ returns the value for Anaphoric, 
-$B(y)$ for Bridging, etc.\fta{explain the three possible values: positive negative or 0} The identity of the label is also included in the vector so that 
+$B(y)$ for Bridging, etc.
+For instance, with the Anaphoric attribute, a value of $+$ applies to labels that can never mark NPs new to the discourse,
+$-$ applies for labels that can {\em only} apply if the NP is new the discourse,  
+and $0$ for labels such as \llbl{Pleonastic} (where anaphoricity is not applicable because there is no discourse referent).
+The identity of the label is also included in the vector so that 
 different labels are always recognized as different by the attribute function.
 The categorical components of this vector are then binarized to form $\tilde{\boldsymbol{\omega}}(y)$; 
 however, instead of a binary component that fires for the $0$ value of each ternary attribute, 
@@ -735,9 +746,9 @@ The test set then contains 19,28~tokens (111~sentences), in which there are 511~
 while the training set contains 2,911~NPs among 11,932~tokens (757~sentences).
 Gold NP boundaries are assumed throughout our experiments.
 
-The log-linear models are trained with an in-house implementation of supervised learning with $L_2$-regularized AdaGrad \citep{adagrad}.
+The log-linear model variants are trained with an in-house implementation of supervised learning with $L_2$-regularized AdaGrad \citep{adagrad}.
 Hyperparameters are tuned  
-on a dev set formed by holding out every tenth instance from the training set 
+on a development set formed by holding out every tenth instance from the training set 
 (test set experiments use the full training set):
 the power of 10 giving the highest soft match accuracy was chosen for $\lambda$.\footnote{Preliminary experiments with cross-validation on the training data showed that the value of $\lambda$ was stable across folds.}
 The Python {\tt scikit-learn} toolkit \citep{scikit-learn} was used for the random forest classifier.\footnote{Because it is a randomized algorithm, the results may vary slightly between runs; 
@@ -777,7 +788,7 @@ Measurements of overall classification performance appear in \cref{tbl:results}.
 While far from perfect, our classifiers achieve promising accuracy levels 
 given the small size of the training data and the number of labels in the annotation scheme.
 The random forest classifier is the most accurate, likely due to the robustness of that technique 
-conditions where the data are small and the frequencies of individual labels are imbalanced.
+under conditions where the data are small and the frequencies of individual labels are imbalanced.
 
 Among the log-linear models, the most successful is the richest model, which combines the fine-grained 
 communicative function labels with higher-level attributes of those labels. 
@@ -846,15 +857,13 @@ and the rarer category \llbl{Unique\_hearer\_new}; the latter is supposed to occ
 only for the first occurrence of a proper name referring to a entity 
 that is not already part of the knowledge of the larger community. 
 In other words, this distinction requires world knowledge about well-known entities, which could perhaps be mined 
-from the web or other sources.
+from the Web or other sources.
 
 \finalversion{\nss{English: ±cost function, ±non-identity attributes, ±predicting intermediate labels}
 
 \nss{maybe: which attribute groupings produce the best classifier, if we want to force a hierarchy}
 
 \nss{feature/attribute ablations}}
-
-\ab{a brief discussion of error analysis, feature weights-function mapping for possible grammaticalization??}
 
 
 \section{Related Work}\label{sec:related}
