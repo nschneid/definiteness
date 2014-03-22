@@ -272,6 +272,7 @@
 \hyphenation{comb-over}
 \hyphenation{per-cept}
 \hyphenation{per-cepts}
+\hyphenation{post-edit-ing}
 \title{\draftnotice{Title, author list not final. Page limit: 8 + 2 bib (will be granted more space in CR)}Automatic Classification of Communicative Functions of Definiteness}
 
 \finalversion{\author{Archna Bhatia \ \ \  Chu-Cheng Lin \ \ \  Lori Levin \ \ \ \  Mandy Simons \\
@@ -524,7 +525,7 @@ The TED data predominates (75\% of the corpus)\footnote{Note that the TED talks 
 the presidential speech represents about 16\%, fictional narratives 5\%, and news articles 4\%. 
 All told, the corpus contains 13,860~words (868~sentences), with 3,422~NPs (the annotatable units). 
 \citet{bhatia14} report high inter-annotator agreement, estimating Cohen's $\kappa = 0.89$ within the TED genre 
-and $0.9$ for all genres.  
+as well as for all genres.  
 
 
 \section{Classification framework}\label{sec:modeling}
@@ -847,6 +848,12 @@ will require further investigation, ideally with additional datasets.
 \label{fig:weights}
 \end{figure}
 
+Finally, we can remove features to test their impact on predictive performance. 
+Notably, in experiments ablating features indicating articles---the most obvious exponents of definiteness 
+in English---we see a decrease in performance, but not a drastic one. 
+This suggests that the expression of communicative functions of definiteness is in fact much richer than 
+morphological definiteness.
+
 \paragraph{Errors.}
 Several labels are unattested or virtually unattested in the training data, 
 so the models unsurprisingly fail to predict them correctly at test time. 
@@ -871,21 +878,22 @@ from the Web or other sources.
 
 \section{Related Work}\label{sec:related}
 
-Understanding definiteness may benefit applications such as coreference resolution and discourse processing, 
-information extraction, and machine translation. 
-For example, the anaphoric relations between a definite description and its antecedent could be realized differently 
-depending on whether it is basic anaphora or extended anaphora and yet differently from non anaphoric uses of descriptions (NPs). 
-A knowledge of these differences can aid coreference resolution systems in determining which entities may be linked together 
-or in recognizing descriptions which are discourse-new depending on the grammaticalization they appear with. 
+Because semantic\slash pragmatic analysis of referring expressions is important for many NLP tasks,  
+a computational model of the communicative functions of definiteness has the potential to leverage 
+diverse lexical and grammatical cues to facilitate deeper inferences about the meaning of linguistic input.
+We have used a coreference resolution system to extract features for modeling definiteness, but 
+an alternative would be to predict definiteness functions as input to (or jointly with) the coreference task. 
+Applications such as information extraction and dialogue processing could be expected to benefit not only from 
+coreference information, but also from some of the semantic distinctions made in our framework, including specificity and genericity.
 
-Similarly an understanding of definiteness in different languages can help machine translation systems. 
+Better computational processing of definiteness in different languages stands to help machine translation systems. 
 It has been noted that machine translation systems face problems when the source and the target language 
 use different grammatical strategies to express the same information \citep{stymne09,tsvetkov13}. 
-Previous work on machine translation (PBSMT) has attempted to deal with this in terms of either 
+Previous work on machine translation has attempted to deal with this in terms of either 
 (a)~preprocessing the source language to make it look more like the target language \citep[\textit{inter alia}]{collins05,habash07,niessen00,stymne09}; 
 or (b)~post-processing the machine translation output to match the target language, \cite[e.g.,][]{popovic06}. 
-Attempts have also been made to use syntax on either the source or the target side or on both sides 
-to get the syntactic differences between languages \citep{liu06,yamada02,zhang07}. 
+Attempts have also been made to use syntax on the source and\slash or the target sides 
+to capture the syntactic differences between languages \citep{liu06,yamada02,zhang07}. 
 Automated prediction of (in)definite articles has been found beneficial in a variety of applications, 
 including postediting of MT output \citep{knight1994automated}, text generation \citep{DBLP:conf/aaai/Elhadad93,minnen2000memory}, 
 and identification and correction of ESL errors \citep{aehan2006detecting,de2008classifier,gamon2008,rozovskaya2010training}. 
@@ -897,31 +905,37 @@ studies on additional, more complex aspects of definiteness are limited.
 \citet{reiter10}  exploit linguistically-motivated features in a supervised approach to 
 distinguish between generic and specific NPs.\finalversion{\yt{what else?}}
 To the best of our knowledge, no studies have been conducted 
-on automatic prediction of semantic and pragmatic communicative functions of definiteness. 
-An understanding of such communicative functions in a language can come handy, e.g., in cases of 
-syncretism on the source and/or the target side language, where the observable parts of grammar alone cannot guide machine translation systems. 
+on automatic prediction of semantic and pragmatic communicative functions of definiteness more broadly. 
+%An understanding of such communicative functions in a language can come handy, e.g., in cases of 
+%syncretism on the source and/or the target side language, where the observable parts of grammar alone cannot guide machine translation systems. 
 
 %\citet{bresnan10} have used logistic regression to predict syntactic structures related to dative alternation based on the semantic mappings to the structures. %\nss{mention Bresnan's work on predicting syntactic alternations with logistic regression 
 %(here we want to predict the hidden information so that the classifier is useful for applications\!).}
 
 
-Our work is also related to research in linguistics on the modeling of syntactic constructions 
-such as dative shift and the expression of possession with ``of'' or ``'s'' in approach.  
-\citet{bresnan10} used semantic features to predict syntactic constructions.   
+Our work is related to research in linguistics on the modeling of syntactic constructions 
+such as dative shift and the expression of possession with ``of'' or ``'s''.  
+\citet{bresnan10} used logistic regression with semantic features to predict syntactic constructions.   
 Although we are doing the opposite (using syntactic features to predict semantic categories), 
 we share the assumption that reductionist approaches (as mentioned earlier) are not able to capture all the nuances of a linguistic phenomenon. 
 Following~\citet{hopper-03} we observe that grammaticalization is accompanied by {\em function drift}, 
 resulting in multiple communicative functions for each grammatical construction. 
-\ab{Hence, like \citet{bresnan10}, in this work, we used logistic regression models to explore the syntax-semantic mapping 
-related to definiteness since such models are robust to deal with skewed data as well and hence are able to model probability 
-without assuming a particular distribution of data.???!}
+% \ab{Hence, like \citet{bresnan10}, in this work, we used logistic regression models to explore the syntax-semantic mapping 
+% related to definiteness since such models are robust to deal with skewed data as well and hence are able to model probability 
+% without assuming a particular distribution of data.???!}
 
 
 
 
 \section{Conclusion}\label{sec:conclusion}
 
-In this paper we presented a model that captures the relationship between the grammar of definiteness and its communicative functions in English to a good accuracy\ab{??! English is an article language, where articles are a clear indicator of some of these functions. }. In future work we will build such models for languages that do not have articles such as Hindi, Russian, and Chinese to identify grammaticalizations of definiteness in these languages as well. This information can, in turn, be used for various MT and NLP tasks.
+We have presented a data-driven approach to modeling the relationship between 
+communicative functions associated with (in)definiteness and their lexical\slash grammatical realization in a particular language.
+Our feature-rich classifiers can give insight into this relationship
+as well as predict communicative functions for the benefit of NLP systems.
+This work has focused on English, but in future work we will build similar models for other languages---including 
+languages without articles, under the hypothesis that such languages will rely on other, subtler devices to encode
+many of the functions of definiteness.
 
 
 
