@@ -583,15 +583,15 @@ The contents of the percept and attribute functions are detailed in \cref{sec:fe
 
 For prediction, having learned weights $\hat{\boldsymbol{\theta}}$ we choose the $y$ that maximizes this probability \cjd{maybe add: the Bayes-optimal decision rule for minimizing misclassification error}:
 \begin{equation}
-\hat{y} \leftarrow \arg\max_{y' \in \mathcal{Y}} p_{\hat{\boldsymbol{\theta}}}(y | x)
+\hat{y} \leftarrow \arg\max_{y \in \mathcal{Y}} p_{\hat{\boldsymbol{\theta}}}(y | x)
 \end{equation}
-Training optimizes $\hat{\boldsymbol{\theta}}$ so as to maximize a convex $L_1$-regularized
+Training optimizes $\hat{\boldsymbol{\theta}}$ so as to maximize a convex $L_2$-regularized
 \costversion{\emph{softmax-margin} }learning objective\costversion{ \citep{gimpel}} over the training data $\mathcal{D}$:
 \begin{equation}
 \hat{\boldsymbol{\theta}} = \argmax_{\boldsymbol{\theta}} 
--\lambda ||\boldsymbol{\theta}||_1 
-+ \sum_{\langle x,y \rangle\in\mathcal{D}} \log{\frac{\exp{\boldsymbol{\theta}^{\top}\mathbf{f}(x,y)}}{\sum_{y \in \mathcal{Y}}\exp{\left(\boldsymbol{\theta}^{\top}\mathbf{f}(x,y')\costversion{ + \kappa\textit{cost}(y,y')}\right)}}}
-\end{equation}\nss{TODO: fix regularizer}
+-\lambda ||\boldsymbol{\theta}||^2_2 
++ \sum_{\langle x,y \rangle\in\mathcal{D}} \log{\frac{\exp{\boldsymbol{\theta}^{\top}\mathbf{f}(x,y)}}{\sum_{y' \in \mathcal{Y}}\exp{\left(\boldsymbol{\theta}^{\top}\mathbf{f}(x,y')\costversion{ + \kappa\textit{cost}(y,y')}\right)}}}
+\end{equation}
 \costversion{The \emph{cost function} allows us to penalize some errors more than others during training, 
 taking into account the linguistic functions of the labels.
 It is zero for the gold label and nonnegative for the others.\nss{intuition}
@@ -709,10 +709,10 @@ for the held-out evaluation (dev or test) set $\mathcal{E}$:
   \item \textbf{Soft match:} This accuracy measure gives partial credit where the predicted and gold labels 
   are related. It is computed as the proportion of attributes whose (categorical) values match: 
   $|\boldsymbol{\omega}(y) \cap \boldsymbol{\omega}(y')|/9$.\cjd{Should these be differentially weighted based on their height in the hierarchy?}
-  \item \textbf{Perplexity:} Perplexity is a value $\rho \in [1,\infty)$ that quantifies how ``surprised'', on average, our model is by the gold labels 
-  in the test set; the greater the probability mass assigned to the true labels, 
-  the lower the score. 
-  It is computed as $\rho = 2^{-\left(\sum_{\langle x, y \rangle \in \mathcal{E}} \log_2 p_{\hat{\boldsymbol{\theta}}}(y \mid x)\right) / |\mathcal{E}|}$. Intuitively a perplexity of $\rho$ means the amount of surprisal in a $\rho$-way uniform random draw.
+%   \item \textbf{Perplexity:} Perplexity is a value $\rho \in [1,\infty)$ that quantifies how ``surprised'', on average, our model is by the gold labels 
+%   in the test set; the greater the probability mass assigned to the true labels, 
+%   the lower the score. 
+%   It is computed as $\rho = 2^{-\left(\sum_{\langle x, y \rangle \in \mathcal{E}} \log_2 p_{\hat{\boldsymbol{\theta}}}(y \mid x)\right) / |\mathcal{E}|}$. Intuitively a perplexity of $\rho$ means the amount of surprisal in a $\rho$-way uniform random draw.
 \end{itemize}
 
 \section{Experiments}\label{sec:exp}
@@ -738,18 +738,26 @@ for use in features (\cref{sec:feats}).
 \subsection{Results}
 
 \begin{table*}\small\centering
-\begin{tabular}{@{}lrrrrrr@{}}
-\multicolumn{1}{c}{\bf Condition} & \multicolumn{1}{c}{$|\boldsymbol{\theta}|$} & \multicolumn{1}{c}{$||\boldsymbol{\theta}||_0$} & \multicolumn{1}{c}{$\lambda$} 
+\begin{tabular}{lrrcc}
+\multicolumn{1}{c}{\bf Condition} & \multicolumn{1}{c}{$|\boldsymbol{\theta}|$} %& \multicolumn{1}{c}{$||\boldsymbol{\theta}||_0$} 
+& \multicolumn{1}{c}{$\lambda$} 
 & \multicolumn{1}{c}{\bf Exact Match Acc.} & \multicolumn{1}{c}{\bf Soft Match Acc.} 
-& \multicolumn{1}{c}{\bf Perplexity} \\
+%& \multicolumn{1}{c}{\bf Perplexity} 
+\\
 \midrule
-Majority baseline & \multicolumn{1}{c}{---} & \multicolumn{1}{c}{---} & \multicolumn{1}{c}{---} & \\
-Log-linear classifier, no grouping by attributes & & \\
-Full log-linear classifier & & \\
+Majority baseline & \multicolumn{1}{c}{---} & \multicolumn{1}{c}{---} %& \multicolumn{1}{c}{---} 
+& 12.1 & 25.5
+\\
+Log-linear classifier, attributes only & 473,064 & 100 & 38.7 & 52.0 \\
+Log-linear classifier, labels only & 413,931 & 100 & 40.8 & 52.1 \\
+Full log-linear classifier (labels + attributes) & 926,417 & 100 & 43.7 & 55.6 \\
+Random forest classifier & 20,363 & \multicolumn{1}{c}{---} & \bf 49.7 & \bf 60.1 \\
 \end{tabular}
-\caption{Classifier versus baselines, as measured on the test set. 
-The first three columns of numbers report the number of parameters (feature weights), the number of nonzero parameters, 
-and the tuned regularization hyperparameter, respectively.}
+\caption{Classifiers and baseline, as measured on the test set.
+%The first three columns of numbers report the number of parameters (feature weights), the number of nonzero parameters, 
+%and the tuned regularization hyperparameter, respectively.
+The first two columns give the number of parameters and the tuned regularization hyperparameter, respectively; 
+the third and fourth columns give accuracies as percentages; the best in each column is bolded.}
 \label{tbl:results}
 \end{table*}
 
