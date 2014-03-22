@@ -580,8 +580,8 @@ Training optimizes $\hat{\boldsymbol{\theta}}$ so as to maximize a convex $L_1$-
 \begin{equation}
 \hat{\boldsymbol{\theta}} = \argmax_{\boldsymbol{\theta}} 
 -\lambda ||\boldsymbol{\theta}||_1 
-+ \sum_{\langle x,y \rangle\in\mathcal{D}} \log{\frac{\exp{\boldsymbol{\theta}^{\top}\mathbf{f}(x,y)}}{\sum_{y' \in \mathcal{Y}}\exp{\left(\boldsymbol{\theta}^{\top}\mathbf{f}(x,y')\costversion{ + \kappa\textit{cost}(y,y')}\right)}}}
-\end{equation}
++ \sum_{\langle x,y \rangle\in\mathcal{D}} \log{\frac{\exp{\boldsymbol{\theta}^{\top}\mathbf{f}(x,y)}}{\sum_{y \in \mathcal{Y}}\exp{\left(\boldsymbol{\theta}^{\top}\mathbf{f}(x,y')\costversion{ + \kappa\textit{cost}(y,y')}\right)}}}
+\end{equation}\nss{TODO: fix regularizer}
 \costversion{The \emph{cost function} allows us to penalize some errors more than others during training, 
 taking into account the linguistic functions of the labels.
 It is zero for the gold label and nonnegative for the others.\nss{intuition}
@@ -594,7 +594,12 @@ and }$\tilde{\boldsymbol{\omega}}(y) = \textit{the identity of the label}$,
 this reduces to standard logistic regression.
 
 \subsubsection{Non-linear model}
-We employ a random forest classifier \citep{Breiman:2001}, an ensemble of tree-structured classifiers ${h(\mathbf{x}, \Theta_n)}$, where $\mathbf{x}$ is an input vector, and ${\Theta_n}$ is the set of random vectors. The random vector for the $k$th tree---$\Theta_k$---is generated independently from the past $\Theta_1, \dots, \Theta_{k-1}$ vectors, but from the same distribution. Each random vector governs the growth of its tree in the ensemble. After $n$ trees are generated, the most popular class is selected by voting; each tree casts a unit vote.
+We employ a random forest classifier \citep{Breiman:2001}, an ensemble of tree-structured classifiers ${h(\mathbf{x}, N, \boldsymbol{\Theta})}$, 
+where $\mathbf{x}$ is an input vector, $N$ is the number of classification trees, and $\boldsymbol{\Theta}$ is a set of $N$ independently generated random vectors. 
+%The random vector for the $k$th tree---$\Theta_k$---is generated independently from the past $\Theta_1, \dots, \Theta_{k-1}$ vectors, but from the same distribution. 
+\nss{they come from the same distribution---what is it?}
+Each random vector governs the growth of its tree in the ensemble. 
+After $N$ trees are generated, the most popular class is selected by voting; each tree casts a unit vote.
  
 An important property of the random forests, in addition to being an effective tool in prediction, is their insusceptibility to overfitting. Rather than overfitting, as the number of trees increases, they produce a limiting value of the generalization error.\footnote{See Theorem 1.2 in \cite{Breiman:2001} for more details.} Thus, a held-out development set for hyperparameter tuning is not required; this alleviates the scarcity problem in setups with limited amount of data.
 
