@@ -492,8 +492,8 @@ generic, pleonastic, quantified, predicative, and nonreferential NPs.
 Finally, because some natural groupings of labels would violate the hierarchy, 
 each label type is associated with several attributes that can be $+$, $-$, or $0$.
 For instance, with the Anaphoric attribute, a value of $+$ applies to labels that can never mark NPs new to the discourse,
-$-$ applies for labels that can {\em only} apply if the NP is new in the discourse,  
-and $0$ for labels such as \llbl{Pleonastic} (where anaphoricity is not applicable because there is no discourse referent).
+$-$ applies to labels that can {\em only} apply if the NP is new in the discourse,  
+and $0$ applies to labels such as \llbl{Pleonastic} (where anaphoricity is not applicable because there is no discourse referent).
 For details on the scheme, see \citet{bhatia14}.
 
 \Cref{fig:excerpt} is an excerpt from the ``Little Red Riding Hood'' annotated with the CFD scheme.
@@ -882,7 +882,7 @@ Similarly an understanding of definiteness in different languages can help machi
 It has been noted that machine translation systems face problems when the source and the target language 
 use different grammatical strategies to express the same information \citep{stymne09,tsvetkov13}. 
 Previous work on machine translation (PBSMT) has attempted to deal with this in terms of either 
-(a)~preprocessing the source language to make it look more like the target language \citep[\textit{inter alia}]{collins05,habash07,niesen00,stymne09}; 
+(a)~preprocessing the source language to make it look more like the target language \citep[\textit{inter alia}]{collins05,habash07,niessen00,stymne09}; 
 or (b)~post-processing the machine translation output to match the target language, \cite[e.g.,][]{popovic06}. 
 Attempts have also been made to use syntax on either the source or the target side or on both sides 
 to get the syntactic differences between languages \citep{liu06,yamada02,zhang07}. 
@@ -901,18 +901,18 @@ on automatic prediction of semantic and pragmatic communicative functions of def
 An understanding of such communicative functions in a language can come handy, e.g., in cases of 
 syncretism on the source and/or the target side language, where the observable parts of grammar alone cannot guide machine translation systems. 
 
-%\citet{bresnan07} have used logistic regression to predict syntactic structures related to dative alternation based on the semantic mappings to the structures. %\nss{mention Bresnan's work on predicting syntactic alternations with logistic regression 
+%\citet{bresnan10} have used logistic regression to predict syntactic structures related to dative alternation based on the semantic mappings to the structures. %\nss{mention Bresnan's work on predicting syntactic alternations with logistic regression 
 %(here we want to predict the hidden information so that the classifier is useful for applications\!).}
 
 
 Our work is also related to research in linguistics on the modeling of syntactic constructions 
 such as dative shift and the expression of possession with ``of'' or ``'s'' in approach.  
-\citet{bresnan07} used semantic features to predict syntactic constructions.   
+\citet{bresnan10} used semantic features to predict syntactic constructions.   
 Although we are doing the opposite (using syntactic features to predict semantic categories), 
 we share the assumption that reductionist approaches (as mentioned earlier) are not able to capture all the nuances of a linguistic phenomenon. 
-Following~\citet{Hopper&Traugott, Traugott} we observe that grammaticalization is accompanied by {\em function drift}, 
+Following~\citet{hopper-03} we observe that grammaticalization is accompanied by {\em function drift}, 
 resulting in multiple communicative functions for each grammatical construction. 
-\ab{Hence, like \citet{bresnan07}, in this work, we used logistic regression models to explore the syntax-semantic mapping 
+\ab{Hence, like \citet{bresnan10}, in this work, we used logistic regression models to explore the syntax-semantic mapping 
 related to definiteness since such models are robust to deal with skewed data as well and hence are able to model probability 
 without assuming a particular distribution of data.???!}
 
