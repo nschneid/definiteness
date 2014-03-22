@@ -728,9 +728,13 @@ The test set then contains 19,28~tokens (111~sentences), in which there are 511~
 while the training set contains 2,911~NPs among 11,932~tokens (757~sentences).
 Gold NP boundaries are assumed throughout our experiments.
 
-We use an in-house implementation of supervised learning with $L_1$-regularized AdaGrad \citep{adagrad}. \ab{Now we mention $L_2$-regularization as well as or instead of $L_1$.}
-Hyperparameters are tuned on a dev set formed by holding out every tenth instance from the training set 
-(test set experiments use the full training set).\nss{early stopping? what exactly is tuned? optimize soft match acc?} 
+The log-linear models are trained with an in-house implementation of supervised learning with $L_2$-regularized AdaGrad \citep{adagrad}.
+Hyperparameters are tuned  
+on a dev set formed by holding out every tenth instance from the training set 
+(test set experiments use the full training set):
+the power of 10 giving the highest soft match accuracy was chosen for $\lambda$.\footnote{Preliminary experiments with cross-validation on the training data showed that the value of $\lambda$ was stable across folds.}
+The Python {\tt scikit-learn} toolkit \citep{scikit-learn} was used for the random forest classifier.\footnote{Because it is a randomized algorithm, the results may vary slightly between runs; 
+however, a cross-validation experiment on the training data found very little variance in accuracy.}
 Automatic dependency parses and coreference information were obtained with 
 the parser and coreference resolution system in Stanford CoreNLP v.~3.3.0 \citep{socher-13,recasens-13}
 for use in features (\cref{sec:feats}).
@@ -772,26 +776,52 @@ the third and fourth columns give accuracies as percentages; the best in each co
 
 \section{Related Work}\label{sec:related}
 
-Understanding definiteness is beneficial in applications such as coreference processing, information extraction, machine translation. For example, the anaphoric relations between a definite description and its antecedent could be realized differently depending on whether it is basic anaphora or extended anaphora and yet differently from non anaphoric uses of descriptions (NPs). A knowledge of these differences can aid coreference resolution systems in determining which entities may be linked together or in recognizing descriptions which are discourse-new depending on the grammaticalization they appear with. 
+Understanding definiteness may benefit applications such as coreference resolution and discourse processing, 
+information extraction, and machine translation. 
+For example, the anaphoric relations between a definite description and its antecedent could be realized differently 
+depending on whether it is basic anaphora or extended anaphora and yet differently from non anaphoric uses of descriptions (NPs). 
+A knowledge of these differences can aid coreference resolution systems in determining which entities may be linked together 
+or in recognizing descriptions which are discourse-new depending on the grammaticalization they appear with. 
 
-Similarly an understanding of definiteness in different languages can help machine translation systems. It has been noted that machine translation systems face problems when the source and the target language use different grammatical strategies to express the same information , see \cite{stymne09}, \cite{tsvetkov13}. Previous work on machine translation (PBSMT) has attempted to deal with this in terms of either preprocessing the source language to make it look more like the target language, e.g. \cite{collins05, habash07, niesen00, stymne09}; or post processing the machine translation output to match the target language, e.g. \cite{popovic06}. Attempts have also been made to use syntax on either the source or the target side or on both sides to get the syntactic differences between languages \cite{liu06, yamada02, zhang07}. Automated prediction of (in)definite articles has been found beneficial in a variety of applications, including postediting of MT output \citep{knight1994automated}, text generation \citep{DBLP:conf/aaai/Elhadad93,minnen2000memory}, and identification and correction of ESL errors \citep{aehan2006detecting,de2008classifier,gamon2008,rozovskaya2010training}. More recently, \citet{tsvetkov13} trained a classifier to predict where English articles might plausibly be added or removed in a phrase, 
+Similarly an understanding of definiteness in different languages can help machine translation systems. 
+It has been noted that machine translation systems face problems when the source and the target language 
+use different grammatical strategies to express the same information \citep{stymne09,tsvetkov13}. 
+Previous work on machine translation (PBSMT) has attempted to deal with this in terms of either 
+(a)~preprocessing the source language to make it look more like the target language \citep[\textit{inter alia}]{collins05,habash07,niesen00,stymne09}; 
+or (b)~post-processing the machine translation output to match the target language, \cite[e.g.,][]{popovic06}. 
+Attempts have also been made to use syntax on either the source or the target side or on both sides 
+to get the syntactic differences between languages \citep{liu06,yamada02,zhang07}. 
+Automated prediction of (in)definite articles has been found beneficial in a variety of applications, 
+including postediting of MT output \citep{knight1994automated}, text generation \citep{DBLP:conf/aaai/Elhadad93,minnen2000memory}, 
+and identification and correction of ESL errors \citep{aehan2006detecting,de2008classifier,gamon2008,rozovskaya2010training}. 
+More recently, \citet{tsvetkov13} trained a classifier to predict where English articles might plausibly be added or removed in a phrase, 
 and used this classifier to improve the quality of statistical machine translation. 
 
-While definiteness morpheme prediction has been thoroughly studied in computational linguistics, studies on additional, more complex aspects of definiteness are limited.  
+While definiteness morpheme prediction has been thoroughly studied in computational linguistics, 
+studies on additional, more complex aspects of definiteness are limited.  
 \citet{reiter10}  exploit linguistically-motivated features in a supervised approach to 
 distinguish between generic and specific NPs.\finalversion{\yt{what else?}}
 To the best of our knowledge, no studies have been conducted 
-on automatic prediction of semantic and pragmatic communicative functions of definiteness. An understanding of such communicative functions in a language can come handy, e.g., in cases of syncretism on the source and/or the target side language, where the observable parts of grammar alone cannot guide machine translation systems. 
+on automatic prediction of semantic and pragmatic communicative functions of definiteness. 
+An understanding of such communicative functions in a language can come handy, e.g., in cases of 
+syncretism on the source and/or the target side language, where the observable parts of grammar alone cannot guide machine translation systems. 
 
 %\citet{bresnan07} have used logistic regression to predict syntactic structures related to dative alternation based on the semantic mappings to the structures. %\nss{mention Bresnan's work on predicting syntactic alternations with logistic regression 
 %(here we want to predict the hidden information so that the classifier is useful for applications\!).}
 
 
-Our work is also related to research in linguistics on the modeling of syntactic constructions such as dative shift and the expression of possession with "of" or "'s" in approach.  \citet{bresnan07} used semantic features to predict syntactic constructions.   Although we are doing the opposite (using syntactic features to predict semantic categories), we share the assumption that reductionist approaches (as mentioned earlier) are not able to capture all the nuances of a linguistic phenomenon. Following~\citet{Hopper&Traugott, Traugott} we observe that grammaticalization is accompanied by {\em function drift}, resulting in multiple communicative functions for each grammatical construction. \ab{Hence, like \citet{bresnan07}, in this work, we used logistic regression models to explore the syntax-semantic mapping related to definiteness since such models are robust to deal with skewed data as well and hence are able to model probability without assuming a particular distribution of data.???!}
+Our work is also related to research in linguistics on the modeling of syntactic constructions 
+such as dative shift and the expression of possession with ``of'' or ``'s'' in approach.  
+\citet{bresnan07} used semantic features to predict syntactic constructions.   
+Although we are doing the opposite (using syntactic features to predict semantic categories), 
+we share the assumption that reductionist approaches (as mentioned earlier) are not able to capture all the nuances of a linguistic phenomenon. 
+Following~\citet{Hopper&Traugott, Traugott} we observe that grammaticalization is accompanied by {\em function drift}, 
+resulting in multiple communicative functions for each grammatical construction. 
+\ab{Hence, like \citet{bresnan07}, in this work, we used logistic regression models to explore the syntax-semantic mapping 
+related to definiteness since such models are robust to deal with skewed data as well and hence are able to model probability 
+without assuming a particular distribution of data.???!}
 
 
-
-\nss{what about coref? discourse models?} 
 
 
 \section{Conclusion}\label{sec:conclusion}
