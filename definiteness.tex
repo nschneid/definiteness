@@ -554,7 +554,7 @@ as well as feature weights that better describe the form--function interactions 
 
 Our setup is formalized below, where we discuss the mathematical models and linguistically motivated features.
 
-\subsection{Model}
+\subsection{Models}
 
 We experiment with two classification models: linear logistic regression and a non-linear tree-based model. 
 Due to their consistency and interpretability, linear models are a valuable tool for quantifying and analyzing the effects of individual features; non-linear models, on the other hand, are powerful and often outperform logistic regression \citep{PerlichEtAl:2003}.
@@ -585,7 +585,7 @@ selecting the $y$ that maximizes this probability:
 \begin{equation}
 \hat{y} \leftarrow \arg\max_{y \in \mathcal{Y}} p_{\hat{\boldsymbol{\theta}}}(y | x)
 \end{equation}
-Training optimizes $\hat{\boldsymbol{\theta}}$ so as to maximize a convex $L_2$-regularized
+Training optimizes $\hat{\boldsymbol{\theta}}$ so as to maximize a convex $L_2$-regularized\footnote{As is standard practice with these models, bias parameters (which capture the overall frequency of percepts/attributes) are excluded from regularization.}
 \costversion{\emph{softmax-margin} }learning objective\costversion{ \citep{gimpel}} over the training data $\mathcal{D}$:
 \begin{equation}
 \hat{\boldsymbol{\theta}} = \argmax_{\boldsymbol{\theta}} 
@@ -748,6 +748,7 @@ for use in features (\cref{sec:feats}).
 
 \subsection{Results}
 
+
 \begin{table*}\small\centering
 \begin{tabular}{lrrcc}
 \multicolumn{1}{c}{\bf Condition} & \multicolumn{1}{c}{$|\boldsymbol{\theta}|$} %& \multicolumn{1}{c}{$||\boldsymbol{\theta}||_0$} 
@@ -771,6 +772,81 @@ The first two columns give the number of parameters and the tuned regularization
 the third and fourth columns give accuracies as percentages; the best in each column is bolded.}
 \label{tbl:results}
 \end{table*}
+
+Measurements of overall classification performance appear in \cref{tbl:results}. 
+While far from perfect, our classifiers achieve promising accuracy levels 
+given the small size of the training data and the number of labels in the annotation scheme.
+The random forest classifier is the most accurate, likely due to the robustness of that technique 
+conditions where the data are small and the frequencies of individual labels are imbalanced.
+
+Among the log-linear models, the most successful is the richest model, which combines the fine-grained 
+communicative function labels with higher-level attributes of those labels. 
+This is encouraging because it suggests that the model has correctly exploited known linguistic generalizations 
+to account for the grammaticalization of definiteness in English. 
+
+An advantage of log-linear models is that feature weights offer insights into the model's behavior.
+\Cref{fig:weights} lists the 10~features that received the highest positive weights in the full model 
+for the \mbox{$+$ and $-$ values} of the Specific attribute. Reassuringly, the definite article, 
+possessives (\texttt{PRP\$}), proper nouns (\texttt{NNP}), and the second person pronoun 
+are associated with specific NPs, while the indefinite article is associated with nonspecific NPs.
+The model also seems to have picked up on the less obvious but well-attested tendency 
+of objects to be nonspecific \citep{aissen-03}.\footnote{The percept \texttt{VB\_pos\_outerhead\_left} 
+fires when the NP is governed by a verb to its left.}
+
+In addition to confirming known grammaticalization patterns of definiteness, 
+we can mine the highly-weighted features for new hypotheses: 
+here the model thinks that objects of ``from'' are especially likely to be specific, 
+and that NPs with comparative adjectives (\texttt{JJR}) are especially likely to be nonspecific.
+Whether these are general trends, or just an artifact of the sentences that happened to be in the training data, 
+will require further investigation, ideally with additional datasets.
+
+\begin{figure}\small\centering
+\begin{tabular}{p{.4\textwidth}p{.4\textwidth}}
+\multicolumn{1}{c}{\bf $+$Specific} & \multicolumn{1}{c}{\bf $-$Specific} \\
+\begin{verbatim}
+	PRP$_first_pos_dependents
+	PRP$_pos_head_left
+	you_last_lemma_dependents
+	you_lemma_dependents_1
+	PRP$_pos_dependents_1
+	PRP$_pos_outerhead_right
+	NNP_last_pos_dependents
+	PRP$_last_pos_dependents
+	the_first_lemma_dependents
+	from_lemma_outerhead
+\end{verbatim}
+&
+\begin{verbatim}
+	a_first_lemma_dependents
+	a_last_lemma_dependents
+	a_lemma_dependents_1
+	JJR_pos_head_left
+	JJR_last_pos_dependents
+	a_lemma_dependents_2
+	new_first_lemma_dependents
+	new_last_lemma_dependents
+	JJR_pos_dependents_2
+	VB_pos_outerhead_left
+\end{verbatim}
+\end{tabular}
+\caption{Percepts receiving highest positive weights in association with attribute values.}
+\label{fig:weights}
+\end{figure}
+
+\paragraph{Errors.}
+Several labels are unattested or virtually unattested in the training data, 
+so the models unsurprisingly fail to predict them correctly at test time. 
+\llbl{Same\_head} and \llbl{Different\_head}, though both common, are confused quite frequently.
+Whether the previous coreferent mention has the same or different head is a simple distinction for humans; 
+low model accuracy is likely due to errors propagated from coreference resolution.
+This problem is so frequent that merging these two categories and retraining the random forest model 
+improves exact match accuracy by 8\% absolute and soft match accuracy by 5\% absolute.
+Another common confusion is between the highly frequent category \llbl{Unique\_Larger\_situation}
+and the rarer category \llbl{Unique\_hearer\_new}; the latter is supposed to occur
+only for the first occurrence of a proper name referring to a entity 
+that is not already part of the knowledge of the larger community. 
+In other words, this distinction requires world knowledge about well-known entities, which could perhaps be mined 
+from the web or other sources.
 
 \finalversion{\nss{English: ±cost function, ±non-identity attributes, ±predicting intermediate labels}
 
