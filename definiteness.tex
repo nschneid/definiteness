@@ -488,7 +488,13 @@ in the speech situation ({\bf Physical-copresence}) or are not Physically-copres
 e.g., spoken on the first day of a conference: ``I'm tired. The airplane was noisy.'').\footnote{\citet{komen-13} also proposed a hierarchy with similar leaf nodes, but different internal structure.}  
 
 In addition to the three main communicative functions, we have annotations for 
-generic, pleonastic, quantified, predicative, and non-referential NPs. For details on the scheme, see \citet{bhatia14}  
+generic, pleonastic, quantified, predicative, and nonreferential NPs. 
+Finally, because some natural groupings of labels would violate the hierarchy, 
+each label type is associated with several attributes that can be $+$, $-$, or $0$.
+For instance, with the Anaphoric attribute, a value of $+$ applies to labels that can never mark NPs new to the discourse,
+$-$ applies for labels that can {\em only} apply if the NP is new in the discourse,  
+and $0$ for labels such as \llbl{Pleonastic} (where anaphoricity is not applicable because there is no discourse referent).
+For details on the scheme, see \citet{bhatia14}.
 
 \Cref{fig:excerpt} is an excerpt from the ``Little Red Riding Hood'' annotated with the CFD scheme.
 
@@ -635,7 +641,7 @@ are intended to capture the aspects of English morphosyntax that may be relevant
 to the communicative functions of definiteness.
 
 After preprocessing the text with a dependency parser and coreference resolver, 
-we extract \sout{\bf the} several kinds of percepts for each NP.
+we extract several kinds of percepts for each NP.
 
 \subsubsection{Basic}
 
@@ -680,14 +686,11 @@ for each label (including internal labels), every one of the 8 attributes
 is assigned a value of $+$, $-$, or $0$ (refer to \cref{fig:hierarchy}).
 In light of sparse data, we design features\costversion{ and cost function} to exploit these similarities 
 via the attribute vector function
-\begin{equation*}
+\begin{equation}
 \boldsymbol{\omega}(y) = [y, A(y), B(y), G(y), O(y), P(y), R(y), S(y), U(y)]^{\top}
-\end{equation*}
+\end{equation}
 where $A: \costversion{\mathcal{L} \cup \mathcal{I}\nss{}}\mathcal{Y} \rightarrow \{+, -, 0\}$ returns the value for Anaphoric, 
 $B(y)$ for Bridging, etc.
-For instance, with the Anaphoric attribute, a value of $+$ applies to labels that can never mark NPs new to the discourse,
-$-$ applies for labels that can {\em only} apply if the NP is new the discourse,  
-and $0$ for labels such as \llbl{Pleonastic} (where anaphoricity is not applicable because there is no discourse referent).
 The identity of the label is also included in the vector so that 
 different labels are always recognized as different by the attribute function.
 The categorical components of this vector are then binarized to form $\tilde{\boldsymbol{\omega}}(y)$; 
