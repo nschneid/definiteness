@@ -274,13 +274,11 @@
 \hyphenation{per-cept}
 \hyphenation{per-cepts}
 \hyphenation{post-edit-ing}
-\title{\draftnotice{Title, author list not final. Page limit: 8 + 2 bib (will be granted more space in CR)}Automatic Classification of Communicative Functions of Definiteness}
+\title{Automatic Classification of Communicative Functions of Definiteness}
 
-\finalversion{\author{Archna Bhatia \ \ \  Chu-Cheng Lin \ \ \  Lori Levin \ \ \ \  Mandy Simons \\
-\bf Fatima Talib Al-Raisi \ \ \  Laleh Roostapour \ \ \  Abhimanu Kumar  \\
-\bf  Nathan Schneider \ \ \  Yulia Tsvetkov \ \ \  Jordan Bender \ \ \  Chris Dyer\\
-Carnegie Mellon University\\
-Pittsburgh, PA 15213}}
+\author{Archna Bhatia$^\ast$ \ \ \ Chu-Cheng Lin$^\ast$ \ \ \ Nathan Schneider$^\ast$ \ \ \ Yulia Tsvetkov$^\ast$ & \bf Fatima Talib Al-Raisi$^\ast$ \ \ \  Laleh Roostapour$^\ast$ \ \ \ Jordan Bender$^\dagger$  \ \ \ Abhimanu Kumar$^\ast$  & \bf Lori Levin$^\ast$ \ \ \ Mandy Simons$^\ast$ \ \ \  Chris Dyer$^\ast$\\
+$^\ast$Carnegie Mellon University\\
+Pittsburgh, PA 15213}
 
 \date{}
 
@@ -310,7 +308,7 @@ and other mono- and cross-lingual NLP tasks.
 
 \section{Introduction}
 
-Languages display a vast range of variation with respect to the form and meaning of definiteness. 
+Definiteness is a morphosyntactic category associated with some aspects of meaning \citep{lyons99}. Languages display a vast range of variation with respect to the form and meaning of definiteness. 
 For example, while languages like English make use of definite and indefinite articles 
 to distinguish between the discourse status of various entities ({\it \textbf{the} car} vs.~{\it \textbf{a} car} vs.~{\it cars}), 
 many other languages---including Czech, Indonesian, and Russian---do not have articles
@@ -354,55 +352,55 @@ exhibited in \cref{ex:care,ex:artichokes,ex:soldier}: e.g., that \cref{ex:artich
   \begin{itemize}
   \item      \ilbl{Unique} $[+U]$ \hfill {\bf\tiny 287}
     \begin{itemize}
-    \item        \ilbl{uniq\_Hearer\_old} $[-G,+O,+S]$ \hfill {\bf\tiny 251}
+    \item        \ilbl{Unique\_Hearer\_Old} $[+F,-G,+S]$ \hfill {\bf\tiny 251}
       \begin{itemize}
-      \item          \llbl{uniq\_Physical\_copresence} $[+R]$ \hfill {\tiny 13}
-      \item          \llbl{uniq\_Larger\_situation} $[+R]$ \hfill {\tiny 237}
-      \item          \llbl{uniq\_predicative\_identity} $[+P]$ \hfill {\tiny 1}
+      \item          \llbl{Unique\_Physical\_Copresence} $[+R]$ \hfill {\tiny 13}
+      \item          \llbl{Unique\_Larger\_Situation} $[+R]$ \hfill {\tiny 237}
+      \item          \llbl{Unique\_Predicative\_Identity} $[+P]$ \hfill {\tiny 1}
       \end{itemize}
-    \item        \llbl{uniq\_Hearer\_new} $[-O]$ \hfill {\tiny 36}
+    \item        \llbl{Unique\_Hearer\_New} $[-F]$ \hfill {\tiny 36}
     \end{itemize}
    \item     \ilbl{Nonunique} $[-U]$ \hfill {\bf\tiny 581}
      \begin{itemize}
-     \item       \ilbl{nonuniq\_Hearer\_old} $[+O]$ \hfill {\bf\tiny 169}
+     \item       \ilbl{Nonunique\_Hearer\_Old} $[+F]$ \hfill {\bf\tiny 169}
        \begin{itemize}
-       \item         \llbl{nonuniq\_Physical\_copresence} $[-G,+R,+S]$ \hfill {\tiny 39}
-       \item         \llbl{nonuniq\_Larger\_situation} $[-G,+R,+S]$ \hfill {\tiny 117}
-       \item         \llbl{nonuniq\_predicative\_identity} $[+P]$ \hfill {\tiny 13}
+       \item         \llbl{Nonunique\_Physical\_Copresence} $[-G,+R,+S]$ \hfill {\tiny 39}
+       \item         \llbl{Nonunique\_Larger\_Situation} $[-G,+R,+S]$ \hfill {\tiny 117}
+       \item         \llbl{Nonunique\_Predicative\_Identity} $[+P]$ \hfill {\tiny 13}
        \end{itemize}
-     \item       \llbl{nonuniq\_Hearer\_new\_spec} $[-G,-O,+R,+S]$ \hfill {\tiny 231}
-     \item       \llbl{nonuniq\_nonspec} $[-G,-S]$ \hfill {\tiny 181}
+     \item       \llbl{Nonunique\_Hearer\_New\_Spec} $[-F,-G,+R,+S]$ \hfill {\tiny 231}
+     \item       \llbl{Nonunique\_Nonspec} $[-G,-S]$ \hfill {\tiny 181}
      \end{itemize}
    \item \ilbl{Generic} $[+G,-R]$ \hfill {\bf\tiny 131}
      \begin{itemize}
-	   \item      \llbl{Generic\_kindLevel} \hfill {\tiny 0}
-	   \item      \llbl{Generic\_individualLevel} \hfill {\tiny 131}
+	   \item      \llbl{Generic\_Kind\_Level} \hfill {\tiny 0}
+	   \item      \llbl{Generic\_Individual\_Level} \hfill {\tiny 131}
      \end{itemize}
   \end{itemize}
 \end{itemize} &
 \begin{itemize}
 \item \ilbl{Anaphora} $[+A]$ \hfill {\bf\tiny 1574}
   \begin{itemize}
-  \item      \ilbl{Basic} $[+O,-B]$ \hfill {\bf\tiny 795}
+  \item      \ilbl{Basic\_Anaphora} $[-B,+F]$ \hfill {\bf\tiny 795}
     \begin{itemize}
-    \item        \llbl{Same\_head} \hfill {\tiny 556}
-    \item        \llbl{Different\_head} \hfill {\tiny 329}
+    \item        \llbl{Same\_Head} \hfill {\tiny 556}
+    \item        \llbl{Different\_Head} \hfill {\tiny 329}
     \end{itemize}
-  \item  \ilbl{Extended} $[+B]$ \hfill {\bf\tiny 779}
+  \item  \ilbl{Extended\_Anaphora} $[+B]$ \hfill {\bf\tiny 779}
     \begin{itemize}
-    \item        \llbl{Bridging\_nominal} $[-G,+R,+S]$ \hfill {\tiny 43}
-    \item        \llbl{Bridging\_event} $[+R,+S]$ \hfill {\tiny 10}
-    \item        \llbl{Bridging\_restrictiveModifier} $[-G,+S]$ \hfill {\tiny 614}
-    \item        \llbl{Bridging\_subtype\_instance} $[-G]$ \hfill {\tiny 0}
-    \item        \llbl{Bridging\_OtherContext} $[+O]$ \hfill {\tiny 112}
+    \item        \llbl{Bridging\_Nominal} $[-G,+R,+S]$ \hfill {\tiny 43}
+    \item        \llbl{Bridging\_Event} $[+R,+S]$ \hfill {\tiny 10}
+    \item        \llbl{Bridging\_Restrictive\_Modifier} $[-G,+S]$ \hfill {\tiny 614}
+    \item        \llbl{Bridging\_Subtype\_Instance} $[-G]$ \hfill {\tiny 0}
+    \item        \llbl{Bridging\_Other\_Context} $[+F]$ \hfill {\tiny 112}
     \end{itemize}
   \end{itemize}
 \item \ilbl{Miscellaneous} $[-R]$ \hfill {\bf\tiny 732}
   \begin{itemize}
 	\item \llbl{Pleonastic} $[-B,-P]$ \hfill {\tiny 53}
 	\item \llbl{Quantified} \hfill {\tiny 248}
-	\item \llbl{Predicative\_equative\_role} $[-B,+P]$ \hfill {\tiny 58}
-	\item \llbl{Part\_of\_noncompositional\_mwe} \hfill {\tiny 100}
+	\item \llbl{Predicative\_Equative\_Role} $[-B,+P]$ \hfill {\tiny 58}
+	\item \llbl{Part\_of\_Noncompositional\_mwe} \hfill {\tiny 100}
 	\item \llbl{Measure\_Nonreferential} \hfill {\tiny 125}
 	\item \llbl{Other\_Nonreferential} \hfill {\tiny 148}
   \end{itemize}
@@ -418,9 +416,9 @@ exhibited in \cref{ex:care,ex:artichokes,ex:soldier}: e.g., that \cref{ex:artich
 \uline{B}ridging  &  779 & 1905 & 621 & Hearer-\uline{O}ld & 1327 &  267 & 1711 & \uline{R}eferential & 690 & 863 & 1752 & \uline{U}nique   &  287 & 581 & 2437 \\
 \end{tabular}\finalversion{\nss{TODO: column headings aren't quite centered}}
 \caption{CFD (Communicative Functions of Definiteness) annotation scheme, with frequencies in the corpus. Internal (non-leaf) labels are in bold;\costversion{\nss{}} these are not annotated or predicted.\finalversion{\nss{TODO: normalize capitalization}}
-$+$/$-$ values are shown for ternary attributes \uline{A}naphoric, \uline{B}ridging, \uline{G}eneric, Hearer-\uline{O}ld, \uline{P}redicative, \uline{R}eferential, \uline{S}pecific, and \uline{U}nique; 
+$+$/$-$ values are shown for ternary attributes \uline{A}naphoric, \uline{B}ridging, \uline{F}amiliar, \uline{G}eneric, \uline{P}redicative, \uline{R}eferential, \uline{S}pecific, and \uline{U}nique; 
 these are inherited from supercategories, but otherwise default to $0$.
-Thus, for example, the full attribute specification for \llbl{uniq\_Physical\_copresence} is $[-A,-B,-G,+O,0P,+R,+S,+U]$.
+Thus, for example, the full attribute specification for \llbl{Unique\_Physical\_Copresence} is $[-A,-B,+F,-G,0P,+R,+S,+U]$.
 Counts for these attributes are shown in the table at bottom.}
 \label{fig:hierarchy}
 \end{figure*}
@@ -519,7 +517,7 @@ would never wear \glosst{anything else}{\llbl{Quantified}}; so \glosst{she}{\llb
 \section{Data}\label{sec:data}
 
 We use the English definiteness corpus of \citet{bhatia14}, 
-which consists of texts from multiple genres annotated with the scheme described in \cref{sec:scheme}. 
+which consists of texts from multiple genres annotated with the scheme described in \cref{sec:scheme}.\footnote{The data can be obtained from \url{http://www.cs.cmu.edu/~ytsvetko/definiteness_corpus}.} 
 The 17~documents consist of prepared speeches (TED talks and a presidential address), 
 published news articles, and fictional narratives. 
 The TED data predominates (75\% of the corpus)\footnote{The TED talks are from a large parallel corpus obtained from \url{http://www.ted.com/talks/}.}; 
@@ -633,16 +631,16 @@ those probabilities are averaged to compute the probability distribution across 
 An important property of the random forests, in addition to being an effective tool in prediction, is their immunity to overfitting: 
 as the number of trees increases, they produce a limiting value of the generalization error.\footnote{See Theorem 1.2 in \cite{Breiman:2001} for details.} 
 Thus, no hyperparameter tuning is required. %; this alleviates the scarcity problem in setups with limited amount of data.
-Random forests are known to be robust to sparse data and to label imbalance, both of which are challenges with the definiteness dataset.
+Random forests are known to be robust to sparse data and to label imbalance \citep{Chen:2004using}, both of which are challenges with the definiteness dataset.
 
 \subsection{Percepts}\label{sec:feats}
 
 The characteristics of the input that are incorporated in the model, which we call \emph{percepts} 
 to distinguish them from model features linking inputs to outputs,\footnote{See above.\finalversion{\fta{see section or subsection number?}}} 
 are intended to capture the aspects of English morphosyntax that may be relevant 
-to the communicative functions of definiteness.
+to the communicative functions of definiteness. \ab{should we explain the difference between percepts and features - may be when the 1st time we mention them in section 4 intro above?- Nathan??? there we say features are lexical, morphological, syntactic characteristics of the input x, here we say these are percepts, and features link input with output.}
 
-After preprocessing the text with a dependency parser and coreference resolver, 
+After preprocessing the text with a dependency parser and coreference resolver, which is described in \cref{sec:exptsetup}, 
 we extract several kinds of percepts for each NP.
 
 \subsubsection{Basic}
@@ -737,10 +735,11 @@ for the held-out evaluation (dev or test) set $\mathcal{E}$:
 %   the lower the score. 
 %   It is computed as $\rho = 2^{-\left(\sum_{\langle x, y \rangle \in \mathcal{E}} \log_2 p_{\hat{\boldsymbol{\theta}}}(y \mid x)\right) / |\mathcal{E}|}$. Intuitively a perplexity of $\rho$ means the amount of surprisal in a $\rho$-way uniform random draw.
 \end{itemize}
+\ab{TODO: We need to enter these numbers.}
 
 \section{Experiments}\label{sec:exp}
 
-\subsection{Experimental Setup}
+\subsection{Experimental Setup}\label{sec:exptsetup}
 
 The annotated corpus of \citet{bhatia14} (\cref{sec:data}) contains 17~documents 
 in 3~genres: 13~prepared speeches (mostly TED talks), 2~newspaper articles, 
@@ -760,7 +759,7 @@ The Python {\tt scikit-learn} toolkit \citep{scikit-learn} was used for the rand
 however, a cross-validation experiment on the training data found very little variance in accuracy.}
 Automatic dependency parses and coreference information were obtained with 
 the parser and coreference resolution system in Stanford CoreNLP v.~3.3.0 \citep{socher-13,recasens-13}
-for use in features (\cref{sec:feats}).
+for use in features (\cref{sec:feats}). From the parser output, the basic dependencies were used to extract the percepts used in this work. On two of the reviewers’ suggestions, to evaluate the performance of Stanford system on our data, we created a gold standard for the dependencies and the coreference for 106 sentences from our corpus (using texts from three different genres). We processed the texts using Stanford CoreNLP v.~3.3.0 and corrected the errors, we found that the Stanford parser had an accuracy of about 70\% on this subset of the corpus and coreference system had an accuracy of …\% {\ab{TODO: enter correct numbers after we are completely done with our Gold Standard- Archna,Chu-Cheng,Jordan}. While it is true that the errors made during preprocessing trickle down and affect the performance on the tasks at hand, e.g. classification in our case, at this stage it does not seem feasible to correct all the errors produced by the Stanford system, however this analysis indicates that there is a scope for further improvement in the classifier performance if better parsers and coreference resolvers become available. {\ab{TODO: say a little bit about what we think to what extent it could affect the overall result- Lori/Chris/Nathan/… ?}
 
 \subsection{Results}
 
@@ -814,7 +813,7 @@ we can mine the highly-weighted features for new hypotheses:
 here the model thinks that objects of ``from'' are especially likely to be specific, 
 and that NPs with comparative adjectives (\texttt{JJR}) are especially likely to be nonspecific.
 Whether these are general trends, or just an artifact of the sentences that happened to be in the training data, 
-will require further investigation, ideally with additional datasets.
+will require further investigation, ideally with additional datasets and more rigorous hypothesis testing.
 
 \begin{figure}\small\centering
 \begin{tabular}{p{.4\textwidth}p{.4\textwidth}}
