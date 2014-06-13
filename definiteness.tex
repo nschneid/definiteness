@@ -390,7 +390,7 @@ exhibited in \cref{ex:care,ex:artichokes,ex:soldier}: e.g., that \cref{ex:artich
     \begin{itemize}
     \item        \llbl{Bridging\_Nominal} $[-G,+R,+S]$ \hfill {\tiny 43}
     \item        \llbl{Bridging\_Event} $[+R,+S]$ \hfill {\tiny 10}
-    \item        \llbl{Bridging\_Restrictive\_Modifier} $[-G,+S]$ \hfill {\tiny 614}
+    \item        \llbl{Bridging\_Restrictive\_Modifier} $[-G,+S]$ \hfill {\tiny 614}\ab{this is going in the next row, need to make everything small so it fits in the row.}
     \item        \llbl{Bridging\_Subtype\_Instance} $[-G]$ \hfill {\tiny 0}
     \item        \llbl{Bridging\_Other\_Context} $[+F]$ \hfill {\tiny 112}
     \end{itemize}
@@ -744,7 +744,7 @@ The Python {\tt scikit-learn} toolkit \citep{scikit-learn} was used for the rand
 however, a cross-validation experiment on the training data found very little variance in accuracy.}
 Automatic dependency parses and coreference information were obtained with 
 the parser and coreference resolution system in Stanford CoreNLP v.~3.3.0 \citep{socher-13,recasens-13}
-for use in features (\cref{sec:feats}). From the parser output, the basic dependencies were used to extract the percepts used in this work. On two of the reviewers’ suggestions, to evaluate the performance of Stanford system on our data, we created a gold standard for the dependencies and the coreference for 106 sentences from our corpus (using texts from three different genres). We processed the texts using Stanford CoreNLP v.~3.3.0 and corrected the errors, we found that the Stanford parser had an accuracy of about 70\% on this subset of the corpus and coreference system had an accuracy of …\% {\ab{TODO: enter correct numbers after we are completely done with our Gold Standard- Archna,Chu-Cheng,Jordan}. While it is true that the errors made during preprocessing trickle down and affect the performance on the tasks at hand, e.g. classification in our case, at this stage it does not seem feasible to correct all the errors produced by the Stanford system, however this analysis indicates that there is a scope for further improvement in the classifier performance if better parsers and coreference resolvers become available. {\ab{TODO: say a little bit about what we think to what extent it could affect the overall result- Lori/Chris/Nathan/… ?}
+for use in features (\cref{sec:feats}). From the parser output, the basic dependencies were used to extract the percepts used in this work. On two of the reviewers’ suggestions, to evaluate the performance of Stanford system on our data, we manually inspected the dependencies and the coreference for a subset of sentences from our corpus (using texts from TED talks and fictional narratives genres) processed using Stanford CoreNLP v.~3.3.0 and recorded the errors. We found that the Stanford parser had an accuracy of about 70\% on this subset of the corpus and coreference system had an accuracy of 75\% {\ab{TODO: enter correct numbers after we are completely done with our Gold Standard- Archna,Chu-Cheng,Jordan}. %While it is true that the errors made during preprocessing trickle down and affect the performance on the tasks at hand, e.g. classification in our case, at this stage it does not seem feasible to correct all the errors produced by the Stanford system, however this analysis indicates that there is a scope for further improvement in the classifier performance if better parsers and coreference resolvers become available. {\ab{TODO: say a little bit about what we think to what extent it could affect the overall result- Lori/Chris/Nathan/… ?}
 
 \subsection{Results}
 
@@ -769,7 +769,7 @@ Random forest classifier & 20,363 & \multicolumn{1}{c}{---} & \bf 49.7 & \bf 60.
 %The first three columns of numbers report the number of parameters (feature weights), the number of nonzero parameters, 
 %and the tuned regularization hyperparameter, respectively.
 The first two columns give the number of parameters and the tuned regularization hyperparameter, respectively; 
-the third and fourth columns give accuracies as percentages; the best in each column is bolded.}
+the third and fourth columns give accuracies as percentages; the best in each column is bolded. \ab{Chu-Cheng will add precision and recall for the exact match. We can’t do that for soft-match.    Also Chu-Cheng will add another table where we have accuracies corresponding to each leaf label.}}
 \label{tbl:results}
 \end{table*}
 
@@ -829,7 +829,7 @@ will require further investigation, ideally with additional datasets and more ri
 	VB_pos_outerhead_left
 \end{verbatim}
 \end{tabular}
-\caption{Percepts receiving highest positive weights in association with attribute values.}
+\caption{Percepts receiving highest positive weights in association with attribute values. \ab{maybe we should add pointers to the not duplicated features, although am not sure if that is necessary.}}
 \label{fig:weights}
 \end{figure}
 
