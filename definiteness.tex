@@ -439,11 +439,12 @@ The communicative function labels also represent the discourse status of entitie
 making them relevant for entity tracking, knowledge base construction, and information extraction. 
 
 Our log-linear model is a form-meaning mapping, consisting of the syntactic, lexical, and morphological features 
-and weights that are predictive of communicative functions.   
-This in itself is linguistically significant in that it shows the grammatical mechanisms 
-beyond the articles {\em the} and {\em a} that are used for expressing definiteness in English.   
+and weights that are predictive of communicative functions. We are using this model to generate plausible hypotheses regarding the form-meaning relationship which can then be tested rigorously through controlled experiments. 
+This hypothesis generation is linguistically significant as it indicates new grammatical mechanisms 
+beyond the articles {\em the} and {\em a} that are used for expressing definiteness in English. 
 %The form-meaning mapping for these languages can be used for machine translation applications. 
 %\citet{tsvetkov13,stymne09} mention how translating from an article-language to an article-less language is problematic. 
+
 
 To build our models, we leverage a cross-lingual definiteness annotation scheme (\cref{sec:scheme}) 
 and annotated English corpus (\cref{sec:data}) from prior work \citep{bhatia14}.
@@ -472,11 +473,11 @@ but may also have many non-prototypical communicative functions. The scheme we a
 
 The CFD is hierarchically organized. This hierarchical organization serves to reduce the number of decisions that an annotator needs to make
 for speed and consistency. At the highest level, the distinction is made between {\bf Anaphora}, {\bf Nonanaphora} and {\bf Miscellaneous} functions of an NP (the annotatable unit). While the communicative functions {\bf Anaphora} and {\bf Nonanaphora} determine whether an entity is old or new in discourse respectively, the {\bf Miscellaneous} function is mainly assigned to various kinds of non referential NPs. Within the {\bf Anaphora} category, further distinctions are made based on communicative functions, such as {\bf Basic\_Anaphora} vs.~{\bf Extended\_Anaphora}. {\bf Basic\_Anaphora} refers to entities that have been mentioned before. {\bf Extended\_Anaphora} refers to entities that have not been mentioned themselves but are evoked by a previously mentioned entity. For example, after mentioning a wedding, {\em the bride}, {\em the groom}, and {\em the cake} 
-are considered to be {\bf Extended\_Anaphora}.  Within the {\bf Nonanaphora} category, the distinction is made between a {\bf Unique} vs.~{\bf Nonunique} vs.~{\bf Generic} communicative function. The function {\bf Unique} refers to entities that become unique in a context due to various reasons. For example, {\em Obama} can safely be considered unique in a political discourse in US contemporarily. The function {\bf Nonunique} refers to entities that can possible have multiple referents which may or may not become identifiable in a speech situation. For example, {\em a little riding hood of red velvet} in \cref{fig:excerpt} could be annotated as a {\bf Nonunique} entity. The function {\bf Generic} refers to classes … . Another important distinction CFD makes is between the communicative functions {\bf Hearer\_Old} and {\bf Hearer\_New} which refer to entities which are familiar to the hearer (e.g. if they are physically present in the speech situation) or non familiar respectively. However this distinction cuts across the two subparts of the hierarchy, {\bf Anaphora} and {\bf Nonanaphora}. While we only express {\bf Hearer\_Old} through the attribute value in the {\bf Anaphora} category, in the {\bf Nonanaphora}, there are specific labels used corresponding to this distinction, e.g. {\bf Unique\_Hearer\_Old} and {\bf Unique\_Hearer\_New}. 
+are considered to be {\bf Extended\_Anaphora}.  Within the {\bf Nonanaphora} category, the distinction is made between a {\bf Unique} vs.~{\bf Nonunique} vs.~{\bf Generic} communicative function. The function {\bf Unique} refers to entities that become unique in a context due to various reasons. For example, {\em Obama} can safely be considered unique in a political discourse in US contemporarily. The function {\bf Nonunique} refers to entities that can possible have multiple referents which may or may not become identifiable in a speech situation. For example, {\em a little riding hood of red velvet} in \cref{fig:excerpt} could be annotated as a {\bf Nonunique} entity. The function {\bf Generic} refers to classes or types of entities rather than specific entities. For example, {\em Dinosaurs} in {\em Dinosaurs are extinct.} is a {\bf Generic}. Another important distinction CFD makes is between the communicative functions {\bf Hearer\_Old} and {\bf Hearer\_New} which refer to entities which are familiar to the hearer (e.g. if they are physically present in the speech situation) or non familiar respectively. However this distinction cuts across the two subparts of the hierarchy, {\bf Anaphora} and {\bf Nonanaphora}. While we only express {\bf Hearer\_Old} through the attribute value in the {\bf Anaphora} category, in the {\bf Nonanaphora}, there are specific labels used corresponding to this distinction, e.g. {\bf Unique\_Hearer\_Old} and {\bf Unique\_Hearer\_New}. 
 
 There are multiple ways to organize the hierarchy based on which of these distinctions are made first and which ones are made subsequently. For example, {\citet{komen-13} has also proposed a hierarchy with similar leaf nodes, but different internal structure. Since it is possible that some natural groupings of labels are not reflected in the hierarchy used, we have also associated several attributes with each label type, viz. \uline{A}naphoric, \uline{B}ridging, \uline{F}amiliar, \uline{G}eneric, \uline{P}redicative, \uline{R}eferential, \uline{S}pecific, and \uline{U}nique. These attributes can have values of $+$, $-$, or $0$, see \cref{fig:hierarchy}. For instance, with the \uline{A}naphoric attribute, a value of $+$ applies to labels that can never mark NPs new to the discourse,
 $-$ applies to labels that can {\em only} apply if the NP is new in the discourse,  
-and $0$ applies to labels such as {\bf Pleonastic} (where anaphoricity is not applicable because there is no discourse referent). For details on the scheme, see \citet{bhatia14}.
+and $0$ applies to labels such as {\bf Pleonastic} (where anaphoricity is not applicable because there is no discourse referent). For further details on the scheme, see \citet{bhatia14}.
 
 
 
@@ -719,7 +720,7 @@ for the held-out evaluation (dev or test) set $\mathcal{E}$:
 %   the lower the score. 
 %   It is computed as $\rho = 2^{-\left(\sum_{\langle x, y \rangle \in \mathcal{E}} \log_2 p_{\hat{\boldsymbol{\theta}}}(y \mid x)\right) / |\mathcal{E}|}$. Intuitively a perplexity of $\rho$ means the amount of surprisal in a $\rho$-way uniform random draw.
 \end{itemize}
-\ab{TODO: We need to enter these numbers.}
+\ab{TODO: We need to enter these numbers. Chu-Cheng?}
 
 \section{Experiments}\label{sec:exp}
 
