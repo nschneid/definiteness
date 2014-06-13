@@ -308,12 +308,12 @@ and other mono- and cross-lingual NLP tasks.
 
 \section{Introduction}
 
-Definiteness is a morphosyntactic category associated with some aspects of meaning \citep{lyons99}. Languages display a vast range of variation with respect to the form and meaning of definiteness. 
+Definiteness is a morphosyntactic category associated with some aspects of meaning \citep{lyons99}. While some morphosyntactic forms of definiteness are employed by all the languages, namely, demonstratives, personal pronouns and possessives, languages display a vast range of variation with respect to the form and meaning of definiteness. 
 For example, while languages like English make use of definite and indefinite articles 
 to distinguish between the discourse status of various entities ({\it \textbf{the} car} vs.~{\it \textbf{a} car} vs.~{\it cars}), 
 many other languages---including Czech, Indonesian, and Russian---do not have articles
 % Archna: Hindi sort of has an indefinite article 
-(although they do have demonstrative determiners).\footnote{Definite NPs, such as demonstratives, personal pronouns, and possessives are found in all languages.}  
+(although they do have demonstrative determiners).  
 % Some languages such as Hausa~\citep{lyons99} have different definite articles for noun phrases 
 % that have been previously mentioned in contrast to those that are definite by virtue of the situation 
 % (e.g., ``the podium'' at a conference).
@@ -413,7 +413,7 @@ exhibited in \cref{ex:care,ex:artichokes,ex:soldier}: e.g., that \cref{ex:artich
   \multicolumn{1}{@{~}c@{~}}{$+$} & \multicolumn{1}{@{~}c@{~~}}{$-$} & \multicolumn{1}{@{~~}c}{$0$} \\
 \hline
 \uline{A}naphoric & 1574 &  999 & 732 &    \uline{G}eneric &  131 & 1476 & 1698 & \uline{P}redicative &  72 &  53 & 3180 & \uline{S}pecific & 1305 & 181 & 1819 \\
-\uline{B}ridging  &  779 & 1905 & 621 & Hearer-\uline{O}ld & 1327 &  267 & 1711 & \uline{R}eferential & 690 & 863 & 1752 & \uline{U}nique   &  287 & 581 & 2437 \\
+\uline{B}ridging  &  779 & 1905 & 621 & \uline{F}amiliar & 1327 &  267 & 1711 & \uline{R}eferential & 690 & 863 & 1752 & \uline{U}nique   &  287 & 581 & 2437 \\
 \end{tabular}\finalversion{\nss{TODO: column headings aren't quite centered}}
 \caption{CFD (Communicative Functions of Definiteness) annotation scheme, with frequencies in the corpus. Internal (non-leaf) labels are in bold;\costversion{\nss{}} these are not annotated or predicted.\finalversion{\nss{TODO: normalize capitalization}}
 $+$/$-$ values are shown for ternary attributes \uline{A}naphoric, \uline{B}ridging, \uline{F}amiliar, \uline{G}eneric, \uline{P}redicative, \uline{R}eferential, \uline{S}pecific, and \uline{U}nique; 
@@ -449,7 +449,7 @@ To build our models, we leverage a cross-lingual definiteness annotation scheme 
 and annotated English corpus (\cref{sec:data}) from prior work \citep{bhatia14}.
 Our classifiers, \cref{sec:modeling}, are supervised models
 with features that combine lexical and morphosyntactic information 
-with prespecified groupings of the communicative function labels;
+with prespecified attributes or groupings of the communicative function labels (such as Anaphoric, Bridging, Specific in \cref{fig:hierarchy}) to predict leaf node labels;
 the evaluation measures (\cref{sec:eval}) include one that exploits these label groupings 
 to award partial credit according to relatedness.
 \Cref{sec:exp} presents experiments comparing several models and discussing their strengths and weaknesses;
@@ -462,39 +462,35 @@ computational work and applications related to definiteness are addressed in \cr
 
 The literature on definiteness describes functions such as 
 uniqueness, familiarity, identifiability, anaphoricity, specificity, and 
-referentiality \citep[\textit{inter alia}]{birner94,condoravdi92,evans77,evans80,gundel88,gundel93,heim90,kadmon87,kadmon90,lyons99,prince92,roberts03,russell05} as being related to definiteness.\footnote{The reductionist approaches to definiteness try to define it in terms of one or two of above mentioned communicative functions.   
+referentiality \citep[\textit{inter alia}]{birner94,condoravdi92,evans77,evans80,gundel88,gundel93,heim90,kadmon87,kadmon90,lyons99,prince92,roberts03,russell05} as being related to definiteness. The reductionist approaches to definiteness try to define it in terms of one or two of above mentioned communicative functions.   
 For example, \citet{roberts03} proposes that the combination of uniqueness and a presupposition of familiarity 
 underlie all definite descriptions.  However, possessive definite descriptions ({\it John's daughter}) 
 and the weak definites ({\it the son of Queen Juliana of the Netherlands}) are neither unique nor necessarily 
 familiar to the listener before they are spoken. In contrast to the reductionist approaches are approaches to grammaticalization~\citep{hopper-03} in which grammar develops over time in such a way that 
 each grammatical construction has some prototypical communicative functions, 
-but may also have many non-prototypical communicative functions. The scheme we are adopting assumes that there may be multiple functions to definiteness.} For this work, we have adopted a scheme that is based on a combination of these functions, the annotation scheme for Communicative Functions of Definiteness (CFD), as described in \citet{bhatia14}.
-It is summarized in \cref{fig:hierarchy}.
+but may also have many non-prototypical communicative functions. The scheme we are adopting for this work, the annotation scheme for Communicative Functions of Definiteness (CFD), as described in \citet{bhatia14}, assumes that there may be multiple functions to definiteness. It is based on a combination of these functions and is summarized in \cref{fig:hierarchy}. It was developed by annotating texts in two languages (English and Hindi) for four different genres, namely TED talks, the presidential inaugural speech, news articles and fictional narratives, keeping in mind the communicative functions that have been associated with definiteness in the linguistic literature. 
 
-It was developed by annotating texts in two languages (English and Hindi) for various genres keeping in mind the communicative functions that have been associated with definiteness previously. The hierarchical organization of CFD serves to reduce the number of decisions that an annotator needs to make
-for speed and consistency.
+The CFD is hierarchically organized. This hierarchical organization serves to reduce the number of decisions that an annotator needs to make
+for speed and consistency. At the highest level, the distinction is made between {\bf Anaphora}, {\bf Nonanaphora} and {\bf Miscellaneous} functions of an NP (the annotatable unit). While the communicative functions {\bf Anaphora} and {\bf Nonanaphora} determine whether an entity is old or new in discourse respectively, the {\bf Miscellaneous} function is mainly assigned to various kinds of non referential NPs. Within the {\bf Anaphora} category, further distinctions are made based on communicative functions, such as {\bf Basic\_Anaphora} vs.~{\bf Extended\_Anaphora}. {\bf Basic\_Anaphora} refers to entities that have been mentioned before. {\bf Extended\_Anaphora} refers to entities that have not been mentioned themselves but are evoked by a previously mentioned entity. For example, after mentioning a wedding, {\em the bride}, {\em the groom}, and {\em the cake} 
+are considered to be {\bf Extended\_Anaphora}.  Within the {\bf Nonanaphora} category, the distinction is made between a {\bf Unique} vs.~{\bf Nonunique} vs.~{\bf Generic} communicative function. The function {\bf Unique} refers to entities that become unique in a context due to various reasons. For example, {\em Obama} can safely be considered unique in a political discourse in US contemporarily. The function {\bf Nonunique} refers to entities that can possible have multiple referents which may or may not become identifiable in a speech situation. For example, {\em a little riding hood of red velvet} in \cref{fig:excerpt} could be annotated as a {\bf Nonunique} entity. The function {\bf Generic} refers to classes … . Another important distinction CFD makes is between the communicative functions {\bf Hearer\_Old} and {\bf Hearer\_New} which refer to entities which are familiar to the hearer (e.g. if they are physically present in the speech situation) or non familiar respectively. However this distinction cuts across the two subparts of the hierarchy, {\bf Anaphora} and {\bf Nonanaphora}. While we only express {\bf Hearer\_Old} through the attribute value in the {\bf Anaphora} category, in the {\bf Nonanaphora}, there are specific labels used corresponding to this distinction, e.g. {\bf Unique\_Hearer\_Old} and {\bf Unique\_Hearer\_New}. 
 
-It assigns a communicative function label to every NP except for first-person pronouns, second-person pronouns and relative pronouns.
-The three main communicative functions in CFD are {\bf Anaphora} vs.~{\bf Nonanaphora} 
-(whether the entity is old in the discourse or not), {\bf Hearer-old} vs.~{\bf Hearer-new}, 
-and {\bf Unique} vs.~{\bf Nonunique} (annotated for {\bf Nonanaphoric} only in the current scheme).  
-However there are a few twists.   
-Entities that have not been mentioned are considered {\bf Anaphoric} (discourse-old) 
-if they are evoked by a previously mentioned entity.   
-For example, after mentioning a wedding, {\em the bride}, {\em the groom}, and {\em the cake} 
-are considered to be {\bf Anaphoric}~\citep{clark77,poesio98}.  
-Entities that are {\bf Non-Anaphoric} can be {\bf Hearer-old} if they are physically present 
-in the speech situation ({\bf Physical-copresence}) or are not Physically-copresent but are identifiable by members of a community due to it being a part of the common knowledge retained by the community ({\bf Larger-situation},
-e.g., spoken on the first day of a conference: ``I'm tired. The airplane was noisy.'').\footnote{\citet{komen-13} also proposed a hierarchy with similar leaf nodes, but different internal structure.}  
-
-In addition to the three main communicative functions, we have annotations for 
-generic, pleonastic, quantified, predicative, and nonreferential NPs. 
-Finally, because some natural groupings of labels would violate the hierarchy, 
-each label type is associated with several attributes that can be $+$, $-$, or $0$.
-For instance, with the Anaphoric attribute, a value of $+$ applies to labels that can never mark NPs new to the discourse,
+There are multiple ways to organize the hierarchy based on which of these distinctions are made first and which ones are made subsequently. For example, {\citet{komen-13} has also proposed a hierarchy with similar leaf nodes, but different internal structure. Since it is possible that some natural groupings of labels are not reflected in the hierarchy used, we have also associated several attributes with each label type, viz. \uline{A}naphoric, \uline{B}ridging, \uline{F}amiliar, \uline{G}eneric, \uline{P}redicative, \uline{R}eferential, \uline{S}pecific, and \uline{U}nique. These attributes can have values of $+$, $-$, or $0$, see \cref{fig:hierarchy}. For instance, with the \uline{A}naphoric attribute, a value of $+$ applies to labels that can never mark NPs new to the discourse,
 $-$ applies to labels that can {\em only} apply if the NP is new in the discourse,  
-and $0$ applies to labels such as \llbl{Pleonastic} (where anaphoricity is not applicable because there is no discourse referent).
-For details on the scheme, see \citet{bhatia14}.
+and $0$ applies to labels such as {\bf Pleonastic} (where anaphoricity is not applicable because there is no discourse referent). For details on the scheme, see \citet{bhatia14}.
+
+
+
+\section{Data}\label{sec:data}
+
+We use the English definiteness corpus of \citet{bhatia14}, 
+which consists of texts from multiple genres annotated with the scheme described in \cref{sec:scheme}.\footnote{The data can be obtained from \url{http://www.cs.cmu.edu/~ytsvetko/definiteness_corpus}.} 
+The 17~documents consist of prepared speeches (TED talks and a presidential address), 
+published news articles, and fictional narratives. 
+The TED data predominates (75\% of the corpus)\footnote{The TED talks are from a large parallel corpus obtained from \url{http://www.ted.com/talks/}.}; 
+the presidential speech represents about 16\%, fictional narratives 5\%, and news articles 4\%. 
+All told, the corpus contains 13,860~words (868~sentences), with 3,422~NPs (the annotatable units). 
+\citet{bhatia14} report high inter-annotator agreement, estimating Cohen's $\kappa = 0.89$ within the TED genre 
+as well as for all genres.  
 
 \Cref{fig:excerpt} is an excerpt from the ``Little Red Riding Hood'' annotated with the CFD scheme.
 
@@ -513,18 +509,6 @@ would never wear \glosst{anything else}{\llbl{Quantified}}; so \glosst{she}{\llb
 
 
 
-
-\section{Data}\label{sec:data}
-
-We use the English definiteness corpus of \citet{bhatia14}, 
-which consists of texts from multiple genres annotated with the scheme described in \cref{sec:scheme}.\footnote{The data can be obtained from \url{http://www.cs.cmu.edu/~ytsvetko/definiteness_corpus}.} 
-The 17~documents consist of prepared speeches (TED talks and a presidential address), 
-published news articles, and fictional narratives. 
-The TED data predominates (75\% of the corpus)\footnote{The TED talks are from a large parallel corpus obtained from \url{http://www.ted.com/talks/}.}; 
-the presidential speech represents about 16\%, fictional narratives 5\%, and news articles 4\%. 
-All told, the corpus contains 13,860~words (868~sentences), with 3,422~NPs (the annotatable units). 
-\citet{bhatia14} report high inter-annotator agreement, estimating Cohen's $\kappa = 0.89$ within the TED genre 
-as well as for all genres.  
 
 
 \section{Classification framework}\label{sec:modeling}
