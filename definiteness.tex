@@ -928,7 +928,6 @@ from the Web or other sources.
 
 \nss{feature/attribute ablations}}
 
-\paragraph{Percepts.}
 
 \begin{figure}\small\centering  
    \begin{tabular}{p{.4\textwidth}p{.3\textwidth}p{.2\textwidth}}
@@ -941,6 +940,8 @@ from the Web or other sources.
 \label{fig:featureweights}
 \end{figure}
 
+\paragraph{Interpretation of Percepts.}\footnote{what is a good title?}
+Some of the percepts listed in Figure \ref{fig:weights} may seem like duplicates. For example, \emph{head's left neighbor's POS: PRP\$}, \emph{first dependent's POS: PRP\$}, \emph{Governor’s right neighbor's POS: PRP\$} and \emph{Last dependent's POS: PRP\$} all fire for the NP \emph{our home in Nashville} in Figure \ref{fig:featureweights} because of the possesive pronoun attached to the head noun. This may be avoided by careful feature engineering; but since our goal in this paper is to generate hypotheses given morphosyntactic percepts that generalize over many languages, we leave higher-level representation of these features as future work. On the other hand, while we should not regard the difference in percept weights as difference of position on the definiteness scale, it may hint something that worths further investigation. For example, \emph{Num. of dependents, dependent's POS: $1$,PRP\$} has higher weight than other number of dependents when the dependent's POS is PRP\$. This could be due to frequency difference in the language, frequency difference in our corpus, or inherent difference in specificity. In our corpus, roughly $80\%$ of all nouns with prossessive pronouns are of the form PRP\$ NN*, which may support the frequency difference hypotheses. But we note again that the percept weights simply provide a lead.
 
 \section{Related Work}\label{sec:related}
 
