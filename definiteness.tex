@@ -853,7 +853,7 @@ Bridging\_Event & 9 & --- & 0 & --- \\
 Nonunique\_Physical\_Copresence & 36 & 0 & 0 & --- \\
 
    \end{tabular}
-   \caption{Leaf Precision, Recall and F1 as percentages. 
+   \caption{Leaf precision, recall and $F_1$ as percentages. 
 The number of instances in the first column are from the training set.}
    \label{tbl:leaf}
 \end{table*}
@@ -862,18 +862,32 @@ The number of instances in the first column are from the training set.}
 Measurements of overall classification performance appear in \cref{tbl:results}. While far from perfect, our classifiers achieve promising accuracy levels 
 given the small size of the training data and the number of labels in the annotation scheme.
 The random forest classifier is the most accurate in Exact Match, likely due to the robustness of that technique under
-conditions where the data are small and the frequencies of individual labels are imbalanced. In Soft Match measure, our attribute-aware log-linear models perform very well. The most successful of the log-linear models is the richest model, which combines the fine-grained 
+conditions where the data are small and the frequencies of individual labels are imbalanced. By the Soft Match measure, our attribute-aware log-linear models perform very well. The most successful of the log-linear models is the richest model, which combines the fine-grained 
 communicative function labels with higher-level attributes of those labels. But notably the attribute-only model,
-which breaks down the semantic labels into combination of attributes, does not fall much behind and performs almost as well as the random forest classifier in Soft Match.
+which decomposes the semantic labels into attributes without directly considering the full label, 
+performs almost as well as the random forest classifier in Soft Match.
 This is encouraging because it suggests that the model has correctly exploited known linguistic generalizations 
 to account for the grammaticalization of definiteness in English. 
 
-\Cref{tbl:leaf} reports the precision and recall of each leaf label predicted. Certain leaf labels are found to be easier for the classifier to predict, e.g. the communicative function label Pleonastic has a high F1 score. This is expected as the Ploenastic CFD for English is quite regular. The percept “POS is EX” fires very consistently for NPs which are gold annotated with Pleonastic CFD label in English. The classifier found predictions for certain CFD labels, such as Bridging\_Event, Bridging\_Nominal and Nonunique\_Nonspecific, to be hard due to the fact that there were not enough training instances for the classifier to learn the generalizations corresponding to these CFDs.  Bridging\_Other\_Context was hard to predict as this was a category which referred not to the entities previously mentioned but to the whole speech event. There seem to be no clear morphosyntactic percepts associated with this CFD, hence to train a classifier to predict this category label, we need more complex percepts involving complex semantic and discourse information. This is also applicable to the confusion between the Same\_Head and Different\_Head since both of these labels share all the semantic attributes used in this study.  
+\Cref{tbl:leaf} reports the precision and recall of each leaf label predicted. 
+Certain leaf labels are found to be easier for the classifier to predict: 
+e.g., the communicative function label Pleonastic has a high $F_1$ score. 
+This is expected as the Ploenastic CFD for English is quite regular and captured by the \texttt{EX} part-of-speech tag. 
+%The percept ``POS is EX'' fires consistently for NPs which are gold-annotated with Pleonastic CFD label in English. 
+The classifier predictions certain CFD labels, 
+such as Bridging\_Event, Bridging\_Nominal and Nonunique\_Nonspecific, to be more difficult due to 
+data sparseness: it appears that there were not enough training instances for the classifier to learn the generalizations corresponding to these CFDs.  
+Bridging\_Other\_Context was hard to predict as this was a category which referred not to the entities previously mentioned 
+but to the whole speech event. There seem to be no clear morphosyntactic cues associated with this CFD, 
+so to train a classifier to predict this category label, we would to model more complex semantic and discourse information. 
+This is also applicable to the confusion between the Same\_Head and Different\_Head, 
+since both of these labels share all the semantic attributes used in this study.  
 
-
+An advantage of log-linear models is that inspecting the learned feature weights can provide useful insights into the model's behavior.
 \Cref{fig:weights} lists 10~features that received the highest positive weights in the full model 
-for the \mbox{$+$ and $-$ values} of the Specific attribute. This is a feature of log-linear models that we can take advantage of since these models make feature weights available which can provide useful insights into the model's behavior. Indeed looking at these feature weights, our prior knowledge about definites and indefinites is confirmed. The definite article, 
-possessives (\texttt{PRP\$}), proper nouns (\texttt{NNP}), and the second person pronoun 
+for the \mbox{$+$ and $-$ values} of the Specific attribute. 
+These confirm some known properties of English definites and indefinites. 
+The definite article, possessives (\texttt{PRP\$}), proper nouns (\texttt{NNP}), and the second person pronoun 
 are all associated with specific NPs, while the indefinite article is associated with nonspecific NPs.
 The model also seems to have picked up on the less obvious but well-attested tendency 
 of objects to be nonspecific \citep{aissen-03}.
@@ -883,8 +897,19 @@ of objects to be nonspecific \citep{aissen-03}.
 
 In addition to confirming known grammaticalization patterns of definiteness, 
 we can mine the highly-weighted features for new hypotheses: 
-here the model thinks that objects of ``from'' are especially likely to be specific, see \cref{fig:weights,fig:featureweights}, 
-and that NPs with comparative adjectives (\texttt{JJR}) are especially likely to be nonspecific, as in \cref{fig:weights}. For another example in \cref{fig:weights}, \emph{Num. of dependents, dependent's POS: $1$,PRP\$} has higher weight than, say \emph{Num. of dependents, dependent's POS: $2$,PRP\$}. This observation can lead us to formulate a hypothesis that in English the NPs which have possessive pronouns immediately preceding the head are more likely to be specific than the NPs which have intervening words between the possessive pronoun and the head. Similarly, looking at another example in \cref{fig:featureweights}, the following two percepts fire for the NP “the United States of America”, viz. \emph{last dependent’s POS: NNP}, and \emph{first dependent’s lemma: the}, we may hypothesize that these percepts are indicators of specificity. Thus this methodology allows us to generate hypotheses, however, each of these hypotheses may not hold true under further investigation. This is due to the fact that several factors affect the feature weights the classifier generates: either these weights indeed reflect the inherent association with specificity, or they may result from the frequency for that pattern observed in our corpus. Whether these are general trends, or just an artifact of the sentences that happened to be in the training data, will require further investigation, ideally with additional datasets and more rigorous hypothesis testing.
+here the model thinks that objects of ``from'' are especially likely to be specific---see \cref{fig:weights,fig:featureweights}---and 
+that NPs with comparative adjectives (\texttt{JJR}) are especially likely to be nonspecific (\cref{fig:weights}). 
+From \cref{fig:weights} we also know that \emph{Num. of dependents, dependent's POS: $1$,PRP\$} has a higher weight than, 
+say, \emph{Num. of dependents, dependent's POS: $2$,PRP\$}. 
+This observation suggests a hypothesis that in English the NPs which have possessive pronouns immediately preceding the head 
+are more likely to be specific than the NPs which have intervening words between the possessive pronoun and the head.
+% Similarly, looking at another example in \cref{fig:featureweights}, the following two percepts fire 
+% for the NP “the United States of America”, viz. \emph{last dependent’s POS: NNP}, and \emph{first dependent’s lemma: the}, 
+% we may hypothesize that these percepts are indicators of specificity. 
+Because frequency and other factors affect the feature weights learned by the classifier, however, 
+these differences in weights may or may not reflect an inherent association with specificity.
+Whether these are general trends, or just an artifact of the sentences that happened to be in the training data and our statistical learning procedure, 
+will require further investigation, ideally with additional datasets and more rigorous hypothesis testing.
 
 
 
@@ -903,7 +928,7 @@ Last dependent's POS & PRP\$ & Last dependent's lemma & new \\
 First dependent's lemma & the & Num. of dependents, dependent's POS & $2$,JJR \\
 Governor's lemma & from & Governor's left neighbor's POS & VB \\
 \end{tabular}
-\caption{Percepts receiving highest positive weights in association with attribute values.}
+\caption{Percepts receiving highest positive weights in association with values of the Specific attribute.}
 \label{fig:weights}
 \end{figure}
 
