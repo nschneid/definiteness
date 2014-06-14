@@ -302,7 +302,7 @@ not all of which are obvious a priori.
 
 \section{Introduction}
 
-Definiteness is a morphosyntactic category associated with some aspects of meaning \citep{lyons99}.\cjd{what aspects of meaning? you can't have this as a first sentence. you need something more precise than "some".} While some morphosyntactic forms of definiteness are employed by all languages---namely, demonstratives, personal pronouns and possessives---languages display a vast range of variation with respect to the form and meaning of definiteness. 
+According to \cite{lyons99}, definiteness is a morphosyntactic category expressing aspects of meaning of Noun Phrases (NPs), such as identifiability (whether a referent to an NP is identifiable by the discourse participants). While some morphosyntactic forms of definiteness are employed by all languages---namely, demonstratives, personal pronouns and possessives---languages display a vast range of variation with respect to the form and meaning of definiteness. 
 For example, while languages like English make use of definite and indefinite articles 
 to distinguish between the discourse status of various entities ({\it \textbf{the} car} vs.~{\it \textbf{a} car} vs.~{\it cars}), 
 many other languages---including Czech, Indonesian, and Russian---do not have articles
@@ -315,12 +315,12 @@ Sometimes definiteness is marked with affixes or clitics, as in Arabic. Sometime
 as in Chinese (a language without articles), where the existential construction can be used to express indefinite subjects 
 and the {\it ba}- construction can be used to express definite direct objects \citep{chen04}. 
 
-Aside from this variation in the form of (in)definite noun phrases (NPs) within and across languages, there is also variability 
-in the semantic, pragmatic, and discourse--related functions expressed by (in)definites.   
-We will refer to these as {\em communicative functions} of (in)definiteness.  
-\Citet[pp. 6--7]{croft-03}, for instance, shows that the conditions under which an NP 
+Aside from this variation in the form of (in)definite NPs within and across languages, there is also variability 
+in the mapping between semantic, pragmatic, and discourse--related functions of NPs and the (in)definites expressing these functions.   
+We refer to these as {\em communicative functions} of (in)definiteness, following \cite{bhatia14}.  
+\Citet[pp. 6--7]{croft-03} shows that even when two languages have access to the same morphosyntactic forms of definiteness, the conditions under which an NP 
 is marked as definite or indefinite (or not at all) 
-are language-specific by contrasting English and French translations such as:
+are language-specific. He illustrates this by contrasting English and French translations (both languages use definite as well as indefinite articles) such as:
 %In the CFD scheme, these should receive labels \llbl{nonuniq\_Hearer\_new\_spec}, \llbl{Other\_Nonreferential}, \llbl{Generic\_individualLevel}, and \llbl{Predicative\_equative\_role}, respectively.  The first is expressed the same (with a definite article) in English and French, whereas the other two are expressed differently in the two languages.     
 %\eenumsentence{\small\label{ex:enfr}
 % \item He went to \textbf{the bank}. (def.)\\
@@ -328,10 +328,10 @@ are language-specific by contrasting English and French translations such as:
 
 \begin{small}
 \enumsentence{\label{ex:care}He showed \textbf{extreme care}. (unmarked)\\
-	  Il montra \textbf{un soin extr\^{e}me}. (indef.)}
+	  Il montra \textbf{\underline{un} soin extr\^{e}me}. (indef.)}
 \enumsentence{\label{ex:artichokes}I love \textbf{artichokes} and asparagus. (unmarked)\\
-	  J'aime \textbf{les artichauts} et les asperges. (def.)}
-\enumsentence{\label{ex:soldier}His brother became \textbf{a soldier}. (indef.)\\
+	  J'aime \textbf{\underline{les} artichauts} et les asperges. (def.)}
+\enumsentence{\label{ex:soldier}His brother became \textbf{\underline{a} soldier}. (indef.)\\
 	  Son fr\`{e}re est devenu \textbf{soldat}. (unmarked)}
 \end{small}
 A cross-linguistic classification of communicative functions  
@@ -422,7 +422,7 @@ using lexical, morphological, and syntactic features.
 The contribution of our work is in both the output of the classifiers and the models themselves (features and weights).  %\ab{What about the Random forest classifier, we don’t mention that?}
 Each classifier predicts communicative function labels that capture aspects of discourse-newness, uniqueness, specificity, and so forth. %(see next section, e.g., whether the entities are 
 %old or new to the discourse and to the hearer)
-Such functions are useful in a variety of language processing applications. For example, they should usually preserved in translation, even when the grammatical mechanisms 
+Such functions are useful in a variety of language processing applications. For example, they should usually be preserved in translation, even when the grammatical mechanisms 
 for expressing them are different. 
 %Indeed, previous work has noted that machine translation systems face problems 
 %while translating from one language to another when the languages use different grammatical strategies (see \cref{sec:related}).
@@ -435,7 +435,7 @@ making them relevant for entity tracking, knowledge base construction, and infor
 Our log-linear model is a form-meaning mapping, that relates syntactic, lexical, and morphological features 
 to properties of communicative functions. The learned weights of this model can, e.g., generate plausible hypotheses regarding the form-meaning relationship which can then be tested rigorously through controlled experiments. 
 This hypothesis generation is linguistically significant as it indicates new grammatical mechanisms 
-beyond the articles {\em the} and {\em a} that are used for expressing definiteness in English. 
+beyond the obvious {\em a} and {\em the} articles that are used for expressing definiteness in English. 
 %The form-meaning mapping for these languages can be used for machine translation applications. 
 %\citet{tsvetkov13,stymne09} mention how translating from an article-language to an article-less language is problematic. 
 
