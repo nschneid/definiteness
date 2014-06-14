@@ -780,12 +780,12 @@ Nonunique\_Physical\_copresence & --- & --- & --- \\
 \\
 \midrule
 Majority baseline & \multicolumn{1}{c}{---} & \multicolumn{1}{c}{---} %& \multicolumn{1}{c}{---} 
-& 12.1 & 25.5
+& 12.1 & 52.3
 \\
-Log-linear classifier, attributes only & 473,064 & 100 & 38.7 & 52.0 \\
-Log-linear classifier, labels only & 413,931 & 100 & 40.8 & 52.1 \\
-Full log-linear classifier (labels + attributes) & 926,417 & 100 & 43.7 & 55.6 \\
-Random forest classifier & 20,363 & \multicolumn{1}{c}{---} & \bf 49.7 & \bf 60.1 \\
+Log-linear classifier, attributes only & 473,064 & 100 & 38.7 & 81.9 \\
+Log-linear classifier, labels only & 413,931 & 100 & 40.8 & 77.7  \\
+Full log-linear classifier (labels + attributes) & 926,417 & 100 & 43.7 & 82.5 \\
+Random forest classifier & 20,363 & \multicolumn{1}{c}{---} & \bf 49.7 & \bf 81.0 \\
 \end{tabular}
 \caption{Classifiers and baseline, as measured on the test set.
 %The first three columns of numbers report the number of parameters (feature weights), the number of nonzero parameters, 
@@ -796,13 +796,17 @@ the third and fourth columns give accuracies as percentages; the best in each co
 \end{table*}
 
 Measurements of overall classification performance appear in \cref{tbl:results}. 
+
 While far from perfect, our classifiers achieve promising accuracy levels 
 given the small size of the training data and the number of labels in the annotation scheme.
-The random forest classifier is the most accurate, likely due to the robustness of that technique 
-under conditions where the data are small and the frequencies of individual labels are imbalanced.
+The Random forest classfier is the most accurate in Exact Match, like due to the robustness under
+conditions where the data are small and the frequencies of individual labels are imbalanced. However
+our attribute-aware log-linear models have the best accuracy under the SoftMatch measure.
 
 Among the log-linear models, the most successful is the richest model, which combines the fine-grained 
-communicative function labels with higher-level attributes of those labels. 
+communicative function labels with higher-level attributes of those labels. But notably the attribute-only model,
+which breaks down the semantic labels into combination of attributes, does not fall much behind and is the second-best
+in SoftMatch.
 This is encouraging because it suggests that the model has correctly exploited known linguistic generalizations 
 to account for the grammaticalization of definiteness in English. 
 
