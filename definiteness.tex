@@ -827,8 +827,8 @@ the third and fourth columns give accuracies as percentages; the best in each co
 \subsection{Results}
 
 \begin{table*}\small\centering
-   \begin{tabular}{lcccc}
-      \bf{Leaf label} & \bf{Prec.} & \bf{Recall} & \bf{$F_1$} & \nss{?} \\
+   \begin{tabular}{lcc|cc}
+      \bf{Leaf label} & \bf{No. of Instances} & \bf{Prec.} & \bf{Recall} & \bf{$F_1$} \\
       \midrule
 Nonunique\_Predicative\_Identity & 10 & --- & 0 & --- \\
 Pleonastic & 44 & 100 & 78 & 88 \\
@@ -852,19 +852,17 @@ Bridging\_Event & 9 & --- & 0 & --- \\
 Nonunique\_Physical\_Copresence & 36 & 0 & 0 & --- \\
 
    \end{tabular}
-   \caption{Leaf Precision, Recall and F1 as percentages}
+   \caption{Leaf Precision, Recall and F1 as percentages. The number of instances in the first column are from the training set.}
    \label{tbl:leaf}
 \end{table*}
 
 
 Measurements of overall classification performance appear in \cref{tbl:results}. While far from perfect, our classifiers achieve promising accuracy levels 
 given the small size of the training data and the number of labels in the annotation scheme.
-The Random forest classifier is the most accurate in Exact Match, likely due to the robustness of that technique under
-conditions where the data are small and the frequencies of individual labels are imbalanced. However
-our attribute-aware log-linear models have the best accuracy under the SoftMatch measure. The most successful is the richest model, which combines the fine-grained 
+The Random forest classifier is the most accurate in Exact Match measure, likely due to the robustness of that technique under
+conditions where the data are small and the frequencies of individual labels are imbalanced. In Soft Match measure, our attribute-aware log-linear models perform very well. The most successful of the log-linear models is the richest model, which combines the fine-grained 
 communicative function labels with higher-level attributes of those labels. But notably the attribute-only model,
-which breaks down the semantic labels into combination of attributes, does not fall much behind and is the second-best
-in SoftMatch.
+which breaks down the semantic labels into combination of attributes, does not fall much behind and performs almost as well as the Random forest classifier in Soft Match.
 This is encouraging because it suggests that the model has correctly exploited known linguistic generalizations 
 to account for the grammaticalization of definiteness in English. 
 
@@ -933,11 +931,14 @@ from the Web or other sources.
 \paragraph{Percepts.}
 
 \begin{figure}\small\centering  
-   \begin{tabular}{p{.3\textwidth}cp{.4\textwidth}}
-      Sentence & Annotated CFD & associated percepts as listed in Figure \ref{fig:weights} \\
-      This is just for \emph{the United States of America}. & Unique\_Larger\_situation & Last dependent's POS: NNP, first dependent's lemma: the\\  
-      We were driving from \emph{our home in Nashville} to a little farm we have 50 miles east of Nashville --- driving ourselves. & Bridging\_restrictiveModifier & First dependent's POS: PRP\$, head's left neighbor's POS: PRP\$, governor's right neighbor's POS:PRP\$, governor's lemma: from \\
+   \begin{tabular}{p{.4\textwidth}p{.3\textwidth}p{.2\textwidth}}
+      \bf{Example} & \bf{Relevant percepts from \cref{fig:weights} & \bf{CFD annotation} \\
+      \midrule
+      This is just for \emph{the United States of America}. & Last dependent's POS: NNP, first dependent's lemma: the & Unique\_Larger\_situation \\ \\
+      We were driving from \emph{our home in Nashville} to a little farm we have 50 miles east of Nashville --- driving ourselves. & First dependent's POS: PRP\$, head's left neighbor's POS: PRP\$, governor's right neighbor's POS:PRP\$, governor's lemma: from\\
 \end{tabular}
+\caption{Sentences from our corpus to illustrate Percepts fired and the corresponding CFD annotations.}
+\label{fig:featureweights}
 \end{figure}
 
 
