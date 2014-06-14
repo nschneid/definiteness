@@ -47,7 +47,7 @@
 \usepackage{amsmath}
 
 \usepackage{mathptmx}	% txfonts
-\usepackage[scaled]{beramono}
+\usepackage[scaled=0.8]{beramono}
 \usepackage[T1]{fontenc}
 \usepackage[utf8x]{inputenc}
 
@@ -293,16 +293,20 @@ Pittsburgh, PA 15260}
 % as well as the syntactic means for expressing them.  
 % \citet{bhatia14} presented an annotation scheme for the communicative functions of definiteness 
 % and released an annotated corpus in English and Hindi.   
-Definiteness expresses a constellation of semantic, pragmatic, and discourse properties---the communicative function---of an NP. We present a supervised classifier for English NPs that uses lexical, morphological, and syntactic features to 
-predict an NP's communicative functions in terms of a language-universal classification scheme. Our classifiers establish strong baselines for future work in this neglected area of computational semantic analysis. In addition, the analysis of the features and learned parameters 
-provides insight into the grammaticalization of definiteness in English, 
+Definiteness expresses a constellation of semantic, pragmatic, and discourse properties---the communicative function---of an NP. We present a supervised classifier for English NPs that uses lexical, morphological, and syntactic features to predict an NP's communicative function in terms of a language-universal classification scheme. Our classifiers establish strong baselines for future work in this neglected area of computational semantic analysis. In addition, analysis of the features and learned parameters 
+in the model provides insight into the grammaticalization of definiteness in English, 
 not all of which is obvious a priori.
 % some of which is obvious (e.g., {\em the} and {\em a}) and some of which is not obvious \ab{(include an example from our findings)}. 
 \end{abstract}
 
 \section{Introduction}
 
-According to \cite{lyons99}, definiteness is a morphosyntactic category expressing aspects of meaning of Noun Phrases (NPs), such as identifiability (whether a referent to an NP is identifiable by the discourse participants or not). While some morphosyntactic forms of definiteness are employed by all languages---namely, demonstratives, personal pronouns and possessives---languages display a vast range of variation with respect to the form and meaning of definiteness. 
+According to \cite{lyons99}, definiteness is a morphosyntactic category of noun phrases (NPs) 
+for expressing aspects of meaning such as, and prototypically, identifiability 
+(whether a referent for the NP can be identified by the discourse participants or not)\nss{why only mention identifiability here?}. 
+While some morphosyntactic forms of definiteness are employed by all languages---namely, 
+demonstratives, personal pronouns, and possessives---languages display a vast range of variation with respect to 
+the form and meaning of definiteness. 
 For example, while languages like English make use of definite and indefinite articles 
 to distinguish between the discourse status of various entities ({\it \textbf{the} car} vs.~{\it \textbf{a} car} vs.~{\it cars}), 
 many other languages---including Czech, Indonesian, and Russian---do not have articles
@@ -316,8 +320,9 @@ as in Chinese (a language without articles), where the existential construction 
 and the {\it ba}- construction can be used to express definite direct objects \citep{chen04}. 
 
 Aside from this variation in the form of (in)definite NPs within and across languages, there is also variability 
-in the mapping between semantic, pragmatic, and discourse--related functions of NPs and the (in)definites expressing these functions.   
-We refer to these as {\em communicative functions} of (in)definiteness, following \cite{bhatia14}.  
+in the mapping between semantic, pragmatic, and discourse %--related 
+functions of NPs and the (in)definites expressing these functions.   
+We refer to these as {\em communicative functions} of definiteness, following \cite{bhatia14}.  
 \Citet[pp. 6--7]{croft-03} shows that even when two languages have access to the same morphosyntactic forms of definiteness, the conditions under which an NP 
 is marked as definite or indefinite (or not at all) 
 are language-specific. He illustrates this by contrasting English and French translations (both languages use definite as well as indefinite articles) such as:
@@ -432,7 +437,7 @@ for expressing them are different.
 The communicative function labels also represent the discourse status of entities, 
 making them relevant for entity tracking, knowledge base construction, and information extraction. 
 
-Our log-linear model is a form-meaning mapping, that relates syntactic, lexical, and morphological features 
+Our log-linear model is a form-meaning mapping that relates syntactic, lexical, and morphological features 
 to properties of communicative functions. The learned weights of this model can, e.g., generate plausible hypotheses regarding the form-meaning relationship which can then be tested rigorously through controlled experiments. 
 This hypothesis generation is linguistically significant as it indicates new grammatical mechanisms 
 beyond the obvious {\em a} and {\em the} articles that are used for expressing definiteness in English. 
@@ -444,7 +449,7 @@ To build our models, we leverage a cross-lingual definiteness annotation scheme 
 and annotated English corpus (\cref{sec:data}) developed in prior work \citep{bhatia14}.
 The classifiers, \cref{sec:modeling}, are supervised models
 with features that combine lexical and morphosyntactic information 
-and the prespecified attributes or groupings of the communicative function labels (such as Anaphoric, Bridging, Specific in \cref{fig:hierarchy}) to predict leaf labels (the non-bold faced labels in \cref{fig:hierarchy});
+and the prespecified attributes or groupings of the communicative function labels (such as Anaphoric, Bridging, Specific in \cref{fig:hierarchy}) to predict leaf labels (the non-bold faced labels in \cref{fig:hierarchy})\nss{this is a bit technical and fig. 1 hasn't been introduced yet. can it be simplified?};
 the evaluation measures (\cref{sec:eval}) include one that exploits these label groupings 
 to award partial credit according to relatedness.
 \Cref{sec:exp} presents experiments comparing several models and discussing their strengths and weaknesses;
@@ -457,20 +462,54 @@ computational work and applications related to definiteness are addressed in \cr
 
 The literature on definiteness describes functions such as 
 uniqueness, familiarity, identifiability, anaphoricity, specificity, and 
-referentiality \citep[\textit{inter alia}]{birner94,condoravdi92,evans77,evans80,gundel88,gundel93,heim90,kadmon87,kadmon90,lyons99,prince92,roberts03,russell05} as being related to definiteness. Reductionist approaches to definiteness try to define it in terms of one or two of above mentioned communicative functions.   
+referentiality \citep[\textit{inter alia}]{birner94,condoravdi92,evans77,evans80,gundel88,gundel93,heim90,kadmon87,kadmon90,lyons99,prince92,roberts03,russell05} as being related to definiteness. Reductionist approaches to definiteness try to define it in terms of one or two of the aforementioned communicative functions.   
 For example, \citet{roberts03} proposes that the combination of uniqueness and a presupposition of familiarity 
 underlie all definite descriptions.  However, possessive definite descriptions ({\it John's daughter}) 
 and the weak definites ({\it the son of Queen Juliana of the Netherlands}) are neither unique nor necessarily 
 familiar to the listener before they are spoken. In contrast to the reductionist approaches are approaches to grammaticalization~\citep{hopper-03} in which grammar develops over time in such a way that 
 each grammatical construction has some prototypical communicative functions, 
-but may also have many non-prototypical communicative functions. The scheme we are adopting for this work, the annotation scheme for Communicative Functions of Definiteness (CFD), as described in \citet{bhatia14}, assumes that there may be multiple functions to definiteness. CFD is based on a combination of these functions and is summarized in \cref{fig:hierarchy}. It was developed by annotating texts in two languages (English and Hindi) for four different genres, namely TED talks, a presidential inaugural speech, news articles and fictional narratives, keeping in mind the communicative functions that have been associated with definiteness in the linguistic literature. 
+but may also have many non-prototypical communicative functions. The scheme we are adopting for this work---the annotation scheme for Communicative Functions of Definiteness (CFD) as described in \citet{bhatia14}---assumes that there may be multiple functions to definiteness. CFD is based on a combination of these functions and is summarized in \cref{fig:hierarchy}. It was developed by annotating texts in two languages (English and Hindi) for four different genres---namely TED talks, a presidential inaugural speech, news articles, and fictional narratives---keeping in mind the communicative functions that have been associated with definiteness in the linguistic literature. 
 
-CFD is hierarchically organized. This hierarchical organization serves to reduce the number of decisions that an annotator needs to make
-for speed and consistency. At the highest level, the distinction is made between {\bf Anaphora}, {\bf Nonanaphora} and {\bf Miscellaneous} functions of an NP (the annotatable unit). While the communicative functions {\bf Anaphora} and {\bf Nonanaphora} determine whether an entity is old or new in discourse respectively, the {\bf Miscellaneous} function is mainly assigned to various kinds of non referential NPs. Within the {\bf Anaphora} category, further distinctions are made based on communicative functions, such as {\bf Basic\_Anaphora} vs.~{\bf Extended\_Anaphora}. {\bf Basic\_Anaphora} refers to entities that have been mentioned before. {\bf Extended\_Anaphora} refers to entities that have not been mentioned themselves but are evoked by a previously mentioned entity. For example, after mentioning a wedding, {\em the bride}, {\em the groom}, and {\em the cake} 
-are considered to be {\bf Extended\_Anaphora}.  Within the {\bf Nonanaphora} category, the distinction is made between a {\bf Unique} vs.~{\bf Nonunique} vs.~{\bf Generic} communicative function. The function {\bf Unique} refers to entities that become unique in a context due to various reasons. For example, {\em Obama} can safely be considered unique in a political discourse in US contemporarily. The function {\bf Nonunique} refers to entities that can possibly have multiple referents which may or may not become identifiable in a speech situation. For example, {\em a little riding hood of red velvet} in \cref{fig:excerpt} could be annotated as a {\bf Nonunique} entity. The function {\bf Generic} refers to classes or types of entities rather than specific entities. For example, {\em Dinosaurs} in {\em Dinosaurs are extinct.} is a {\bf Generic}. Another important distinction CFD makes is between the communicative functions {\bf Hearer\_Old} and {\bf Hearer\_New} which refer to entities which are familiar to the hearer (e.g. if they are physically present in the speech situation) or non familiar respectively. However this distinction cuts across the two subparts of the hierarchy, {\bf Anaphora} and {\bf Nonanaphora}. While we only express {\bf Hearer\_Old} through the attribute value in the {\bf Anaphora} category, in the {\bf Nonanaphora}, there are specific labels used corresponding to this distinction, e.g. {\bf Unique\_Hearer\_Old} and {\bf Unique\_Hearer\_New}. Some additional details of the annotation scheme can be seen in \cref{fig:hierarchy} and are described in \citet{bhatia14} .
+CFD is hierarchically organized. This hierarchical organization serves to reduce the number of decisions that an annotator needs to make for speed and consistency. 
+We now highlight some of the major distinctions in the hierarchy.
 
-There are multiple ways to organize the hierarchy based on - which of these distinctions are made first and which ones are made subsequently. For example, {\citet{komen-13} has also proposed a hierarchy with similar leaf nodes, but different internal structure. Since it is possible that some natural groupings of labels are not reflected in the hierarchy we used, we have also associated several attributes (to arrive at such natural groupings) with each label type, viz. \uline{A}naphoric, \uline{B}ridging, \uline{F}amiliar, \uline{G}eneric, \uline{P}redicative, \uline{R}eferential, \uline{S}pecific, and \uline{U}nique. These attributes can have values of $+$, $-$, or $0$, see \cref{fig:hierarchy}. For instance, with the \uline{A}naphoric attribute, a value of $+$ applies to labels that can never mark NPs new to the discourse,
-$-$ applies to labels that can {\em only} apply if the NP is new in the discourse,  
+At the highest level, the distinction is made between {\bf Anaphora}, {\bf Nonanaphora}, and {\bf Miscellaneous} 
+functions of an NP (the annotatable unit). {\bf Anaphora} and {\bf Nonanaphora} respectively describe 
+whether an entity is old or new in the discourse; 
+the {\bf Miscellaneous} function is mainly assigned to various kinds of nonreferential NPs. 
+
+The {\bf Anaphora} category has two subcategories: {\bf Basic\_Anaphora} and {\bf Extended\_Anaphora}. 
+{\bf Basic\_Anaphora} applies to NPs referring to entities that have been mentioned before. 
+{\bf Extended\_Anaphora} applies to any NP whose referent has not been mentioned itself, but is evoked by a previously mentioned entity. 
+For example, after mentioning a wedding, {\em the bride}, {\em the groom}, and {\em the cake} 
+are considered to be {\bf Extended\_Anaphora}.  
+
+Within the {\bf Nonanaphora} category, a first distinction is made between {\bf Unique}, {\bf Nonunique}, and {\bf Generic}. 
+The {\bf Unique} function applies to NPs whose referent becomes unique in a context for any of several reasons. 
+For example, {\em Obama} can safely be considered unique in contemporary political discourse in the United States. 
+The function {\bf Nonunique} applies to NPs that start out with multiple possible referents 
+and that may or may not become identifiable in a speech situation. 
+For example, {\em a little riding hood of red velvet} in \cref{fig:excerpt} could be annotated with the label {\bf Nonunique}. 
+Finally, {\bf Generic} NPs refer to classes or types of entities rather than specific entities. 
+For example, {\em Dinosaurs} in {\em Dinosaurs are extinct.} is a {\bf Generic} NP. 
+
+Another important distinction CFD makes is between {\bf Hearer\_Old} 
+for references to entities that are familiar to the hearer (e.g., if they are physically present in the speech situation), 
+versus {\bf Hearer\_New} for nonfamiliar references. 
+This distinction cuts across the two subparts of the hierarchy, {\bf Anaphora} and {\bf Nonanaphora}. 
+So labels marking {\bf Hearer\_Old} or {\bf Hearer\_New} also encode other distinctions (e.g., {\bf Unique\_Hearer\_Old}, {\bf Unique\_Hearer\_New}, {\bf Nonunique\_Hearer\_Old}).
+For further details on the annotation scheme, see \cref{fig:hierarchy} and \citet{bhatia14}.
+
+Because the ordering of distinctions determines the tree structure of the hierarchy, 
+the same communicative functions could have been organized in a superficially different way.
+In fact, \citet{komen-13} has proposed a hierarchy with similar leaf nodes, but different internal structure. 
+Since it is possible that some natural groupings of labels are not reflected in the hierarchy we used, 
+we also decompose each label into fundamental communicative functions, which we call \emph{attributes}. 
+Each label type is associated with values for attributes  
+\uline{A}naphoric, \uline{B}ridging, \uline{F}amiliar, \uline{G}eneric, \uline{P}redicative, \uline{R}eferential, \uline{S}pecific, and \uline{U}nique.
+%(to arrive at such natural groupings), viz.: 
+These attributes can have values of $+$, $-$, or $0$, as shown in \cref{fig:hierarchy}. 
+For instance, with the \uline{A}naphoric attribute, a value of $+$ applies to labels that can never mark NPs new to the discourse, $-$ applies to labels that can {\em only} apply if the NP is new in the discourse,  
 and $0$ applies to labels such as {\bf Pleonastic} (where anaphoricity is not applicable because there is no discourse referent). 
 
 
@@ -493,11 +532,11 @@ as well as for all genres.
 \begin{figure*}[t]\small
 \textit{Once upon a time there was a dear little girl who was loved by everyone who looked at her, but most of all by her grandmother, and there was nothing that she would not have given to the child.}
 \\[5pt]
-Once \glosst{she}{\llbl{Same\_head}} gave \glosst{her}{\llbl{Different\_head}} 
-\glosst{a little riding hood of \glosst{red velvet}{\llbl{Other\_nonreferential}}}{$\underset{~}{\llbl{nonuniq\_Hearer\_new\_spec}}$}, 
-which suited \glosst{her}{\llbl{Same\_head}} so well that \glosst{she}{\llbl{Same\_head}} 
-would never wear \glosst{anything else}{\llbl{Quantified}}; so \glosst{she}{\llbl{Same\_head}} was always called 
-`\glosst{Little Red Riding Hood}{\llbl{uniq\_Hearer\_new}}.'
+Once \glosst{she}{\llbl{Same\_Head}} gave \glosst{her}{\llbl{Different\_Head}} 
+\glosst{a little riding hood of \glosst{red velvet}{\llbl{Other\_Nonreferential}}}{$\underset{~}{\llbl{Nonunique\_Hearer\_New\_Spec}}$}, 
+which suited \glosst{her}{\llbl{Same\_Head}} so well that \glosst{she}{\llbl{Same\_Head}} 
+would never wear \glosst{anything else}{\llbl{Quantified}}; so \glosst{she}{\llbl{Same\_Head}} was always called 
+`\glosst{Little Red Riding Hood}{\llbl{Unique\_Hearer\_New}}.'
 \caption{An annotated sentence from ``Little Red Riding Hood.'' The previous sentence is shown for context.}
 \label{fig:excerpt}
 \end{figure*}
@@ -708,7 +747,7 @@ for the held-out evaluation (dev or test) set $\mathcal{E}$:
   to determine which categories are reliably predicted.
   \item \textbf{Soft match:} This accuracy measure gives partial credit where the predicted and gold labels 
   are related. It is computed as the proportion of attributes whose (categorical) values match: 
-  $|\boldsymbol{\omega}(y) \cap \boldsymbol{\omega}(y’)|/8$.\finalversion{\cjd{Should these be differentially weighted based on their height in the hierarchy?}}
+  $|\boldsymbol{\omega}(y) \cap \boldsymbol{\omega}(y’)|/9$.\finalversion{\cjd{Should these be differentially weighted based on their height in the hierarchy?}}
 %   \item \textbf{Perplexity:} Perplexity is a value $\rho \in [1,\infty)$ that quantifies how ``surprised'', on average, our model is by the gold labels 
 %   in the test set; the greater the probability mass assigned to the true labels, 
 %   the lower the score. 
@@ -777,26 +816,26 @@ the third and fourth columns give accuracies as percentages; the best in each co
    \begin{tabular}{lccc}
       \bf{Leaf label} & \bf{Prec.} & \bf{Recall} & \bf{F1} \\
       \midrule
-Nonunique\_predicative\_identity & --- & --- & --- \\
+Nonunique\_Predicative\_Identity & --- & --- & --- \\
 Pleonastic & 100 & 78 & 88 \\
-Nonunique\_generic\_nonspec & 9 & 25 & 13 \\
+Nonunique\_Nonspec & 9 & 25 & 13 \\
 Other\_Nonreferential & 39 & 36 & 37 \\
 Nonunique\_Larger\_situation & 29 & 25 & 27 \\
-Bridging\_OtherContext & 33 & 6 & 11 \\
-Same\_head & 41 & 41 & 41 \\
-Unique\_Hearer\_new & --- & --- & --- \\
+Bridging\_Other\_Context & 33 & 6 & 11 \\
+Same\_Head & 41 & 41 & 41 \\
+Unique\_Hearer\_New & --- & --- & --- \\
 Quantified & 57 & 57 & 57 \\
-Different\_head & 32 & 33 & 32 \\
-Bridging\_nominal & 33 & 10 & 15 \\
+Different\_Head & 32 & 33 & 32 \\
+Bridging\_Nominal & 33 & 10 & 15 \\
 Measure\_Nonreferential & 88 & 26 & 40 \\
-Part\_of\_noncompositionalMWE & 20 & 17 & 18 \\
-Bridging\_restrictiveModifier & 58 & 84 & 68 \\
-Nonunique\_Hearer\_new\_spec & 36 & 46 & 40 \\
+Part\_of\_Noncompositional\_MWE & 20 & 17 & 18 \\
+Bridging\_Restrictive\_Modifier & 58 & 84 & 68 \\
+Nonunique\_Hearer\_New\_Spec & 36 & 46 & 40 \\
 Predicative\_Nonidentity & --- & --- & --- \\
 Unique\_Larger\_situation & 52 & 58 & 55 \\
-Generic\_individualLevel & 14 & 11 & 13 \\
-Bridging\_event & --- & --- & --- \\
-Nonunique\_Physical\_copresence & --- & --- & --- \\
+Generic\_Individual\_Level & 14 & 11 & 13 \\
+Bridging\_Event & --- & --- & --- \\
+Nonunique\_Physical\_Copresence & --- & --- & --- \\
 
    \end{tabular}
    \caption{Leaf Precision, Recall and F1 as percentages}
@@ -873,13 +912,13 @@ morphological definiteness.
 \paragraph{Errors.}
 Several labels are unattested or virtually unattested in the training data, 
 so the models unsurprisingly fail to predict them correctly at test time. 
-\llbl{Same\_head} and \llbl{Different\_head}, though both common, are confused quite frequently.
+\llbl{Same\_Head} and \llbl{Different\_Head}, though both common, are confused quite frequently.
 Whether the previous coreferent mention has the same or different head is a simple distinction for humans; 
 low model accuracy is likely due to errors propagated from coreference resolution.
 This problem is so frequent that merging these two categories and retraining the random forest model 
 improves exact match accuracy by 8\% absolute and soft match accuracy by 5\% absolute.
-Another common confusion is between the highly frequent category \llbl{Unique\_Larger\_situation}
-and the rarer category \llbl{Unique\_hearer\_new}; the latter is supposed to occur
+Another common confusion is between the highly frequent category \llbl{Unique\_Larger\_Situation}
+and the rarer category \llbl{Unique\_Hearer\_New}; the latter is supposed to occur
 only for the first occurrence of a proper name referring to a entity 
 that is not already part of the knowledge of the larger community. 
 In other words, this distinction requires world knowledge about well-known entities, which could perhaps be mined 
