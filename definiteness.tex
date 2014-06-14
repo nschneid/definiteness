@@ -615,7 +615,7 @@ Random forests are known to be robust to sparse data and to label imbalance \cit
 \subsection{Percepts}\label{sec:feats}
 
 The characteristics of the input that are incorporated in the model, which we call \emph{percepts} 
-to distinguish them from model features linking inputs to outputs,\footnote{See \cref{sec:modelslnl}}. 
+to distinguish them from model features linking inputs to outputs,\footnote{See \cref{sec:modelslnl}} 
 are intended to capture the aspects of English morphosyntax that may be relevant 
 to the communicative functions of definiteness.
 
@@ -698,7 +698,7 @@ this assigns lower (better) cost to an internal label than to an incorrect leaf 
 
 \section{Evaluation}\label{sec:eval}
 
-The following measures will be used to evaluate our predictor against the gold standard 
+The following measures are used to evaluate our predictor against the gold standard 
 for the held-out evaluation (dev or test) set $\mathcal{E}$:
 \begin{itemize}
   \item \textbf{Exact match:} This accuracy measure gives credit only where the predicted and gold labels 
@@ -708,7 +708,7 @@ for the held-out evaluation (dev or test) set $\mathcal{E}$:
   to determine which categories are reliably predicted.
   \item \textbf{Soft match:} This accuracy measure gives partial credit where the predicted and gold labels 
   are related. It is computed as the proportion of attributes whose (categorical) values match: 
-  $|\boldsymbol{\omega}(y) \cap \boldsymbol{\omega}(y')|/9$.\finalversion{\cjd{Should these be differentially weighted based on their height in the hierarchy?}}
+  $|\boldsymbol{\omega}(y) \cap \boldsymbol{\omega}(y’)|/8$.\finalversion{\cjd{Should these be differentially weighted based on their height in the hierarchy?}}
 %   \item \textbf{Perplexity:} Perplexity is a value $\rho \in [1,\infty)$ that quantifies how ``surprised'', on average, our model is by the gold labels 
 %   in the test set; the greater the probability mass assigned to the true labels, 
 %   the lower the score. 
@@ -726,7 +726,8 @@ the resulting test set consists of 2~TED talks (``Alisa\_News'', ``RobertHammond
 1~newspaper article (``crime1\_iPad\_E''), and 1~narrative (``Little Red Riding Hood'').
 The test set then contains 19,28~tokens (111~sentences), in which there are 511~annotated NPs; 
 while the training set contains 2,911~NPs among 11,932~tokens (757~sentences).
-Gold NP boundaries are assumed throughout our experiments.
+
+Gold NP boundaries are assumed throughout our experiments. Thus, for training as well as testing, we extract percepts of only the gold NPs and do not consider the other possible NPs inferred by the parser. For instance, to find the head of a gold NP, we assume the gold boundary and look for candidates within this boundary which have an outbound dependency. If there is a conflict between the gold boundaries and the parser generated boundaries or multiple candidates satisfying the above condition are found, then we select the candidate from within the gold boundary which is linearly closest to its outbound head. 
 
 The log-linear model variants are trained with an in-house implementation of supervised learning with $L_2$-regularized AdaGrad \citep{adagrad}.
 Hyperparameters are tuned  
@@ -737,7 +738,7 @@ The Python {\tt scikit-learn} toolkit \citep{scikit-learn} was used for the rand
 however, a cross-validation experiment on the training data found very little variance in accuracy.}
 Automatic dependency parses and coreference information were obtained with 
 the parser and coreference resolution system in Stanford CoreNLP v.~3.3.0 \citep{socher-13,recasens-13}
-for use in features (\cref{sec:feats}). From the parser output, the basic dependencies were used to extract the percepts used in this work. On two of the reviewers’ suggestions, to evaluate the performance of Stanford system on our data, we manually inspected the dependencies and the coreference for a subset of sentences from our corpus (using texts from TED talks and fictional narratives genres) processed using Stanford CoreNLP v.~3.3.0 and recorded the errors. We found that the Stanford parser had an accuracy of about 70\% on this subset of the corpus and coreference system had an accuracy of 75\% {\ab{TODO: enter correct numbers after we are completely done with our Gold Standard- Archna,Chu-Cheng,Jordan}. %While it is true that the errors made during preprocessing trickle down and affect the performance on the tasks at hand, e.g. classification in our case, at this stage it does not seem feasible to correct all the errors produced by the Stanford system, however this analysis indicates that there is a scope for further improvement in the classifier performance if better parsers and coreference resolvers become available. {\ab{TODO: say a little bit about what we think to what extent it could affect the overall result- Lori/Chris/Nathan/… ?}
+for use in features (\cref{sec:feats}). From the parser output, the basic dependencies were used to extract the percepts used in this work. On two of the reviewers’ suggestions, to evaluate the performance of Stanford system on our data, we manually inspected the dependencies for a subset of sentences from our corpus (using texts from TED talks and fictional narratives genres) processed using Stanford CoreNLP v.~3.3.0 and recorded the errors. We found that about 70\% of the sentences had all correct dependencies, and only about 0.04\% of the total dependencies were incorrect for our data.
 
 \subsection{Results}
 
