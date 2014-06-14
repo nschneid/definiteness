@@ -861,7 +861,7 @@ The number of instances in the first column are from the training set.}
 
 Measurements of overall classification performance appear in \cref{tbl:results}. While far from perfect, our classifiers achieve promising accuracy levels 
 given the small size of the training data and the number of labels in the annotation scheme.
-The random forest classifier is the most accurate in Exact Match measure, likely due to the robustness of that technique under
+The random forest classifier is the most accurate in Exact Match, likely due to the robustness of that technique under
 conditions where the data are small and the frequencies of individual labels are imbalanced. In Soft Match measure, our attribute-aware log-linear models perform very well. The most successful of the log-linear models is the richest model, which combines the fine-grained 
 communicative function labels with higher-level attributes of those labels. But notably the attribute-only model,
 which breaks down the semantic labels into combination of attributes, does not fall much behind and performs almost as well as the random forest classifier in Soft Match.
