@@ -301,8 +301,14 @@ not all of which is obvious a priori.
 
 \section{Introduction}
 
-Definiteness has been taken to associate morphosyntax of Noun Phrases (NPs) with aspects of their meaning, e.g. definite markers have prototypically been associated with identifiability
-(whether a referent for the NP can be identified by the discourse participants or not) \citep{lyons99}, together with other aspects such as inclusiveness (where the reference is made to the totality of objects or mass in the context) \citep{hawkins78}. 
+Definiteness is a morphosyntactic property of noun phrases (NPs) 
+associated with semantic and pragmatic characteristics of entities 
+and their discourse status. 
+\Citet{lyons99}, for example, argues that definite markers prototypically reflect \emph{identifiability}
+(whether a referent for the NP can be identified by the discourse participants or not); 
+other aspects identified in the literature include \emph{uniqueness} of the entity in the world 
+and whether the hearer is already \emph{familiar} with the entity given the context and preceding discourse \citep{roberts03,abbott06}.
+%inclusiveness (where the reference is made to the totality of objects or mass in the context) \citep{hawkins78}. 
 While some morphosyntactic forms of definiteness are employed by all languages---namely, 
 demonstratives, personal pronouns, and possessives---languages display a vast range of variation with respect to 
 the form and meaning of definiteness. 
@@ -855,7 +861,7 @@ The number of instances in the first column are from the training set.}
 
 Measurements of overall classification performance appear in \cref{tbl:results}. While far from perfect, our classifiers achieve promising accuracy levels 
 given the small size of the training data and the number of labels in the annotation scheme.
-The random forest classifier is the most accurate in Exact Match measure, likely due to the robustness of that technique under
+The random forest classifier is the most accurate in Exact Match, likely due to the robustness of that technique under
 conditions where the data are small and the frequencies of individual labels are imbalanced. In Soft Match measure, our attribute-aware log-linear models perform very well. The most successful of the log-linear models is the richest model, which combines the fine-grained 
 communicative function labels with higher-level attributes of those labels. But notably the attribute-only model,
 which breaks down the semantic labels into combination of attributes, does not fall much behind and performs almost as well as the random forest classifier in Soft Match.
