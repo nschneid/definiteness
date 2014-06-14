@@ -301,9 +301,8 @@ not all of which is obvious a priori.
 
 \section{Introduction}
 
-According to \cite{lyons99}, definiteness is a morphosyntactic category of noun phrases (NPs) 
-for expressing aspects of meaning such as, and prototypically, identifiability 
-(whether a referent for the NP can be identified by the discourse participants or not)\nss{why only mention identifiability here?}. 
+Definiteness has been taken to associate morphosyntax of Noun Phrases (NPs) with aspects of their meaning, e.g. definite markers have prototypically been associated with identifiability
+(whether a referent for the NP can be identified by the discourse participants or not) \citep{lyons99}, together with other aspects such as inclusiveness (where the reference is made to the totality of objects or mass in the context) \citep{hawkins78}. 
 While some morphosyntactic forms of definiteness are employed by all languages---namely, 
 demonstratives, personal pronouns, and possessives---languages display a vast range of variation with respect to 
 the form and meaning of definiteness. 
@@ -449,7 +448,7 @@ To build our models, we leverage a cross-lingual definiteness annotation scheme 
 and annotated English corpus (\cref{sec:data}) developed in prior work \citep{bhatia14}.
 The classifiers, \cref{sec:modeling}, are supervised models
 with features that combine lexical and morphosyntactic information 
-and the prespecified attributes or groupings of the communicative function labels (such as Anaphoric, Bridging, Specific in \cref{fig:hierarchy}) to predict leaf labels (the non-bold faced labels in \cref{fig:hierarchy})\nss{this is a bit technical and fig. 1 hasn't been introduced yet. can it be simplified?};
+and the prespecified attributes or groupings of the communicative function labels (such as Anaphoric, Bridging, Specific in \cref{fig:hierarchy}) to predict leaf labels (the non-bold faced labels in \cref{fig:hierarchy}); %\nss{this is a bit technical and fig. 1 hasn't been introduced yet. can it be simplified?}%\ab{couldn’t get to it}
 the evaluation measures (\cref{sec:eval}) include one that exploits these label groupings 
 to award partial credit according to relatedness.
 \Cref{sec:exp} presents experiments comparing several models and discussing their strengths and weaknesses;
@@ -673,7 +672,7 @@ the dependency relation,
 and (for the head only) a binary indicator of plurality (determined from the POS tag).
 As there may be multiple dependents, we have additional features specific to the first and the last one. 
 Moreover, to better capture tense, aspect and modality, we collect the attached verb's \emph{auxiliaries}. 
-We also make note of \emph{neg} if it\nss{what? the word \emph{not}?} is attached to the verb.
+We also make note of the negative particle (with dependency label \emph{neg}) if it is a dependent of the verb.
     
 \paragraph{Structural.} 
 The structural percepts are: the \emph{path length} from the head up to the root, and to the attached verb. 
@@ -783,7 +782,7 @@ we assign a default value.
 For example, some of our percepts are properties of the ``outbound head'', the immediate parent node to which the NP under consideration is attached.
 We assume the gold NP boundary and look for words within this boundary which have an outbound dependency (a link to a word outside the NP boundary).    
 If there is a conflict between the gold boundary  and the parser-generated boundary or if multiple words with outbound dependencies are found, then
-we select the word from within the gold boundary which is linearly closest to its outbound head.\nss{if short on space, this paragraph can probably be condensed}
+we select the word from within the gold boundary which is linearly closest to its outbound head.
 
 \paragraph{Learning.} The log-linear model variants are trained with an in-house implementation of supervised learning with $L_2$-regularized AdaGrad \citep{adagrad}.
 Hyperparameters are tuned  
@@ -886,35 +885,21 @@ Whether these are general trends, or just an artifact of the sentences that happ
 will require further investigation, ideally with additional datasets and more rigorous hypothesis testing.
 
 \begin{figure}\small\centering
-\begin{tabular}{p{.4\textwidth}p{.4\textwidth}}
-\multicolumn{1}{c}{\bf $+$Specific} & \multicolumn{1}{c}{\bf $-$Specific} \\
-\begin{verbatim}
-	PRP$_first_pos_dependents
-	PRP$_pos_head_left
-	you_last_lemma_dependents
-	you_lemma_dependents_1
-	PRP$_pos_dependents_1
-	PRP$_pos_outerhead_right
-	NNP_last_pos_dependents
-	PRP$_last_pos_dependents
-	the_first_lemma_dependents
-	from_lemma_outerhead
-\end{verbatim}
-&
-\begin{verbatim}
-	a_first_lemma_dependents
-	a_last_lemma_dependents
-	a_lemma_dependents_1
-	JJR_pos_head_left
-	JJR_last_pos_dependents
-	a_lemma_dependents_2
-	new_first_lemma_dependents
-	new_last_lemma_dependents
-	JJR_pos_dependents_2
-	VB_pos_outerhead_left
-\end{verbatim}
+   \begin{tabular}{lr|lr}
+      \multicolumn{4}{c}{\bf Percepts} \\
+\multicolumn{2}{c}{\bf $+$Specific} & \multicolumn{2}{c}{\bf $-$Specific} \\
+First dependent's POS & PRP\$ & First dependent's lemma & a \\
+Head's left neighbor's POS & PRP\$ & Last dependent's lemma & a \\
+Last dependent's lemma & you & Num. of dependents, dependent's lemma & $1$,a \\
+Num. of dependents, dependent's lemma & $1$,you & Head's left neighbor's POS & JJR \\
+Num. of dependents, dependent's POS & $1$,PRP\$ & Last dependent's POS & JJR \\
+Governor's right neighbor's POS & PRP\$ & Num. of dependents, dependent's lemma & $2$,a \\
+Last dependent's POS & NNP & First dependent's lemma & new \\
+Last dependent's POS & PRP\$ & Last dependent's lemma & new \\
+First dependent's lemma & the & Num. of dependents, dependent's POS & $2$,JJR \\
+Governor's lemma & from & Governor's left neighbor's POS & VB \\
 \end{tabular}
-\caption{Percepts receiving highest positive weights in association with attribute values. \ab{maybe we should add pointers to the not duplicated features, although am not sure if that is necessary.}}
+\caption{Percepts receiving highest positive weights in association with attribute values.}
 \label{fig:weights}
 \end{figure}
 
@@ -949,10 +934,10 @@ from the Web or other sources.
 
 \begin{figure}\small\centering  
    \begin{tabular}{p{.4\textwidth}p{.3\textwidth}p{.2\textwidth}}
-      \bf{Example} & \bf{Relevant percepts from \cref{fig:weights} & \bf{CFD annotation} \\
+      \bf{Example} & \bf{Relevant percepts from \cref{fig:weights}} & \bf{CFD annotation} \\
       \midrule
-      This is just for \emph{the United States of America}. & \texttt{NNP\_last\_pos\_dependents}, \texttt{the\_first\_lemma\_dependents} & Unique\_Larger\_situation \\ \\
-      We were driving from \emph{our home in Nashville} to a little farm we have 50 miles east of Nashville --- driving ourselves. & \texttt{PRP\$\_first\_pos\_dependents}, \texttt{PRP\$\_pos\_head\_left}, \texttt{PRP\$\_pos\_outerhead\_right}, \texttt{from\_lemma\_outerhead} & Bridging\_Restrictive\_Modifier \\
+      This is just for \emph{the United States of America}. & Last dependent's POS: NNP, first dependent's lemma: the & Unique\_Larger\_situation \\ \\
+      We were driving from \emph{our home in Nashville} to a little farm we have 50 miles east of Nashville --- driving ourselves. & First dependent's POS: PRP\$, head's left neighbor's POS: PRP\$, governor's right neighbor's POS:PRP\$, governor's lemma: from & Bridging\_restrictiveModifier \\
 \end{tabular}
 \caption{Sentences from our corpus to illustrate Percepts fired and the corresponding CFD annotations.}
 \label{fig:featureweights}
@@ -1006,7 +991,6 @@ resulting in multiple communicative functions for each grammatical construction.
 % \ab{Hence, like \citet{bresnan10}, in this work, we used logistic regression models to explore the syntax-semantic mapping 
 % related to definiteness since such models are robust to deal with skewed data as well and hence are able to model probability 
 % without assuming a particular distribution of data.???!}
-\ab{TODO: incorporate new references}
 
 
 
