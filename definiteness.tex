@@ -783,6 +783,7 @@ the parser and coreference resolution system in Stanford CoreNLP v.~3.3.0 \citep
 for use in features (\cref{sec:feats}). From the parser output, the basic dependencies were used to extract the percepts used in this work. On two of the reviewers’ suggestions, to evaluate the performance of Stanford system on our data, we manually inspected the dependencies for a subset of sentences from our corpus (using texts from TED talks and fictional narratives genres) processed using Stanford CoreNLP v.~3.3.0 and recorded the errors. We found that about 70\% of the sentences had all correct dependencies, and only about 0.04\% of the total dependencies were incorrect for our data.
 
 
+
 \begin{table*}\small\centering
 \begin{tabular}{lrrcc}
 \multicolumn{1}{c}{\bf Condition} & \multicolumn{1}{c}{$|\boldsymbol{\theta}|$} %& \multicolumn{1}{c}{$||\boldsymbol{\theta}||_0$} 
@@ -816,26 +817,26 @@ the third and fourth columns give accuracies as percentages; the best in each co
    \begin{tabular}{lccc}
       \bf{Leaf label} & \bf{Prec.} & \bf{Recall} & \bf{F1} \\
       \midrule
-Nonunique\_Predicative\_Identity & --- & --- & --- \\
-Pleonastic & 100 & 78 & 88 \\
-Nonunique\_Nonspec & 9 & 25 & 13 \\
-Other\_Nonreferential & 39 & 36 & 37 \\
-Nonunique\_Larger\_situation & 29 & 25 & 27 \\
-Bridging\_Other\_Context & 33 & 6 & 11 \\
-Same\_Head & 41 & 41 & 41 \\
-Unique\_Hearer\_New & --- & --- & --- \\
-Quantified & 57 & 57 & 57 \\
-Different\_Head & 32 & 33 & 32 \\
-Bridging\_Nominal & 33 & 10 & 15 \\
-Measure\_Nonreferential & 88 & 26 & 40 \\
-Part\_of\_Noncompositional\_MWE & 20 & 17 & 18 \\
-Bridging\_Restrictive\_Modifier & 58 & 84 & 68 \\
-Nonunique\_Hearer\_New\_Spec & 36 & 46 & 40 \\
-Predicative\_Nonidentity & --- & --- & --- \\
-Unique\_Larger\_situation & 52 & 58 & 55 \\
-Generic\_Individual\_Level & 14 & 11 & 13 \\
-Bridging\_Event & --- & --- & --- \\
-Nonunique\_Physical\_Copresence & --- & --- & --- \\
+Nonunique\_Predicative\_Identity & 10 & --- & 0 & --- \\
+Pleonastic & 44 & 100 & 78 & 88 \\
+Nonunique\_Nonspec & 173 & 9 & 25 & 13 \\
+Other\_Nonreferential & 134 & 39 & 36 & 37 \\
+Nonunique\_Larger\_situation & 97 & 29 & 25 & 27 \\
+Bridging\_Other\_Context & 96 & 33 & 6 & 11 \\
+Same\_Head & 452 & 41 & 41 & 41 \\
+Unique\_Hearer\_New & 26 & --- & 0 & --- \\
+Quantified & 213 & 57 & 57 & 57 \\
+Different\_Head & 271 & 32 & 33 & 32 \\
+Bridging\_Nominal & 33 & 33 & 10 & 15 \\
+Measure\_Nonreferential & 98 & 88 & 26 & 40 \\
+Part\_of\_Noncompositional\_MWE & 88 & 20 & 17 & 18 \\
+Bridging\_Restrictive\_Modifier & 552 & 58 & 84 & 68 \\
+Nonunique\_Hearer\_New\_Spec & 190 & 36 & 46 & 40 \\
+Predicative\_Nonidentity & 57 & 0 & 0 & --- \\
+Unique\_Larger\_situation & 97 & 52 & 58 & 55 \\
+Generic\_Individual\_Level & 113 & 14 & 11 & 13 \\
+Bridging\_Event & 9 & --- & 0 & --- \\
+Nonunique\_Physical\_Copresence & 36 & 0 & 0 & --- \\
 
    \end{tabular}
    \caption{Leaf Precision, Recall and F1 as percentages}
