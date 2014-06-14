@@ -276,7 +276,9 @@
 \hyphenation{post-edit-ing}
 \title{Automatic Classification of Communicative Functions of Definiteness}
 
-\author{Archna Bhatia$^\ast$ \ \ \ Chu-Cheng Lin$^\ast$ \ \ \ Nathan Schneider$^\ast$ \ \ \ Yulia Tsvetkov$^\ast$ & \bf Fatima Talib Al-Raisi$^\ast$ \ \ \  Laleh Roostapour$^\ast$ \ \ \ Jordan Bender$^\dagger$  \ \ \ Abhimanu Kumar$^\ast$  & \bf Lori Levin$^\ast$ \ \ \ Mandy Simons$^\ast$ \ \ \  Chris Dyer$^\ast$\\
+\author{Archna Bhatia$^\ast$ \ \ \ Chu-Cheng Lin$^\ast$ \ \ \ Nathan Schneider$^\ast$ \ \ \ Yulia Tsvetkov$^\ast$ \\
+ \bf Fatima Talib Al-Raisi$^\ast$ \ \ \  Laleh Roostapour$^\ast$ \ \ \ Jordan Bender$^\dagger$  \ \ \ Abhimanu Kumar$^\ast$  \\
+ \bf Lori Levin$^\ast$ \ \ \ Mandy Simons$^\ast$ \ \ \  Chris Dyer$^\ast$\\
 $^\ast$Carnegie Mellon University\\
 Pittsburgh, PA 15213\\
 $^\dagger$University of Pittsburgh\\
@@ -818,7 +820,7 @@ Random forest classifier & 20,363 & \multicolumn{1}{c}{---} & \bf 49.7 & 77.5 \\
 %The first three columns of numbers report the number of parameters (feature weights), the number of nonzero parameters, 
 %and the tuned regularization hyperparameter, respectively.
 The first two columns give the number of parameters and the tuned regularization hyperparameter, respectively; 
-the third and fourth columns give accuracies as percentages; the best in each column is bolded.}
+the third and fourth columns give accuracies as percentages. The best in each column is bolded.}
 \label{tbl:results}
 \end{table*}
 
@@ -828,30 +830,29 @@ the third and fourth columns give accuracies as percentages; the best in each co
 \subsection{Results}
 
 \begin{table*}\small\centering
-   \begin{tabular}{lrrrr}
-      \bf{Leaf label} & \bf{No. of Instances} & \bf{Prec.} & \bf{Recall} & \bf{$F_1$} \\
+   \begin{tabular}{lr<{\hspace{23pt}}r<{\hspace{3pt}}r<{\hspace{5pt}}r}
+      \textbf{Leaf label} & \multicolumn{1}{c}{\textbf{No. of Instances}} & \multicolumn{1}{c}{\textbf{Prec.}} & \multicolumn{1}{c}{\textbf{Recall}} & \textbf{$F_1$} \\
       \midrule
-Nonunique\_Predicative\_Identity & 10 & --- & 0 & --- \\
 Pleonastic & 44 & 100 & 78 & 88 \\
-Nonunique\_Nonspec & 173 & 9 & 25 & 13 \\
-Other\_Nonreferential & 134 & 39 & 36 & 37 \\
-Nonunique\_Larger\_situation & 97 & 29 & 25 & 27 \\
-Bridging\_Other\_Context & 96 & 33 & 6 & 11 \\
-Same\_Head & 452 & 41 & 41 & 41 \\
-Unique\_Hearer\_New & 26 & --- & 0 & --- \\
-Quantified & 213 & 57 & 57 & 57 \\
-Different\_Head & 271 & 32 & 33 & 32 \\
-Bridging\_Nominal & 33 & 33 & 10 & 15 \\
-Measure\_Nonreferential & 98 & 88 & 26 & 40 \\
-Part\_of\_Noncompositional\_MWE & 88 & 20 & 17 & 18 \\
 Bridging\_Restrictive\_Modifier & 552 & 58 & 84 & 68 \\
+Quantified & 213 & 57 & 57 & 57 \\
+Unique\_Larger\_Situation & 97 & 52 & 58 & 55 \\
+Same\_Head & 452 & 41 & 41 & 41 \\
+Measure\_Nonreferential & 98 & 88 & 26 & 40 \\
 Nonunique\_Hearer\_New\_Spec & 190 & 36 & 46 & 40 \\
-Predicative\_Nonidentity & 57 & 0 & 0 & --- \\
-Unique\_Larger\_situation & 97 & 52 & 58 & 55 \\
+Other\_Nonreferential & 134 & 39 & 36 & 37 \\
+Different\_Head & 271 & 32 & 33 & 32 \\
+Nonunique\_Larger\_Situation & 97 & 29 & 25 & 27 \\
+Part\_of\_Noncompositional\_MWE & 88 & 20 & 17 & 18 \\
+Bridging\_Nominal & 33 & 33 & 10 & 15 \\
 Generic\_Individual\_Level & 113 & 14 & 11 & 13 \\
+Nonunique\_Nonspec & 173 & 9 & 25 & 13 \\
+Bridging\_Other\_Context & 96 & 33 & 6 & 11 \\
 Bridging\_Event & 9 & --- & 0 & --- \\
 Nonunique\_Physical\_Copresence & 36 & 0 & 0 & --- \\
-
+Nonunique\_Predicative\_Identity & 10 & --- & 0 & --- \\
+Predicative\_Nonidentity & 57 & 0 & 0 & --- \\
+Unique\_Hearer\_New & 26 & --- & 0 & --- \\
    \end{tabular}
    \caption{Leaf precision, recall and $F_1$ as percentages. 
 The number of instances in the first column are from the training set.}
@@ -913,18 +914,19 @@ will require further investigation, ideally with additional datasets and more ri
 
 
 \begin{figure}\small\centering
-   \begin{tabular}{lr|lr}
+   \begin{tabular}{l>{\tt}r|l>{\tt}r}
       \multicolumn{4}{c}{\bf Percepts} \\
 \multicolumn{2}{c}{\bf $+$Specific} & \multicolumn{2}{c}{\bf $-$Specific} \\
+\cmidrule(lr){1-2}\cmidrule(lr){3-4}
 First dependent's POS & PRP\$ & First dependent's lemma & a \\
 Head's left neighbor's POS & PRP\$ & Last dependent's lemma & a \\
-Last dependent's lemma & you & Num. of dependents, dependent's lemma & $1$,a \\
-Num. of dependents, dependent's lemma & $1$,you & Head's left neighbor's POS & JJR \\
-Num. of dependents, dependent's POS & $1$,PRP\$ & Last dependent's POS & JJR \\
-Governor's right neighbor's POS & PRP\$ & Num. of dependents, dependent's lemma & $2$,a \\
+Last dependent's lemma & you & Num. of dependents, dependent's lemma & 1,a \\
+Num. of dependents, dependent's lemma & 1,you & Head's left neighbor's POS & JJR \\
+Num. of dependents, dependent's POS & 1,PRP\$ & Last dependent's POS & JJR \\
+Governor's right neighbor's POS & PRP\$ & Num. of dependents, dependent's lemma & 2,a \\
 Last dependent's POS & NNP & First dependent's lemma & new \\
 Last dependent's POS & PRP\$ & Last dependent's lemma & new \\
-First dependent's lemma & the & Num. of dependents, dependent's POS & $2$,JJR \\
+First dependent's lemma & the & Num. of dependents, dependent's POS & 2,JJR \\
 Governor's lemma & from & Governor's left neighbor's POS & VB \\
 \end{tabular}
 \caption{Percepts receiving highest positive weights in association with values of the Specific attribute.}
@@ -963,13 +965,13 @@ from the Web or other sources.
 
 
 \begin{figure}\small\centering  
-   \begin{tabular}{p{.4\textwidth}p{.3\textwidth}p{.2\textwidth}}
+   \begin{tabular}{@{}>{\raggedright}p{.35\textwidth}@{~~~}>{\raggedright}p{.35\textwidth}@{~~~}p{.25\textwidth}@{}}
       \bf{Example} & \bf{Relevant percepts from \cref{fig:weights}} & \bf{CFD annotation} \\
       \midrule
-      This is just for \emph{the United States of America}. & Last dependent's POS: NNP, first dependent's lemma: the & Unique\_Larger\_situation \\ \\
-      We were driving from \emph{our home in Nashville} to a little farm we have 50 miles east of Nashville --- driving ourselves. & First dependent's POS: PRP\$, head's left neighbor's POS: PRP\$, governor's right neighbor's POS:PRP\$, governor's lemma: from & Bridging\_restrictiveModifier \\
+      This is just for \emph{the United States of America}. & Last dependent's POS:~\texttt{NNP} First~dependent's~lemma:~\texttt{the} & Unique\_Larger\_Situation \\ \\[-5pt]
+      We were driving from \emph{our home in Nashville} to a little farm we have 50 miles east of Nashville --- driving ourselves. & First dependent's POS:~\texttt{PRP\$} Head's~left~neighbor's~POS:~\texttt{PRP\$} Governor's~right~neighbor's~POS:~\texttt{PRP\$} Governor's~lemma:~\texttt{from} & Bridging\_Restrictive\_Modifier \\
 \end{tabular}
-\caption{Sentences from our corpus to illustrate Percepts fired for \emph{the Gold NPs} and the corresponding CFD annotations.}
+\caption{Sentences from our corpus to illustrate percepts fired for gold NPs and the corresponding CFD annotations.}
 \label{fig:featureweights}
 \end{figure}
 
@@ -1046,7 +1048,7 @@ many of the functions of definiteness.
 \section*{Acknowledgments}
 This work was sponsored by the U.~S.~Army Research Laboratory and the
 U.~S.~Army Research Office under contract/grant number
-W911NF-10-1-0533. Also we would like to thank the reviewers for their useful comments.
+W911NF-10-1-0533. We thank the reviewers for their useful comments.
 
 
 \bibliographystyle{aclnat}
