@@ -741,12 +741,12 @@ this assigns lower (better) cost to an internal label than to an incorrect leaf 
 The following measures are used to evaluate our predictor against the gold standard 
 for the held-out evaluation (dev or test) set $\mathcal{E}$:
 \begin{itemize}
-  \item \textbf{Exact match:} This accuracy measure gives credit only where the predicted and gold labels 
+  \item \textbf{Exact Match:} This accuracy measure gives credit only where the predicted and gold labels 
   are identical.\costversion{\nss{} When the model is allowed to predict internal labels, we will report 
   overall precision and recall of leaf labels. Otherwise, we report accuracy.}
   \item \textbf{By leaf label:} We also compute precision and recall of each leaf label 
   to determine which categories are reliably predicted.
-  \item \textbf{Soft match:} This accuracy measure gives partial credit where the predicted and gold labels 
+  \item \textbf{Soft Match:} This accuracy measure gives partial credit where the predicted and gold labels 
   are related. It is computed as the proportion of attributes-plus-full-label whose (categorical) values match: 
   \mbox{$|\boldsymbol{\omega}(y) \cap \boldsymbol{\omega}(y’)|/9$}.\finalversion{\cjd{Should these be differentially weighted based on their height in the hierarchy?}}
 %   \item \textbf{Perplexity:} Perplexity is a value $\rho \in [1,\infty)$ that quantifies how ``surprised'', on average, our model is by the gold labels 
@@ -784,7 +784,7 @@ we assign a default value.
 Hyperparameters are tuned  
 on a development set formed by holding out every tenth instance from the training set 
 (test set experiments use the full training set):
-the power of 10 giving the highest soft match accuracy was chosen for $\lambda$.\footnote{Preliminary experiments with cross-validation on the training data showed that the value of $\lambda$ was stable across folds.}
+the power of 10 giving the highest Soft Match accuracy was chosen for $\lambda$.\footnote{Preliminary experiments with cross-validation on the training data showed that the value of $\lambda$ was stable across folds.}
 The Python {\tt scikit-learn} toolkit \citep{scikit-learn} was used for the random forest classifier.\footnote{Because it is a randomized algorithm, the results may vary slightly between runs; 
 however, a cross-validation experiment on the training data found very little variance in accuracy.}
 
@@ -855,10 +855,10 @@ The number of instances in the first column are from the training set.}
 
 Measurements of overall classification performance appear in \cref{tbl:results}. While far from perfect, our classifiers achieve promising accuracy levels 
 given the small size of the training data and the number of labels in the annotation scheme.
-The Random forest classifier is the most accurate in Exact Match measure, likely due to the robustness of that technique under
+The random forest classifier is the most accurate in Exact Match measure, likely due to the robustness of that technique under
 conditions where the data are small and the frequencies of individual labels are imbalanced. In Soft Match measure, our attribute-aware log-linear models perform very well. The most successful of the log-linear models is the richest model, which combines the fine-grained 
 communicative function labels with higher-level attributes of those labels. But notably the attribute-only model,
-which breaks down the semantic labels into combination of attributes, does not fall much behind and performs almost as well as the Random forest classifier in Soft Match.
+which breaks down the semantic labels into combination of attributes, does not fall much behind and performs almost as well as the random forest classifier in Soft Match.
 This is encouraging because it suggests that the model has correctly exploited known linguistic generalizations 
 to account for the grammaticalization of definiteness in English. 
 
@@ -917,7 +917,7 @@ so the models unsurprisingly fail to predict them correctly at test time.
 Whether the previous coreferent mention has the same or different head is a simple distinction for humans; 
 low model accuracy is likely due to errors propagated from coreference resolution.
 This problem is so frequent that merging these two categories and retraining the random forest model 
-improves exact match accuracy by 8\% absolute and soft match accuracy by 5\% absolute.
+improves Exact Match accuracy by 8\% absolute and Soft Match accuracy by 5\% absolute.
 Another common confusion is between the highly frequent category \llbl{Unique\_Larger\_Situation}
 and the rarer category \llbl{Unique\_Hearer\_New}; the latter is supposed to occur
 only for the first occurrence of a proper name referring to a entity 
@@ -1002,7 +1002,7 @@ We have presented a data-driven approach to modeling the relationship between
 universal communicative functions associated with (in)definiteness and their lexical\slash grammatical realization in a particular language.
 Our feature-rich classifiers can give insights into this relationship
 as well as predict communicative functions for the benefit of NLP systems.
-Exploiting the higher level semantic attributes, our log-linear classifier compares favorably to the Random forest classifier in SoftMatch accuracy. With the attributes, we should also be able to predict intermediate level CFDs and design a cost function that allows us to directly optimize the classifier for SoftMatch. Preliminary results do show improvement, we plan to explore this area further. This work has focused on English, but in future work we plan to build similar models for other languages---including 
+Exploiting the higher level semantic attributes, our log-linear classifier compares favorably to the random forest classifier in Soft Match accuracy. With the attributes, we should also be able to predict intermediate level CFDs and design a cost function that allows us to directly optimize the classifier for Soft Match. Preliminary results do show improvement, we plan to explore this area further. This work has focused on English, but in future work we plan to build similar models for other languages---including 
 languages without articles, under the hypothesis that such languages will rely on other, subtler devices to encode
 many of the functions of definiteness. 
 
