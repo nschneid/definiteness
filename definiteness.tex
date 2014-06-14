@@ -993,7 +993,7 @@ resulting in multiple communicative functions for each grammatical construction.
 % \ab{Hence, like \citet{bresnan10}, in this work, we used logistic regression models to explore the syntax-semantic mapping 
 % related to definiteness since such models are robust to deal with skewed data as well and hence are able to model probability 
 % without assuming a particular distribution of data.???!}
-Other attempts have also been made to capture aspects of meaning that have been grammaticalized using classifiers, e.g. see \cite{reichart10} for tense sense disambiguation. 
+Other attempts have also been made to capture,  using classifiers, (propositional as well as non propositional) aspects of meaning that have been grammaticalized, e.g. see \cite{reichart10} for tense sense disambiguation, \cite{prabhakaran12}. 
 
 
 
@@ -1001,10 +1001,9 @@ Other attempts have also been made to capture aspects of meaning that have been 
 
 We have presented a data-driven approach to modeling the relationship between 
 communicative functions associated with (in)definiteness and their lexical\slash grammatical realization in a particular language.
-Our feature-rich classifiers can give insight into this relationship
+Our feature-rich classifiers can give insights into this relationship
 as well as predict communicative functions for the benefit of NLP systems.
-Exploiting the higher level semantic attributes, our loglinear classifier compares favorably to the Random forest classifier in SoftMatch accuracy. With the attributes we should also be able to predict intermediate level CFDs and design a cost function that allows us to directly optimize the classifier for SoftMatch. Preliminary results do show improvement but are still inclusive, so we leave these as future work.
-This work has focused on English, but in future work we will build similar models for other languages---including 
+Exploiting the higher level semantic attributes, our log-linear classifier compares favorably to the Random forest classifier in SoftMatch accuracy. With the attributes, we should also be able to predict intermediate level CFDs and design a cost function that allows us to directly optimize the classifier for SoftMatch. Preliminary results do show improvement, we plan to explore this area further. This work has focused on English, but in future work we will build similar models for other languages---including 
 languages without articles, under the hypothesis that such languages will rely on other, subtler devices to encode
 many of the functions of definiteness. 
 
