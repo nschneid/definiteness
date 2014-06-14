@@ -885,33 +885,19 @@ Whether these are general trends, or just an artifact of the sentences that happ
 will require further investigation, ideally with additional datasets and more rigorous hypothesis testing.
 
 \begin{figure}\small\centering
-\begin{tabular}{p{.4\textwidth}p{.4\textwidth}}
-\multicolumn{1}{c}{\bf $+$Specific} & \multicolumn{1}{c}{\bf $-$Specific} \\
-\begin{verbatim}
-	PRP$_first_pos_dependents
-	PRP$_pos_head_left
-	you_last_lemma_dependents
-	you_lemma_dependents_1
-	PRP$_pos_dependents_1
-	PRP$_pos_outerhead_right
-	NNP_last_pos_dependents
-	PRP$_last_pos_dependents
-	the_first_lemma_dependents
-	from_lemma_outerhead
-\end{verbatim}
-&
-\begin{verbatim}
-	a_first_lemma_dependents
-	a_last_lemma_dependents
-	a_lemma_dependents_1
-	JJR_pos_head_left
-	JJR_last_pos_dependents
-	a_lemma_dependents_2
-	new_first_lemma_dependents
-	new_last_lemma_dependents
-	JJR_pos_dependents_2
-	VB_pos_outerhead_left
-\end{verbatim}
+   \begin{tabular}{lr|lr}
+      \multicolumn{4}{c}{\bf Percepts} \\
+\multicolumn{2}{c}{\bf $+$Specific} & \multicolumn{2}{c}{\bf $-$Specific} \\
+First dependent's POS & PRP\$ & First dependent's lemma & a \\
+Head's left neighbor's POS & PRP\$ & Last dependent's lemma & a \\
+Last dependent's lemma & you & Num. of dependents, dependent's lemma & $1$,a \\
+Num. of dependents, dependent's lemma & $1$,you & Head's left neighbor's POS & JJR \\
+Num. of dependents, dependent's POS & $1$,PRP\$ & Last dependent's POS & JJR \\
+Governor's right neighbor's POS & PRP\$ & Num. of dependents, dependent's lemma & $2$,a \\
+Last dependent's POS & NNP & First dependent's lemma & new \\
+Last dependent's POS & PRP\$ & Last dependent's lemma & new \\
+First dependent's lemma & the & Num. of dependents, dependent's POS & $2$,JJR \\
+Governor's lemma & from & Governor's left neighbor's POS & VB \\
 \end{tabular}
 \caption{Percepts receiving highest positive weights in association with attribute values. \ab{maybe we should add pointers to the not duplicated features, although am not sure if that is necessary.}}
 \label{fig:weights}
@@ -947,10 +933,10 @@ from the Web or other sources.
 \paragraph{Percepts.}
 
 \begin{figure}\small\centering  
-   \begin{tabular}{p{.3\textwidth}cp{.3\textwidth}}
+   \begin{tabular}{p{.3\textwidth}cp{.4\textwidth}}
       Sentence & Annotated CFD & associated percepts as listed in Figure \ref{fig:weights} \\
-      This is just for \emph{the United States of America}. & Unique\_Larger\_situation & \texttt{NNP\_last\_pos\_dependents}, \texttt{the\_first\_lemma\_dependents}\\  
-      We were driving from \emph{our home in Nashville} to a little farm we have 50 miles east of Nashville --- driving ourselves. & Bridging\_restrictiveModifier & \texttt{PRP\$\_first\_pos\_dependents},\texttt{PRP\$\_pos\_head\_left},\texttt{PRP\$\_pos\_outerhead\_right}, \texttt{from\_lemma\_outerhead} \\
+      This is just for \emph{the United States of America}. & Unique\_Larger\_situation & Last dependent's POS: NNP, first dependent's lemma: the\\  
+      We were driving from \emph{our home in Nashville} to a little farm we have 50 miles east of Nashville --- driving ourselves. & Bridging\_restrictiveModifier & First dependent's POS: PRP\$, head's left neighbor's POS: PRP\$, governor's right neighbor's POS:PRP\$, governor's lemma: from \\
 \end{tabular}
 \end{figure}
 
