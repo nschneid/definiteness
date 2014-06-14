@@ -3,7 +3,7 @@
 \usepackage{comment}
 \usepackage{relsize} % relative font sizes (e.g. \smaller). must precede ACL style
 \usepackage{colingstyle/coling2014}
-
+\usepackage{microtype}
 \usepackage[linkcolor=blue]{hyperref}
 
 \usepackage[round]{natbib}
@@ -741,12 +741,12 @@ this assigns lower (better) cost to an internal label than to an incorrect leaf 
 The following measures are used to evaluate our predictor against the gold standard 
 for the held-out evaluation (dev or test) set $\mathcal{E}$:
 \begin{itemize}
-  \item \textbf{Exact match:} This accuracy measure gives credit only where the predicted and gold labels 
+  \item \textbf{Exact Match:} This accuracy measure gives credit only where the predicted and gold labels 
   are identical.\costversion{\nss{} When the model is allowed to predict internal labels, we will report 
   overall precision and recall of leaf labels. Otherwise, we report accuracy.}
   \item \textbf{By leaf label:} We also compute precision and recall of each leaf label 
   to determine which categories are reliably predicted.
-  \item \textbf{Soft match:} This accuracy measure gives partial credit where the predicted and gold labels 
+  \item \textbf{Soft Match:} This accuracy measure gives partial credit where the predicted and gold labels 
   are related. It is computed as the proportion of attributes-plus-full-label whose (categorical) values match: 
   \mbox{$|\boldsymbol{\omega}(y) \cap \boldsymbol{\omega}(y’)|/9$}.\finalversion{\cjd{Should these be differentially weighted based on their height in the hierarchy?}}
 %   \item \textbf{Perplexity:} Perplexity is a value $\rho \in [1,\infty)$ that quantifies how ``surprised'', on average, our model is by the gold labels 
@@ -784,7 +784,7 @@ we assign a default value.
 Hyperparameters are tuned  
 on a development set formed by holding out every tenth instance from the training set 
 (test set experiments use the full training set):
-the power of 10 giving the highest soft match accuracy was chosen for $\lambda$.\footnote{Preliminary experiments with cross-validation on the training data showed that the value of $\lambda$ was stable across folds.}
+the power of 10 giving the highest Soft Match accuracy was chosen for $\lambda$.\footnote{Preliminary experiments with cross-validation on the training data showed that the value of $\lambda$ was stable across folds.}
 The Python {\tt scikit-learn} toolkit \citep{scikit-learn} was used for the random forest classifier.\footnote{Because it is a randomized algorithm, the results may vary slightly between runs; 
 however, a cross-validation experiment on the training data found very little variance in accuracy.}
 
@@ -855,10 +855,10 @@ The number of instances in the first column are from the training set.}
 
 Measurements of overall classification performance appear in \cref{tbl:results}. While far from perfect, our classifiers achieve promising accuracy levels 
 given the small size of the training data and the number of labels in the annotation scheme.
-The Random forest classifier is the most accurate in Exact Match measure, likely due to the robustness of that technique under
+The random forest classifier is the most accurate in Exact Match measure, likely due to the robustness of that technique under
 conditions where the data are small and the frequencies of individual labels are imbalanced. In Soft Match measure, our attribute-aware log-linear models perform very well. The most successful of the log-linear models is the richest model, which combines the fine-grained 
 communicative function labels with higher-level attributes of those labels. But notably the attribute-only model,
-which breaks down the semantic labels into combination of attributes, does not fall much behind and performs almost as well as the Random forest classifier in Soft Match.
+which breaks down the semantic labels into combination of attributes, does not fall much behind and performs almost as well as the random forest classifier in Soft Match.
 This is encouraging because it suggests that the model has correctly exploited known linguistic generalizations 
 to account for the grammaticalization of definiteness in English. 
 
@@ -878,7 +878,7 @@ of objects to be nonspecific \citep{aissen-03}.
 In addition to confirming known grammaticalization patterns of definiteness, 
 we can mine the highly-weighted features for new hypotheses: 
 here the model thinks that objects of ``from'' are especially likely to be specific, see \cref{fig:weights,fig:featureweights}, 
-and that NPs with comparative adjectives (\texttt{JJR}) are especially likely to be nonspecific, as in \cref{fig:weights}. For another example in \cref{fig:weights}, \emph{Num. of dependents, dependent's POS: $1$,PRP\$} has higher weight than, say \emph{Num. of dependents, dependent's POS: $2$,PRP\$}. This observation can lead us to formulate a hypothesis that in English the NPs which have possessive pronouns immediately preceding the head are more likely to be specific than the NPs which have intervening words between the possessive pronoun and the head. Similarly, looking at another example in \cref{fig:featureweights}, the following two percepts fire for the NP “the United States of America”, viz. Last dependent’s POS: NNP, and first dependent’s lemma: the, we may hypothesize that these percepts are indicators of specificity. Thus this methodology allows us to generate hypotheses, however, each of these hypotheses may not hold true under further investigation. This is due to the fact that the feature weights the classifier generates may be due to a number of reasons: either these weights indeed reflect the inherent association with specificity, or they may be a result of the frequency for that pattern observed in our corpus. Whether these are general trends, or just an artifact of the sentences that happened to be in the training data, will require further investigation, ideally with additional datasets and more rigorous hypothesis testing.
+and that NPs with comparative adjectives (\texttt{JJR}) are especially likely to be nonspecific, as in \cref{fig:weights}. For another example in \cref{fig:weights}, \emph{Num. of dependents, dependent's POS: $1$,PRP\$} has higher weight than, say \emph{Num. of dependents, dependent's POS: $2$,PRP\$}. This observation can lead us to formulate a hypothesis that in English the NPs which have possessive pronouns immediately preceding the head are more likely to be specific than the NPs which have intervening words between the possessive pronoun and the head. Similarly, looking at another example in \cref{fig:featureweights}, the following two percepts fire for the NP “the United States of America”, viz. \emph{last dependent’s POS: NNP}, and \emph{first dependent’s lemma: the}, we may hypothesize that these percepts are indicators of specificity. Thus this methodology allows us to generate hypotheses, however, each of these hypotheses may not hold true under further investigation. This is due to the fact that several factors affect the feature weights the classifier generates: either these weights indeed reflect the inherent association with specificity, or they may result from the frequency for that pattern observed in our corpus. Whether these are general trends, or just an artifact of the sentences that happened to be in the training data, will require further investigation, ideally with additional datasets and more rigorous hypothesis testing.
 
 
 
@@ -917,7 +917,7 @@ so the models unsurprisingly fail to predict them correctly at test time.
 Whether the previous coreferent mention has the same or different head is a simple distinction for humans; 
 low model accuracy is likely due to errors propagated from coreference resolution.
 This problem is so frequent that merging these two categories and retraining the random forest model 
-improves exact match accuracy by 8\% absolute and soft match accuracy by 5\% absolute.
+improves Exact Match accuracy by 8\% absolute and Soft Match accuracy by 5\% absolute.
 Another common confusion is between the highly frequent category \llbl{Unique\_Larger\_Situation}
 and the rarer category \llbl{Unique\_Hearer\_New}; the latter is supposed to occur
 only for the first occurrence of a proper name referring to a entity 
@@ -939,7 +939,7 @@ from the Web or other sources.
       This is just for \emph{the United States of America}. & Last dependent's POS: NNP, first dependent's lemma: the & Unique\_Larger\_situation \\ \\
       We were driving from \emph{our home in Nashville} to a little farm we have 50 miles east of Nashville --- driving ourselves. & First dependent's POS: PRP\$, head's left neighbor's POS: PRP\$, governor's right neighbor's POS:PRP\$, governor's lemma: from & Bridging\_restrictiveModifier \\
 \end{tabular}
-\caption{Sentences from our corpus to illustrate Percepts fired and the corresponding CFD annotations.}
+\caption{Sentences from our corpus to illustrate Percepts fired for \emph{the Gold NPs} and the corresponding CFD annotations.}
 \label{fig:featureweights}
 \end{figure}
 
@@ -1002,7 +1002,12 @@ We have presented a data-driven approach to modeling the relationship between
 universal communicative functions associated with (in)definiteness and their lexical\slash grammatical realization in a particular language.
 Our feature-rich classifiers can give insights into this relationship
 as well as predict communicative functions for the benefit of NLP systems.
-Exploiting the higher level semantic attributes, our log-linear classifier compares favorably to the Random forest classifier in SoftMatch accuracy. With the attributes, we should also be able to predict intermediate level CFDs and design a cost function that allows us to directly optimize the classifier for SoftMatch. Preliminary results do show improvement, we plan to explore this area further. This work has focused on English, but in future work we plan to build similar models for other languages---including 
+Exploiting the higher-level semantic attributes, our log-linear classifier compares favorably to the random forest classifier in Soft Match accuracy. 
+%With the attributes, we should also be able to predict intermediate level CFDs and design a cost function that allows us to directly optimize the classifier for Soft Match. 
+%Preliminary results do show improvement, we plan to explore this area further. 
+%too technical
+Further improvements to the classifier may come from additional features or better preprocessing.
+This work has focused on English, but in future work we plan to build similar models for other languages---including 
 languages without articles, under the hypothesis that such languages will rely on other, subtler devices to encode
 many of the functions of definiteness. 
 
