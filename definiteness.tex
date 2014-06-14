@@ -296,7 +296,7 @@ Pittsburgh, PA 15260}
 Definiteness expresses a constellation of semantic, pragmatic, and discourse properties---the communicative function---of an NP. We present a supervised classifier for English NPs that uses lexical, morphological, and syntactic features to 
 predict an NP's communicative functions in terms of a language-universal classification scheme. Our classifiers establish strong baselines for future work in this neglected area of computational semantic analysis. In addition, the analysis of the features and learned parameters 
 provides insight into the grammaticalization of definiteness in English, 
-not all of which are obvious a priori.
+not all of which is obvious a priori.
 % some of which is obvious (e.g., {\em the} and {\em a}) and some of which is not obvious \ab{(include an example from our findings)}. 
 \end{abstract}
 
@@ -467,7 +467,7 @@ but may also have many non-prototypical communicative functions. The scheme we a
 
 CFD is hierarchically organized. This hierarchical organization serves to reduce the number of decisions that an annotator needs to make
 for speed and consistency. At the highest level, the distinction is made between {\bf Anaphora}, {\bf Nonanaphora} and {\bf Miscellaneous} functions of an NP (the annotatable unit). While the communicative functions {\bf Anaphora} and {\bf Nonanaphora} determine whether an entity is old or new in discourse respectively, the {\bf Miscellaneous} function is mainly assigned to various kinds of non referential NPs. Within the {\bf Anaphora} category, further distinctions are made based on communicative functions, such as {\bf Basic\_Anaphora} vs.~{\bf Extended\_Anaphora}. {\bf Basic\_Anaphora} refers to entities that have been mentioned before. {\bf Extended\_Anaphora} refers to entities that have not been mentioned themselves but are evoked by a previously mentioned entity. For example, after mentioning a wedding, {\em the bride}, {\em the groom}, and {\em the cake} 
-are considered to be {\bf Extended\_Anaphora}.  Within the {\bf Nonanaphora} category, the distinction is made between a {\bf Unique} vs.~{\bf Nonunique} vs.~{\bf Generic} communicative function. The function {\bf Unique} refers to entities that become unique in a context due to various reasons. For example, {\em Obama} can safely be considered unique in a political discourse in US contemporarily. The function {\bf Nonunique} refers to entities that can possibly have multiple referents which may or may not become identifiable in a speech situation. For example, {\em a little riding hood of red velvet} in \cref{fig:excerpt} could be annotated as a {\bf Nonunique} entity. The function {\bf Generic} refers to classes or types of entities rather than specific entities. For example, {\em Dinosaurs} in {\em Dinosaurs are extinct.} is a {\bf Generic}. Another important distinction CFD makes is between the communicative functions {\bf Hearer\_Old} and {\bf Hearer\_New} which refer to entities which are familiar to the hearer (e.g. if they are physically present in the speech situation) or non familiar respectively. However this distinction cuts across the two subparts of the hierarchy, {\bf Anaphora} and {\bf Nonanaphora}. While we only express {\bf Hearer\_Old} through the attribute value in the {\bf Anaphora} category, in the {\bf Nonanaphora}, there are specific labels used corresponding to this distinction, e.g. {\bf Unique\_Hearer\_Old} and {\bf Unique\_Hearer\_New}. Further distinctions are also made distinguishing more communicative functions in the hierarchy, for further details on the scheme, see \citet{bhatia14} and \cref{fig:hierarchy}.
+are considered to be {\bf Extended\_Anaphora}.  Within the {\bf Nonanaphora} category, the distinction is made between a {\bf Unique} vs.~{\bf Nonunique} vs.~{\bf Generic} communicative function. The function {\bf Unique} refers to entities that become unique in a context due to various reasons. For example, {\em Obama} can safely be considered unique in a political discourse in US contemporarily. The function {\bf Nonunique} refers to entities that can possibly have multiple referents which may or may not become identifiable in a speech situation. For example, {\em a little riding hood of red velvet} in \cref{fig:excerpt} could be annotated as a {\bf Nonunique} entity. The function {\bf Generic} refers to classes or types of entities rather than specific entities. For example, {\em Dinosaurs} in {\em Dinosaurs are extinct.} is a {\bf Generic}. Another important distinction CFD makes is between the communicative functions {\bf Hearer\_Old} and {\bf Hearer\_New} which refer to entities which are familiar to the hearer (e.g. if they are physically present in the speech situation) or non familiar respectively. However this distinction cuts across the two subparts of the hierarchy, {\bf Anaphora} and {\bf Nonanaphora}. While we only express {\bf Hearer\_Old} through the attribute value in the {\bf Anaphora} category, in the {\bf Nonanaphora}, there are specific labels used corresponding to this distinction, e.g. {\bf Unique\_Hearer\_Old} and {\bf Unique\_Hearer\_New}. Some additional details of the annotation scheme can be seen in \cref{fig:hierarchy} and are described in \citet{bhatia14} .
 
 There are multiple ways to organize the hierarchy based on - which of these distinctions are made first and which ones are made subsequently. For example, {\citet{komen-13} has also proposed a hierarchy with similar leaf nodes, but different internal structure. Since it is possible that some natural groupings of labels are not reflected in the hierarchy we used, we have also associated several attributes (to arrive at such natural groupings) with each label type, viz. \uline{A}naphoric, \uline{B}ridging, \uline{F}amiliar, \uline{G}eneric, \uline{P}redicative, \uline{R}eferential, \uline{S}pecific, and \uline{U}nique. These attributes can have values of $+$, $-$, or $0$, see \cref{fig:hierarchy}. For instance, with the \uline{A}naphoric attribute, a value of $+$ applies to labels that can never mark NPs new to the discourse,
 $-$ applies to labels that can {\em only} apply if the NP is new in the discourse,  
@@ -727,7 +727,10 @@ the resulting test set consists of 2~TED talks (``Alisa\_News'', ``RobertHammond
 The test set then contains 19,28~tokens (111~sentences), in which there are 511~annotated NPs; 
 while the training set contains 2,911~NPs among 11,932~tokens (757~sentences).
 
-Gold NP boundaries are assumed throughout our experiments. Thus, for training as well as testing, we extract percepts of only the gold NPs and do not consider the other possible NPs inferred by the parser. For instance, to find the head of a gold NP, we assume the gold boundary and look for candidates within this boundary which have an outbound dependency. If there is a conflict between the gold boundaries and the parser generated boundaries or multiple candidates satisfying the above condition are found, then we select the candidate from within the gold boundary which is linearly closest to its outbound head. 
+Throughout our experiment, we use the NP boundaries identified by the human annotators (gold NP boundaries).   Thus, for training as well as testing, we
+extract percepts for gold NPs and assign labels to gold NPs.    We do not consider the other possible NPs identified by the parser.     However, we use the parser to find percepts, such as the lemma of the head of which the NP is a dependent or the part of speech of the first dependent of the NP.     If there is a conflict between the gold NP boundaries and the parsed NP boundaries, to avoid extracting wrong percepts, we assign a default value.  For example, some of our percepts are properties of the "outbound head", the immediate parent node to which the NP under consideration is attached.    
+We assume the gold NP boundary and look for words within this boundary which have an outbound dependency (a link to a word outside the NP boundary).    If there is a conflict between the gold boundary  and the parser generated boundary or if multiple words with outbound dependencies are found, then
+we select the word from within the gold boundary which is linearly closest to its outbound head.
 
 The log-linear model variants are trained with an in-house implementation of supervised learning with $L_2$-regularized AdaGrad \citep{adagrad}.
 Hyperparameters are tuned  
@@ -740,37 +743,6 @@ Automatic dependency parses and coreference information were obtained with
 the parser and coreference resolution system in Stanford CoreNLP v.~3.3.0 \citep{socher-13,recasens-13}
 for use in features (\cref{sec:feats}). From the parser output, the basic dependencies were used to extract the percepts used in this work. On two of the reviewers’ suggestions, to evaluate the performance of Stanford system on our data, we manually inspected the dependencies for a subset of sentences from our corpus (using texts from TED talks and fictional narratives genres) processed using Stanford CoreNLP v.~3.3.0 and recorded the errors. We found that about 70\% of the sentences had all correct dependencies, and only about 0.04\% of the total dependencies were incorrect for our data.
 
-\subsection{Results}
-
-\begin{table*}\small\centering
-   \begin{tabular}{lccc}
-      \bf{Leaf label} & \bf{Prec.} & \bf{Recall} & \bf{F1} \\
-      \midrule
-Nonunique\_predicative\_identity & --- & --- & --- \\
-Pleonastic & 1.0 & 0.778 & 0.875 \\
-Nonunique\_generic\_nonspec & 0.087 & 0.25 & 0.129 \\
-Other\_Nonreferential & 0.385 & 0.357 & 0.37 \\
-Nonunique\_Larger\_situation & 0.294 & 0.25 & 0.27 \\
-Bridging\_OtherContext & 0.333 & 0.063 & 0.105 \\
-Same\_head & 0.413 & 0.413 & 0.413 \\
-Unique\_Hearer\_new & --- & --- & --- \\
-Quantified & 0.571 & 0.571 & 0.571 \\
-Different\_head & 0.317 & 0.328 & 0.322 \\
-Bridging\_nominal & 0.333 & 0.1 & 0.154 \\
-Measure\_Nonreferential & 0.875 & 0.259 & 0.4 \\
-Part\_of\_noncompositionalMWE & 0.2 & 0.167 & 0.182 \\
-Bridging\_restrictiveModifier & 0.578 & 0.839 & 0.684 \\
-Nonunique\_Hearer\_new\_spec & 0.358 & 0.463 & 0.404 \\
-Predicative\_Nonidentity & --- & --- & --- \\
-Unique\_Larger\_situation & 0.523 & 0.576 & 0.548 \\
-Generic\_individualLevel & 0.143 & 0.111 & 0.125 \\
-Bridging\_event & --- & --- & --- \\
-Nonunique\_Physical\_copresence & --- & --- & --- \\
-
-   \end{tabular}
-   \caption{Leaf Precision and Recall \ab{discuss briefly in Results section}}
-   \label{tbl:leaf}
-\end{table*}
 
 \begin{table*}\small\centering
 \begin{tabular}{lrrcc}
@@ -785,8 +757,8 @@ Majority baseline & \multicolumn{1}{c}{---} & \multicolumn{1}{c}{---} %& \multic
 \\
 Log-linear classifier, attributes only & 473,064 & 100 & 38.7 & 81.9 \\
 Log-linear classifier, labels only & 413,931 & 100 & 40.8 & 77.7  \\
-Full log-linear classifier (labels + attributes) & 926,417 & 100 & 43.7 & 82.5 \\
-Random forest classifier & 20,363 & \multicolumn{1}{c}{---} & \bf 49.7 & \bf 81.0 \\
+Full log-linear classifier (labels + attributes) & 926,417 & 100 & 43.7 & \bf 82.5 \\
+Random forest classifier & 20,363 & \multicolumn{1}{c}{---} & \bf 49.7 & 81.0 \\
 \end{tabular}
 \caption{Classifiers and baseline, as measured on the test set.
 %The first three columns of numbers report the number of parameters (feature weights), the number of nonzero parameters, 
@@ -796,15 +768,47 @@ the third and fourth columns give accuracies as percentages; the best in each co
 \label{tbl:results}
 \end{table*}
 
-Measurements of overall classification performance appear in \cref{tbl:results}. 
 
-While far from perfect, our classifiers achieve promising accuracy levels 
+
+
+\subsection{Results}
+
+\begin{table*}\small\centering
+   \begin{tabular}{lccc}
+      \bf{Leaf label} & \bf{Prec.} & \bf{Recall} & \bf{F1} \\
+      \midrule
+Nonunique\_predicative\_identity & --- & --- & --- \\
+Pleonastic & 100 & 78 & 88 \\
+Nonunique\_generic\_nonspec & 9 & 25 & 13 \\
+Other\_Nonreferential & 39 & 36 & 37 \\
+Nonunique\_Larger\_situation & 29 & 25 & 27 \\
+Bridging\_OtherContext & 33 & 6 & 11 \\
+Same\_head & 41 & 41 & 41 \\
+Unique\_Hearer\_new & --- & --- & --- \\
+Quantified & 57 & 57 & 57 \\
+Different\_head & 32 & 33 & 32 \\
+Bridging\_nominal & 33 & 10 & 15 \\
+Measure\_Nonreferential & 88 & 26 & 40 \\
+Part\_of\_noncompositionalMWE & 20 & 17 & 18 \\
+Bridging\_restrictiveModifier & 58 & 84 & 68 \\
+Nonunique\_Hearer\_new\_spec & 36 & 46 & 40 \\
+Predicative\_Nonidentity & --- & --- & --- \\
+Unique\_Larger\_situation & 52 & 58 & 55 \\
+Generic\_individualLevel & 14 & 11 & 13 \\
+Bridging\_event & --- & --- & --- \\
+Nonunique\_Physical\_copresence & --- & --- & --- \\
+
+   \end{tabular}
+   \caption{Leaf Precision, Recall and F1 as percentages}
+   \label{tbl:leaf}
+\end{table*}
+
+
+Measurements of overall classification performance appear in \cref{tbl:results}. While far from perfect, our classifiers achieve promising accuracy levels 
 given the small size of the training data and the number of labels in the annotation scheme.
-The Random forest classfier is the most accurate in Exact Match, like due to the robustness under
+The Random forest classifier is the most accurate in Exact Match, likely due to the robustness of that technique under
 conditions where the data are small and the frequencies of individual labels are imbalanced. However
-our attribute-aware log-linear models have the best accuracy under the SoftMatch measure.
-
-Among the log-linear models, the most successful is the richest model, which combines the fine-grained 
+our attribute-aware log-linear models have the best accuracy under the SoftMatch measure. The most successful is the richest model, which combines the fine-grained 
 communicative function labels with higher-level attributes of those labels. But notably the attribute-only model,
 which breaks down the semantic labels into combination of attributes, does not fall much behind and is the second-best
 in SoftMatch.
