@@ -496,8 +496,8 @@ For example, {\em Dinosaurs} in {\em Dinosaurs are extinct.} is a {\bf Generic} 
 Another important distinction CFD makes is between {\bf Hearer\_Old} 
 for references to entities that are familiar to the hearer (e.g., if they are physically present in the speech situation), 
 versus {\bf Hearer\_New} for nonfamiliar references. 
-This distinction cuts across the two subparts of the hierarchy, {\bf Anaphora} and {\bf Nonanaphora}. 
-So labels marking {\bf Hearer\_Old} or {\bf Hearer\_New} also encode other distinctions (e.g., {\bf Unique\_Hearer\_Old}, {\bf Unique\_Hearer\_New}, {\bf Nonunique\_Hearer\_Old}).
+This distinction cuts across the two subparts of the hierarchy, {\bf Anaphora} and {\bf Nonanaphora}; 
+thus, labels marking {\bf Hearer\_Old} or {\bf Hearer\_New} also encode other distinctions (e.g., {\bf Unique\_Hearer\_Old}, {\bf Unique\_Hearer\_New}, {\bf Nonunique\_Hearer\_Old}).
 For further details on the annotation scheme, see \cref{fig:hierarchy} and \citet{bhatia14}.
 
 Because the ordering of distinctions determines the tree structure of the hierarchy, 
@@ -520,7 +520,7 @@ We use the English definiteness corpus of \citet{bhatia14},
 which consists of texts from multiple genres annotated with the scheme described in \cref{sec:scheme}.\footnote{The data can be obtained from \url{http://www.cs.cmu.edu/~ytsvetko/definiteness_corpus}.} 
 The 17~documents consist of prepared speeches (TED talks and a presidential address), 
 published news articles, and fictional narratives. 
-The TED data predominates (75\% of the corpus)\footnote{The TED talks are from a large parallel corpus obtained from \url{http://www.ted.com/talks/}.}; 
+The TED data predominates (75\% of the corpus);\footnote{The TED talks are from a large parallel corpus obtained from \url{http://www.ted.com/talks/}.} 
 the presidential speech represents about 16\%, fictional narratives 5\%, and news articles 4\%. 
 All told, the corpus contains 13,860~words (868~sentences), with 3,422~NPs (the annotatable units). 
 \citet{bhatia14} report high inter-annotator agreement, estimating Cohen's $\kappa = 0.89$ within the TED genre 
@@ -577,7 +577,8 @@ Each weight in the model corresponds to a feature that mediates between
 These decisions are\nss{}}
 This is aimed at attaining better predictive accuracy 
 as well as feature weights that better describe the form--function interactions we are interested in recovering.
-We also train a random forest model, which sacrifices interpretability of the learned parameters for predictive accuracy.
+We also train a random forest model on the hypothesis that 
+it would allow us to sacrifice interpretability of the learned parameters for predictive accuracy.
 
 Our setup is formalized below, where we discuss the mathematical models and linguistically motivated features.
 
@@ -607,7 +608,8 @@ produces a vector of real-valued characteristics of the input, and
 the attribute function\finalversion{\fta{define a and c to make it clear}} $\tilde{\boldsymbol{\omega}}: \mathcal{Y} \rightarrow \{0,1\}^a$
 encodes characteristics of each label.
 There is a feature for every percept--attribute pairing: so
-$d = c \cdot a$ and $f_{(i-1)a+j}(x,y) = \phi_i(x)\tilde{\omega}_j(y), 1 \leq i \leq c, 1 \leq j \leq a$.
+$d = c \cdot a$ and $f_{(i-1)a+j}(x,y) = \phi_i(x)\tilde{\omega}_j(y), 1 \leq i \leq c, 1 \leq j \leq a$.\footnote{\Citet{chahuneau-13} 
+use a similar parametrization for their model of morphological inflection.}
 The contents of the percept and attribute functions are detailed in \cref{sec:feats,sec:attrs} respectively.
 
 For prediction, having learned weights $\hat{\boldsymbol{\theta}}$ we use the Bayes-optimal decision rule for minimizing misclassification error, 
@@ -671,7 +673,7 @@ the dependency relation,
 and (for the head only) a binary indicator of plurality (determined from the POS tag).
 As there may be multiple dependents, we have additional features specific to the first and the last one. 
 Moreover, to better capture tense, aspect and modality, we collect the attached verb's \emph{auxiliaries}. 
-We also make note of \emph{neg} if it is attached to the verb.
+We also make note of \emph{neg} if it\nss{what? the word \emph{not}?} is attached to the verb.
     
 \paragraph{Structural.} 
 The structural percepts are: the \emph{path length} from the head up to the root, and to the attached verb. 
@@ -746,8 +748,8 @@ for the held-out evaluation (dev or test) set $\mathcal{E}$:
   \item \textbf{By leaf label:} We also compute precision and recall of each leaf label 
   to determine which categories are reliably predicted.
   \item \textbf{Soft match:} This accuracy measure gives partial credit where the predicted and gold labels 
-  are related. It is computed as the proportion of attributes whose (categorical) values match: 
-  $|\boldsymbol{\omega}(y) \cap \boldsymbol{\omega}(y’)|/9$.\finalversion{\cjd{Should these be differentially weighted based on their height in the hierarchy?}}
+  are related. It is computed as the proportion of attributes-plus-full-label whose (categorical) values match: 
+  \mbox{$|\boldsymbol{\omega}(y) \cap \boldsymbol{\omega}(y’)|/9$}.\finalversion{\cjd{Should these be differentially weighted based on their height in the hierarchy?}}
 %   \item \textbf{Perplexity:} Perplexity is a value $\rho \in [1,\infty)$ that quantifies how ``surprised'', on average, our model is by the gold labels 
 %   in the test set; the greater the probability mass assigned to the true labels, 
 %   the lower the score. 
@@ -758,7 +760,7 @@ for the held-out evaluation (dev or test) set $\mathcal{E}$:
 
 \subsection{Experimental Setup}\label{sec:exptsetup}
 
-The annotated corpus of \citet{bhatia14} (\cref{sec:data}) contains 17~documents 
+\paragraph{Data splits.} The annotated corpus of \citet{bhatia14} (\cref{sec:data}) contains 17~documents 
 in 3~genres: 13~prepared speeches (mostly TED talks),\footnote{We have combined the TED talks and presidential speech genres since both involved prepared speeches.} 2~newspaper articles, 
 and 2~fictional narratives. We arbitrarily choose some documents to hold out from each genre; 
 the resulting test set consists of 2~TED talks (``Alisa\_News'', ``RobertHammond\_park''), 
@@ -766,21 +768,31 @@ the resulting test set consists of 2~TED talks (``Alisa\_News'', ``RobertHammond
 The test set then contains 19,28~tokens (111~sentences), in which there are 511~annotated NPs; 
 while the training set contains 2,911~NPs among 11,932~tokens (757~sentences).
 
-Throughout our experiment, we use the NP boundaries identified by the human annotators (gold NP boundaries).   Thus, for training as well as testing, we
-extract percepts for gold NPs and assign labels to gold NPs.    We do not consider the other possible NPs identified by the parser.     However, we use the parser to find percepts, such as the lemma of the head of which the NP is a dependent or the part of speech of the first dependent of the NP.     If there is a conflict between the gold NP boundaries and the parsed NP boundaries, to avoid extracting wrong percepts, we assign a default value.  For example, some of our percepts are properties of the "outbound head", the immediate parent node to which the NP under consideration is attached.    
-We assume the gold NP boundary and look for words within this boundary which have an outbound dependency (a link to a word outside the NP boundary).    If there is a conflict between the gold boundary  and the parser generated boundary or if multiple words with outbound dependencies are found, then
-we select the word from within the gold boundary which is linearly closest to its outbound head.
+\paragraph{Preprocessing.} Automatic dependency parses and coreference information were obtained with 
+the parser and coreference resolution system in Stanford CoreNLP v.~3.3.0 \citep{socher-13,recasens-13}
+for use in features (\cref{sec:feats}). Syntactic features were extracted from the Basic dependencies output by the parser. 
+To evaluate the performance of Stanford system on our data, 
+we manually inspected the dependencies for a subset of sentences from our corpus (using texts from TED talks and fictional narratives genres) 
+and recorded the errors. 
+We found that about 70\% of the sentences had all correct dependencies, and only about 0.04\% of the total dependencies were incorrect for our data.
 
-The log-linear model variants are trained with an in-house implementation of supervised learning with $L_2$-regularized AdaGrad \citep{adagrad}.
+Throughout our experiments (training as well as testing), we use the gold NP boundaries identified by the human annotators (gold NP boundaries).
+The automatic dependency parses are used to extract percepts for each gold NP.     
+If there is a conflict between the gold NP boundaries and the parsed NP boundaries, to avoid extracting misleading percepts, 
+we assign a default value.  
+For example, some of our percepts are properties of the ``outbound head'', the immediate parent node to which the NP under consideration is attached.
+We assume the gold NP boundary and look for words within this boundary which have an outbound dependency (a link to a word outside the NP boundary).    
+If there is a conflict between the gold boundary  and the parser-generated boundary or if multiple words with outbound dependencies are found, then
+we select the word from within the gold boundary which is linearly closest to its outbound head.\nss{if short on space, this paragraph can probably be condensed}
+
+\paragraph{Learning.} The log-linear model variants are trained with an in-house implementation of supervised learning with $L_2$-regularized AdaGrad \citep{adagrad}.
 Hyperparameters are tuned  
 on a development set formed by holding out every tenth instance from the training set 
 (test set experiments use the full training set):
 the power of 10 giving the highest soft match accuracy was chosen for $\lambda$.\footnote{Preliminary experiments with cross-validation on the training data showed that the value of $\lambda$ was stable across folds.}
 The Python {\tt scikit-learn} toolkit \citep{scikit-learn} was used for the random forest classifier.\footnote{Because it is a randomized algorithm, the results may vary slightly between runs; 
 however, a cross-validation experiment on the training data found very little variance in accuracy.}
-Automatic dependency parses and coreference information were obtained with 
-the parser and coreference resolution system in Stanford CoreNLP v.~3.3.0 \citep{socher-13,recasens-13}
-for use in features (\cref{sec:feats}). From the parser output, the basic dependencies were used to extract the percepts used in this work. On two of the reviewers’ suggestions, to evaluate the performance of Stanford system on our data, we manually inspected the dependencies for a subset of sentences from our corpus (using texts from TED talks and fictional narratives genres) processed using Stanford CoreNLP v.~3.3.0 and recorded the errors. We found that about 70\% of the sentences had all correct dependencies, and only about 0.04\% of the total dependencies were incorrect for our data.
+
 
 
 
@@ -815,8 +827,8 @@ the third and fourth columns give accuracies as percentages; the best in each co
 \subsection{Results}
 
 \begin{table*}\small\centering
-   \begin{tabular}{lccc}
-      \bf{Leaf label} & \bf{Prec.} & \bf{Recall} & \bf{F1} \\
+   \begin{tabular}{lcccc}
+      \bf{Leaf label} & \bf{Prec.} & \bf{Recall} & \bf{$F_1$} & \nss{?} \\
       \midrule
 Nonunique\_Predicative\_Identity & 10 & --- & 0 & --- \\
 Pleonastic & 44 & 100 & 78 & 88 \\
