@@ -866,7 +866,6 @@ which breaks down the semantic labels into combination of attributes, does not f
 This is encouraging because it suggests that the model has correctly exploited known linguistic generalizations 
 to account for the grammaticalization of definiteness in English. 
 
-\cref{tbl:leaf}
 
 An advantage of log-linear models is that feature weights offer insights into the model's behavior.
 \Cref{fig:weights} lists the 10~features that received the highest positive weights in the full model 
@@ -877,11 +876,11 @@ The model also seems to have picked up on the less obvious but well-attested ten
 of objects to be nonspecific \citep{aissen-03}.\footnote{The percept \texttt{VB\_pos\_outerhead\_left} 
 fires when the NP is governed by a verb to its left.}
 
+
 In addition to confirming known grammaticalization patterns of definiteness, 
 we can mine the highly-weighted features for new hypotheses: 
 here the model thinks that objects of ``from'' are especially likely to be specific, 
-and that NPs with comparative adjectives (\texttt{JJR}) are especially likely to be nonspecific.
-Whether these are general trends, or just an artifact of the sentences that happened to be in the training data, 
+and that NPs with comparative adjectives (\texttt{JJR}) are especially likely to be nonspecific. For another example, \emph{Num. of dependents, dependent's POS: $1$,PRP\$} has higher weight than, say \emph{Num. of dependents, dependent's POS: $2$,PRP\$}. This could be due to the inherent difference associated with specificity, or frequency difference for the two patterns in the language, or frequency difference for the patterns in our corpus. Whether these are general trends, or just an artifact of the sentences that happened to be in the training data, 
 will require further investigation, ideally with additional datasets and more rigorous hypothesis testing.
 
 \begin{figure}\small\centering
@@ -908,6 +907,9 @@ Notably, in experiments ablating features indicating articles---the most obvious
 in English---we see a decrease in performance, but not a drastic one. 
 This suggests that the expression of communicative functions of definiteness is in fact much richer than 
 morphological definiteness.
+
+
+
 
 \paragraph{Errors.}
 Several labels are unattested or virtually unattested in the training data, 
@@ -942,8 +944,7 @@ from the Web or other sources.
 \label{fig:featureweights}
 \end{figure}
 
-\paragraph{Interpretation of Percepts.}\footnote{what is a good title?}
-Some of the percepts listed in Figure \ref{fig:weights} may seem like duplicates. For example, \emph{head's left neighbor's POS: PRP\$}, \emph{first dependent's POS: PRP\$}, \emph{Governor’s right neighbor's POS: PRP\$} and \emph{Last dependent's POS: PRP\$} all fire for the NP \emph{our home in Nashville} in Figure \ref{fig:featureweights} because of the possesive pronoun attached to the head noun. This may be avoided by careful feature engineering; but since our goal in this paper is to generate hypotheses given morphosyntactic percepts that generalize over many languages, we leave higher-level representation of these features as future work. On the other hand, while we should not regard the difference in percept weights as difference of position on the definiteness scale, it may hint something that worths further investigation. For example, \emph{Num. of dependents, dependent's POS: $1$,PRP\$} has higher weight than other number of dependents when the dependent's POS is PRP\$. This could be due to frequency difference in the language, frequency difference in our corpus, or inherent difference in specificity. In our corpus, roughly $80\%$ of all nouns with prossessive pronouns are of the form PRP\$ NN*, which may support the frequency difference hypotheses. But we note again that the percept weights simply provide a lead.
+
 
 \section{Related Work}\label{sec:related}
 
