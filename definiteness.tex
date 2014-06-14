@@ -827,7 +827,7 @@ the third and fourth columns give accuracies as percentages; the best in each co
 \subsection{Results}
 
 \begin{table*}\small\centering
-   \begin{tabular}{lcccc}
+   \begin{tabular}{lcc|cc}
       \bf{Leaf label} & \bf{No. of Instances} & \bf{Prec.} & \bf{Recall} & \bf{$F_1$} \\
       \midrule
 Nonunique\_Predicative\_Identity & 10 & --- & 0 & --- \\
@@ -859,12 +859,10 @@ Nonunique\_Physical\_Copresence & 36 & 0 & 0 & --- \\
 
 Measurements of overall classification performance appear in \cref{tbl:results}. While far from perfect, our classifiers achieve promising accuracy levels 
 given the small size of the training data and the number of labels in the annotation scheme.
-The Random forest classifier is the most accurate in Exact Match, likely due to the robustness of that technique under
-conditions where the data are small and the frequencies of individual labels are imbalanced. However
-our attribute-aware log-linear models have the best accuracy under the SoftMatch measure. The most successful is the richest model, which combines the fine-grained 
+The Random forest classifier is the most accurate in Exact Match measure, likely due to the robustness of that technique under
+conditions where the data are small and the frequencies of individual labels are imbalanced. In Soft Match measure, our attribute-aware log-linear models perform very well. The most successful of the log-linear models is the richest model, which combines the fine-grained 
 communicative function labels with higher-level attributes of those labels. But notably the attribute-only model,
-which breaks down the semantic labels into combination of attributes, does not fall much behind and is the second-best
-in SoftMatch.
+which breaks down the semantic labels into combination of attributes, does not fall much behind and performs almost as well as the Random forest classifier in Soft Match.
 This is encouraging because it suggests that the model has correctly exploited known linguistic generalizations 
 to account for the grammaticalization of definiteness in English. 
 
@@ -947,11 +945,14 @@ from the Web or other sources.
 \paragraph{Percepts.}
 
 \begin{figure}\small\centering  
-   \begin{tabular}{p{.3\textwidth}cp{.3\textwidth}}
-      Sentence & Annotated CFD & associated percepts as listed in Figure \ref{fig:weights} \\
-      This is just for \emph{the United States of America}. & Unique\_Larger\_situation & \texttt{NNP\_last\_pos\_dependents}, \texttt{the\_first\_lemma\_dependents}\\  
-      We were driving from \emph{our home in Nashville} to a little farm we have 50 miles east of Nashville --- driving ourselves. & Bridging\_restrictiveModifier & \texttt{PRP\$\_first\_pos\_dependents},\texttt{PRP\$\_pos\_head\_left},\texttt{PRP\$\_pos\_outerhead\_right}, \texttt{from\_lemma\_outerhead} \\
+   \begin{tabular}{p{.4\textwidth}p{.3\textwidth}p{.2\textwidth}}
+      \bf{Example} & \bf{Relevant percepts from \cref{fig:weights} & \bf{CFD annotation} \\
+      \midrule
+      This is just for \emph{the United States of America}. & \texttt{NNP\_last\_pos\_dependents}, \texttt{the\_first\_lemma\_dependents} & Unique\_Larger\_situation \\ \\
+      We were driving from \emph{our home in Nashville} to a little farm we have 50 miles east of Nashville --- driving ourselves. & \texttt{PRP\$\_first\_pos\_dependents}, \texttt{PRP\$\_pos\_head\_left}, \texttt{PRP\$\_pos\_outerhead\_right}, \texttt{from\_lemma\_outerhead} & Bridging\_restrictiveModifier \\
 \end{tabular}
+\caption{Sentences from our corpus to illustrate Percepts fired and the corresponding CFD annotations.}
+\label{fig:featureweights}
 \end{figure}
 
 
