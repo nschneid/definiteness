@@ -283,10 +283,8 @@
 \author{Archna Bhatia$^\ast$ \ \ \ Chu-Cheng Lin$^\ast$ \ \ \ Nathan Schneider$^\ast$ \ \ \ Yulia Tsvetkov$^\ast$ \\
  \bf Fatima Talib Al-Raisi$^\ast$ \ \ \  Laleh Roostapour$^\ast$ \ \ \ Jordan Bender$^\dagger$  \ \ \ Abhimanu Kumar$^\ast$  \\
  \bf Lori Levin$^\ast$ \ \ \ Mandy Simons$^\ast$ \ \ \  Chris Dyer$^\ast$\\
-$^\ast$Carnegie Mellon University\\
-Pittsburgh, PA 15213\\
-$^\dagger$University of Pittsburgh\\
-Pittsburgh, PA 15260}
+$^\ast$Carnegie Mellon University, Pittsburgh, PA 15213\\
+$^\dagger$University of Pittsburgh, Pittsburgh, PA 15260}
 
 \date{}
 
@@ -667,7 +665,7 @@ Random forests are known to be robust to sparse data and to label imbalance \cit
 \subsection{Percepts}\label{sec:feats}
 
 The characteristics of the input that are incorporated in the model, which we call \emph{percepts} 
-to distinguish them from model features linking inputs to outputs,\footnote{See \cref{sec:modelslnl}} 
+to distinguish them from model features linking inputs to outputs, see \cref{sec:modelslnl}, 
 are intended to capture the aspects of English morphosyntax that may be relevant 
 to the communicative functions of definiteness.
 
@@ -783,9 +781,9 @@ while the training set contains 2,911~NPs among 11,932~tokens (757~sentences).
 the parser and coreference resolution system in Stanford CoreNLP v.~3.3.0 \citep{socher-13,recasens-13}
 for use in features (\cref{sec:feats}). Syntactic features were extracted from the Basic dependencies output by the parser. 
 To evaluate the performance of Stanford system on our data, 
-we manually inspected the dependencies for a subset of sentences from our corpus (using texts from TED talks and fictional narratives genres) 
+we manually inspected the dependencies and coreference information for a subset of sentences from our corpus (using texts from TED talks and fictional narratives genres) 
 and recorded the errors. 
-We found that about 70\% of the sentences had all correct dependencies, and only about 0.04\% of the total dependencies were incorrect for our data.
+We found that about 70\% of the sentences had all correct dependencies, and only about 0.04\% of the total dependencies were incorrect for our data. However, only 62.5\% of the coreference links were correctly identified by the coreference resolver. The rest of them were either missing or incorrectly identified. We believe this may have caused a portion of the classifier errors while predicting the Ananphoic labels.
 
 Throughout our experiments (training as well as testing), we use the gold NP boundaries identified by the human annotators.
 The automatic dependency parses are used to extract percepts for each gold NP.     
@@ -799,8 +797,6 @@ on a development set formed by holding out every tenth instance from the trainin
 the power of 10 giving the highest Soft Match accuracy was chosen for $\lambda$.\footnote{Preliminary experiments with cross-validation on the training data showed that the value of $\lambda$ was stable across folds.}
 The Python {\tt scikit-learn} toolkit \citep{scikit-learn} was used for the random forest classifier.\footnote{Because it is a randomized algorithm, the results may vary slightly between runs; 
 however, a cross-validation experiment on the training data found very little variance in accuracy.}
-
-
 
 
 \begin{table*}\small\centering
