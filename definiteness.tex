@@ -790,7 +790,7 @@ The automatic dependency parses are used to extract percepts for each gold NP.
 If there is a conflict between the gold NP boundaries and the parsed NP boundaries, to avoid extracting misleading percepts, 
 we assign a default value.  
 
-\paragraph{Learning.} The log-linear model variants are trained with an in-house implementation of supervised learning with $L_2$-regularized AdaGrad \citep{adagrad}.
+{\bf Learning.} The log-linear model variants are trained with an in-house implementation of supervised learning with $L_2$-regularized AdaGrad \citep{adagrad}.
 Hyperparameters are tuned  
 on a development set formed by holding out every tenth instance from the training set 
 (test set experiments use the full training set):
@@ -799,7 +799,7 @@ The Python {\tt scikit-learn} toolkit \citep{scikit-learn} was used for the rand
 however, a cross-validation experiment on the training data found very little variance in accuracy.}
 
 
-\begin{table*}\small\centering
+\begin{table*}[!htbp]\small\centering
 \begin{tabular}{lrrcc}
 \multicolumn{1}{c}{\bf Condition} & \multicolumn{1}{c}{$|\boldsymbol{\theta}|$} %& \multicolumn{1}{c}{$||\boldsymbol{\theta}||_0$} 
 & \multicolumn{1}{c}{$\lambda$} 
@@ -893,8 +893,7 @@ are all associated with {specific} NPs, while the indefinite article is associat
 The model also seems to have picked up on the less obvious but well-attested tendency 
 of objects to be nonspecific \citep{aissen-03}.
 % \footnote{The percept \texttt{VB\_pos\_outerhead\_left}  fires when the NP is governed by a verb to its left.}
-
-%Most percepts of the model are local around the head, so when several highly weighted percepts are fired it may be because of what is usually regarded as a single construction. %This is illustrated in Figure \cref{fig:featureweights}: the model uses 3 highly weighted percepts, namely the POS of the first dependent, the head's left neighbor's POS, and the governor's right neighbor's POS to \emph{describe} a possessive pronoun adjecent to the noun it depends on. 
+ 
 
 In addition to confirming known grammaticalization patterns of definiteness, 
 we can mine the highly-weighted features for new hypotheses: 
