@@ -7,10 +7,15 @@
 \usepackage{relsize} % relative font sizes (e.g. \smaller). must precede ACL style
 \usepackage{colingstyle/coling2014}
 \usepackage{microtype}
-\usepackage[hidelinks]{hyperref}
 
 \usepackage[round]{natbib}
 \newcommand{\citeposs}[1]{\citeauthor{#1}'s (\citeyear{#1})}
+
+\usepackage{hyperref}
+\hypersetup{
+    colorlinks=false,
+    pdfborder={0 0 0},
+}
 
 %\usepackage{times}
 %\usepackage{latexsym}
