@@ -19,6 +19,7 @@
 \usepackage[boxed]{algorithm2e}
 \renewcommand\AlCapFnt{\small}
 %\usepackage[small,bf,skip=5pt]{caption}
+\usepackage{caption}
 \usepackage{sidecap} % side captions
 \usepackage{rotating}	% sideways
 
@@ -285,8 +286,9 @@
 
 \author{Archna Bhatia$^\ast$ \ \ \ Chu-Cheng Lin$^\ast$ \ \ \ Nathan Schneider$^\ast$ \ \ \ Yulia Tsvetkov$^\ast$ \\
  \bf Fatima Talib Al-Raisi$^\ast$ \ \ \  Laleh Roostapour$^\ast$ \ \ \ Jordan Bender$^\dagger$  \ \ \ Abhimanu Kumar$^\ast$  \\
- \bf Lori Levin$^\ast$ \ \ \ Mandy Simons$^\ast$ \ \ \  Chris Dyer$^\ast$\\
-$^\ast$Carnegie Mellon University, Pittsburgh, PA 15213 \ \ \ ^\dagger$University of Pittsburgh, Pittsburgh, PA 15260}
+ \bf Lori Levin$^\ast$ \ \ \ Mandy Simons$^\ast$ \ \ \  Chris Dyer$^\ast$\\[5pt]
+\begin{tabular}{cc}\llap{$^\ast$}Carnegie Mellon University & \llap{$^\dagger$}University of Pittsburgh \\
+Pittsburgh, PA 15213 & Pittsburgh, PA 15260\end{tabular}}
 
 \date{}
 
@@ -306,8 +308,8 @@ not all of which is obvious a priori.
 \end{abstract}
 
 \section{Introduction}
-\let\thefootnote\relax\footnote{This work is licensed under a Creative Commons Attribution 4.0 International License. Page numbers and proceedings footer are added by the organisers. License details: \url{http://creativecommons.org/licenses/by/4.0/}}
-\addtocounter{footnote}{-1}\let\thefootnote\svthefootnote
+\let\thefootnote\relax\footnote{This work is licensed under a Creative Commons Attribution 4.0 International License. Page numbers and proceedings footer are added by the organisers. License details: \url{http://creativecommons.org/licenses/by/4.0/}}%
+\addtocounter{footnote}{-1}\let\thefootnote\svthefootnote%
 Definiteness is a morphosyntactic property of noun phrases (NPs) 
 associated with semantic and pragmatic characteristics of entities 
 and their discourse status. 
@@ -964,7 +966,7 @@ from the Web or other sources.
       This is just for \emph{the United States of America}. & Last dependent's POS:~\texttt{NNP} First~dependent's~lemma:~\texttt{the} & Unique\_Larger\_Situation \\ \\[-5pt]
       We were driving from \emph{our home in Nashville} to a little farm we have 50 miles east of Nashville --- driving ourselves. & First dependent's POS:~\texttt{PRP\$} Head's~left~neighbor's~POS:~\texttt{PRP\$} Governor's~right~neighbor's~POS:~\texttt{PRP\$} Governor's~lemma:~\texttt{from} & Bridging\_Restrictive\_Modifier \\
 \end{tabular}
-\caption{Sentences from our corpus to illustrate percepts fired for gold NPs and the corresponding CFD annotations.}
+\caption{Sentences from our corpus illustrating percepts fired for gold NPs and their CFD annotations.}
 \label{fig:featureweights}
 \end{figure}
 
