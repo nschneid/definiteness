@@ -306,7 +306,7 @@ not all of which is obvious a priori.
 \end{abstract}
 
 \section{Introduction}
-\let\thefootnote\relax\footnote{This work is licensed under a Creative Commons Attribution 4.0 International Licence. Page numbers and proceedings footer are added by the organisers. Licence details: http:// creativecommons.org/licenses/by/4.0/}
+\let\thefootnote\relax\footnote{This work is licensed under a Creative Commons Attribution 4.0 International License. Page numbers and proceedings footer are added by the organisers. License details: \url{http://creativecommons.org/licenses/by/4.0/}}
 \addtocounter{footnote}{-1}\let\thefootnote\svthefootnote
 Definiteness is a morphosyntactic property of noun phrases (NPs) 
 associated with semantic and pragmatic characteristics of entities 
@@ -356,7 +356,7 @@ should be able to characterize the aspects of meaning that account for the diffe
 exhibited in \cref{ex:care,ex:artichokes,ex:soldier}: e.g., that \cref{ex:artichokes} concerns a generic class of entities while 
 \cref{ex:soldier} concerns a role filled by an individual. For more on communicative functions, see \cref{sec:scheme}.
 
-\begin{figure*}[p]\small\centering
+\begin{figure*}[t]\small\centering
 \begin{tabular}{@{}p{.51\textwidth}p{.46\textwidth}@{}}
 \begin{itemize}
 \item    \ilbl{Nonanaphora} {\bf\scriptsize $[-A,-B]$} \hfill {\bf\tiny 999}
@@ -832,36 +832,6 @@ the third and fourth columns give accuracies as percentages. The best in each co
 
 \subsection{Results}
 
-\begin{table*}\small\centering
-   \begin{tabular}{lr<{\hspace{23pt}}r<{\hspace{3pt}}r<{\hspace{5pt}}r}
-      \textbf{Leaf label} & \multicolumn{1}{c}{\textbf{No. of Instances}} & \multicolumn{1}{c}{\textbf{Prec.}} & \multicolumn{1}{c}{\textbf{Recall}} & \textbf{$F_1$} \\
-      \midrule
-Pleonastic & 44 & 100 & 78 & 88 \\
-Bridging\_Restrictive\_Modifier & 552 & 58 & 84 & 68 \\
-Quantified & 213 & 57 & 57 & 57 \\
-Unique\_Larger\_Situation & 97 & 52 & 58 & 55 \\
-Same\_Head & 452 & 41 & 41 & 41 \\
-Measure\_Nonreferential & 98 & 88 & 26 & 40 \\
-Nonunique\_Hearer\_New\_Spec & 190 & 36 & 46 & 40 \\
-Other\_Nonreferential & 134 & 39 & 36 & 37 \\
-Different\_Head & 271 & 32 & 33 & 32 \\
-Nonunique\_Larger\_Situation & 97 & 29 & 25 & 27 \\
-Part\_of\_Noncompositional\_MWE & 88 & 20 & 17 & 18 \\
-Bridging\_Nominal & 33 & 33 & 10 & 15 \\
-Generic\_Individual\_Level & 113 & 14 & 11 & 13 \\
-Nonunique\_Nonspec & 173 & 9 & 25 & 13 \\
-Bridging\_Other\_Context & 96 & 33 & 6 & 11 \\
-Bridging\_Event & 9 & --- & 0 & --- \\
-Nonunique\_Physical\_Copresence & 36 & 0 & 0 & --- \\
-Nonunique\_Predicative\_Identity & 10 & --- & 0 & --- \\
-Predicative\_Nonidentity & 57 & 0 & 0 & --- \\
-Unique\_Hearer\_New & 26 & --- & 0 & --- \\
-   \end{tabular}
-   \caption{Leaf precision, recall and $F_1$ as percentages. 
-The number of instances in the first column are from the training set.}
-   \label{tbl:leaf}
-\end{table*}
-
 
 Measurements of overall classification performance appear in \cref{tbl:results}. While far from perfect, our classifiers achieve promising accuracy levels 
 given the small size of the training data and the number of labels in the annotation scheme.
@@ -872,6 +842,26 @@ which decomposes the semantic labels into attributes without directly considerin
 performs almost as well as the random forest classifier in Soft Match.
 This is encouraging because it suggests that the model has correctly exploited known linguistic generalizations 
 to account for the grammaticalization of definiteness in English. 
+
+\begin{table*}\small\centering
+   \begin{tabular}{@{}lrrrrlrrrr@{}}
+      \textbf{Leaf label} & \multicolumn{1}{c}{$N$} & \multicolumn{1}{c}{\textbf{P}} & \multicolumn{1}{c}{\textbf{R}} & \textbf{$F_1$} &
+      \textbf{Leaf label} & \multicolumn{1}{c}{$N$} & \multicolumn{1}{c}{\textbf{P}} & \multicolumn{1}{c}{\textbf{R}} & \textbf{$F_1$} \\
+      \midrule
+Pleonastic & 44 & 100 & 78 & 88                      & Part\_of\_Noncompositional\_MWE & 88 & 20 & 17 & 18 \\
+Bridging\_Restrictive\_Modifier & 552 & 58 & 84 & 68 & Bridging\_Nominal & 33 & 33 & 10 & 15 \\ 
+Quantified & 213 & 57 & 57 & 57                      & Generic\_Individual\_Level & 113 & 14 & 11 & 13 \\
+Unique\_Larger\_Situation & 97 & 52 & 58 & 55        & Nonunique\_Nonspec & 173 & 9 & 25 & 13 \\
+Same\_Head & 452 & 41 & 41 & 41                      & Bridging\_Other\_Context & 96 & 33 & 6 & 11 \\
+Measure\_Nonreferential & 98 & 88 & 26 & 40          & Bridging\_Event & 9 & --- & 0 & --- \\
+Nonunique\_Hearer\_New\_Spec & 190 & 36 & 46 & 40    & Nonunique\_Physical\_Copresence & 36 & 0 & 0 & --- \\
+Other\_Nonreferential & 134 & 39 & 36 & 37           & Nonunique\_Predicative\_Identity & 10 & --- & 0 & --- \\
+Different\_Head & 271 & 32 & 33 & 32                 & Predicative\_Nonidentity & 57 & 0 & 0 & --- \\
+Nonunique\_Larger\_Situation & 97 & 29 & 25 & 27     & Unique\_Hearer\_New & 26 & --- & 0 & --- \\
+   \end{tabular}
+   \caption{Number of training set instances and precision, recall, and $F_1$ percentages for leaf labels.}
+   \label{tbl:leaf}
+\end{table*}
 
 \Cref{tbl:leaf} reports the precision and recall of each leaf label predicted. 
 Certain leaf labels are found to be easier for the classifier to predict: 
