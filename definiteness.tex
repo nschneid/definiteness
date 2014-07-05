@@ -1,5 +1,8 @@
 \PassOptionsToPackage{usenames}{color}
 \documentclass[11pt,letterpaper]{article}
+
+\let\svthefootnote\thefootnote
+
 \usepackage{comment}
 \usepackage{relsize} % relative font sizes (e.g. \smaller). must precede ACL style
 \usepackage{colingstyle/coling2014}
@@ -15,7 +18,7 @@
 
 \usepackage[boxed]{algorithm2e}
 \renewcommand\AlCapFnt{\small}
-\usepackage[small,bf,skip=5pt]{caption}
+%\usepackage[small,bf,skip=5pt]{caption}
 \usepackage{sidecap} % side captions
 \usepackage{rotating}	% sideways
 
@@ -283,8 +286,7 @@
 \author{Archna Bhatia$^\ast$ \ \ \ Chu-Cheng Lin$^\ast$ \ \ \ Nathan Schneider$^\ast$ \ \ \ Yulia Tsvetkov$^\ast$ \\
  \bf Fatima Talib Al-Raisi$^\ast$ \ \ \  Laleh Roostapour$^\ast$ \ \ \ Jordan Bender$^\dagger$  \ \ \ Abhimanu Kumar$^\ast$  \\
  \bf Lori Levin$^\ast$ \ \ \ Mandy Simons$^\ast$ \ \ \  Chris Dyer$^\ast$\\
-$^\ast$Carnegie Mellon University, Pittsburgh, PA 15213\\
-$^\dagger$University of Pittsburgh, Pittsburgh, PA 15260}
+$^\ast$Carnegie Mellon University, Pittsburgh, PA 15213 \ \ \ ^\dagger$University of Pittsburgh, Pittsburgh, PA 15260}
 
 \date{}
 
@@ -304,7 +306,8 @@ not all of which is obvious a priori.
 \end{abstract}
 
 \section{Introduction}
-
+\let\thefootnote\relax\footnote{This work is licensed under a Creative Commons Attribution 4.0 International Licence. Page numbers and proceedings footer are added by the organisers. Licence details: http:// creativecommons.org/licenses/by/4.0/}
+\addtocounter{footnote}{-1}\let\thefootnote\svthefootnote
 Definiteness is a morphosyntactic property of noun phrases (NPs) 
 associated with semantic and pragmatic characteristics of entities 
 and their discourse status. 
@@ -353,7 +356,7 @@ should be able to characterize the aspects of meaning that account for the diffe
 exhibited in \cref{ex:care,ex:artichokes,ex:soldier}: e.g., that \cref{ex:artichokes} concerns a generic class of entities while 
 \cref{ex:soldier} concerns a role filled by an individual. For more on communicative functions, see \cref{sec:scheme}.
 
-\begin{figure*}[t]\small\centering
+\begin{figure*}[p]\small\centering
 \begin{tabular}{@{}p{.51\textwidth}p{.46\textwidth}@{}}
 \begin{itemize}
 \item    \ilbl{Nonanaphora} {\bf\scriptsize $[-A,-B]$} \hfill {\bf\tiny 999}
@@ -546,7 +549,7 @@ Once \glosst{she}{\llbl{Same\_Head}} gave \glosst{her}{\llbl{Different\_Head}}
 which suited \glosst{her}{\llbl{Same\_Head}} so well that \glosst{she}{\llbl{Same\_Head}} 
 would never wear \glosst{anything else}{\llbl{Quantified}}; so \glosst{she}{\llbl{Same\_Head}} was always called 
 `\glosst{Little Red Riding Hood}{\llbl{Unique\_Hearer\_New}}.'
-\caption{An annotated sentence from ``Little Red Riding Hood.'' The previous sentence is shown for context.}
+\caption{An annotated sentence from ``Little Red Riding Hood.’’ The previous sentence is shown for context.}
 \label{fig:excerpt}
 \end{figure*}
 
