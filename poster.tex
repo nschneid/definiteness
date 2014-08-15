@@ -1,0 +1,290 @@
+\documentclass[landscape,final]{baposter}
+
+%\usepackage{times}
+\usepackage{calc}
+\usepackage{graphicx}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{relsize}
+\usepackage{multirow}
+\usepackage{url}
+\usepackage{tipa}
+%\usepackage{biblatex}
+
+\usepackage{multicol}
+\usepackage{natbib}
+\newcommand{\namecite}{\citet}
+\renewcommand{\cite}{\citep}
+\bibpunct[, ]{[}{]}{;}{n}{,}{,}
+
+\usepackage{pgfbaselayers}
+\pgfdeclarelayer{background}
+\pgfdeclarelayer{foreground}
+\pgfsetlayers{background,main,foreground}
+
+\usepackage{fourier} % utopia font
+\renewcommand*\sfdefault{uop} % optima font
+%\usepackage{palatino}
+\usepackage{listings}
+\newcommand{\captionfont}{\footnotesize}
+\newcommand{\hl}[1]{\color{red}{#1}}
+%\newcommand{\textgl}[1]{``#1''}
+%\newcommand{\word}[2]{\textnl{#1} \textgl{#2}}
+%\newcommand{\gloss}[3]{\textnl{#1} (\textnl{#2}) \textgl{#3}}
+
+%\newcommand{\upspc}{\vspace{-1.9em}}
+
+\newcommand{\feat}[1]{\textsmaller[.5]{\textsf{#1}}} % code for a feature group
+%\newcommand{\featstr}[1]{\textsmaller[.5]{\begin{lstlisting}#1\end{lstlisting}}} % full feature name
+\newcommand{\textnl}{\textit}
+
+\selectcolormodel{cmyk}
+
+\graphicspath{{../}}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Multicol Settings
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\setlength{\columnsep}{0.7em}
+\setlength{\columnseprule}{0mm}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Save space in lists. Use this after the opening of the list
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\newcommand{\compresslist}{%
+\setlength{\itemsep}{1pt}%
+\setlength{\parskip}{0pt}%
+\setlength{\parsep}{0pt}%
+}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%% Begin of Document
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{document}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%% Here starts the poster
+%%%---------------------------------------------------------------------------
+%%% Format it to your taste with the options
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\typeout{Poster Starts}
+\background{
+  \begin{tikzpicture}[remember picture,overlay]%
+    \draw (current page.north west)+(-2em,-0em) node[anchor=north west] {\hspace{-2em}\includegraphics[height=1.1\textheight]{silhouettes_background}};
+  \end{tikzpicture}%
+}
+\definecolor{silver}{cmyk}{0,0,0,0.5}
+\definecolor{lightgray}{cmyk}{0,0,0,0.05}
+\definecolor{yellow}{cmyk}{0,0,0.9,0.0}
+\definecolor{reddishyellow}{cmyk}{0,0.22,1.0,0.0}
+\definecolor{black}{cmyk}{0,0,0.0,1.0}
+\definecolor{darkYellow}{cmyk}{0,0,1.0,0.5}
+\definecolor{darkSilver}{cmyk}{0,0,0,0.1}
+
+\definecolor{lightyellow}{cmyk}{0,0,0.3,0.0}
+\definecolor{lighteryellow}{cmyk}{0,0,0.1,0.0}
+\definecolor{lighteryellow}{cmyk}{0,0,0.1,0.0}
+\definecolor{lightestyellow}{cmyk}{0,0,0.05,0.0}
+% My colors
+\definecolor{lightmagenta}{cmyk}{0,0.3,0.0,0.0}
+\definecolor{lightermagenta}{cmyk}{0,0.1,0,0.0}
+\definecolor{lightestmagenta}{cmyk}{0,0.05,0.0,0.0}
+\definecolor{cyan}{cmyk}{0.9,0.,0.0,0.0}
+\definecolor{lightcyan}{cmyk}{0.3,0.,0.0,0.0}
+\definecolor{lightercyan}{cmyk}{0.1,0,0,0.0}
+\definecolor{lightestcyan}{cmyk}{0.05,0.0,0.0,0.0}
+\definecolor{blue}{cmyk}{0.5,0.2,0.0,0.0}
+\definecolor{lightblue}{cmyk}{0.2,0.12,0.0,0.0}
+\definecolor{lighterblue}{cmyk}{0.1,0.05,0,0.0}
+\definecolor{lightestblue}{cmyk}{0.01,0.005,0.0,0.0}
+
+\definecolor{darkpurple}{cmyk}{1,1,0.0,0.0}
+\definecolor{lightpurple}{cmyk}{0.1,0.4,0.0,0.0}
+
+\begin{poster}{
+  % Show grid to help with alignment
+  grid=no,
+  % Column spacing
+  colspacing=1.4em,
+  % Color style
+  bgColorOne=white, %lighteryellow,
+  bgColorTwo=white, %lightestyellow,
+  borderColor=lightgray, %reddishyellow,
+  headerColorOne=red, %yellow,
+  headerColorTwo=darkpurple, %reddishyellow,
+  headerFontColor=white,
+  boxColorOne=lightgray, %lightyellow,
+  boxColorTwo=lightgray, %lighteryellow,
+  % Format of textbox
+  textborder=rounded-small, %roundedleft,
+  % Format of text header
+  eyecatcher=yes,
+  headerborder=closed,
+  headerheight=0.1\textheight,
+  headershape=rounded, %roundedright,
+  headershade=plain,
+  headerfont=\large\bf\sc\textsf, %Sans Serif
+  boxshade=plain,
+%  background=shade-tb,
+  background=plain,
+  linewidth=1pt
+}
+  % Eye Catcher
+  {%\begin{minipage}{7em}
+\includegraphics[width=9em]{img/cmu_logo}\\
+%\end{minipage}
+} % No eye catcher for this poster. If an eye catcher is present, the title is centered between eye-catcher and logo.
+  % Title
+  {\bf %Sans Serif
+  %\bf% Serif
+  \textsf{Automatic Classification of Communicative Functions of Definiteness}
+  }
+    % Authors
+  {\large %\it %Sans Serif
+  % Serif
+  Archna Bhatia$\overset{^\textsc{lti}}{\textrm{,}}$ Chu-Cheng Lin$\overset{^\textsc{lti}}{\textrm{,}}$ Nathan Schneider$\overset{^\textsc{lti}}{\textrm{,}}$ Yulia Tsvetkov$\overset{^\textsc{lti}}{\textrm{,}}$ Fatima Talib Al-Raisi$\overset{^\textsc{lti}}{\textrm{,}}$ Laleh Roostapour$\overset{^\textsc{lti}}{\textrm{,}}$ \\ Jordan Bender$\overset{^\textsc{p}}{\textrm{,}}$ Abhimanu Kumar$\overset{^\textsc{lti}}{\textrm{,}}$ Lori Levin$\overset{^\textsc{lti}}{\textrm{,}}$ Mandy Simons$\overset{^\textsc{ph}}{\textrm{,}}$ and Chris Dyer$\overset{^\textsc{lti}}{\textrm{}}$
+  \\
+  \textbf{L}anguage \textbf{T}echnologies \textbf{I}nstitute / Department of \textbf{Ph}ilosophy, Carnegie Mellon University $\bullet$ Department of Linguistics, University of \textbf{P}ittsburgh. Pittsburgh, PA
+  }
+
+  \tikzstyle{light shaded}=[top color=baposterBGtwo!30!white,bottom color=baposterBGone!30!white,shading=axis,shading angle=30]
+
+  % Width of left inset image
+   %  \newlength{\leftimgwidth}
+    % \setlength{\leftimgwidth}{0.78em+8.0em}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%% Now define the boxes that make up the poster
+%%%---------------------------------------------------------------------------
+%%% Each box has a name and can be placed absolutely or relatively.
+%%% The only inconvenience is that you can only specify a relative position 
+%%% towards an already declared box. So if you have a box attached to the 
+%%% bottom, one to the top and a third one which should be in between, you 
+%%% have to specify the top and bottom boxes before you specify the middle 
+%%% box.
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+    %
+    % A coloured circle useful as a bullet with an adjustably strong filling
+    \newcommand{\colouredcircle}[1]{%
+      \tikz{\useasboundingbox (-0.2em,-0.32em) rectangle(0.2em,0.32em); \draw[draw=black,fill=bgColorOne!80!black!#1!white,line width=0.03em] (0,0) circle(0.18em);}}
+
+    \newcommand{\numbox}[1]{%
+      \tikz{\useasboundingbox (-0.2em,-0.32em) rectangle(0.2em,0.32em); \draw[draw=black,fill=headerColorOne!80!black!80!white,line width=0.03em] (0,0) circle(0.5em); \path (0,0) node {\smaller #1};}\hspace{0.2em}}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%Abstract%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\headerbox{Abstract}{name=abstract,column=0,row=0,span=1.15}{
+Definiteness expresses a constellation of semantic, pragmatic, and discourse properties (the communicative functions) of an NP. Our supervised classifier for English NPs uses lexical, morphological, and syntactic features to predict the communicative functions in terms of a language-universal classification scheme and establishes strong baselines for future work. Additionally, analysis of the features and learned parameters in the model provides insight into the grammaticalization of definiteness in English, not all of which is obvious a priori.
+}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\headerbox{Classification Model}{name=model,column=0,span=1.15,below=abstract}{
+We use an in-house implementation of a multiclass logistic regression classifier with L2-regularization [***AB: Do we want to say why we used L2, & why log regression? Also how do I make the following equatoin look better? I don't want the first part to be in the center, but more to the left.*** ].
+\begin{align*}
+\hat{\boldsymbol{\theta}} = \arg \max_{\boldsymbol{\theta}}-{\lambda} ||\boldsymbol{\theta}||^2_2 + \\
+ \sum_{\langle x,y \rangle\in\mathcal{D}} \log{\frac{\exp{\boldsymbol{\theta}^{\top}\mathbf{f}(x,y)}}{\sum_{y' \in \mathcal{Y}}\exp{\left(\boldsymbol{\theta}^{\top}\mathbf{f}(x,y')\costversion{ + \kappa\textit{cost}(y,y')}\right)}}} \\
+\end{align*}
+}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%Main Features%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\headerbox{Features}{name=features,column=0,span=1.15,below=model}{
+%\linebreak 
+
+\begin{description}
+\item [Words of Interest] Head of the NP, its dependents, its governor (external to NP), its first ancestor verb \\--- token, lemma, POS tag, dependency relation, a binary indicator of plurality on the head N, first\_dependent, last\_dependent, auxiliaries of the first ancestral verb, first ancestral verb with a negative particle as dependent. 
+\item [Structural] --- path length to the root, path length to the first ancestral verb, number of dependents, number of dependency relations that link non-neighbors.
+\item [Positional] --- token length of the NP, NP's location in the sentence (first or second half), the first ancestral verb's position relative to the head (left or right), POS \& lemma of the left and the right neighbors of the head, governor, and the first ancestral verb. 
+\item [Above features of NPs in Following NP-NP relation Types] immediate parent, immediate child, immediate precedent, immediate successor, the nearest preceding coreferent mention.
+\end{description}
+}  
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%Scheme%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\headerbox{The language independent scheme for Communicative Functions of Definiteness}{name=scheme,column=1.15,span = 1.85}{
+
+\vspace{4pt}
+
+\begin{center}\small
+\begin{tabular}{p{25em}p{25em}}
+\multicolumn{1}{c}{\bf Nonanaphora} & \multicolumn{1}{c}{\bf Anaphora \& Miscellaneous} \\
+\smaller[.5]
+ \begin{tabular}{p{22em}p{3em}} 
+   \\\hline{\bf Nonanaphora} [-A,-B]&${\bf 999}$\\\hline\\{\bf - Unique} [+U]&${\bf 287}$\\$*${\bf Unique\_Hearer\_Old} [+F,-G,+S]&${\bf 251}$\\Unique\_Physical\_Copresence [+R]&$13$\\Unique\_Larger\_Situation [+R]&$237$\\Unique\_Predicative\_Identity [+P]&$1$\\$*$Unique\_Hearer\_New [-F]&$36$\\\\{\bf - Nonunique} [-U]&${\bf 581}$\\$*${\bf Nonunique\_Hearer\_Old} [+F]&${\bf 169}$\\Nonunique\_Physical\_Copresence [-G,+R,+S]&$39$\\Nonunique\_Larger\_Situation [-G,+R,+S]&$117$\\Nonunique\_Predicative\_Identity [+P]&$13$\\$*$Nonunique\_Hearer\_New\_Spec [-F,-G,+R,+S]&$231$\\$*$Nonunique\_Nonspec [-G,-S]&$181$\\\\{\bf - Generic} [+G,-R]&${\bf 131}$\\$*$Generic\_Kind\_Level&$0$\\$*$Generic\_Individual\_Level&$131$ 
+ \end{tabular} 
+& 
+\smaller[.5]
+ \begin{tabular}{p{22em}p{3em}} 
+   \\\hline{\bf Anaphora} [+A]&${\bf 1574}$\\\hline\\{\bf - Basic\_Anaphora} [-B,+F]& ${\bf 795}$\\$*$Same\_Head&$556$\\$*$Different\_Head&$329$\\\\{\bf - Extended\_Anaphora} [+B]&${\bf 779}$\\$*$Bridging\_Nominal [-G,+R,+S]&$43$\\$*$Bridging\_Event [+R,+S]&$10$\\$*$Bridging\_Restrictive\_Modifier [-G,+S]&$614$\\$*$Bridging\_Subtype\_Instance [-G]&$0$\\$*$Bridging\_Other\_Context [+F]&$112$\\\\\hline{\bf Miscellaneous} [-R]&${\bf 732}$\\\hline\\- Pleonastic [-B,-P]&$53$\\- Quantified&$248$\\- Predicative\_Equative\_Role [-B,+P]&$58$\\- Part\_Of\_Noncompositional\_MWE&$100$\\- Measure\_Nonreferential&$125$\\- Other\_Nonreferential&$148$
+ \end{tabular} \\
+
+\end{tabular}
+\end{center}
+}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%Examples%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\headerbox{Examples for Communicative Functions}{name=example,column=1.15,span = 1.85,below=scheme}{
+
+\vspace{4pt}
+\begin {center}\small
+\smaller[.5]
+\begin{tabular}{p{18em}p{32em}}
+\hline{\bf CFD Label}&${\bf Example}$\\\hline\\Unique\_Physical\_Copresence & {\bf John} here is an investment banker.\\Unique\_Larger\_Situation & In the days since {\bf Hillary Clinton} unburdened herself in an interview with The Atlantic's Jeffrey Goldberg ...\\Unique\_Predicative\_Identity & Clark Kent is {\bf Superman}.\\Unique\_Hearer\_New & a restaurant chain named {\bf Shoney's}\\Nonunique\_Physical\_Copresence & {\bf The podium} is too high.\\Nonunique\_Larger\_Situation & {\bf the chair} (at a conference) / {\bf today}\\Nonunique\_Predicative\_Identity & He is {\bf the manager}.\\Nonunique\_Hearer\_New\_Specific & I am looking for {\bf a nurse}. Her name is Sara.\\Nonunique\_Nonspec & I am looking for {\bf a nurse} [any nurse would do].\\Generic\_Kind\_Level & {\bf Dinosaurs} are extinct.\\Generic\_Individual\_Level & {\bf Cats} have fur.\\Basic\_Same\_Head & I'm going to tell you \underline{a quick story}. It's {\bf a true story}.\\Basic\_Different\_Head & I adopted \underline{a cat} this weekend. {\bf The animal} is so cute.\\Extended\_Bridging\_Nominal & I looked at \underline{an apartment} yesterday. {\bf The kitchen} was really large.\\Extended\_Bridging\_Event & My friend's son \underline{got married} this weekend. {\bf The bride} looked beautiful.\\Extended\_Bridging\_Restrictive\_Modifier & {\bf the house} \underline{next door}/ \underline{John's} {\bf daughter}\\Extended\_Subtype\_Instance & I collect \underline{coins}. I have {\bf a 1943 steel penny}.\\Extended\_Other\_Context & I want to focus on \underline{what many of you have said you would like me to elaborate on}. What can you do about {\bf the climate crisis}?\\Pleonastic & {\bf It is raining.}\\Quantified & {\bf All the people} / {\bf no motorcade}\\Predicative\_Equative\_Role & He's {\bf a teacher}. / This is {\bf an opportunity}.\\Part\_of\_Noncompositional\_MWE & Ole' Charlie kicked {\bf the bucket} today.\\Measure\_Nonreferential & {\bf hours} later / {\bf miles} away\\Other\_Nonreferential & {\bf global warming} / {\bf concern} / the topic of {\bf energy} 
+  \end{tabular} 
+\end{center}\\ 
+}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%Results%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% 
+  \headerbox{Accuracy}{name=results,column=3,span=1}{
+
+\begin{center}\small
+\smaller [.5]
+\begin{tabular}{|l|r|c|c|}
+      %\hline
+ \multicolumn{1}{p{5em}}{Condition} &  \multicolumn{1}{c}{\# Params}	&  \multicolumn{1}{c}{ExactMatch(\%)} &  \multicolumn{1}{c}{SoftMatch(\%)}    	\\				
+       \hline %\hline
+\feat{Majority baseline} & --- & 12.1 & 47.8 \\
+\feat{Log}\\
++ \feat{attributes} & 473,064 & 38.7 & 77.1 \\ 
++ \feat{labels} & 413,931 & 40.8 & 73.6 \\ 
++ \feat{attributes, labels} & 926,417 & 43.7 & {\bf 78.2} \\
+\feat{Random forest} & 20,363 & {\bf 49.7} & 77.5 \\
+			\hline%\hline
+\end{tabular}
+\end{center}
+
+\begin{center}\small
+\smaller [.5]
+\begin{tabular}{|l|c|c|}
+      %\hline
+ \multicolumn{1}{p{9em}}{Leaf label} & \multicolumn{1}{c}{N} & \multicolumn{1}{c}{F1}	\\				
+       \hline %\hline
+\textsc{Bridging\_Restrictive\_Modifier} & 552 & 68 \\
+\textsc{Same\_Head} & 452 & 41 \\
+\textsc{Different\_Head} & 271 & 32 \\
+\textsc{Pleonastic} & 44 & 88 \\
+			\hline%\hline
+\end{tabular}
+\end{center}
+\begin{center}
+\end{center}
+
+
+[***AB: will add all teh other labels a bit later.***]
+}
+ %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%Analysis%%%%%%%%%%%%%%%%%%%%    %%%%%%%%%%%%%%%%%%
+ \headerbox{Analysis}{name=anal,column=3,span=1,below=results}{
+ %\scriptsize 
+\begin{description}
+ \item [Confirmation of known facts] ...
+ \item [Good hypotheses to test] ...
+ \item [Baffling cases] ... 
+\end{description}
+
+[***AB: to be added soon***]
+}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%Acknowledgements%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\headerbox{Acknowledgements}{name=ack,column=3,span=1,below=anal}{
+%\scriptsize 
+    This research was sponsored by a grant from the U.S. Army Research Lab and the U.S. Army Research Office.  
+}
+
+\end{poster}%
+\end{document}
