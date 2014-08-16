@@ -181,10 +181,9 @@ Definiteness expresses a constellation of semantic, pragmatic, and discourse pro
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \headerbox{Classification Model}{name=model,column=0,span=1.15,below=abstract}{
-We use an in-house implementation of a multiclass logistic regression classifier with L2-regularization [***AB: Do we want to say why we used L2, & why log regression? Also how do I make the following equatoin look better? I don't want the first part to be in the center, but more to the left.*** ].
+We use an in-house implementation of a multiclass logistic regression classifier with L2-regularization [***AB: Do we want to say why we used L2, & why log regression?*** ].
 \begin{align*}
-\hat{\boldsymbol{\theta}} = \arg \max_{\boldsymbol{\theta}}-{\lambda} ||\boldsymbol{\theta}||^2_2 + \\
- \sum_{\langle x,y \rangle\in\mathcal{D}} \log{\frac{\exp{\boldsymbol{\theta}^{\top}\mathbf{f}(x,y)}}{\sum_{y' \in \mathcal{Y}}\exp{\left(\boldsymbol{\theta}^{\top}\mathbf{f}(x,y')\costversion{ + \kappa\textit{cost}(y,y')}\right)}}} \\
+\hat{\boldsymbol{\theta}} = \arg \max_{\boldsymbol{\theta}}-{\lambda} ||\boldsymbol{\theta}||^2_2 + \sum_{\langle x,y \rangle\in\mathcal{D}} \log{\frac{\exp{\boldsymbol{\theta}^{\top}\mathbf{f}(x,y)}}{\sum_{y' \in \mathcal{Y}}\exp{\left(\boldsymbol{\theta}^{\top}\mathbf{f}(x,y')\costversion{ + \kappa\textit{cost}(y,y')}\right)}}} \\
 \end{align*}
 }
 
@@ -254,31 +253,58 @@ We use an in-house implementation of a multiclass logistic regression classifier
 \smaller [.5]
 \begin{tabular}{|l|c|c|}
       %\hline
- \multicolumn{1}{p{9em}}{Leaf label} & \multicolumn{1}{c}{N} & \multicolumn{1}{c}{F1}	\\				
+ \multicolumn{1}{p{9em}}{Leaf label} & \multicolumn{1}{c}{Num of instances} & \multicolumn{1}{c}{F1}	\\				
        \hline %\hline
 \textsc{Bridging\_Restrictive\_Modifier} & 552 & 68 \\
 \textsc{Same\_Head} & 452 & 41 \\
 \textsc{Different\_Head} & 271 & 32 \\
+\textsc{Quantified} & 213 & 57 \\
+\textsc{Nonunique\_Hearer\_New\_Specific} & 190 & 40 \\
+\textsc{Nonunique\_Nonspec} & 173 & 13 \\
+\textsc{Other\_Nonreferential} & 134 & 37 \\
+\textsc{Generic\_Individual\_Level} & 113 & 13 \\
+\textsc{Measure\_Nonreferential} & 98 & 40 \\
+\textsc{Unique\_Larger\_Situation} & 97 & 55 \\
+\textsc{Nonunique\_Larger\_Situation} & 97 & 27 \\
+\textsc{Bridging\_Other\_Context} & 96 & 11 \\
+\textsc{Part\_of\_Noncompositional\_MWE} & 88 & 18 \\
+\textsc{Predicative\_Nonidentity} & 57 & --- \\
 \textsc{Pleonastic} & 44 & 88 \\
+\textsc{Nonunique\_Physical\_Copresence} & 36 & --- \\
+\textsc{Bridging\_Nominal} & 33 & 15 \\
+\textsc{Unique\_Hearer\_New} & 26 & --- \\
+\textsc{Nonunique\_Predicative\_Identity} & 10 & --- \\
+\textsc{Bridging\_Event} & 9 & --- \\
 			\hline%\hline
 \end{tabular}
 \end{center}
-\begin{center}
-\end{center}
-
-
-[***AB: will add all teh other labels a bit later.***]
 }
  %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%Analysis%%%%%%%%%%%%%%%%%%%%    %%%%%%%%%%%%%%%%%%
  \headerbox{Analysis}{name=anal,column=3,span=1,below=results}{
  %\scriptsize 
-\begin{description}
- \item [Confirmation of known facts] ...
- \item [Good hypotheses to test] ...
- \item [Baffling cases] ... 
-\end{description}
+\begin{center}\small
+ \smaller [.5]
+{\bf Confirmation of known facts: Specificity}
+ \begin{tabular}{|l|l|}
+  \multicolumn{1}{p{8em}}{High +ve wts} & \multicolumn{1}{l}{High -ve wt}    \\
+        \hline %\hline
+the definite article "the" & the indefinite article "a"\\possessives (PRP\$)\\proper nouns (NNP)\\2nd person pronouns\\NPs with "the" as the first dependent \\\hline
+\end{tabular}
+ \end{center}
 
-[***AB: to be added soon***]
+\begin{center}\small
+  \smaller [.5]
+{\bf Good hypotheses to test: Specificity}
+  \begin{tabular}{|l|l|}
+   \multicolumn{1}{p{8em}}{High +ve wts} & \multicolumn{1}{l}{High -ve wt}    \\
+         \hline %\hline
+ objects of "from" & NPS with comparative adjectives (JJR)\\NPs with NNP as their last dependent\\{NPs with possessive pronouns\\immediately preceding the\\head (rather than the\\ones with intervening words)}\\\hline
+ \end{tabular}
+  \end{center}
+\begin{center}\small
+   \smaller [.5]
+{\bf Baffling cases: Specificity} [***AB: to be added***]
+   \end{center}
 }
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%Acknowledgements%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \headerbox{Acknowledgements}{name=ack,column=3,span=1,below=anal}{
