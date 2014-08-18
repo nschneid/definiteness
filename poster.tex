@@ -181,9 +181,14 @@ Definiteness expresses a constellation of semantic, pragmatic, and discourse pro
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \headerbox{Classification Model}{name=model,column=0,span=1.15,below=abstract}{
-We use an in-house implementation of a multiclass logistic regression classifier (logistic regression allows us to analyze the feature weights and hence generate hypotheses regarding form-function interactions). [***AB: will add or just replace with the weight times percept version of the objective once am sure about it***].
+We use an in-house implementation of a multiclass logistic regression classifier (logistic regression allows us to analyze the feature weights and hence generate hypotheses regarding form-function interactions).
+\\{\bf Feature function:}
+\begin{align*}\mathbf{f}(x,y) = \boldsymbol{\phi}(x) \times \tilde{\boldsymbol{\omega}}(y)
+\end{align*}
+
+{\bf Feature weight vector:}
 \begin{align*}
-\hat{\boldsymbol{\theta}} = \arg \max_{\boldsymbol{\theta}}-{\lambda} ||\boldsymbol{\theta}||^2_2 + \sum_{\langle x,y \rangle\in\mathcal{D}} \log{\frac{\exp{\boldsymbol{\theta}^{\top}\mathbf{f}(x,y)}}{\sum_{y' \in \mathcal{Y}}\exp{\left(\boldsymbol{\theta}^{\top}\mathbf{f}(x,y')\right)}}} \\
+\hat{\boldsymbol{\theta}} = \arg \max_{\boldsymbol{\theta}}-{\lambda} ||\boldsymbol{\theta}||^2_2 + \sum_{\langle x,y \rangle\in\mathcal{D}} \log{\frac{\exp{\boldsymbol{\theta}^{\top}\mathbf{f}(x,y)}}{\sum_{y' \in \mathcal{Y}}\exp{\left(\boldsymbol{\theta}^{\top}\mathbf{f}(x,y')\right)}}}
 \end{align*}
 }
 
