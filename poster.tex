@@ -142,7 +142,7 @@
   % Title
   {\bf %Sans Serif
   %\bf% Serif
-  \textsf{Automatic Classification of Communicative Functions of Definiteness}
+  \textbf{Automatic Classification of Communicative Functions of Definiteness}
   }
     % Authors
   {\large %\it %Sans Serif
@@ -183,7 +183,7 @@ Definiteness expresses a constellation of semantic, pragmatic, and discourse pro
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \headerbox{Classification Model}{name=model,column=0,span=1.05,below=abstract}{
-We use an in-house implementation of a \\multiclass logistic regression classifier. %(logistic regression allows us to analyze the feature weights and hence generate hypotheses regarding form-function interactions).
+We use an in-house implementation of a \\multiclass logistic regression classifier.\\ %(logistic regression allows us to analyze the feature weights and hence generate hypotheses regarding form-function interactions).
 \\{\bf Feature function:}
 \begin{align*}\mathbf{f}(x,y) = \boldsymbol{\phi}(x) \times \tilde{\boldsymbol{\omega}}(y)
 \end{align*}
@@ -212,7 +212,7 @@ We use an in-house implementation of a \\multiclass logistic regression classifi
 
 \begin{center}\small
 \begin{tabular}{p{25em}p{25em}}
-%\multicolumn{1}{c}{\bf Nonanaphora} & \multicolumn{1}{c}{\bf Anaphora \& Miscellaneous} \\
+%\multicolumn{1}{c}{\bf Nonanaphora} & \multicolumn{1}{c}{\bf Anaphora \& Miscellaneous}
 \smaller[.5]
  \begin{tabular}{p{22em}p{3em}} 
    {\bf \normalsize{Nonanaphora} [-A,-B]&${\bf 999}$}\\\hline\\{\bf - Unique} [+U]&${\bf 287}$\\$*${\bf Unique\_Hearer\_Old} [+F,-G,+S]&${\bf 251}$\\Unique\_Physical\_Copresence [+R]&$13$\\Unique\_Larger\_Situation [+R]&$237$\\Unique\_Predicative\_Identity [+P]&$1$\\$*$Unique\_Hearer\_New [-F]&$36$\\\\{\bf - Nonunique} [-U]&${\bf 581}$\\$*${\bf Nonunique\_Hearer\_Old} [+F]&${\bf 169}$\\Nonunique\_Physical\_Copresence [-G,+R,+S]&$39$\\Nonunique\_Larger\_Situation [-G,+R,+S]&$117$\\Nonunique\_Predicative\_Identity [+P]&$13$\\$*$Nonunique\_Hearer\_New\_Spec [-F,-G,+R,+S]&$231$\\$*$Nonunique\_Nonspec [-G,-S]&$181$\\\\{\bf - Generic} [+G,-R]&${\bf 131}$\\$*$Generic\_Kind\_Level&$0$\\$*$Generic\_Individual\_Level&$131$ 
@@ -220,7 +220,7 @@ We use an in-house implementation of a \\multiclass logistic regression classifi
 & 
 \smaller[.5]
  \begin{tabular}{p{22em}p{3em}} 
-   \\{\bf \normalsize{Anaphora} [+A]&${\bf 1574}$}\\\hline\\{\bf - Basic\_Anaphora} [-B,+F]& ${\bf 795}$\\$*$Same\_Head&$556$\\$*$Different\_Head&$329$\\\\{\bf - Extended\_Anaphora} [+B]&${\bf 779}$\\$*$Bridging\_Nominal [-G,+R,+S]&$43$\\$*$Bridging\_Event [+R,+S]&$10$\\$*$Bridging\_Restrictive\_Modifier [-G,+S]&$614$\\$*$Bridging\_Subtype\_Instance [-G]&$0$\\$*$Bridging\_Other\_Context [+F]&$112$\\\\{\bf \normalsize{Miscellaneous} [-R]&${\bf 732}$}\\\hline\\- Pleonastic [-B,-P]&$53$\\- Quantified&$248$\\- Predicative\_Equative\_Role [-B,+P]&$58$\\- Part\_Of\_Noncompositional\_MWE&$100$\\- Measure\_Nonreferential&$125$\\- Other\_Nonreferential&$148$
+  \\ {\bf \normalsize{Anaphora} [+A]&${\bf 1574}$}\\\hline\\{\bf - Basic\_Anaphora} [-B,+F]& ${\bf 795}$\\$*$Same\_Head&$556$\\$*$Different\_Head&$329$\\\\{\bf - Extended\_Anaphora} [+B]&${\bf 779}$\\$*$Bridging\_Nominal [-G,+R,+S]&$43$\\$*$Bridging\_Event [+R,+S]&$10$\\$*$Bridging\_Restrictive\_Modifier [-G,+S]&$614$\\$*$Bridging\_Subtype\_Instance [-G]&$0$\\$*$Bridging\_Other\_Context [+F]&$112$\\\\{\bf \normalsize{Miscellaneous} [-R]&${\bf 732}$}\\\hline\\- Pleonastic [-B,-P]&$53$\\- Quantified&$248$\\- Predicative\_Equative\_Role [-B,+P]&$58$\\- Part\_Of\_Noncompositional\_MWE&$100$\\- Measure\_Nonreferential&$125$\\- Other\_Nonreferential&$148$
  \end{tabular} \\
 
 \end{tabular}
@@ -230,9 +230,9 @@ We use an in-house implementation of a \\multiclass logistic regression classifi
 \headerbox{Examples for Communicative Functions}{name=example,column=1.05,span = 1.85,below=scheme}{
 
 \vspace{4pt}
-\begin {center}\small
+\begin {left}\small
 \smaller[.5]
-\begin{tabular}{p{18em}p{32em}}
+\begin{tabular}{p{19em}p{32em}}
 {\bf \normalsize{CFD Label}}&{\bf \normalsize{Example}}\\\hline\\Unique\_Physical\_Copresence & {\bf John} here is an investment banker.\\Unique\_Larger\_Situation & In the days since {\bf Hillary Clinton} unburdened herself in an interview with The Atlantic's Jeffrey Goldberg ...\\Unique\_Predicative\_Identity & Clark Kent is {\bf Superman}.\\Unique\_Hearer\_New & a restaurant chain named {\bf Shoney's}\\Nonunique\_Physical\_Copresence & {\bf The podium} is too high.\\Nonunique\_Larger\_Situation & {\bf the chair} (at a conference) / {\bf today}\\Nonunique\_Predicative\_Identity & He is {\bf the manager}.\\Nonunique\_Hearer\_New\_Specific & I am looking for {\bf a nurse}. Her name is Sara.\\Nonunique\_Nonspec & I am looking for {\bf a nurse} [any nurse would do].\\Generic\_Kind\_Level & {\bf Dinosaurs} are extinct.\\Generic\_Individual\_Level & {\bf Cats} have fur.\\Basic\_Same\_Head & I'm going to tell you \underline{a quick story}. It's {\bf a true story}.\\Basic\_Different\_Head & I adopted \underline{a cat} this weekend. {\bf The animal} is so cute.\\Extended\_Bridging\_Nominal & I looked at \underline{an apartment} yesterday. {\bf The kitchen} was really large.\\Extended\_Bridging\_Event & My friend's son \underline{got married} this weekend. {\bf The bride} looked beautiful.\\Extended\_Bridging\_Restrictive\_Modifier & {\bf the house} \underline{next door}/ \underline{John's} {\bf daughter}\\Extended\_Subtype\_Instance & I collect \underline{coins}. I have {\bf a 1943 steel penny}.\\Extended\_Other\_Context & I want to focus on \underline{what many of you have said you would like me}\\
 & \underline{to elaborate on}. What can you do about {\bf the climate crisis}?\\Pleonastic & {\bf It is raining.}\\Quantified & {\bf All the people} / {\bf no motorcade}\\Predicative\_Equative\_Role & He's {\bf a teacher}. / This is {\bf an opportunity}.\\Part\_of\_Noncompositional\_MWE & Ole' Charlie kicked {\bf the bucket} today.\\Measure\_Nonreferential & {\bf hours} later / {\bf miles} away\\Other\_Nonreferential & {\bf global warming} / {\bf concern} / the topic of {\bf energy} 
   \end{tabular} 
@@ -243,9 +243,10 @@ We use an in-house implementation of a \\multiclass logistic regression classifi
 
 \begin{center}\small
 \smaller [.5]
-\begin{tabular}{|l|r|c|c|}
+\begin{tabular}{|l|c|c|c|}
       %\hline
- \multicolumn{1}{p{5em}}{Condition} &  \multicolumn{1}{c}{\# Params}	&  \multicolumn{1}{c}{ExactMatch(\%)} &  \multicolumn{1}{c}{SoftMatch(\%)}    	\\				
+ \multicolumn{1}{p{5em}}{\bf \normalsize{Condition}} &  \multicolumn{1}{c}{\bf \normalsize{Params}}	&  \multicolumn{1}{c}{\bf \normalsize{ExactMatch}} &  \multicolumn{1}{c}{\bf \normalsize{SoftMatch}}    	\\
+  &  \multicolumn{1}{c}{\bf \normalsize{\#}}     &  \multicolumn{1}{c}{\bf \normalsize{\%}} &  \multicolumn{1}{c}{\bf \normalsize{\%}}      \\				
        \hline %\hline
 \feat{Majority baseline} & --- & 12.1 & 47.8 \\
 \feat{Log-linear}& & &\\
@@ -261,7 +262,7 @@ We use an in-house implementation of a \\multiclass logistic regression classifi
 \smaller [.5]
 \begin{tabular}{|l|c|c|}
       %\hline
- \multicolumn{1}{p{9em}}{Leaf label} & \multicolumn{1}{c}{Num of instances} & \multicolumn{1}{c}{F1}	\\				
+ \multicolumn{1}{p{9em}}{\bf \normalsize{Leaf label}} & \multicolumn{1}{c}{\bf \normalsize{Num of instances}} & \multicolumn{1}{c}{\bf \normalsize{F1}}	\\				
        \hline %\hline
 \textsc{Bridging\_Restrictive\_Modifier} & 552 & 68 \\
 \textsc{Same\_Head} & 452 & 41 \\
@@ -292,9 +293,9 @@ We use an in-house implementation of a \\multiclass logistic regression classifi
  %\scriptsize 
 \begin{center}\small
  \smaller [.5]
-{\bf Confirmation of known facts: Specificity}
+{\bf \normalsize{Confirmation of known facts: Specificity}}
  \begin{tabular}{|l|l|}
-  \multicolumn{1}{p{8em}}{High `+' weights} & \multicolumn{1}{l}{High `-' weights}    \\
+  \multicolumn{1}{p{8em}}{\bf High `+' weights} & \multicolumn{1}{l}{\bf High `-' weights}    \\
         \hline %\hline
 + the definite article "the" & - the indefinite article "a"\\
 + possessives (PRP\$)&\\
@@ -306,9 +307,9 @@ We use an in-house implementation of a \\multiclass logistic regression classifi
 
 \begin{center}\small
   \smaller [.5]
-{\bf Good hypotheses to test: Specificity}
+{\bf \normalsize{Hypotheses to test: Specificity}}
   \begin{tabular}{|l|l|}
-   \multicolumn{1}{p{8em}}{High `+' weights} & \multicolumn{1}{l}{High `-' weights}    \\
+   \multicolumn{1}{p{8em}}{\bf High `+' weights} & \multicolumn{1}{l}{\bf High `-' weights}    \\
          \hline %\hline
  + objects of "from" & - NPS with comparative \\
  + NPs with NNP as their last dependent & \phantom{- }adjectives (JJR)\\
