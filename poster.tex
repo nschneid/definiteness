@@ -1,4 +1,4 @@
-\documentclass[landscape,final]{baposter}
+\documentclass[portrait,final]{baposter}
 
 %\usepackage{times}
 \usepackage{calc}
@@ -135,8 +135,8 @@
   linewidth=1pt
 }
   % Eye Catcher
-  {%\begin{minipage}{7em}
-\includegraphics[width=9em]{img/cmu_logo}\\
+  {%\begin{minipage}{8em}
+\includegraphics[width=8em]{img/cmu_logo}\\
 %\end{minipage}
 } % No eye catcher for this poster. If an eye catcher is present, the title is centered between eye-catcher and logo.
   % Title
@@ -177,13 +177,13 @@
       \tikz{\useasboundingbox (-0.2em,-0.32em) rectangle(0.2em,0.32em); \draw[draw=black,fill=headerColorOne!80!black!80!white,line width=0.03em] (0,0) circle(0.5em); \path (0,0) node {\smaller #1};}\hspace{0.2em}}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%Abstract%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\headerbox{Abstract}{name=abstract,column=0,row=0,span=1.05}{
+\headerbox{Abstract}{name=abstract,column=0,row=0,span=1.15}{
 Definiteness expresses a constellation of semantic, pragmatic, and discourse properties (the communicative functions) of an NP. Our supervised classifier for English NPs uses lexical, morphological, and syntactic features to predict the communicative functions in terms of a language-universal classification scheme and establishes strong baselines for future work. Additionally, analysis of the features and learned parameters in the model provides insight into the grammaticalization of definiteness in English, not all of which is obvious a priori.
 }
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\headerbox{Classification Model}{name=model,column=0,span=1.05,below=abstract}{
-We use an in-house implementation of a \\multiclass logistic regression classifier.\\ %(logistic regression allows us to analyze the feature weights and hence generate hypotheses regarding form-function interactions).
+\headerbox{Classification Model}{name=model,column=0,span=1.15,below=abstract}{
+We use an in-house implementation of a multiclass logistic regression classifier.\\ %(logistic regression allows us to analyze the feature weights and hence generate hypotheses regarding form-function interactions).
 \\{\bf Feature function:}
 \begin{align*}\mathbf{f}(x,y) = \boldsymbol{\phi}(x) \times \tilde{\boldsymbol{\omega}}(y)
 \end{align*}
@@ -195,7 +195,7 @@ We use an in-house implementation of a \\multiclass logistic regression classifi
 }
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%Main Features%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\headerbox{Features}{name=features,column=0,span=1.05,below=model}{
+\headerbox{Features}{name=features,column=0,span=1.15,below=model}{
 %\linebreak 
 
 \begin{description}
@@ -206,12 +206,12 @@ We use an in-house implementation of a \\multiclass logistic regression classifi
 \end{description}
 }  
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%Scheme%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\headerbox{Communicative Functions of Definiteness}{name=scheme,column=1.05,span = 1.85}{
+\headerbox{Communicative Functions of Definiteness}{name=scheme,column=1.13,span = 1.89}{
 
 \vspace{4pt}
 
 \begin{center}\small
-\begin{tabular}{p{25em}p{25em}}
+\begin{tabular}{p{25em}p{22em}}
 %\multicolumn{1}{c}{\bf Nonanaphora} & \multicolumn{1}{c}{\bf Anaphora \& Miscellaneous}
 \smaller[.5]
  \begin{tabular}{p{22em}p{3em}} 
@@ -219,27 +219,28 @@ We use an in-house implementation of a \\multiclass logistic regression classifi
  \end{tabular} 
 & 
 \smaller[.5]
- \begin{tabular}{p{22em}p{3em}} 
-  \\ {\bf \normalsize{Anaphora} [+A]&${\bf 1574}$}\\\hline\\{\bf - Basic\_Anaphora} [-B,+F]& ${\bf 795}$\\$*$Same\_Head&$556$\\$*$Different\_Head&$329$\\\\{\bf - Extended\_Anaphora} [+B]&${\bf 779}$\\$*$Bridging\_Nominal [-G,+R,+S]&$43$\\$*$Bridging\_Event [+R,+S]&$10$\\$*$Bridging\_Restrictive\_Modifier [-G,+S]&$614$\\$*$Bridging\_Subtype\_Instance [-G]&$0$\\$*$Bridging\_Other\_Context [+F]&$112$\\\\{\bf \normalsize{Miscellaneous} [-R]&${\bf 732}$}\\\hline\\- Pleonastic [-B,-P]&$53$\\- Quantified&$248$\\- Predicative\_Equative\_Role [-B,+P]&$58$\\- Part\_Of\_Noncompositional\_MWE&$100$\\- Measure\_Nonreferential&$125$\\- Other\_Nonreferential&$148$
+ \begin{tabular}{p{19em}p{3em}} 
+  {\bf \normalsize{Anaphora} [+A]&${\bf 1574}$}\\\hline\\{\bf - Basic\_Anaphora} [-B,+F]& ${\bf 795}$\\$*$Same\_Head&$556$\\$*$Different\_Head&$329$\\\\{\bf - Extended\_Anaphora} [+B]&${\bf 779}$\\$*$Bridging\_Nominal [-G,+R,+S]&$43$\\$*$Bridging\_Event [+R,+S]&$10$\\$*$Bridging\_Restrictive\_Modifier [-G,+S]&$614$\\$*$Bridging\_Subtype\_Instance [-G]&$0$\\$*$Bridging\_Other\_Context [+F]&$112$\\\\{\bf \normalsize{Miscellaneous} [-R]&${\bf 732}$}\\\hline\\- Pleonastic [-B,-P]&$53$\\- Quantified&$248$\\- Predicative\_Equative\_Role [-B,+P]&$58$\\- Part\_Of\_Noncompositional\_MWE&$100$\\- Measure\_Nonreferential&$125$\\- Other\_Nonreferential&$148$
  \end{tabular} \\
 
 \end{tabular}
 \end{center}
 }
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%Examples%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\headerbox{Examples for Communicative Functions}{name=example,column=1.05,span = 1.85,below=scheme}{
+\headerbox{Examples for Communicative Functions}{name=example,column=1.13,span = 1.89,below=scheme}{
 
 \vspace{4pt}
 \begin {left}\small
 \smaller[.5]
-\begin{tabular}{p{19em}p{32em}}
-{\bf \normalsize{CFD Label}}&{\bf \normalsize{Example}}\\\hline\\Unique\_Physical\_Copresence & {\bf John} here is an investment banker.\\Unique\_Larger\_Situation & In the days since {\bf Hillary Clinton} unburdened herself in an interview with The Atlantic's Jeffrey Goldberg ...\\Unique\_Predicative\_Identity & Clark Kent is {\bf Superman}.\\Unique\_Hearer\_New & a restaurant chain named {\bf Shoney's}\\Nonunique\_Physical\_Copresence & {\bf The podium} is too high.\\Nonunique\_Larger\_Situation & {\bf the chair} (at a conference) / {\bf today}\\Nonunique\_Predicative\_Identity & He is {\bf the manager}.\\Nonunique\_Hearer\_New\_Specific & I am looking for {\bf a nurse}. Her name is Sara.\\Nonunique\_Nonspec & I am looking for {\bf a nurse} [any nurse would do].\\Generic\_Kind\_Level & {\bf Dinosaurs} are extinct.\\Generic\_Individual\_Level & {\bf Cats} have fur.\\Basic\_Same\_Head & I'm going to tell you \underline{a quick story}. It's {\bf a true story}.\\Basic\_Different\_Head & I adopted \underline{a cat} this weekend. {\bf The animal} is so cute.\\Extended\_Bridging\_Nominal & I looked at \underline{an apartment} yesterday. {\bf The kitchen} was really large.\\Extended\_Bridging\_Event & My friend's son \underline{got married} this weekend. {\bf The bride} looked beautiful.\\Extended\_Bridging\_Restrictive\_Modifier & {\bf the house} \underline{next door}/ \underline{John's} {\bf daughter}\\Extended\_Subtype\_Instance & I collect \underline{coins}. I have {\bf a 1943 steel penny}.\\Extended\_Other\_Context & I want to focus on \underline{what many of you have said you would like me}\\
-& \underline{to elaborate on}. What can you do about {\bf the climate crisis}?\\Pleonastic & {\bf It is raining.}\\Quantified & {\bf All the people} / {\bf no motorcade}\\Predicative\_Equative\_Role & He's {\bf a teacher}. / This is {\bf an opportunity}.\\Part\_of\_Noncompositional\_MWE & Ole' Charlie kicked {\bf the bucket} today.\\Measure\_Nonreferential & {\bf hours} later / {\bf miles} away\\Other\_Nonreferential & {\bf global warming} / {\bf concern} / the topic of {\bf energy} 
+\begin{tabular}{p{19em}p{29em}}
+{\bf \normalsize{CFD Label}}&{\bf \normalsize{Example}}\\\hline
+Unique\_Physical\_Copresence & {\bf John} here is an investment banker.\\Unique\_Larger\_Situation & In the days since {\bf Hillary Clinton} unburdened herself in an interview with The Atlantic's Jeffrey Goldberg ...\\Unique\_Predicative\_Identity & Clark Kent is {\bf Superman}.\\Unique\_Hearer\_New & a restaurant chain named {\bf Shoney's}\\Nonunique\_Physical\_Copresence & {\bf The podium} is too high.\\Nonunique\_Larger\_Situation & {\bf the chair} (at a conference) / {\bf today}\\Nonunique\_Predicative\_Identity & He is {\bf the manager}.\\Nonunique\_Hearer\_New\_Specific & I am looking for {\bf a nurse}. Her name is Sara.\\Nonunique\_Nonspec & I am looking for {\bf a nurse} [any nurse would do].\\Generic\_Kind\_Level & {\bf Dinosaurs} are extinct.\\Generic\_Individual\_Level & {\bf Cats} have fur.\\Basic\_Same\_Head & I'm going to tell you \underline{a quick story}. It's {\bf a true story}.\\Basic\_Different\_Head & I adopted \underline{a cat} this weekend. {\bf The animal} is so cute.\\Extended\_Bridging\_Nominal & I looked at \underline{an apartment} yesterday. {\bf The kitchen} was really large.\\Extended\_Bridging\_Event & My friend's son \underline{got married} this weekend. {\bf The bride} looked beautiful.\\Extended\_Bridging\_Restrictive\_Modifier & {\bf the house} \underline{next door}/ \underline{John's} {\bf daughter}\\Extended\_Subtype\_Instance & I collect \underline{coins}. I have {\bf a 1943 steel penny}.\\Extended\_Other\_Context & I want to focus on \underline{what many of you have said you would like}\\
+& \underline{me to elaborate on}. What can you do about {\bf the climate crisis}?\\Pleonastic & {\bf It is raining.}\\Quantified & {\bf All the people} / {\bf no motorcade}\\Predicative\_Equative\_Role & He's {\bf a teacher}. / This is {\bf an opportunity}.\\Part\_of\_Noncompositional\_MWE & Ole' Charlie kicked {\bf the bucket} today.\\Measure\_Nonreferential & {\bf hours} later / {\bf miles} away\\Other\_Nonreferential & {\bf global warming} / {\bf concern} / the topic of {\bf energy} 
   \end{tabular} 
 \end{center}
 }
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%Results%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% 
-  \headerbox{Accuracy}{name=results,column=2.9,span=1.1}{
+  \headerbox{Accuracy}{name=results,column=0,span=1.15,below=features}{
 
 \begin{center}\small
 \smaller [.5]
@@ -257,12 +258,16 @@ We use an in-house implementation of a \\multiclass logistic regression classifi
 			\hline%\hline
 \end{tabular}
 \end{center}
-
-\begin{center}\small
+}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%Results2%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+  \headerbox{Communicative Function Label Accuracy}{name=results2,column=1.13,span=1.89,below=example}{
+\begin{left}\small
 \smaller [.5]
+ \begin{tabular}{p{22em}p{18em}}
+\smaller [.7]
 \begin{tabular}{|l|c|c|}
       %\hline
- \multicolumn{1}{p{9em}}{\bf \normalsize{Leaf label}} & \multicolumn{1}{c}{\bf \normalsize{Num of instances}} & \multicolumn{1}{c}{\bf \normalsize{F1}}	\\				
+ \multicolumn{1}{p{9em}}{\bf \normalsize{CFD label}} & \multicolumn{1}{c}{\bf \normalsize{Instances}} & \multicolumn{1}{c}{\bf \normalsize{F1}}	\\				
        \hline %\hline
 \textsc{Bridging\_Restrictive\_Modifier} & 552 & 68 \\
 \textsc{Same\_Head} & 452 & 41 \\
@@ -285,11 +290,42 @@ We use an in-house implementation of a \\multiclass logistic regression classifi
 \textsc{Nonunique\_Predicative\_Identity} & 10 & --- \\
 \textsc{Bridging\_Event} & 9 & --- \\
 			\hline%\hline
+\end{tabular} 
+
+&
+
+\smaller [.7]
+\begin{tabular}{|l|c|c|}
+      %\hline
+ \multicolumn{1}{p{9em}}{\bf \normalsize{CFD label}} & \multicolumn{1}{c}{\bf \normalsize{Instances}} & \multicolumn{1}{c}{\bf \normalsize{F1}} \\               
+       \hline %\hline
+\textsc{Bridging\_Restrictive\_Modifier} & 552 & 68 \\
+\textsc{Same\_Head} & 452 & 41 \\
+\textsc{Different\_Head} & 271 & 32 \\
+\textsc{Quantified} & 213 & 57 \\
+\textsc{Nonunique\_Hearer\_New\_Specific} & 190 & 40 \\
+\textsc{Nonunique\_Nonspec} & 173 & 13 \\
+\textsc{Other\_Nonreferential} & 134 & 37 \\
+\textsc{Generic\_Individual\_Level} & 113 & 13 \\
+\textsc{Measure\_Nonreferential} & 98 & 40 \\
+\textsc{Unique\_Larger\_Situation} & 97 & 55 \\
+\textsc{Nonunique\_Larger\_Situation} & 97 & 27 \\
+\textsc{Bridging\_Other\_Context} & 96 & 11 \\
+\textsc{Part\_of\_Noncompositional\_MWE} & 88 & 18 \\
+\textsc{Predicative\_Nonidentity} & 57 & --- \\
+\textsc{Pleonastic} & 44 & 88 \\
+\textsc{Nonunique\_Physical\_Copresence} & 36 & --- \\
+\textsc{Bridging\_Nominal} & 33 & 15 \\
+\textsc{Unique\_Hearer\_New} & 26 & --- \\
+\textsc{Nonunique\_Predicative\_Identity} & 10 & --- \\
+\textsc{Bridging\_Event} & 9 & --- \\
+                        \hline%\hline
+\end{tabular} 
 \end{tabular}
-\end{center}
+\end{left}
 }
  %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%Analysis%%%%%%%%%%%%%%%%%%%%    %%%%%%%%%%%%%%%%%%
- \headerbox{Analysis}{name=anal,column=2.9,span=1.1,below=results}{
+ \headerbox{Analysis}{name=anal,column=0,span=1.15,below=results}{
  %\scriptsize 
 \begin{center}\small
  \smaller [.5]
@@ -325,7 +361,7 @@ We use an in-house implementation of a \\multiclass logistic regression classifi
    \end{center}
 }
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%Acknowledgements%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\headerbox{Acknowledgements}{name=ack,column=2.9,span=1.1,below=anal}{
+\headerbox{Acknowledgements}{name=ack,column=1.13,span=1.89,below=results2}{
 %\scriptsize 
     This research was sponsored by a grant from the U.S. Army Research Lab and the U.S. Army Research Office.  
 }
