@@ -181,9 +181,9 @@ Definiteness expresses a constellation of semantic, pragmatic, and discourse pro
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \headerbox{Classification Model}{name=model,column=0,span=1.15,below=abstract}{
-We use an in-house implementation of a multiclass logistic regression classifier with L2-regularization [***AB: Do we want to say why we used L2, & why log regression?*** ].
+We use an in-house implementation of a multiclass logistic regression classifier [***AB: Do we want to say why we used log regression? something as follows:***] as the results are interpretable (logistic regression allows us to analyze the feature weights and hence generate hypotheses regarding form-function interactions). [***AB: will add or just replace with the weight times percept version of teh objective once am sure about it***].
 \begin{align*}
-\hat{\boldsymbol{\theta}} = \arg \max_{\boldsymbol{\theta}}-{\lambda} ||\boldsymbol{\theta}||^2_2 + \sum_{\langle x,y \rangle\in\mathcal{D}} \log{\frac{\exp{\boldsymbol{\theta}^{\top}\mathbf{f}(x,y)}}{\sum_{y' \in \mathcal{Y}}\exp{\left(\boldsymbol{\theta}^{\top}\mathbf{f}(x,y')\costversion{ + \kappa\textit{cost}(y,y')}\right)}}} \\
+\hat{\boldsymbol{\theta}} = \arg \max_{\boldsymbol{\theta}}-{\lambda} ||\boldsymbol{\theta}||^2_2 + \sum_{\langle x,y \rangle\in\mathcal{D}} \log{\frac{\exp{\boldsymbol{\theta}^{\top}\mathbf{f}(x,y)}}{\sum_{y' \in \mathcal{Y}}\exp{\left(\boldsymbol{\theta}^{\top}\mathbf{f}(x,y')\right)}}} \\
 \end{align*}
 }
 
@@ -199,7 +199,7 @@ We use an in-house implementation of a multiclass logistic regression classifier
 \end{description}
 }  
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%Scheme%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\headerbox{The language independent scheme for Communicative Functions of Definiteness}{name=scheme,column=1.15,span = 1.85}{
+\headerbox{Communicative Functions of Definiteness}{name=scheme,column=1.15,span = 1.85}{
 
 \vspace{4pt}
 
