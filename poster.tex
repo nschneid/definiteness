@@ -208,7 +208,7 @@ We use an in-house implementation of a multiclass logistic regression classifier
 
 \vspace{4pt}
 
-\begin{l}\small
+\begin{center}\small
 \begin{tabular}{p{25em}p{22em}}
 %\multicolumn{1}{c}{\bf Nonanaphora} & \multicolumn{1}{c}{\bf Anaphora \& Miscellaneous}
 \smaller
@@ -239,7 +239,6 @@ Unique\_Physical\_Copresence & {\bf John} here is an investment banker.\\Unique\
 }
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%Results%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% 
   \headerbox{Accuracy}{name=results,column=1.85,span=1.15,below=features}{
-
 \begin{center}\small
 %\smaller [.5]
 \begin{tabular}{l|c|c|c}
@@ -259,91 +258,50 @@ Unique\_Physical\_Copresence & {\bf John} here is an investment banker.\\Unique\
 }
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%Results2%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
   \headerbox{Communicative Function Label Accuracy}{name=results2,column=1.85,span=1.15,below=results}{
-\begin{left}\small
-\smaller[.2]
+\begin{center}\small
+\smaller[.5]
 \begin{tabular}{l|c|c}
-
       %\hline
  \multicolumn{1}{p{9em}|}{\bf \normalsize{CFD label}} & \multicolumn{1}{c|}{\bf \normalsize{\#}}& \multicolumn{1}{c}{\bf \normalsize{F1}}	\\\hline %\hline
-\textsc{Bridging\_Restrictive\_Modifier} & 552 & 68 \\
-\textsc{Same\_Head} & 452 & 41 \\
-\textsc{Different\_Head} & 271 & 32 \\
-\textsc{Quantified} & 213 & 57 \\
-\textsc{Nonunique\_Hearer\_New\_Specific} & 190 & 40 \\
-\textsc{Nonunique\_Nonspec} & 173 & 13 \\
-\textsc{Other\_Nonreferential} & 134 & 37 \\
-\textsc{Generic\_Individual\_Level} & 113 & 13 \\
-\textsc{Measure\_Nonreferential} & 98 & 40 \\
-\textsc{Unique\_Larger\_Situation} & 97 & 55 \\
-\textsc{Nonunique\_Larger\_Situation} & 97 & 27 \\
-\textsc{Bridging\_Other\_Context} & 96 & 11 \\
-\textsc{Part\_of\_Noncompositional\_MWE} & 88 & 18 \\
-\textsc{Predicative\_Nonidentity} & 57 & --- \\
-\textsc{Pleonastic} & 44 & 88 \\
-\textsc{Nonunique\_Physical\_Copresence} & 36 & --- \\
-\textsc{Bridging\_Nominal} & 33 & 15 \\
-\textsc{Unique\_Hearer\_New} & 26 & --- \\
-\textsc{Nonunique\_Predicative\_Identity} & 10 & --- \\
-\textsc{Bridging\_Event} & 9 & --- \\
+\feat{Bridging\_Restrictive\_Modifier} & 552 & 68 \\
+\feat{Same\_Head} & 452 & 41 \\
+\feat{Different\_Head} & 271 & 32 \\
+\feat{Quantified} & 213 & 57 \\
+\feat{Nonunique\_Hearer\_New\_Specific} & 190 & 40 \\
+\feat{Nonunique\_Nonspec} & 173 & 13 \\
+\feat{Other\_Nonreferential} & 134 & 37 \\
+\feat{Generic\_Individual\_Level} & 113 & 13 \\
+\feat{Measure\_Nonreferential} & 98 & 40 \\
+\feat{Unique\_Larger\_Situation} & 97 & 55 \\
+\feat{Nonunique\_Larger\_Situation} & 97 & 27 \\
+\feat{Bridging\_Other\_Context} & 96 & 11 \\
+\feat{Part\_of\_Noncompositional\_MWE} & 88 & 18 \\
+\feat{Predicative\_Nonidentity} & 57 & --- \\
+\feat{Pleonastic} & 44 & 88 \\
+\feat{Nonunique\_Physical\_Copresence} & 36 & --- \\
+\feat{Bridging\_Nominal} & 33 & 15 \\
+\feat{Unique\_Hearer\_New} & 26 & --- \\
+\feat{Nonunique\_Predicative\_Identity} & 10 & --- \\
+\feat{Bridging\_Event} & 9 & --- \\
 			%\hline%\hline
 \end{tabular} 
-\end{left}
+\end{center}
 }
  %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%Analysis%%%%%%%%%%%%%%%%%%%%    %%%%%%%%%%%%%%%%%%
  \headerbox{Analysis Example: Specificity}{name=anal,column=0,span=1.85,below=example}{
- %\scriptsize 
-<<<<<<< HEAD
 \begin{left}\small
- %\smaller [.5]
-%{\bf \normalsize{Confirmation of known facts: Specificity}}
- \begin{tabular}{l|l}
+\begin{tabular}{l|l}
 \multicolumn{1}{p{20em}|}{\bf \normalsize{Confirmation of known facts}} & \multicolumn{1}{l}{\bf \normalsize{Hypotheses to test}}
-=======
-\begin{center}\small
- \smaller [.5]
-%{\bf \normalsize{Confirmation of known facts: Specificity}}
-{\bf \normalsize{Specificity}}
- \begin{tabular}{|l|l|}
-\multicolumn{1}{p{8em}}{\bf \normalsize{Confirmation of known facts}} & \multicolumn{1}{l}{\bf \normalsize{Hypotheses to test}}
->>>>>>> 4ed5a0580f8252f13b00b65486660e9b4673a76b
-
- % \multicolumn{1}{p{8em}}{\bf High `+' weights} & \multicolumn{1}{l}{\bf High `-' weights}    \\
+% \multicolumn{1}{p{8em}}{\bf High `+' weights} & \multicolumn{1}{l}{\bf High `-' weights}    \\
 \\\hline %\hline
 + the definite article "the" & + objects of "from"\\
 + possessives (PRP\$)& + NPs with NNP as their last dependent\\
-+ proper nouns (NNP)& + NPs with possessive pronouns\\
-+ 2nd person pronouns& \phantom{+ }immediately preceding the\\
-+ NPs with "the" as the first dependent & \phantom{+ }head (rather than the\\
-- the indefinite article "a" & \phantom{+ }ones with intervening words)\\
-& - NPS with comparative \\
-<<<<<<< HEAD
-& \phantom{- }adjectives (JJR)\\
++ proper nouns (NNP)& + NPs with possessive pronouns immediately preceding\\
++ 2nd person pronouns& \phantom{+ }the head (rather than the ones with intervening words)\\
++ NPs with "the" as the first dependent & \\\hline
+- the indefinite article "a" & - NPS with comparative adjectives (JJR) \\\hline
 \end{tabular}
  \end{left}
-=======
-& \phantom{- }adjectives (JJR)\\\hline
-\end{tabular}
- \end{center}
->>>>>>> 4ed5a0580f8252f13b00b65486660e9b4673a76b
-
-%\begin{center}\small
-%  \smaller [.5]
-%{\bf \normalsize{Hypotheses to test: Specificity}}
-%  \begin{tabular}{|l|l|}
-  % \multicolumn{1}{p{8em}}{\bf High `+' weights} & \multicolumn{1}{l}{\bf High `-' weights}    \\
-%         \hline %\hline
-% + objects of "from" & - NPS with comparative \\
-% + NPs with NNP as their last dependent & \phantom{- }adjectives (JJR)\\
-% + {NPs with possessive pronouns & \\
-% \phantom{+ }immediately preceding the & \\
-% \phantom{+ }head (rather than the & \\
-% \phantom{+ }ones with intervening words)} & \\\hline
-% \end{tabular}
-%  \end{center}
-%\begin{center}\small
-%   \smaller [.5]
-%{\bf Baffling cases: Specificity} [***AB: to be added***]
-%   \end{center}
 }
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%Acknowledgements%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %\scriptsize 
