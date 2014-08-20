@@ -214,7 +214,7 @@ We use an in-house implementation of a multiclass logistic regression classifier
 %\multicolumn{1}{c}{\bf Nonanaphora} & \multicolumn{1}{c}{\bf Anaphora \& Miscellaneous}
 \smaller
  \begin{tabular}{p{25em}r} 
-   {\bf \normalsize{Nonanaphora} $[-A,-B]$&${\bf 999}$}\\
+   {\bf \normalsize{Nonanaphora}} $[-A,-B]$&${\bf 999}$\\
 \hline\\
 {\bf Unique} $[+U]$&${\bf 287}$\\
 \quad $*$~{\bf Unique\_Hearer\_Old} $[+F,-G,+S]$&${\bf 251}$\\
@@ -233,12 +233,12 @@ We use an in-house implementation of a multiclass logistic regression classifier
 \\
 {\bf Generic} $[+G,-R]$&${\bf 131}$\\
 \quad $*$~Generic\_Kind\_Level&$0$\\
-\quad $*$~Generic\_Individual\_Level&$131$ 
+\quad $*$~Generic\_Individual\_Level&$131$
  \end{tabular} 
 & 
 \smaller
- \begin{tabular}{p{21em}r} 
-  {\bf \normalsize{Anaphora} $[+A]$&${\bf 1574}$}\\
+\begin{tabular}{p{21em}r}
+  {\bf \normalsize{Anaphora}} $[+A]$&${\bf 1574}$\\
 \hline\\
 {\bf Basic\_Anaphora} $[-B,+F]$& ${\bf 795}$\\
 \quad $*$~Same\_Head&$556$\\
@@ -251,7 +251,7 @@ We use an in-house implementation of a multiclass logistic regression classifier
 \quad $*$~Bridging\_Subtype\_Instance $[-G]$&$0$\\
 \quad $*$~Bridging\_Other\_Context $[+F]$&$112$\\
 \\
-{\bf \normalsize{Miscellaneous} $[-R]$&${\bf 732}$}\\
+{\bf \normalsize{Miscellaneous}} $[-R]$&${\bf 732}$\\
 \hline\\
 Pleonastic $[-B,-P]$&$53$\\
 Quantified&$248$\\
@@ -329,7 +329,7 @@ Unique\_Physical\_Copresence & {\bf John} here is an investment banker.\\Unique\
 }
  %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%Analysis%%%%%%%%%%%%%%%%%%%%    %%%%%%%%%%%%%%%%%%
  \headerbox{Analysis Example: Specificity}{name=anal,column=0,span=1.85,below=example}{
-\begin{left}\small
+\small
 \begin{tabular}{l|l}
 \multicolumn{1}{p{20em}|}{\bf \normalsize{Confirmation of known facts}} & \multicolumn{1}{l}{\bf \normalsize{Hypotheses to test}}
 % \multicolumn{1}{p{8em}}{\bf High `+' weights} & \multicolumn{1}{l}{\bf High `-' weights}    \\
@@ -341,7 +341,6 @@ $+$ 2nd person pronouns& \phantom{$+$ }the head (rather than the ones with inter
 $+$ NPs with "the" as the first dependent & \\[5pt]\hline\\[-5pt]
 $-$ the indefinite article "a" & $-$ NPs with comparative adjectives (\texttt{JJR}) \\[5pt]\hline
 \end{tabular}
- \end{left}
 }
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%Acknowledgements%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %\scriptsize 
